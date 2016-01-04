@@ -23,6 +23,7 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
 import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.*;
@@ -247,7 +248,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		if (inFS != null)
 		{
 			//We dont want very hot liquids stored here so if they are much hotter than boiling water, we prevent it. 
-			if (inFS.getFluid() != null && inFS.getFluid().getTemperature(inFS) > 385)
+			if (inFS.getFluid() != null && inFS.getFluid().getTemperature(inFS) > Global.HOT_LIQUID_TEMP)
 				return false;
 
 			if (fluid == null)
@@ -750,7 +751,12 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				}
 				else if(FluidContainerRegistry.isEmptyContainer(container))
 				{
-					this.setInventorySlotContents(0, this.removeLiquid(getInputStack()));
+					ItemStack fullContainer = this.removeLiquid(getInputStack());
+					if (fullContainer.getItem() == TFCItems.woodenBucketMilk)
+					{
+						ItemCustomBucketMilk.createTag(fullContainer, 20f);
+					}
+					this.setInventorySlotContents(0, fullContainer);
 				}
 			}
 		}
