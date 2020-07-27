@@ -3,7 +3,6 @@
 ### Gradle ###
 .gradle
 build/
-libs/
 
 
 # Ignore Gradle GUI config
@@ -109,7 +108,6 @@ gradle-app.setting
 
 # IntelliJ
 /out/
-libs/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
