@@ -132,8 +132,6 @@ public class ChunkEventHandler
 	{
 		TFC_Climate.removeCacheManager(event.world);
 		TFC_Core.removeCDM(event.world);
-		if(event.world.provider.dimensionId == 0)
-			AnvilManager.getInstance().clearRecipes();
 	}
 
 	@SubscribeEvent

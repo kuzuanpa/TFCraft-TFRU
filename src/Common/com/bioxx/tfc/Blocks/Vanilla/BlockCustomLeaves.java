@@ -109,12 +109,6 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
 		onNeighborBlockChange(world, x, y, z, null);
-		Block block = world.getBlock(x, y, z);
-		if(block instanceof BlockCustomLeaves2)
-		{
-			this.destroyLeaves(world, x, y, z);
-		}
-		
 	}
 
 	@Override
