@@ -19,8 +19,8 @@ v0.80.03 Fix: 修复：
 - 石砧上的物品复制
 - leaves decay
 - 树叶不正常的凋零
-- remove block recipes, set metal amount of metal sheet to 100 and double sheet to 200
-- 移除了制作锭的配方,并调整单层板的含量为100，双层板为200
+- remove metal block recipes, set metal amount of metal sheet to 100 and double sheet to 200
+- 移除了制作金属方块的配方,并调整单层板的含量为100，双层板为200
 - make Anvil recipe do not disappear if player moved between worlds
 - 在玩家切换世界的时候砧配方不会消失了
 
