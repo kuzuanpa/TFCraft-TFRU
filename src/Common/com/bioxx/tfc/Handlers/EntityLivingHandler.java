@@ -107,6 +107,7 @@ public class EntityLivingHandler
 				{
 					player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 20, 1));
 					player.addPotionEffect(new PotionEffect(Potion.weakness.id, 20, 1));
+					player.addPotionEffect(new PotionEffect(2, 20, 1));
 				}
 
 				//Scan the players inventory for any items that are too heavy to carry normally
@@ -260,7 +261,7 @@ public class EntityLivingHandler
 				IEquipable equipment = (IEquipable) item.getItem();
 				if (equipment.getEquipType(item) == EquipType.BACK && (equipment == TFCItems.quiver || equipment.getTooHeavyToCarry(item)))
 				{
-					player.inventory.setInventorySlotContents(36, item.copy());
+					player.inventory.setInventorySlotContents(40, item.copy());
 					item.stackSize = 0;
 					event.item.setEntityItemStack(item);
 				}
@@ -342,9 +343,10 @@ public class EntityLivingHandler
 				pi.tempEquipment = ((InventoryPlayerTFC) player.inventory).extraEquipInventory.clone();
 			}
 		}
-
+    /*
 		if (event.entity.dimension == 1)
 			event.entity.travelToDimension(0);
+    */
 	}
 
 	@SubscribeEvent

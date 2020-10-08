@@ -128,7 +128,6 @@ public class TEBloomery extends NetworkTileEntity
 			
 			if (worldObj.blockExists(x, yCoord, z))
 			{
-				new Exception("TFCTime = "+TFC_Time.getTotalTicks()+"\nfuelTimeLeft = "+fuelTimeLeft).printStackTrace();
 				if (bloomeryLit && TFC_Time.getTotalTicks() > fuelTimeLeft)
 				{
 					if (worldObj.getBlock(x, yCoord, z) == TFCBlocks.molten)
@@ -280,7 +279,7 @@ public class TEBloomery extends NetworkTileEntity
 							int c = entity.getEntityItem().stackSize;
 							while (c > 0)
 							{
-								if (charcoalCount + oreCount < (2 * maxCount) && oreCount < maxCount && outCount < 2000)
+								if (charcoalCount + oreCount < (2 * maxCount) && oreCount < maxCount && outCount < 1000)
 								{
 									if (addOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage())))
 									{
@@ -360,7 +359,6 @@ public class TEBloomery extends NetworkTileEntity
 		super.readFromNBT(nbttagcompound);
 		isFlipped = nbttagcompound.getBoolean("isFlipped");
 		fuelTimeLeft = nbttagcompound.getLong("fuelTimeLeft");
-		if(fuelTimeLeft<0L)this.fuelTimeLeft = 0L;
 		charcoalCount = nbttagcompound.getInteger("charcoalCount");
 		outCount = nbttagcompound.getInteger("outCount");
 		oreCount = nbttagcompound.getInteger("oreCount");

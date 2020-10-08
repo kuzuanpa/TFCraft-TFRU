@@ -41,7 +41,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 
 		for (x = 0; x < playerInv.armorInventory.length; ++x)
 		{
-			int index = playerInv.getSizeInventory() - 1 - x;
+			int index = playerInv.getSizeInventory() - 2 - x;
 			this.addSlotToContainer(new SlotArmorTFC(this, playerInv, index, 8, 8 + x * 18, x));
 		}
 		PlayerInventory.buildInventoryLayout(this, playerInv, 8, 90, false, true);

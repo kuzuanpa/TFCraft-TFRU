@@ -69,14 +69,14 @@ public class InventoryPlayerTFC extends InventoryPlayer {
 	public ItemStack getStackInSlot(int par1)
 	{
 		ItemStack[] aitemstack = this.mainInventory;
-		if (par1 >= this.mainInventory.length + this.extraEquipInventory.length)
+		if (par1 >= this.mainInventory.length + 4)
 		{
-			par1 -= this.mainInventory.length + this.extraEquipInventory.length;
-			aitemstack = this.armorInventory;
+		    par1-= this.mainInventory.length + 4;
+			aitemstack = this.extraEquipInventory;
 		}
 		else if(par1 >= this.mainInventory.length){
-			par1-= aitemstack.length;
-			aitemstack = this.extraEquipInventory;
+			par1 -= this.mainInventory.length;
+			aitemstack = this.armorInventory;
 		}
 		return aitemstack[par1];
 	}
@@ -86,14 +86,14 @@ public class InventoryPlayerTFC extends InventoryPlayer {
 	{
 		ItemStack[] aitemstack = this.mainInventory;
 
-		if (par1 >= this.mainInventory.length + this.extraEquipInventory.length)
+		if (par1 >= this.mainInventory.length + 4)
 		{
-			aitemstack = this.armorInventory;
-			par1 -= this.mainInventory.length + this.extraEquipInventory.length;
+		    par1-= this.mainInventory.length + 4;
+			aitemstack = this.extraEquipInventory;
 		}
 		else if(par1 >= this.mainInventory.length){
-			par1-= aitemstack.length;
-			aitemstack = this.extraEquipInventory;
+			par1 -= this.mainInventory.length;
+			aitemstack = this.armorInventory;
 		}
 		if (aitemstack[par1] != null)
 		{
@@ -139,14 +139,14 @@ public class InventoryPlayerTFC extends InventoryPlayer {
 	{
 		ItemStack[] aitemstack = this.mainInventory;
 
-		if (par1 >= this.mainInventory.length + this.extraEquipInventory.length)
+		if (par1 >= this.mainInventory.length + 4)
 		{
-			aitemstack = this.armorInventory;
-			par1 -= this.mainInventory.length + this.extraEquipInventory.length;
+		    par1-= this.mainInventory.length + 4;
+			aitemstack = this.extraEquipInventory;
 		}
 		else if(par1 >= this.mainInventory.length){
-			par1-= aitemstack.length;
-			aitemstack = this.extraEquipInventory;
+			par1 -= this.mainInventory.length;
+			aitemstack = this.armorInventory;
 		}
 
 
@@ -191,6 +191,8 @@ public class InventoryPlayerTFC extends InventoryPlayer {
 				this.extraEquipInventory[i] = null;
 			}
 		}
+    NBTTagList derp = new NBTTagList();
+    this.player.getEntityData().setTag("ExtraInventory", derp);
 		super.dropAllItems();
 	}
 
@@ -210,19 +212,28 @@ public class InventoryPlayerTFC extends InventoryPlayer {
 	}
 
 	@Override
-	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)//par1 index ItemStack 调用的物品
 	{
 
 		ItemStack[] aitemstack = this.mainInventory;
 
-		if (par1 >= this.mainInventory.length + this.extraEquipInventory.length)
+		/*if (par1 >= this.mainInventory.length + this.extraEquipInventory.length)  //这里是par1>= 36 + 1[默认是1]
 		{
-			par1 -= this.mainInventory.length + this.extraEquipInventory.length;
-			aitemstack = this.armorInventory;
+			par1 -= this.mainInventory.length + this.extraEquipInventory.length;//这里是par1 -= 36 + 1[默认是1]
+			aitemstack = this.armorInventory;       this.armorInventory数组 0 1 2 3 [0=头盔 1=胸甲 2=裤子 3=鞋子][头盔TFC原版index=40 胸甲=39 裤子=38 鞋子=37]
 		}
 		else if(par1 >= this.mainInventory.length){
 			par1-= aitemstack.length;
 			aitemstack = this.extraEquipInventory;
+		}*/
+		if (par1 >= this.mainInventory.length + 4)
+		{
+		    par1-= this.mainInventory.length + 4;
+			aitemstack = this.extraEquipInventory;
+		}
+		else if(par1 >= this.mainInventory.length){
+			par1 -= this.mainInventory.length;
+			aitemstack = this.armorInventory;
 		}
 
 		aitemstack[par1] = par2ItemStack;
@@ -268,7 +279,7 @@ public class InventoryPlayerTFC extends InventoryPlayer {
 		for (i = 0; i < extraEquipInventory.length; i++)
 		{
 			ItemStack is = extraEquipInventory[i];
-			if (is != null)
+			if (is != null && is.stackSize != 0)
 			{
 				nbt = new NBTTagCompound();
 				nbt.setByte("Slot", (byte) i);
