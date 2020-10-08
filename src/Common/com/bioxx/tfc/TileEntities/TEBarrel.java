@@ -286,6 +286,12 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(is == null || is.stackSize > 1)
 			return is;
+
+		// Check if it is AR tank, if it is, skips it.
+		boolean isArTank = is.hasTagCompound();
+		if (isArTank) isArTank = is.getTagCompound().hasKey("Amount");
+		if (isArTank) return is;
+
 		if(FluidContainerRegistry.isFilledContainer(is))
 		{
 			FluidStack fs = FluidContainerRegistry.getFluidForFilledItem(is);
@@ -300,7 +306,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			FluidStack isfs = ((IFluidContainerItem) is.getItem()).getFluid(is);
 			if(isfs != null && addLiquid(isfs))
 			{
-				((IFluidContainerItem) is.getItem()).drain(is, is.getMaxDamage(), true);
+				((IFluidContainerItem) is.getItem()).drain(is, ((IFluidContainerItem) is.getItem()).getCapacity(is), true);
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 		}
@@ -717,19 +723,20 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				ItemStack container = getInputStack();
 				FluidStack inLiquid = FluidContainerRegistry.getFluidForFilledItem(container);
 
-				if(container != null && container.getItem() instanceof IFluidContainerItem)
-				{
-					FluidStack isfs = ((IFluidContainerItem)container.getItem()).getFluid(container);
-					if(isfs != null && addLiquid(isfs))
-					{
-						((IFluidContainerItem) container.getItem()).drain(container, ((IFluidContainerItem)container.getItem()).getCapacity(container), true);
+				if (container != null) {
+					boolean isArTank = container.hasTagCompound();
+					if (isArTank) {
+						isArTank = container.getTagCompound().hasKey("Amount");
 					}
-				}
-				else if (inLiquid != null && container != null && container.stackSize == 1)
-				{
-					if(addLiquid(inLiquid))
-					{
-						this.setInventorySlotContents(0, FluidContainerRegistry.drainFluidContainer(container));
+					if (container != null && container.getItem() instanceof IFluidContainerItem && !isArTank) {
+						FluidStack isfs = ((IFluidContainerItem) container.getItem()).getFluid(container);
+						if (isfs != null && addLiquid(isfs)) {
+							((IFluidContainerItem) container.getItem()).drain(container, ((IFluidContainerItem) container.getItem()).getCapacity(container), true);
+						}
+					} else if (inLiquid != null && container != null && container.stackSize == 1 && !isArTank) {
+						if (addLiquid(inLiquid)) {
+							this.setInventorySlotContents(0, FluidContainerRegistry.drainFluidContainer(container));
+						}
 					}
 				}
 			}
