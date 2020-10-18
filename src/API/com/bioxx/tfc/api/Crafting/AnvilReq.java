@@ -6,7 +6,7 @@ public enum AnvilReq
     COPPER("Copper", 1),
     BRONZE("Bronze", 2),
     WROUGHTIRON("Wrought Iron", 3),
-    STEEL("Steel", 4),
+    STEEL("Steel", 5),
     BLACKSTEEL("Black Steel", 5),
     REDSTEEL("Red Steel", 6),
     BLUESTEEL("Blue Steel", 6),
@@ -14,8 +14,7 @@ public enum AnvilReq
     BLACKBRONZE("Black Bronze", 2),
     ROSEGOLD("Rose Gold", 2);
     
-    public static final AnvilReq RULES[] = new AnvilReq[]{STONE, COPPER, BRONZE, WROUGHTIRON, STEEL, BLACKSTEEL, REDSTEEL, BLUESTEEL, BISMUTHBRONZE, BLACKBRONZE, ROSEGOLD};
-    
+	 public static final AnvilReq RULES[] = new AnvilReq[]{STONE, COPPER, BRONZE, WROUGHTIRON, STEEL, BLACKSTEEL, REDSTEEL, BLUESTEEL, BISMUTHBRONZE, BLACKBRONZE, ROSEGOLD};
     public final int Tier;
 
     public final String Name;

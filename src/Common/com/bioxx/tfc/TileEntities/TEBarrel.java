@@ -3,6 +3,7 @@ package com.bioxx.tfc.TileEntities;
 import java.util.Random;
 import java.util.Stack;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -28,7 +29,6 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.*;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
-
 public class TEBarrel extends NetworkTileEntity implements IInventory
 {
 	public FluidStack fluid;
@@ -287,11 +287,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		if(is == null || is.stackSize > 1)
 			return is;
 
-		// Check if it is AR tank, if it is, skips it.
-		boolean isArTank = is.hasTagCompound();
-		if (isArTank) isArTank = is.getTagCompound().hasKey("Amount");
-		if (isArTank) return is;
-
+		
 		if(FluidContainerRegistry.isFilledContainer(is))
 		{
 			FluidStack fs = FluidContainerRegistry.getFluidForFilledItem(is);
@@ -723,20 +719,19 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				ItemStack container = getInputStack();
 				FluidStack inLiquid = FluidContainerRegistry.getFluidForFilledItem(container);
 
-				if (container != null) {
-					boolean isArTank = container.hasTagCompound();
-					if (isArTank) {
-						isArTank = container.getTagCompound().hasKey("Amount");
+				if(container != null && container.getItem() instanceof IFluidContainerItem && !container.hasTagCompound())
+				{
+					FluidStack isfs = ((IFluidContainerItem)container.getItem()).getFluid(container);
+					if(isfs != null && addLiquid(isfs))
+					{
+						((IFluidContainerItem) container.getItem()).drain(container, ((IFluidContainerItem)container.getItem()).getCapacity(container), true);
 					}
-					if (container != null && container.getItem() instanceof IFluidContainerItem && !isArTank) {
-						FluidStack isfs = ((IFluidContainerItem) container.getItem()).getFluid(container);
-						if (isfs != null && addLiquid(isfs)) {
-							((IFluidContainerItem) container.getItem()).drain(container, ((IFluidContainerItem) container.getItem()).getCapacity(container), true);
-						}
-					} else if (inLiquid != null && container != null && container.stackSize == 1 && !isArTank) {
-						if (addLiquid(inLiquid)) {
-							this.setInventorySlotContents(0, FluidContainerRegistry.drainFluidContainer(container));
-						}
+				}
+				else if (inLiquid != null && container != null && container.stackSize == 1)
+				{
+					if(addLiquid(inLiquid))
+					{
+						this.setInventorySlotContents(0, FluidContainerRegistry.drainFluidContainer(container));
 					}
 				}
 			}

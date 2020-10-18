@@ -30,7 +30,7 @@ public abstract class ItemAnvil extends ItemTerraBlock implements ISmeltable, IE
 	@Override
 	public short getMetalReturnAmount(ItemStack is) {
 
-		return 1400;
+		return 800;
 	}
 
 	@Override

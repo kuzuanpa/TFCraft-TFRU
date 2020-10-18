@@ -142,16 +142,15 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.powder, 6, 0), new ItemStack(TFCItems.oreChunk, 1, 32), "itemHammer"));
 
 		//Devices
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 1), "###"," # ","###", '#', "ingotDoubleCopper"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 2), "###"," # ","###", '#', "ingotDoubleBronze"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 3), "###"," # ","###", '#', "ingotDoubleWroughtIron"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 4), "###"," # ","###", '#', "ingotDoubleSteel"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 5), "###"," # ","###", '#', "ingotDoubleBlackSteel"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 6), "###"," # ","###", '#', "ingotDoubleBlueSteel"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 7), "###"," # ","###", '#', "ingotDoubleRedSteel"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 0), "###"," # ","###", '#', "ingotDoubleRoseGold"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 1), "###"," # ","###", '#', "ingotDoubleBismuthBronze"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 2), "###"," # ","###", '#', "ingotDoubleBlackBronze"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 1), "###"," D ","###", '#', "ingotCopper", 'D',"ingotDoubleCopper"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 2), "###"," D ","###", '#', "ingotBronze", 'D',"ingotDoubleBronze"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 3), "###"," D ","###", '#', "ingotWroughtIron", 'D',"ingotDoubleWroughtIron"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 4), "###"," D ","###", '#', "ingotSteel", 'D',"ingotDoubleSteel"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 6), "###"," D ","###", '#', "ingotBlueSteel", 'D',"ingotDoubleBlueSteel"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 7), "###"," D ","###", '#', "ingotRedSteel", 'D',"ingotDoubleRedSteel"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 0), "###"," D ","###", '#', "ingotRoseGold", 'D',"ingotDoubleRoseGold"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 1), "###"," D ","###", '#', "ingotBismuthBronze", 'D',"ingotDoubleBismuthBronze"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 2), "###"," D ","###", '#', "ingotBlackBronze", 'D',"ingotDoubleBlackBronze"));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.bloomery, 1), "PPP", "P P", "PPP", 'P', "plateDoubleAnyBronze"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.blastFurnace, 1), "PPP", "PCP", "PPP", 'P', "plateDoubleWroughtIron", 'C', new ItemStack(TFCBlocks.crucible, 1)));
