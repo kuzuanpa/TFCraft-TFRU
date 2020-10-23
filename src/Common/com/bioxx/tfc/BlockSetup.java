@@ -250,50 +250,50 @@ public class BlockSetup extends TFCBlocks
 		//Snow = (Block)Block.blockRegistry.getObject("snow_layer");
 		snow = new BlockCustomSnow().setHardness(0.1F).setStepSound(Block.soundTypeSnow).setBlockName("snow").setLightOpacity(0).setBlockTextureName("snow");
 		Blocks.snow_layer = snow;
-		stoneIgInCobble = new BlockIgInCobble(Material.rock).setHardness(16F).setBlockName("IgInRockCobble");
-		stoneIgIn = new BlockIgIn(Material.rock).setHardness(8F).setBlockName("IgInRock");
-		stoneIgInSmooth = new BlockIgInSmooth().setHardness(16F).setBlockName("IgInRockSmooth");
-		stoneIgInBrick = new BlockIgInBrick().setHardness(16F).setBlockName("IgInRockBrick");
+		stoneIgInCobble = new BlockIgInCobble(Material.rock).setHardness(8F).setBlockName("IgInRockCobble");
+		stoneIgIn = new BlockIgIn(Material.rock).setHardness(4F).setBlockName("IgInRock");
+		stoneIgInSmooth = new BlockIgInSmooth().setHardness(8F).setBlockName("IgInRockSmooth");
+		stoneIgInBrick = new BlockIgInBrick().setHardness(8F).setBlockName("IgInRockBrick");
 
-		stoneSedCobble = new BlockSedCobble(Material.rock).setHardness(14F).setBlockName("SedRockCobble");
-		stoneSed = new BlockSed(Material.rock).setHardness(7F).setBlockName("SedRock");
-		stoneSedSmooth = new BlockSedSmooth().setHardness(14F).setBlockName("SedRockSmooth");
-		stoneSedBrick = new BlockSedBrick().setHardness(14F).setBlockName("SedRockBrick");
+		stoneSedCobble = new BlockSedCobble(Material.rock).setHardness(7F).setBlockName("SedRockCobble");
+		stoneSed = new BlockSed(Material.rock).setHardness(3.5F).setBlockName("SedRock");
+		stoneSedSmooth = new BlockSedSmooth().setHardness(7F).setBlockName("SedRockSmooth");
+		stoneSedBrick = new BlockSedBrick().setHardness(7F).setBlockName("SedRockBrick");
 
-		stoneIgExCobble = new BlockIgExCobble(Material.rock).setHardness(16F).setBlockName("IgExRockCobble");
-		stoneIgEx = new BlockIgEx(Material.rock).setHardness(8F).setBlockName("IgExRock");
-		stoneIgExSmooth = new BlockIgExSmooth().setHardness(16F).setBlockName("IgExRockSmooth");
-		stoneIgExBrick = new BlockIgExBrick().setHardness(16F).setBlockName("IgExRockBrick");
+		stoneIgExCobble = new BlockIgExCobble(Material.rock).setHardness(8F).setBlockName("IgExRockCobble");
+		stoneIgEx = new BlockIgEx(Material.rock).setHardness(4F).setBlockName("IgExRock");
+		stoneIgExSmooth = new BlockIgExSmooth().setHardness(8F).setBlockName("IgExRockSmooth");
+		stoneIgExBrick = new BlockIgExBrick().setHardness(8F).setBlockName("IgExRockBrick");
 
-		stoneMMCobble = new BlockMMCobble(Material.rock).setHardness(15F).setBlockName("MMRockCobble");
-		stoneMM = new BlockMM(Material.rock).setHardness(8F).setBlockName("MMRock");
-		stoneMMSmooth = new BlockMMSmooth().setHardness(15F).setBlockName("MMRockSmooth");
-		stoneMMBrick = new BlockMMBrick().setHardness(15F).setBlockName("MMRockBrick");
+		stoneMMCobble = new BlockMMCobble(Material.rock).setHardness(7.5F).setBlockName("MMRockCobble");
+		stoneMM = new BlockMM(Material.rock).setHardness(4F).setBlockName("MMRock");
+		stoneMMSmooth = new BlockMMSmooth().setHardness(7.5F).setBlockName("MMRockSmooth");
+		stoneMMBrick = new BlockMMBrick().setHardness(7.5F).setBlockName("MMRockBrick");
 
-		dirt = new BlockDirt(0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("dirt");
+		dirt = new BlockDirt(0).setHardness(0.5F).setStepSound(Block.soundTypeGravel).setBlockName("dirt");
 
-		dirt2 = new BlockDirt(16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("dirt");
-		clay = new BlockClay(0).setHardness(3F).setStepSound(Block.soundTypeGravel).setBlockName("clay");
-		clay2 = new BlockClay(16).setHardness(3F).setStepSound(Block.soundTypeGravel).setBlockName("clay");
-		clayGrass = new BlockClayGrass(0).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("ClayGrass");
-		clayGrass2 = new BlockClayGrass(16).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("ClayGrass");
-		grass = new BlockGrass().setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("Grass");
-		grass2 = new BlockGrass(16).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("Grass");
-		peat = new BlockPeat().setHardness(3F).setStepSound(Block.soundTypeGravel).setBlockName("Peat");
-		peatGrass = new BlockPeatGrass().setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("PeatGrass");
-		dryGrass = new BlockDryGrass(0).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("DryGrass");
-		dryGrass2 =new BlockDryGrass(16).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("DryGrass");
+		dirt2 = new BlockDirt(16).setHardness(0.5F).setStepSound(Block.soundTypeGravel).setBlockName("dirt");
+		clay = new BlockClay(0).setHardness(0.7F).setStepSound(Block.soundTypeGravel).setBlockName("clay");
+		clay2 = new BlockClay(16).setHardness(0.7F).setStepSound(Block.soundTypeGravel).setBlockName("clay");
+		clayGrass = new BlockClayGrass(0).setHardness(0.8F).setStepSound(Block.soundTypeGrass).setBlockName("ClayGrass");
+		clayGrass2 = new BlockClayGrass(16).setHardness(0.8F).setStepSound(Block.soundTypeGrass).setBlockName("ClayGrass");
+		grass = new BlockGrass().setHardness(0.6F).setStepSound(Block.soundTypeGrass).setBlockName("Grass");
+		grass2 = new BlockGrass(16).setHardness(0.6F).setStepSound(Block.soundTypeGrass).setBlockName("Grass");
+		peat = new BlockPeat().setHardness(1F).setStepSound(Block.soundTypeGravel).setBlockName("Peat");
+		peatGrass = new BlockPeatGrass().setHardness(1F).setStepSound(Block.soundTypeGrass).setBlockName("PeatGrass");
+		dryGrass = new BlockDryGrass(0).setHardness(0.7F).setStepSound(Block.soundTypeGrass).setBlockName("DryGrass");
+		dryGrass2 =new BlockDryGrass(16).setHardness(0.7F).setStepSound(Block.soundTypeGrass).setBlockName("DryGrass");
 		tallGrass = new BlockCustomTallGrass().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("TallGrass");
 		sand = new BlockSand(0).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
 		sand2 = new BlockSand(16).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
 
-		ore = new BlockOre(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
-		ore2 = new BlockOre2(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
-		ore3 = new BlockOre3(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
+		ore = new BlockOre(Material.rock).setHardness(5F).setResistance(5F).setBlockName("Ore");
+		ore2 = new BlockOre2(Material.rock).setHardness(5F).setResistance(5F).setBlockName("Ore");
+		ore3 = new BlockOre3(Material.rock).setHardness(5F).setResistance(5F).setBlockName("Ore");
 		worldItem = new BlockWorldItem().setHardness(0.05F).setResistance(1F).setBlockName("LooseRock");
 		sulfur = new BlockSulfur(Material.rock).setBlockName("Sulfur").setHardness(0.5F).setResistance(1F);
 
-		logPile = new BlockLogPile().setHardness(10F).setResistance(1F).setBlockName("LogPile");
+		logPile = new BlockLogPile().setHardness(3F).setResistance(1F).setBlockName("LogPile");
 		woodSupportV = new BlockWoodSupport(Material.wood).setBlockName("WoodSupportV").setHardness(0.5F).setResistance(1F);
 		woodSupportH = new BlockWoodSupport(Material.wood).setBlockName("WoodSupportH").setHardness(0.5F).setResistance(1F);
 		woodSupportV2 = new BlockWoodSupport2(Material.wood).setBlockName("WoodSupportV2").setHardness(0.5F).setResistance(1F);
@@ -315,33 +315,33 @@ public class BlockSetup extends TFCBlocks
 		anvil2 = new BlockAnvil(8).setBlockName("Anvil2").setHardness(3).setResistance(100F);
 
 		molten = new BlockMolten().setBlockName("Molten").setHardness(20);
-		blastFurnace = new BlockBlastFurnace().setBlockName("BlastFurnace").setHardness(20).setLightLevel(0F);
-		bloomery = new BlockEarlyBloomery().setBlockName("EarlyBloomery").setHardness(20).setLightLevel(0F);
-		bloom = new BlockBloom().setBlockName("Bloom").setHardness(20).setLightLevel(0F);
+		blastFurnace = new BlockBlastFurnace().setBlockName("BlastFurnace").setHardness(10).setLightLevel(0F);
+		bloomery = new BlockEarlyBloomery().setBlockName("EarlyBloomery").setHardness(10).setLightLevel(0F);
+		bloom = new BlockBloom().setBlockName("Bloom").setHardness(10).setLightLevel(0F);
 		sluice = new BlockSluice().setBlockName("Sluice").setHardness(2F).setResistance(20F);
 
-		stoneStairs = new BlockStair(Material.rock).setBlockName("stoneStairs").setHardness(10);
-		stoneSlabs = new BlockSlab().setBlockName("stoneSlabs").setHardness(10);
-		stoneStalac = new BlockStalactite().setBlockName("stoneStalac").setHardness(5);
+		stoneStairs = new BlockStair(Material.rock).setBlockName("stoneStairs").setHardness(7);
+		stoneSlabs = new BlockSlab().setBlockName("stoneSlabs").setHardness(7);
+		stoneStalac = new BlockStalactite().setBlockName("stoneStalac").setHardness(3);
 
 		charcoal = new BlockCharcoal().setHardness(3F).setResistance(10F).setBlockName("Charcoal");
 
 		detailed = new BlockDetailed().setBlockName("StoneDetailed").setHardness(10);
 
-		planks = new BlockPlanks(Material.wood).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood");
-		planks2 = new BlockPlanks2(Material.wood).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood2");
+		planks = new BlockPlanks(Material.wood).setHardness(2.0F).setResistance(2.0F).setStepSound(Block.soundTypeWood).setBlockName("wood");
+		planks2 = new BlockPlanks2(Material.wood).setHardness(2.0F).setResistance(2.0F).setStepSound(Block.soundTypeWood).setBlockName("wood2");
 		leaves = new BlockCustomLeaves().setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves").setCreativeTab(TFCTabs.TFC_DECORATION);
 		leaves2 = new BlockCustomLeaves2().setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves2");
 		sapling = new BlockSapling().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling");
 		sapling2 = new BlockSapling2().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling2");
 
-		logNatural = new BlockLogNatural().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log");
-		logNatural2 = new BlockLogNatural2().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log2");
-		woodVert = new BlockLogVert().setBlockName("WoodVert").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
-		woodVert2 = new BlockLogVert2().setBlockName("WoodVert2").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
-		woodHoriz = new BlockLogHoriz(0).setBlockName("WoodHoriz").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
-		woodHoriz2 = new BlockLogHoriz(8).setBlockName("WoodHoriz2").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
-		woodHoriz3 = new BlockLogHoriz2(0).setBlockName("WoodHoriz3").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
+		logNatural = new BlockLogNatural().setHardness(20.0F).setStepSound(Block.soundTypeWood).setBlockName("log");
+		logNatural2 = new BlockLogNatural2().setHardness(20.0F).setStepSound(Block.soundTypeWood).setBlockName("log2");
+		woodVert = new BlockLogVert().setBlockName("WoodVert").setHardness(10).setResistance(7.5F).setStepSound(Block.soundTypeWood);
+		woodVert2 = new BlockLogVert2().setBlockName("WoodVert2").setHardness(10).setResistance(7.5F).setStepSound(Block.soundTypeWood);
+		woodHoriz = new BlockLogHoriz(0).setBlockName("WoodHoriz").setHardness(10).setResistance(7.5F).setStepSound(Block.soundTypeWood);
+		woodHoriz2 = new BlockLogHoriz(8).setBlockName("WoodHoriz2").setHardness(10).setResistance(7.5F).setStepSound(Block.soundTypeWood);
+		woodHoriz3 = new BlockLogHoriz2(0).setBlockName("WoodHoriz3").setHardness(10).setResistance(7.5F).setStepSound(Block.soundTypeWood);
 		//Use 8 instead of 0 if Global.WOOD_ALL.length > 24
 		woodHoriz4 = new BlockLogHoriz2(/*8*/0).setBlockName("WoodHoriz4").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
 
@@ -375,7 +375,7 @@ public class BlockSetup extends TFCBlocks
 
 		barrel = new BlockBarrel().setBlockName("Barrel").setHardness(2);
 		loom = new BlockLoom().setBlockName("Loom").setHardness(2);
-		thatch = new BlockThatch().setBlockName("Thatch").setHardness(1).setStepSound(Block.soundTypeGrass).setCreativeTab(TFCTabs.TFC_BUILDING);
+		thatch = new BlockThatch().setBlockName("Thatch").setHardness(0.5F).setStepSound(Block.soundTypeGrass).setCreativeTab(TFCTabs.TFC_BUILDING);
 		moss = new BlockMoss().setBlockName("Moss").setHardness(1).setStepSound(Block.soundTypeGrass);
 
 		flora = new BlockFlora().setBlockName("Flora").setHardness(0.1f).setStepSound(Block.soundTypeGrass);
@@ -394,7 +394,7 @@ public class BlockSetup extends TFCBlocks
 		armorStand2 = new BlockStand2().setBlockName("ArmourStand").setHardness(2);
 
 		berryBush = new BlockBerryBush().setBlockName("BerryBush").setHardness(0.3f).setStepSound(Block.soundTypeGrass);
-		crops = new BlockCrop().setBlockName("crops").setHardness(0.3F).setStepSound(Block.soundTypeGrass);
+		crops = new BlockCrop().setBlockName("crops").setHardness(0.2F).setStepSound(Block.soundTypeGrass);
 		lilyPad = new BlockCustomLilyPad().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("LilyPad").setBlockTextureName("waterlily");
 		flowers = new BlockFlower().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers");
 		flowers2 = new BlockFlower2().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers2");
@@ -416,10 +416,10 @@ public class BlockSetup extends TFCBlocks
 		waterPlant = new BlockWaterPlant(0).setBlockName("SeaGrassStill").setHardness(0.5f).setStepSound(Block.soundTypeGravel);
 
 		fireBrick = new BlockFireBrick().setBlockName("FireBrick").setHardness(8);
-		metalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(80);
+		metalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(20);
 		leatherRack = new BlockLeatherRack().setBlockName("LeatherRack").setHardness(1);
-		metalBlock = new BlockMetal(Material.iron) {}.setHardness(16F).setResistance(10F).setStepSound(Block.soundTypeMetal).setBlockName("MetalBlock");
-		metalBlock2 = new BlockMetal2(Material.iron) {}.setHardness(16F).setResistance(10F).setStepSound(Block.soundTypeMetal).setBlockName("MetalBlock");
+		metalBlock = new BlockMetal(Material.iron) {}.setHardness(8F).setResistance(5F).setStepSound(Block.soundTypeMetal).setBlockName("MetalBlock");
+		metalBlock2 = new BlockMetal2(Material.iron) {}.setHardness(8F).setResistance(5F).setStepSound(Block.soundTypeMetal).setBlockName("MetalBlock");
 
 		gravel = new BlockGravel(0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravels");
 		gravel2 = new BlockGravel(16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravels");
