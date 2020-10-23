@@ -5,6 +5,7 @@ import java.util.Random;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.Explosion;
@@ -45,6 +46,11 @@ public class BlockOre3 extends BlockOre
 			ret.add(itemstack);
 		}
 		return ret;
+	}
+
+	public static Item getDroppedItem(int meta)
+	{
+		return TFCItems.oreChunk;
 	}
 
 	@Override
