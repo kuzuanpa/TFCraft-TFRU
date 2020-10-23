@@ -91,7 +91,7 @@ public class WorldGenSoilPits implements IWorldGenerator
 		int radius = rand.nextInt(14) + 2;
 		byte depth = (byte) (rand.nextInt(3) + 1);
 		boolean flag = false;
-		if(rand.nextInt(30) == 0 && j <= 150)
+		if(rand.nextInt(20) == 0 && j <= 150)
 		{
 			for (int xCoord = i - radius; xCoord <= i + radius; ++xCoord)
 			{
@@ -99,7 +99,11 @@ public class WorldGenSoilPits implements IWorldGenerator
 				{
 					int x = xCoord - i;
 					int z = zCoord - k;
-					if (x * x + z * z <= radius * radius && TFC_Climate.getRainfall(world, xCoord, Global.SEALEVEL, zCoord) >= 500)
+					double rainfall = TFC_Climate.getRainfall(world, xCoord, Global.SEALEVEL, zCoord);
+					if (rainfall < 500) {
+						radius = rand.nextInt(Math.max(14 - (int)Math.ceil((500-rainfall)/100), 2)) + 2;
+					}
+					if (x * x + z * z <= radius * radius)
 					{
 						flag = false;
 						for (int yCoord = j - depth; yCoord <= j + depth; ++yCoord)

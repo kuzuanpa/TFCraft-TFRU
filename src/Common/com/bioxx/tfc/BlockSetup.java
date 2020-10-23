@@ -287,10 +287,10 @@ public class BlockSetup extends TFCBlocks
 		sand = new BlockSand(0).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
 		sand2 = new BlockSand(16).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
 
-		ore = new BlockOre(Material.rock).setHardness(5F).setResistance(5F).setBlockName("Ore");
-		ore2 = new BlockOre2(Material.rock).setHardness(5F).setResistance(5F).setBlockName("Ore");
-		ore3 = new BlockOre3(Material.rock).setHardness(5F).setResistance(5F).setBlockName("Ore");
-		worldItem = new BlockWorldItem().setHardness(0.05F).setResistance(1F).setBlockName("LooseRock");
+		ore = new BlockOre(Material.rock).setHardness(4F).setResistance(4F).setBlockName("Ore");
+		ore2 = new BlockOre2(Material.rock).setHardness(4F).setResistance(4F).setBlockName("Ore");
+		ore3 = new BlockOre3(Material.rock).setHardness(4F).setResistance(4F).setBlockName("Ore");
+		worldItem = new BlockWorldItem().setHardness(0F).setResistance(1F).setBlockName("LooseRock");
 		sulfur = new BlockSulfur(Material.rock).setBlockName("Sulfur").setHardness(0.5F).setResistance(1F);
 
 		logPile = new BlockLogPile().setHardness(3F).setResistance(1F).setBlockName("LogPile");
@@ -299,8 +299,8 @@ public class BlockSetup extends TFCBlocks
 		woodSupportV2 = new BlockWoodSupport2(Material.wood).setBlockName("WoodSupportV2").setHardness(0.5F).setResistance(1F);
 		woodSupportH2 = new BlockWoodSupport2(Material.wood).setBlockName("WoodSupportH2").setHardness(0.5F).setResistance(1F);
 
-		tilledSoil = new BlockFarmland(TFCBlocks.dirt, 0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil");
-		tilledSoil2 = new BlockFarmland(TFCBlocks.dirt2, 16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil");
+		tilledSoil = new BlockFarmland(TFCBlocks.dirt, 0).setHardness(0.7F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil");
+		tilledSoil2 = new BlockFarmland(TFCBlocks.dirt2, 16).setHardness(0.7F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil");
 
 		fruitTreeWood = new BlockFruitWood().setBlockName("fruitTreeWood").setHardness(5.5F).setResistance(2F);
 		fruitTreeLeaves = new BlockFruitLeaves(0).setBlockName("fruitTreeLeaves").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundTypeGrass);
@@ -394,7 +394,7 @@ public class BlockSetup extends TFCBlocks
 		armorStand2 = new BlockStand2().setBlockName("ArmourStand").setHardness(2);
 
 		berryBush = new BlockBerryBush().setBlockName("BerryBush").setHardness(0.3f).setStepSound(Block.soundTypeGrass);
-		crops = new BlockCrop().setBlockName("crops").setHardness(0.2F).setStepSound(Block.soundTypeGrass);
+		crops = new BlockCrop().setBlockName("crops").setHardness(0.0F).setStepSound(Block.soundTypeGrass);
 		lilyPad = new BlockCustomLilyPad().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("LilyPad").setBlockTextureName("waterlily");
 		flowers = new BlockFlower().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers");
 		flowers2 = new BlockFlower2().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers2");
@@ -421,8 +421,8 @@ public class BlockSetup extends TFCBlocks
 		metalBlock = new BlockMetal(Material.iron) {}.setHardness(8F).setResistance(5F).setStepSound(Block.soundTypeMetal).setBlockName("MetalBlock");
 		metalBlock2 = new BlockMetal2(Material.iron) {}.setHardness(8F).setResistance(5F).setStepSound(Block.soundTypeMetal).setBlockName("MetalBlock");
 
-		gravel = new BlockGravel(0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravels");
-		gravel2 = new BlockGravel(16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravels");
+		gravel = new BlockGravel(0).setHardness(0.7F).setStepSound(Block.soundTypeGravel).setBlockName("gravels");
+		gravel2 = new BlockGravel(16).setHardness(0.7F).setStepSound(Block.soundTypeGravel).setBlockName("gravels");
 
 		grill = new BlockGrill().setHardness(2F).setBlockName("Grill");
 		metalTrapDoor = new BlockMetalTrapDoor().setHardness(2F).setBlockName("MetalTrapDoor");

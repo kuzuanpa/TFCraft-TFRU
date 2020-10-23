@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
+import com.bioxx.tfc.Blocks.Flora.BlockLogVert;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -54,9 +55,9 @@ public class ItemRawHide extends ItemLooseRock
 					itemstack.stackSize--;
 				}
 			}
-			else if(itemstack.getItem() == TFCItems.soakedHide && side == ForgeDirection.UP.ordinal() )
+			else if(itemstack.getItem() == TFCItems.soakedHide && side != ForgeDirection.DOWN.ordinal())
 			{
-				if(world.getBlock(x, y, z) instanceof BlockLogHoriz && world.isAirBlock( x, y + 1, z ) && world.setBlock(x, y+1, z, TFCBlocks.leatherRack))
+				if((world.getBlock(x, y, z) instanceof BlockLogHoriz || world.getBlock(x, y, z) instanceof BlockLogVert) && world.isAirBlock( x, y + 1, z ) && world.setBlock(x, y+1, z, TFCBlocks.leatherRack))
 				{
 					TELeatherRack te = (TELeatherRack)world.getTileEntity(x, y+1, z);
 					te.setLeather(itemstack);

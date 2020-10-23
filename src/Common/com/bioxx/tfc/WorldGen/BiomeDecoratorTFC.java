@@ -101,13 +101,13 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 
 		for (var2 = 0; var2 < 10; ++var2)
 		{
-			if (randomGenerator.nextInt(100) < 10)
+			if (randomGenerator.nextInt(50) < 10)
 			{
 				xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 				zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 				yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-				if(TFC_Climate.getBioTemperatureHeight(currentWorld, xCoord, yCoord, zCoord) >= 25)
-					this.reedGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+//				if(TFC_Climate.getBioTemperatureHeight(currentWorld, xCoord, yCoord, zCoord) >= 25)
+				this.reedGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 			}
 		}
 
