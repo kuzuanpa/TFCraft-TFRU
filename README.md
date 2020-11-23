@@ -1,5 +1,5 @@
-# TFC for TerraFirmaRescue
-# 群峦救援：群峦传说
+# TFC-TFR 群峦传说-群峦救援
+##### TerraFirmaCraft for TerraFirmaRescue
 
 ## License 协议
 
@@ -13,6 +13,11 @@ This project contains plenty of changes, and may not suitable for update from st
 该项目涉及大量魔改，并非延续官方版本的更新，慎用。
 
 ## Recent Changes 更新记录
+v0.80.09
+Fix: 修复：
+- Ingot pile drop dupe when GT6 is installed, which is actually an error in original code
+- 修复锭堆掉落双倍物品
+
 v0.80.08
 
 Add: 添加：
