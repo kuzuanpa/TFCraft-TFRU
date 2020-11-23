@@ -310,7 +310,7 @@ public class BlockIngotPile extends BlockTerraContainer
 					}
 				}
 			}
-			super.breakBlock(world, x, y, z, b, meta);
+//			super.breakBlock(world, x, y, z, b, meta);
 		}
 	}
 
