@@ -278,40 +278,41 @@ public class BlockIngotPile extends BlockTerraContainer
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block b, int meta)
 	{
-		TEIngotPile te = (TEIngotPile)world.getTileEntity(x, y, z);
-		if (te != null)
-		{
-			for (int var6 = 0; var6 < te.getSizeInventory(); ++var6)
-			{
-				ItemStack var7 = te.getStackInSlot(var6);
-
-				if (var7 != null)
-				{
-					float var8 = this.random.nextFloat() * 0.8F + 0.1F;
-					float var9 = this.random.nextFloat() * 0.8F + 0.1F;
-					EntityItem var12;
-
-					for (float var10 = this.random.nextFloat() * 0.8F + 0.1F; var7.stackSize > 0; world.spawnEntityInWorld(var12))
-					{
-						int var11 = this.random.nextInt(21) + 10;
-
-						if (var11 > var7.stackSize)
-							var11 = var7.stackSize;
-
-						var7.stackSize -= var11;
-						var12 = new EntityItem(world, x + var8, y + var9, z + var10, new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
-						float var13 = 0.05F;
-						var12.motionX = (float)this.random.nextGaussian() * var13;
-						var12.motionY = (float)this.random.nextGaussian() * var13 + 0.2F;
-						var12.motionZ = (float)this.random.nextGaussian() * var13;
-
-						if (var7.hasTagCompound())
-							var12.getEntityItem().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
-					}
-				}
-			}
+//		TEIngotPile te = (TEIngotPile)world.getTileEntity(x, y, z);
+//		if (te != null)
+//		{
+//			for (int var6 = 0; var6 < te.getSizeInventory(); ++var6)
+//			{
+//				ItemStack var7 = te.getStackInSlot(var6);
+//
+//				if (var7 != null)
+//				{
+//					float var8 = this.random.nextFloat() * 0.8F + 0.1F;
+//					float var9 = this.random.nextFloat() * 0.8F + 0.1F;
+//					EntityItem var12;
+//
+//					for (float var10 = this.random.nextFloat() * 0.8F + 0.1F; var7.stackSize > 0; world.spawnEntityInWorld(var12))
+//					{
+//						int var11 = this.random.nextInt(21) + 10;
+//
+//						if (var11 > var7.stackSize)
+//							var11 = var7.stackSize;
+//
+//						var7.stackSize -= var11;
+//						var12 = new EntityItem(world, x + var8, y + var9, z + var10, new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
+//						float var13 = 0.05F;
+//						var12.motionX = (float)this.random.nextGaussian() * var13;
+//						var12.motionY = (float)this.random.nextGaussian() * var13 + 0.2F;
+//						var12.motionZ = (float)this.random.nextGaussian() * var13;
+//
+//						if (var7.hasTagCompound())
+//							var12.getEntityItem().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
+//					}
+//				}
+//			}
 //			super.breakBlock(world, x, y, z, b, meta);
-		}
+//		}
+//		super.breakBlock(world, x, y, z, b, meta);
 	}
 
 	@Override
