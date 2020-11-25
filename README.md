@@ -15,6 +15,11 @@ This project contains plenty of changes, and may not suitable for update from st
 ## Recent Changes 更新记录
 v0.80.09
 Fix: 修复：
+- Lapis and Borax have wrong indicators. 
+- 青金石和硼砂有错误的指示物
+
+v0.80.09
+Fix: 修复：
 - Ingot pile drop dupe when GT6 is installed, which is actually an error in original code
 - 修复锭堆掉落双倍物品
 

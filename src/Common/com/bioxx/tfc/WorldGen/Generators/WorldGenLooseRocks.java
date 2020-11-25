@@ -94,7 +94,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 						if(!coreSample.contains(BlockOre3.getDroppedItem(m+32)))
 						{
 							coreSample.add(BlockOre3.getDroppedItem(m+32));
-							coreSampleStacks.add(new ItemStack(BlockOre3.getDroppedItem(m+32), 1, m));
+							coreSampleStacks.add(new ItemStack(BlockOre3.getDroppedItem(m+32), 1, m+32));
 						}
 					}
 				}
