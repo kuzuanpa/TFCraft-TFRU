@@ -11,6 +11,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -44,7 +45,7 @@ import org.apache.logging.log4j.Logger;
 public class TerraFirmaCraft
 {
 	public static final Logger LOG = LogManager.getLogger(Reference.MOD_NAME);
-
+	public static boolean BotLoaded = false;
 	@Instance(Reference.MOD_ID)
 	public static TerraFirmaCraft instance;
 
@@ -64,7 +65,7 @@ public class TerraFirmaCraft
 		TFC_ConfigFiles.preInit(event.getModConfigurationDirectory());
 		TFC_ConfigFiles.reloadGeneral(); // No special needs
 		// No world gen here, other mods may need to load first!
-
+		BotLoaded = Loader.isModLoaded("Botania");
 		proxy.registerTickHandler();
 
 		proxy.registerFluids();

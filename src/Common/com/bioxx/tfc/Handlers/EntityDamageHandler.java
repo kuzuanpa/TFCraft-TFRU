@@ -19,9 +19,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-
+import vazkii.botania.common.item.equipment.armor.elementium.ItemElementiumArmor;
+import vazkii.botania.common.item.equipment.armor.manasteel.ItemManasteelArmor;
+import vazkii.botania.common.item.equipment.armor.manaweave.ItemManaweaveArmor;
+import vazkii.botania.common.item.equipment.armor.terrasteel.ItemTerrasteelArmor;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
@@ -122,6 +126,7 @@ public class EntityDamageHandler
 			int location = getRandomSlot(entity.getRNG());
 
 			//2. Get Armor Rating for armor in hit Location
+			if(!(TerraFirmaCraft.BotLoaded)) {
 			if(armor[location] != null && armor[location].getItem() instanceof ItemTFCArmor)
 			{
 				pierceRating = ((ItemTFCArmor)armor[location].getItem()).armorTypeTFC.getPiercingAR();
@@ -175,10 +180,95 @@ public class EntityDamageHandler
 			float hasHealth = entity.getHealth();
 			entity.setHealth(entity.getHealth()-eventPost.incomingDamage);
 			entity.func_110142_aN().func_94547_a(source, hasHealth, eventPost.incomingDamage);
+		}else {
+			//Bot
+			if(armor[location] != null && armor[location].getItem() instanceof ItemTFCArmor)
+			{
+				pierceRating = ((ItemTFCArmor)armor[location].getItem()).armorTypeTFC.getPiercingAR();
+				slashRating = ((ItemTFCArmor)armor[location].getItem()).armorTypeTFC.getSlashingAR();
+				crushRating = ((ItemTFCArmor)armor[location].getItem()).armorTypeTFC.getCrushingAR();
+				if(entity instanceof IInnateArmor)
+				{
+					pierceRating += ((IInnateArmor)entity).getPierceArmor();
+					slashRating += ((IInnateArmor)entity).getSlashArmor();
+					crushRating += ((IInnateArmor) entity).getCrushArmor();
+				}			
+				float pierceMult = getDamageReduction(pierceRating);
+				float slashMult = getDamageReduction(slashRating);
+				float crushMult = getDamageReduction(crushRating);
+				damage = processDamageSource(source, damage, pierceMult,
+						slashMult, crushMult);		
+				armor[location].damageItem((int) processArmorDamage(armor[location], damage), entity);
+			}else if(armor[location] != null && armor[location].getItem() instanceof ItemManasteelArmor) {
+				if(armor[location].getItem() instanceof ItemTerrasteelArmor)
+				{
+					pierceRating = ((ItemTerrasteelArmor)armor[location].getItem()).armorTypeTFC.getPiercingAR();
+					slashRating = ((ItemTerrasteelArmor)armor[location].getItem()).armorTypeTFC.getSlashingAR();
+					crushRating = ((ItemTerrasteelArmor)armor[location].getItem()).armorTypeTFC.getCrushingAR();
+				}else if(armor[location].getItem() instanceof ItemElementiumArmor) {
+					pierceRating = ((ItemElementiumArmor)armor[location].getItem()).armorTypeTFC.getPiercingAR();
+					slashRating = ((ItemElementiumArmor)armor[location].getItem()).armorTypeTFC.getSlashingAR();
+					crushRating = ((ItemElementiumArmor)armor[location].getItem()).armorTypeTFC.getCrushingAR();
+				}
+				else if(armor[location].getItem() instanceof ItemManaweaveArmor) {
+					pierceRating = ((ItemManaweaveArmor)armor[location].getItem()).armorTypeTFC.getPiercingAR();
+					slashRating = ((ItemManaweaveArmor)armor[location].getItem()).armorTypeTFC.getSlashingAR();
+					crushRating = ((ItemManaweaveArmor)armor[location].getItem()).armorTypeTFC.getCrushingAR();
+				}
+				else {
+					pierceRating = 1000;
+					slashRating = 1000;
+					crushRating = 1000;
+				}
+				if(entity instanceof IInnateArmor)
+					{
+						pierceRating += ((IInnateArmor)entity).getPierceArmor();
+						slashRating += ((IInnateArmor)entity).getSlashArmor();
+						crushRating += ((IInnateArmor) entity).getCrushArmor();
+					}			
+					float pierceMult = getDamageReduction(pierceRating);
+					float slashMult = getDamageReduction(slashRating);
+					float crushMult = getDamageReduction(crushRating);
+					damage = processDamageSource(source, damage, pierceMult,
+							slashMult, crushMult);		
+					armor[location].damageItem((int) processArmorDamage(armor[location], damage), entity);
+				}
+				
+			
+			else if (armor[location] == null || armor[location] != null && !(armor[location].getItem() instanceof ItemTFCArmor || armor[location] != null && !(armor[location].getItem() instanceof ItemManasteelArmor)))
+			{
+				if(entity instanceof IInnateArmor)
+				{
+					pierceRating += ((IInnateArmor)entity).getPierceArmor();
+					slashRating += ((IInnateArmor)entity).getSlashArmor();
+					crushRating += ((IInnateArmor) entity).getCrushArmor();
+				}
+				
+				float pierceMult = getDamageReduction(pierceRating);
+				float slashMult = getDamageReduction(slashRating);
+				float crushMult = getDamageReduction(crushRating);
+
+				damage = processDamageSource(source, damage, pierceMult, slashMult, crushMult);
+
+
+				if(location == 3)
+					damage *= 1.75f;
+				else if(location == 0)
+					entity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 100, 1));
+			}
+
+			EntityArmorCalcEvent eventPost = new EntityArmorCalcEvent(entity, damage, EntityArmorCalcEvent.EventType.POST);
+			MinecraftForge.EVENT_BUS.post(eventPost);
+		
+			float hasHealth = entity.getHealth();
+			entity.setHealth(entity.getHealth()-eventPost.incomingDamage);
+			entity.func_110142_aN().func_94547_a(source, hasHealth, eventPost.incomingDamage);
+	
 		}
+		}	
 		return 0;
 	}
-
+	
 	private float processDamageSource(DamageSource source, float damage,
 			float pierceMult, float slashMult, float crushMult)
 	{
