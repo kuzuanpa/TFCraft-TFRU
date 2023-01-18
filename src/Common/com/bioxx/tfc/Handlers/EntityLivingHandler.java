@@ -62,10 +62,10 @@ public class EntityLivingHandler
 			//Set Max Health
 			float newMaxHealth = FoodStatsTFC.getMaxHealth(player);
 			float oldMaxHealth = (float)player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
-			if(oldMaxHealth != newMaxHealth)
-			{
-				player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(newMaxHealth);
-			}
+			//if(oldMaxHealth != newMaxHealth)
+			//{
+			//	player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(newMaxHealth);
+			//}
 
 			if(!player.worldObj.isRemote)
 			{
