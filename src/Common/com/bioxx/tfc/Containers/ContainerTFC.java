@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Containers;
 
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import com.bioxx.tfc.api.TFC_ItemHeat;
+import org.apache.logging.log4j.Level;
 
 public class ContainerTFC extends Container
 {
@@ -227,11 +229,13 @@ public class ContainerTFC extends Container
 
 	public static boolean isItemStackEqual(ItemStack is1, ItemStack is2)
 	{
-		return is1.stackSize != is2.stackSize ? false :
-			is1.getItem() != is2.getItem() ? false :
-				is1.getItemDamage() != is2.getItemDamage() ? false :
-					is1.stackTagCompound == null && is2.stackTagCompound != null ? false :
-						is1.stackTagCompound == null || areCompoundsEqual(is1, is2);
+		return  is1 != null
+				&& is2 != null
+				&& is1.stackSize == is2.stackSize
+			    && is1.getItem() == is2.getItem()
+		        && is1.getItemDamage() == is2.getItemDamage()
+		        && ((is1.stackTagCompound == null && is2.stackTagCompound == null)
+				   ||areCompoundsEqual(is1, is2));
 	}
 
 	public static boolean areCompoundsEqual(ItemStack is1, ItemStack is2)
@@ -265,7 +269,9 @@ public class ContainerTFC extends Container
 	{
 		Slot slot = (Slot)this.inventorySlots.get( slotNum );
 		ItemStack is = transferStackInSlotTFC(entityplayer, slotNum);
-		
+		FMLLog.log(Level.FATAL,"c");
+
+
 		// send a packet to make sure that the item is removed; that it stays removed.
 		if ( ! slot.getHasStack() && entityplayer instanceof EntityPlayerMP && ! entityplayer.worldObj.isRemote )
 		{

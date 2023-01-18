@@ -42,16 +42,6 @@ public class EntityDamageHandler
 	public void onEntityHurt(LivingHurtEvent event)
 	{
 		EntityLivingBase entity = event.entityLiving;
-		if(entity instanceof EntityPlayer)
-		{
-			float curMaxHealth = (float)((EntityPlayer)entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
-			float newMaxHealth = FoodStatsTFC.getMaxHealth((EntityPlayer)entity);
-			float h = ((EntityPlayer)entity).getHealth();
-			if(newMaxHealth != curMaxHealth)
-				((EntityPlayer)entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(newMaxHealth);
-			if(newMaxHealth < h)
-				((EntityPlayer)entity).setHealth(newMaxHealth);
-		}
 
 		if(event.source == DamageSource.onFire)
 		{
