@@ -17,7 +17,7 @@ effect.bleed=Bleeding
 death.attack.alcohol=%1$s died of alcohol poisoning
 death.attack.heatStroke=%1$s died of heat stroke
 death.attack.caveIn=%1$s was crushed by falling cobblestone
-
+tfc.message.techiteminbarrel=This item is too mordern, Barrel can't contain so much.
 #==============
 #= Gui config =
 #==============

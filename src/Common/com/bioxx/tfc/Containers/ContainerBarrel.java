@@ -150,11 +150,11 @@ public class ContainerBarrel extends ContainerTFC
 	{
 		super.detectAndSendChanges();
 		Slot slot = (Slot)(inventorySlots.get(0));
-		if (slot.getStack() != null && slot.getStack().getItem().getUnlocalizedName().equals("gt.multitileentity")){
+		if (slot.getStack() != null && slot.getStack().getItem().getUnlocalizedName().equals("gt.multitileentity")&&slot.getStack().stackSize > 1){
+			slot.getStack().stackSize--;
 			this.inventoryPlayer.addItemStackToInventory(slot.getStack());
-            this.inventoryPlayer.player.closeScreen();
+			slot.getStack().stackSize = 1;
 			this.inventoryPlayer.player.addChatMessage(new ChatComponentTranslation("tfc.message.techiteminbarrel").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
-			slot.putStack(null);
 		}
 		for (int var1 = 0; var1 < this.crafters.size() && guiTab == 0; ++var1)
 		{

@@ -16,6 +16,8 @@ key.LockTool=锁定工具位置
 effect.bleed=流血
 death.attack.alcohol=%1$s死于酒精中毒
 death.attack.heatStroke=%1$s死于中暑
+death.attack.caveIn=%1$s被落石砸死了
+tfc.message.techiteminbarrel=这个物品太精密了，桶里不能放这么多
 
 #==============
 #= Entities = 
@@ -59,7 +61,7 @@ fishingRod.gotAway=它跑掉了...
 #================
 #= Achievements =
 #================
-achievement.achLooseRock=确凿无疑是块岩石
+achievement.achLooseRock=确实是块石头
 achievement.achLooseRock.desc=拾取岩石
 achievement.achSmallOre=无石不翻
 achievement.achSmallOre.desc=找到矿石颗粒
@@ -77,7 +79,7 @@ achievement.achSaw=木匠
 achievement.achSaw.desc=制造出锯子
 achievement.achAnvil=捶打时间
 achievement.achAnvil.desc=制造出石砧
-achievement.achPickaxe=(终于到了)挖矿时间！
+achievement.achPickaxe=挖矿时间！
 achievement.achPickaxe.desc=制造出鹤嘴锄
 achievement.achDiamond=钻-噢,等下,不要啊
 achievement.achDiamond.desc=找到钻石
