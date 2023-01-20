@@ -1914,6 +1914,7 @@ tile.Anvil.Steel.name=钢砧
 tile.Anvil.Tin.name=锡砧
 tile.Anvil.Wrought Iron.name=锻铁砧
 tile.Anvil.Zinc.name=锌砧
+tile.Anvil3.Mana Steel.name=魔力钢砧
 
 #==================
 #= Terrain Blocks =

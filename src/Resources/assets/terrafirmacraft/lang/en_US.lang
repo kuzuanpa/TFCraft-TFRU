@@ -2064,6 +2064,7 @@ tile.Anvil.Steel.name=Steel Anvil
 tile.Anvil.Tin.name=Tin Anvil
 tile.Anvil.Wrought Iron.name=Wrought Iron Anvil
 tile.Anvil.Zinc.name=Zinc Anvil
+tile.Anvil3.Mana Steel.name=Mana Steel Anvil
 
 #==================
 #= Terrain Blocks =
