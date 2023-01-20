@@ -1,5 +1,8 @@
 package com.bioxx.tfc.api.Crafting;
 
+import cpw.mods.fml.common.FMLLog;
+import org.apache.logging.log4j.Level;
+
 public enum AnvilReq
 {
     STONE("Stone", 0),
@@ -8,13 +11,14 @@ public enum AnvilReq
     WROUGHTIRON("Wrought Iron", 3),
     STEEL("Steel", 5),
     BLACKSTEEL("Black Steel", 5),
-    REDSTEEL("Red Steel", 6),
-    BLUESTEEL("Blue Steel", 6),
-    BISMUTHBRONZE("Bismuth Bronze", 2),
+    REDSTEEL("Red Steel", 7),
+    BLUESTEEL("Blue Steel", 7),
+	BISMUTHBRONZE("Bismuth Bronze", 2),
     BLACKBRONZE("Black Bronze", 2),
-    ROSEGOLD("Rose Gold", 2);
-    
-	 public static final AnvilReq RULES[] = new AnvilReq[]{STONE, COPPER, BRONZE, WROUGHTIRON, STEEL, BLACKSTEEL, REDSTEEL, BLUESTEEL, BISMUTHBRONZE, BLACKBRONZE, ROSEGOLD};
+	ROSEGOLD("Rose Gold", 2),
+	MANASTEEL("Mana Steel", 6);
+
+	 public static final AnvilReq[] RULES = new AnvilReq[]{STONE, COPPER, BRONZE, WROUGHTIRON, STEEL, BLACKSTEEL,MANASTEEL, REDSTEEL, BLUESTEEL, BISMUTHBRONZE, BLACKBRONZE, ROSEGOLD, MANASTEEL};
     public final int Tier;
 
     public final String Name;
@@ -24,7 +28,7 @@ public enum AnvilReq
         Name = n;
         Tier = tier;
     }
-    
+
     public boolean matches(int tier)
     {
 		return tier >= Tier;
@@ -33,10 +37,10 @@ public enum AnvilReq
     {
 		return req.Tier >= Tier;
     }
-    public static boolean matches(int i, int j)
+    public static boolean matches(int recipeLevel, int anvilLevel)
     {
-		return j >= i;
-    }
+		return anvilLevel >= recipeLevel;
+	}
     
     public static AnvilReq getReqFromInt(int i)
     {
@@ -74,4 +78,8 @@ public enum AnvilReq
     		return BISMUTHBRONZE;
     	}
     }
+	public static AnvilReq getReqFromInt3(int i){
+		return MANASTEEL;
+	}
+
 }

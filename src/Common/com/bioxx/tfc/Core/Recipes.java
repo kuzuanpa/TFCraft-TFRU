@@ -28,6 +28,7 @@ import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.*;
 import com.bioxx.tfc.api.Enums.RuleEnum;
+import vazkii.botania.common.lib.LibOreDict;
 
 public class Recipes 
 {
@@ -151,6 +152,7 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 0), "###"," D ","###", '#', "ingotRoseGold", 'D',"ingotDoubleRoseGold"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 1), "###"," D ","###", '#', "ingotBismuthBronze", 'D',"ingotDoubleBismuthBronze"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 2), "###"," D ","###", '#', "ingotBlackBronze", 'D',"ingotDoubleBlackBronze"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil3, 1, 0), "###"," # ","###", '#', LibOreDict.MANA_STEEL));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.bloomery, 1), "PPP", "P P", "PPP", 'P', "plateDoubleAnyBronze"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.blastFurnace, 1), "PPP", "PCP", "PPP", 'P', "plateDoubleWroughtIron", 'C', new ItemStack(TFCBlocks.crucible, 1)));
@@ -1301,6 +1303,7 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.highCarbonBlueSteelIngot), null, "ingot", false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelIngot)).clearRecipeSkills());
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.highCarbonRedSteelIngot), null, "ingot",  false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelIngot)).clearRecipeSkills());
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.highCarbonSteelIngot), null, "ingot", false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelIngot)).clearRecipeSkills());
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.weakRedSteelIngot), new ItemStack(TFCItems.smallMetalChunk,1,3), "ingot",  false, AnvilReq.MANASTEEL, new ItemStack(TFCItems.redSteelIngot)).clearRecipeSkills());
 
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthIngot2x), null, "sheet", false, AnvilReq.STONE, new ItemStack(TFCItems.bismuthSheet)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeIngot2x), null, "sheet", false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.bismuthBronzeSheet)));

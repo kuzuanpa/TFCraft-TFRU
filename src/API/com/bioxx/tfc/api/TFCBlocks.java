@@ -113,6 +113,7 @@ public class TFCBlocks
 	public static Block bellows;
 	public static Block anvil;
 	public static Block anvil2;
+	public static Block anvil3;
 	public static Block forge;
 	public static Block blastFurnace;
 	public static Block molten;

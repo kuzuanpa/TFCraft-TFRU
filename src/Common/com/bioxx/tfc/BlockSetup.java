@@ -84,6 +84,7 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(bellows, ItemBellows.class, "Bellows");
 		GameRegistry.registerBlock(anvil, ItemAnvil1.class, "Anvil");
 		GameRegistry.registerBlock(anvil2, ItemAnvil2.class, "Anvil2");
+		GameRegistry.registerBlock(anvil3, ItemAnvil3.class, "Anvil3");
 		GameRegistry.registerBlock(forge, "Forge");
 
 		GameRegistry.registerBlock(molten, "Molten");
@@ -313,6 +314,7 @@ public class BlockSetup extends TFCBlocks
 		forge= new BlockForge().setBlockName("Forge").setHardness(20).setLightLevel(0F);
 		anvil = new BlockAnvil().setBlockName("Anvil").setHardness(3).setResistance(100F);
 		anvil2 = new BlockAnvil(8).setBlockName("Anvil2").setHardness(3).setResistance(100F);
+		anvil3 = new BlockAnvil(11).setBlockName("Anvil3").setHardness(3).setResistance(100F);
 
 		molten = new BlockMolten().setBlockName("Molten").setHardness(20);
 		blastFurnace = new BlockBlastFurnace().setBlockName("BlastFurnace").setHardness(10).setLightLevel(0F);

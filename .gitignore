@@ -24,8 +24,8 @@ gradle-app.setting
 *.ipr
 *.iws
 
-## Plugin-specific files:
-
+## Plugin-specific files
+/libs/
 # IntelliJ
 /out/
 
@@ -181,3 +181,4 @@ src/Resources/META-INF/openbees_at.cfg
 src/Resources/META-INF/PneumaticCraft_at.cfg
 src/Resources/META-INF/simplyjetpacks_at.cfg
 classes/
+/libs/

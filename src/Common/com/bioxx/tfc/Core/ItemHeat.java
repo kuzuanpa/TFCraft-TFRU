@@ -477,7 +477,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.cloudberry, 1), 1, 1200, null));
 
 		//manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1, WILDCARD_VALUE), 0.2, 200, new ItemStack(Items.bowl, 1)));
-
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.anvil3, 1, 0), steelRaw, null));
 		//Other
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.stick, 1, WILDCARD_VALUE), 1, 40, new ItemStack(TFCBlocks.torch, 2)));
 	}

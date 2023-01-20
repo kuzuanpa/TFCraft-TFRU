@@ -68,6 +68,10 @@ public class BlockAnvil extends BlockTerraContainer
 			for(int i = 0; i < 3; i++)
 				par3List.add(new ItemStack(this, 1, i));
 		}
+		if(this == TFCBlocks.anvil3)
+		{
+			par3List.add(new ItemStack(this, 1, 0));
+		}
 	}
 
 	@Override
@@ -106,7 +110,7 @@ public class BlockAnvil extends BlockTerraContainer
 		if (te instanceof TEAnvil)
 		{
 			TEAnvil teAnvil = (TEAnvil) te;
-			if (teAnvil.anvilTier != AnvilReq.STONE.Tier || this == TFCBlocks.anvil2)
+			if (teAnvil.anvilTier != AnvilReq.STONE.Tier || this == TFCBlocks.anvil2 || this == TFCBlocks.anvil3)
 			{
 				if(direction == 0) 
 					return AxisAlignedBB.getBoundingBox(par2 + 0.2, (double)par3 + 0, (double)par4 + 0, par2 + 0.8, par3 + 0.6, (double)par4 + 1);
@@ -266,6 +270,8 @@ public class BlockAnvil extends BlockTerraContainer
 			te.anvilTier = AnvilReq.getReqFromInt(meta).Tier;
 		else if(this == TFCBlocks.anvil2)
 			te.anvilTier = AnvilReq.getReqFromInt2(meta).Tier;
+		else if(this == TFCBlocks.anvil3)
+			te.anvilTier = AnvilReq.getReqFromInt3(meta).Tier;
 	}
 
 	@Override
