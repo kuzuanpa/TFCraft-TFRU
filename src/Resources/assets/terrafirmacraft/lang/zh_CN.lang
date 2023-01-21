@@ -1900,21 +1900,21 @@ tile.ingotpile.name=金属锭
 tile.SmokeRack.name=烟熏架
 
 #== Anvils ==
-tile.Anvil.Stone.name=石砧
-tile.Anvil.Bismuth.name=铋砧
-tile.Anvil2.Bismuth Bronze.name=铋青铜砧
-tile.Anvil2.Black Bronze.name=黑青铜砧
-tile.Anvil.Black Steel.name=黑钢砧
-tile.Anvil.Blue Steel.name=蓝钢砧
-tile.Anvil.Bronze.name=青铜砧
-tile.Anvil.Copper.name=铜砧
+tile.Anvil.Stone.name=石原始砧
+tile.Anvil.Bismuth.name=铋原始砧
+tile.Anvil2.Bismuth Bronze.name=铋青铜原始砧
+tile.Anvil2.Black Bronze.name=黑青铜原始砧
+tile.Anvil.Black Steel.name=黑钢原始砧
+tile.Anvil.Blue Steel.name=蓝钢原始砧
+tile.Anvil.Bronze.name=青铜原始砧
+tile.Anvil.Copper.name=铜原始砧
 tile.Anvil.Red Steel.name=红钢砧
-tile.Anvil2.Rose Gold.name=玫瑰金砧
-tile.Anvil.Steel.name=钢砧
-tile.Anvil.Tin.name=锡砧
-tile.Anvil.Wrought Iron.name=锻铁砧
-tile.Anvil.Zinc.name=锌砧
-tile.Anvil3.Mana Steel.name=魔力钢砧
+tile.Anvil2.Rose Gold.name=玫瑰金原始砧
+tile.Anvil.Steel.name=钢原始砧
+tile.Anvil.Tin.name=锡原始砧
+tile.Anvil.Wrought Iron.name=锻铁原始砧
+tile.Anvil.Zinc.name=锌原始砧
+tile.Anvil3.Mana Steel.name=魔力钢原始砧
 
 #==================
 #= Terrain Blocks =

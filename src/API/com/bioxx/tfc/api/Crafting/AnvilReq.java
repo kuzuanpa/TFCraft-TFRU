@@ -1,8 +1,5 @@
 package com.bioxx.tfc.api.Crafting;
 
-import cpw.mods.fml.common.FMLLog;
-import org.apache.logging.log4j.Level;
-
 public enum AnvilReq
 {
     STONE("Stone", 0),
@@ -29,14 +26,6 @@ public enum AnvilReq
         Tier = tier;
     }
 
-    public boolean matches(int tier)
-    {
-		return tier >= Tier;
-    }
-    public boolean matches(AnvilReq req)
-    {
-		return req.Tier >= Tier;
-    }
     public static boolean matches(int recipeLevel, int anvilLevel)
     {
 		return anvilLevel >= recipeLevel;

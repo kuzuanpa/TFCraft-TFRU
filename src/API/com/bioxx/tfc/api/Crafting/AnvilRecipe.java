@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.common.FMLLog;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -134,7 +133,6 @@ public class AnvilRecipe
 
 	public boolean isComplete(AnvilManager am, AnvilRecipe recipe, int[] rules)
 	{
-		FMLLog.log(Level.FATAL,anvilreq+"/"+recipe.anvilreq);
 		PlanRecipe pr = am.getPlan(recipe.plan);
 		if(     areItemStacksEqual(input1, recipe.input1) && 
 				areItemStacksEqual(input2, recipe.input2) &&
