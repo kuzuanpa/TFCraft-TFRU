@@ -2,7 +2,11 @@ package com.bioxx.tfc.Core.Player;
 
 import java.util.Random;
 
+import baubles.api.IBauble;
+import baubles.common.container.InventoryBaubles;
+import baubles.common.lib.PlayerHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,6 +25,8 @@ import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
+import vazkii.botania.common.item.relic.ItemAesirRing;
+import vazkii.botania.common.item.relic.ItemOdinRing;
 
 public class FoodStatsTFC
 {
@@ -421,8 +427,10 @@ public class FoodStatsTFC
 
 	public static int getMaxHealth(EntityPlayer player)
 	{
+
 		return (int)(Math.min(1000+(player.experienceLevel * TFCOptions.healthGainRate),
-				TFCOptions.healthGainCap) * TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier());
+				TFCOptions.healthGainCap) * TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier())
+				* (ItemOdinRing.getOdinRing(player) !=null?2:1);
 	}
 
 	/**
