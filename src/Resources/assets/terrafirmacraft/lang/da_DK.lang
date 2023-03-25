@@ -2513,7 +2513,13 @@ gui.ProPick.FoundMedium=Fandt en mellemstor mængde
 gui.ProPick.FoundLarge=Fandt en stor mængde
 gui.ProPick.FoundVeryLarge=Fandt en meget stor mængde
 gui.ProPick.FoundNothing=Fandt intet af interresse
-
+gui.ProPick.AtWest=
+gui.ProPick.AtEast=
+gui.ProPick.Up=
+gui.ProPick.Down=
+gui.ProPick.AtNorth=
+gui.ProPick.AtSouth=
+gui.ProPick.About=
 #== Creative Tabs ==
 itemGroup.TFCArmor=(TFC) Rustning
 itemGroup.TFCMaterials=(TFC) Materialer

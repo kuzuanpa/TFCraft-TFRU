@@ -2707,7 +2707,13 @@ gui.ProPick.FoundMedium=Found a medium sample of
 gui.ProPick.FoundLarge=Found a large sample of
 gui.ProPick.FoundVeryLarge=Found a very large sample of
 gui.ProPick.FoundNothing=Found nothing of interest.
-
+gui.ProPick.AtWest=In West
+gui.ProPick.AtEast=In East
+gui.ProPick.Up=Below
+gui.ProPick.Down=Beside
+gui.ProPick.AtNorth=In North
+gui.ProPick.AtSouth=In South
+gui.ProPick.About=about
 #== Creative Tabs ==
 itemGroup.TFCArmor=(TFC) Armor
 itemGroup.TFCMaterials=(TFC) Materials

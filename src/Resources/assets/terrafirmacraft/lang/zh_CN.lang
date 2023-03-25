@@ -2509,13 +2509,22 @@ gui.goldpan.overused=这片区域资源似乎已经采尽,你可能不会再发�
 gui.seeds.failedTemp=这里太冷了，无法进行种植，作物活不长。
 gui.seeds.failedSun=这里日照不足，无法进行种植，作物活不长。
 
-gui.ProPick.Found=发现了
-gui.ProPick.FoundTraces=发现了微量的
-gui.ProPick.FoundSmall=发现了少量的
-gui.ProPick.FoundMedium=发现了中等量的
-gui.ProPick.FoundLarge=发现了大量的
-gui.ProPick.FoundVeryLarge=发现了巨量的
+gui.ProPick.Found=勘测到
+gui.ProPick.FoundTraces=勘测到微量的
+gui.ProPick.FoundSmall=勘测到少量的
+gui.ProPick.FoundMedium=勘测到中等量的
+gui.ProPick.FoundLarge=勘测到大量的
+gui.ProPick.FoundVeryLarge=勘测到巨量的
 gui.ProPick.FoundNothing=没发现什么特别的
+gui.ProPick.AtWest=于西方
+gui.ProPick.AtEast=于东方
+gui.ProPick.Up=于上方
+gui.ProPick.Down=于下方
+gui.ProPick.AtNorth=于北方
+gui.ProPick.AtSouth=于南方
+gui.ProPick.About=大约
+
+
 
 #== Creative Tabs ==
 itemGroup.TFCArmor=群峦|装备

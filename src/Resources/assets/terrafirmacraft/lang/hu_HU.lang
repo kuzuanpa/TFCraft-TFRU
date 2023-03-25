@@ -2511,10 +2511,15 @@ gui.ProPick.FoundTraces=
 gui.ProPick.FoundSmall=
 gui.ProPick.FoundMedium=
 gui.ProPick.FoundLarge=
-"gui.ProPick.FoundVeryLarge=
-"
+gui.ProPick.FoundVeryLarge=
 gui.ProPick.FoundNothing=Nem talál semmi érdekeset.
-
+gui.ProPick.AtWest=
+gui.ProPick.AtEast=
+gui.ProPick.Up=
+gui.ProPick.Down=
+gui.ProPick.AtNorth=
+gui.ProPick.AtSouth=
+gui.ProPick.About=
 #== Creative Tabs ==
 itemGroup.TFCArmor=(TFC) Pajzs
 itemGroup.TFCMaterials=(TFC) Anyagok

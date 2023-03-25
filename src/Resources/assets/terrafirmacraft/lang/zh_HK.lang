@@ -2513,6 +2513,13 @@ gui.ProPick.FoundMedium=探到中量的
 gui.ProPick.FoundLarge=探到大量的
 gui.ProPick.FoundVeryLarge=探到很大量的
 gui.ProPick.FoundNothing=探不到任何感興趣的東西
+gui.ProPick.AtWest=于西方
+gui.ProPick.AtEast=于东方
+gui.ProPick.Up=于上方
+gui.ProPick.Down=于下方
+gui.ProPick.AtNorth=于北方
+gui.ProPick.AtSouth=于南方
+gui.ProPick.About=大约
 
 #== Creative Tabs ==
 itemGroup.TFCArmor=(厚德傳說) 盔甲

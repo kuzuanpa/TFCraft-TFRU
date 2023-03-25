@@ -2513,7 +2513,13 @@ gui.ProPick.FoundMedium=중간 덩어리를 발견함:
 gui.ProPick.FoundLarge=큰 덩어리를 발견함:
 gui.ProPick.FoundVeryLarge=거대한 덩어리를 발견함:
 gui.ProPick.FoundNothing=아무것도 찾지 못했습니다.
-
+gui.ProPick.AtWest=
+gui.ProPick.AtEast=
+gui.ProPick.Up=
+gui.ProPick.Down=
+gui.ProPick.AtNorth=
+gui.ProPick.AtSouth=
+gui.ProPick.About=
 #== Creative Tabs ==
 itemGroup.TFCArmor=(TFC) 갑옷
 itemGroup.TFCMaterials=(TFC) 재료

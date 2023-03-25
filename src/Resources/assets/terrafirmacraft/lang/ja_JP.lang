@@ -2513,7 +2513,13 @@ gui.ProPick.FoundMedium=鉱脈を発見した：
 gui.ProPick.FoundLarge=大きな鉱脈を発見した：
 gui.ProPick.FoundVeryLarge=巨大な鉱脈を発見した：
 gui.ProPick.FoundNothing=鉱脈は発見できなかった・・・
-
+gui.ProPick.AtWest=
+gui.ProPick.AtEast=
+gui.ProPick.Up=
+gui.ProPick.Down=
+gui.ProPick.AtNorth=
+gui.ProPick.AtSouth=
+gui.ProPick.About=
 #== Creative Tabs ==
 itemGroup.TFCArmor=(TFC) 防具
 itemGroup.TFCMaterials=(TFC) 素材

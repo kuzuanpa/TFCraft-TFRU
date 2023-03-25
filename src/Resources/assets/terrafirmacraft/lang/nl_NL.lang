@@ -2513,7 +2513,13 @@ gui.ProPick.FoundMedium=Gemiddelde hoeveelheid gevonden van
 gui.ProPick.FoundLarge=Grote hoeveelheid gevonden van
 gui.ProPick.FoundVeryLarge=Gigantische hoeveelheid gevonden van
 gui.ProPick.FoundNothing=Niets gevonden
-
+gui.ProPick.AtWest=
+gui.ProPick.AtEast=
+gui.ProPick.Up=
+gui.ProPick.Down=
+gui.ProPick.AtNorth=
+gui.ProPick.AtSouth=
+gui.ProPick.About=
 #== Creative Tabs ==
 itemGroup.TFCArmor=(TFC) Harnassen
 itemGroup.TFCMaterials=(TFC) Materialen

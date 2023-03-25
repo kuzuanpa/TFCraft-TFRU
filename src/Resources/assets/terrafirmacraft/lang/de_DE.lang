@@ -2513,7 +2513,13 @@ gui.ProPick.FoundMedium=Die Probe enthielt eine mittlere Menge
 gui.ProPick.FoundLarge=Die Probe enthielt eine große Menge
 gui.ProPick.FoundVeryLarge=Die Probe enthielt eine sehr große Menge
 gui.ProPick.FoundNothing=Nichts von Interesse gefunden.
-
+gui.ProPick.AtWest=
+gui.ProPick.AtEast=
+gui.ProPick.Up=
+gui.ProPick.Down=
+gui.ProPick.AtNorth=
+gui.ProPick.AtSouth=
+gui.ProPick.About=
 #== Creative Tabs ==
 itemGroup.TFCArmor=(TFC) Rüstung
 itemGroup.TFCMaterials=(TFC) Werkstoffe

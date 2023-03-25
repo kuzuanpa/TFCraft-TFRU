@@ -2513,7 +2513,13 @@ gui.ProPick.FoundMedium=Найдена средняя проба:
 gui.ProPick.FoundLarge=Найдена значительная проба:
 gui.ProPick.FoundVeryLarge=Найдена огромная проба:
 gui.ProPick.FoundNothing=Ничего не найдено.
-
+gui.ProPick.AtWest=
+gui.ProPick.AtEast=
+gui.ProPick.Up=
+gui.ProPick.Down=
+gui.ProPick.AtNorth=
+gui.ProPick.AtSouth=
+gui.ProPick.About=
 #== Creative Tabs ==
 itemGroup.TFCArmor=(TFC) Доспехи
 itemGroup.TFCMaterials=(TFC) Материалы

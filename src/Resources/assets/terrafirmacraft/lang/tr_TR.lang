@@ -2513,7 +2513,13 @@ gui.ProPick.FoundMedium=Orta örnek bulundu:
 gui.ProPick.FoundLarge=Büyük örnek bulundu:
 gui.ProPick.FoundVeryLarge=Çok büyük örnek bulundu:
 gui.ProPick.FoundNothing=Önemli bir şey bulunmadı.
-
+gui.ProPick.AtWest=
+gui.ProPick.AtEast=
+gui.ProPick.Up=
+gui.ProPick.Down=
+gui.ProPick.AtNorth=
+gui.ProPick.AtSouth=
+gui.ProPick.About=
 #== Creative Tabs ==
 itemGroup.TFCArmor=(TFC) Zırh
 itemGroup.TFCMaterials=(TFC) Metaryaller

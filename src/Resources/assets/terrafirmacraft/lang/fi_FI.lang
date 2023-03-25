@@ -2513,7 +2513,13 @@ gui.ProPick.FoundMedium=Löytyi keskikokoinen näyte
 gui.ProPick.FoundLarge=Löytyi iso näyte
 gui.ProPick.FoundVeryLarge=Löytyi erittäin iso näyte
 gui.ProPick.FoundNothing=Ei löytynyt mitään kiinnostavaa.
-
+gui.ProPick.AtWest=
+gui.ProPick.AtEast=
+gui.ProPick.Up=
+gui.ProPick.Down=
+gui.ProPick.AtNorth=
+gui.ProPick.AtSouth=
+gui.ProPick.About=
 #== Creative Tabs ==
 itemGroup.TFCArmor=(TFC) Haarniskat
 itemGroup.TFCMaterials=(TFC) Materiaalit

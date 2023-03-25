@@ -2513,7 +2513,13 @@ gui.ProPick.FoundMedium=S-a găsit o mostră medie de
 gui.ProPick.FoundLarge=S-a găsit o mostră mare de
 gui.ProPick.FoundVeryLarge=S-a găsit o mostră foarte mare de
 gui.ProPick.FoundNothing=Nu s-a găsit nimic de interes.
-
+gui.ProPick.AtWest=
+gui.ProPick.AtEast=
+gui.ProPick.Up=
+gui.ProPick.Down=
+gui.ProPick.AtNorth=
+gui.ProPick.AtSouth=
+gui.ProPick.About=
 #== Creative Tabs ==
 itemGroup.TFCArmor=(TFC) Armură
 itemGroup.TFCMaterials=(TFC) Materiale

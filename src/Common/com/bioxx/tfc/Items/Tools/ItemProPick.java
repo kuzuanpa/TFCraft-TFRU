@@ -269,16 +269,16 @@ public class ItemProPick extends ItemTerra
 			if (Math.abs(aZ) > max) res = 2;
 			switch (res) {
 				case 0:
-					if (aX < 0) LocationMsg = "gui.ProPick.West";
-					else LocationMsg = "gui.ProPick.East";
+					if (aX < 0) LocationMsg = "gui.ProPick.AtWest";
+					else LocationMsg = "gui.ProPick.AtEast";
 					break;
 				case 1:
 					if (aY < 0) LocationMsg = "gui.ProPick.Down";
 					else LocationMsg = "gui.ProPick.Up";
 					break;
 				case 2:
-					if (aZ < 0) LocationMsg = "gui.ProPick.South";
-					else LocationMsg = "gui.ProPick.North";
+					if (aZ < 0) LocationMsg = "gui.ProPick.AtSouth";
+					else LocationMsg = "gui.ProPick.AtNorth";
 					break;
 			}
 			if (rank == SkillRank.Expert||rank == SkillRank.Master){

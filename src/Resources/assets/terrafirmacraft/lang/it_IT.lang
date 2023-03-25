@@ -2517,7 +2517,13 @@ gui.ProPick.FoundMedium=Trovato un campione medio di
 gui.ProPick.FoundLarge=Trovato un grosso campione di
 gui.ProPick.FoundVeryLarge=Trovato un campione enorme di
 gui.ProPick.FoundNothing=Trovato nulla di interesse
-
+gui.ProPick.AtWest=
+gui.ProPick.AtEast=
+gui.ProPick.Up=
+gui.ProPick.Down=
+gui.ProPick.AtNorth=
+gui.ProPick.AtSouth=
+gui.ProPick.About=
 #== Creative Tabs ==
 itemGroup.TFCArmor=(TFC) Armature
 itemGroup.TFCMaterials=(TFC) Materie prime
