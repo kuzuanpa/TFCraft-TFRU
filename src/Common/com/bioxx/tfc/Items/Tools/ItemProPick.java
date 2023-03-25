@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -162,10 +163,14 @@ public class ItemProPick extends ItemTerra
 						{
 							String oreName = ore.getDisplayName();
 
-							if (results.containsKey(oreName))
+							if (results.containsKey(oreName)){
 								results.get(oreName).count++;
+								results.get(oreName).averageCalculateX += x;
+								results.get(oreName).averageCalculateY += y;
+								results.get(oreName).averageCalculateZ += z;
+							}
 							else
-								results.put(oreName, new ProspectResult(ore, 1));
+								results.put(oreName, new ProspectResult(ore, 1,x,y,z));
 
 							ore = null;
 							oreName = null;
@@ -219,7 +224,10 @@ public class ItemProPick extends ItemTerra
 	 */
 	private void tellResult(EntityPlayer player)
 	{
+
 		TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_PROSPECTING, 1);
+		SkillRank rank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_PROSPECTING);
+
 		int index = random.nextInt(results.size());
 		ProspectResult result = results.values().toArray(new ProspectResult[0])[index];
 		String oreName = result.itemStack.getUnlocalizedName() + ".name";
@@ -235,11 +243,51 @@ public class ItemProPick extends ItemTerra
 			quantityMsg = "gui.ProPick.FoundLarge";
 		else
 			quantityMsg = "gui.ProPick.FoundVeryLarge";
-		
+		String LocationMsg ="";
+		String DistanceMsg = "";
+
+
+		if (rank != SkillRank.Novice){
+		//计算矿物中心
+		int aX =result.averageCalculateX / result.count;
+		int aY =result.averageCalculateY / result.count;
+		int aZ =result.averageCalculateZ / result.count;
+
+		if (!player.worldObj.isRemote) {
+			//变为相对距离
+			aX -= player.posX;
+			aY -= player.posY;
+			aZ -= player.posZ;
+
+			int max = Math.abs(aX);
+			int res = 0;
+			if (Math.abs(aY) > max) {
+				max = Math.abs(aY);
+				res = 1;
+			}
+			if (Math.abs(aZ) > max) res = 2;
+			switch (res) {
+				case 0:
+					if (aX < 0) LocationMsg = "gui.ProPick.West";
+					else LocationMsg = "gui.ProPick.East";
+				case 1:
+					if (aY < 0) LocationMsg = "gui.ProPick.Down";
+					else LocationMsg = "gui.ProPick.Up";
+				case 2:
+					if (aZ < 0) LocationMsg = "gui.ProPick.South";
+					else LocationMsg = "gui.ProPick.North";
+			}
+			if (rank == SkillRank.Expert || rank == SkillRank.Master){
+				DistanceMsg = " "+(Math.floorDiv((int)Math.sqrt(Math.abs(aX)^2+Math.abs(aY)^2+Math.abs(aZ)^2) ,10) *10)+ "m";
+			}
+		}
+		}
 		TFC_Core.sendInfoMessage(player,
 				new ChatComponentTranslation(quantityMsg)
 				.appendText(" ")
-				.appendSibling(new ChatComponentTranslation(oreName)));
+				.appendSibling(new ChatComponentTranslation(oreName)
+						.appendSibling(new ChatComponentTranslation(LocationMsg)
+								.appendSibling(new ChatComponentText(DistanceMsg)))));
 				
 		oreName = null;
 		result = null;
@@ -255,11 +303,16 @@ public class ItemProPick extends ItemTerra
 	{
 		public ItemStack itemStack;
 		public int count;
-
-		public ProspectResult(ItemStack itemStack, int count)
+		public int averageCalculateX;
+		public int averageCalculateY;
+		public int averageCalculateZ;
+		public ProspectResult(ItemStack itemStack, int count, int x,int y,int z)
 		{
 			this.itemStack = itemStack;
 			this.count = count;
+			this.averageCalculateX = x;
+			this.averageCalculateY = y;
+			this.averageCalculateZ = z;
 		}
 	}
 
