@@ -72,7 +72,7 @@ public class ItemProPick extends ItemTerra
 			if (block == TFCBlocks.toolRack)
 				return true;
 
-			// Getting the meta data only when we actually need it.
+			// Getting the metadata only when we actually need it.
 			int meta = world.getBlockMetadata(x, y, z);
 
 			SkillRank rank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_PROSPECTING);
@@ -165,12 +165,12 @@ public class ItemProPick extends ItemTerra
 
 							if (results.containsKey(oreName)){
 								results.get(oreName).count++;
-								results.get(oreName).averageCalculateX += x;
-								results.get(oreName).averageCalculateY += y;
-								results.get(oreName).averageCalculateZ += z;
+								results.get(oreName).averageCalculateX += blockX;
+								results.get(oreName).averageCalculateY += blockY;
+								results.get(oreName).averageCalculateZ += blockZ;
 							}
 							else
-								results.put(oreName, new ProspectResult(ore, 1,x,y,z));
+								results.put(oreName, new ProspectResult(ore, 1,blockX,blockY,blockZ));
 
 							ore = null;
 							oreName = null;
@@ -244,7 +244,8 @@ public class ItemProPick extends ItemTerra
 		else
 			quantityMsg = "gui.ProPick.FoundVeryLarge";
 		String LocationMsg ="";
-		String DistanceMsg = "";
+		String DistanceMsg1 = "";
+		String DistanceMsg2 = "";
 
 
 		if (rank != SkillRank.Novice){
@@ -270,27 +271,34 @@ public class ItemProPick extends ItemTerra
 				case 0:
 					if (aX < 0) LocationMsg = "gui.ProPick.West";
 					else LocationMsg = "gui.ProPick.East";
+					break;
 				case 1:
 					if (aY < 0) LocationMsg = "gui.ProPick.Down";
 					else LocationMsg = "gui.ProPick.Up";
+					break;
 				case 2:
 					if (aZ < 0) LocationMsg = "gui.ProPick.South";
 					else LocationMsg = "gui.ProPick.North";
+					break;
 			}
-			if (rank == SkillRank.Expert || rank == SkillRank.Master){
-				DistanceMsg = " "+(Math.floorDiv((int)Math.sqrt(Math.abs(aX)^2+Math.abs(aY)^2+Math.abs(aZ)^2) ,10) *10)+ "m";
-			}
-		}
+			if (rank == SkillRank.Expert||rank == SkillRank.Master){
+				DistanceMsg1="gui.ProPick.About";
+			 DistanceMsg2 = (Math.floorDiv((int)Math.sqrt(Math.pow(Math.abs(aX),2)+Math.pow(Math.abs(aY),2)+Math.pow(Math.abs(aZ),2)) ,10) *10)+ "m";
+		}}
 		}
 		TFC_Core.sendInfoMessage(player,
 				new ChatComponentTranslation(quantityMsg)
 				.appendText(" ")
-				.appendSibling(new ChatComponentTranslation(oreName)
-						.appendSibling(new ChatComponentTranslation(LocationMsg)
-								.appendSibling(new ChatComponentText(DistanceMsg)))));
+				.appendSibling(new ChatComponentTranslation(oreName)				.appendText(" ")
+				.appendText(" ")
+				.appendSibling(new ChatComponentTranslation(LocationMsg)
+			    .appendText(" ")
+			    .appendSibling(new ChatComponentTranslation(DistanceMsg1)
+				.appendSibling(new ChatComponentText(DistanceMsg2))))));
 				
 		oreName = null;
 		result = null;
+
 	}
 
 	@Override
