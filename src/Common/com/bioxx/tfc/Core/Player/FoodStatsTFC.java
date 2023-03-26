@@ -25,7 +25,6 @@ import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
-import vazkii.botania.common.item.relic.ItemAesirRing;
 import vazkii.botania.common.item.relic.ItemOdinRing;
 
 public class FoodStatsTFC
@@ -34,11 +33,11 @@ public class FoodStatsTFC
 
 	/** The player's food level. This measures how much food the player can handle.*/
 	public float stomachLevel = 24;
-	private float stomachMax = 24.0f;
+	private final float stomachMax = 24.0f;
 	private float prevFoodLevel = 24;
 
-	private ResourceLocation drunkBlur = new ResourceLocation("shaders/post/blur.json");
-	private ResourceLocation wastedBlur = new ResourceLocation("shaders/post/blur.json");//new ResourceLocation("shaders/post/blurPhosphor.json");
+	private final ResourceLocation drunkBlur = new ResourceLocation("shaders/post/blur.json");
+	private final ResourceLocation wastedBlur = new ResourceLocation("shaders/post/blur.json");//new ResourceLocation("shaders/post/blurPhosphor.json");
 
 	public float nutrFruit = 1.0f;
 	public float nutrVeg = 1.0f;
