@@ -117,25 +117,27 @@ public class TerraFirmaCraft
 		GameRegistry.registerWorldGenerator(new WorldGenLargeRock(), 7);
 		GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);
 
+
 		WorldType.DEFAULT = new TFCWorldType(0, "TFCDefault");
+		//can't remove because removing them won't make vanilla world gen properly
 		WorldType.FLAT = new TFCWorldType(1, "TFCFlat");
 		WorldType.LARGE_BIOMES = new TFCWorldType(2, "TFCLargeBiomes");
 		WorldType.AMPLIFIED = new TFCWorldType(3, "TFCAmplified");
 
-		DimensionManager.unregisterDimension(-1);
+		//DimensionManager.unregisterDimension(-1);
 		DimensionManager.unregisterDimension(0);
-		DimensionManager.unregisterDimension(1);
+		//DimensionManager.unregisterDimension(1);
 
-		DimensionManager.unregisterProviderType(-1);
+		//DimensionManager.unregisterProviderType(-1);
 		DimensionManager.unregisterProviderType(0);
-		DimensionManager.unregisterProviderType(1);
-		DimensionManager.registerProviderType(-1, TFCProviderHell.class, false);
+		//DimensionManager.unregisterProviderType(1);
+		//DimensionManager.registerProviderType(-1, TFCProviderHell.class, false);
 		DimensionManager.registerProviderType(0, TFCProvider.class, true);
-		DimensionManager.registerProviderType(1, TFCProvider.class, false);
+		//DimensionManager.registerProviderType(1, TFCProvider.class, false);
 
-		DimensionManager.registerDimension(-1, -1);
+		//DimensionManager.registerDimension(-1, -1);
 		DimensionManager.registerDimension(0, 0);
-		DimensionManager.registerDimension(1, 1);
+		//DimensionManager.registerDimension(1, 1);
 	}
 
 	@EventHandler

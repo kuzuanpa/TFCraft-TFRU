@@ -6,9 +6,9 @@
 
 
 generator.TFCDefault=TFC默认生成模式
-generator.TFCFlat=TFC平坦世界（无效）
-generator.TFCAmplified=TFC巨大世界
-generator.TFCLargeBiomes=TFC超大世界
+generator.TFCFlat=TFC平坦世界(无效)
+generator.TFCAmplified=TFC巨大世界(无效)
+generator.TFCLargeBiomes=TFC超大世界(无效)
 
 key.ToolMode=循环工具模式
 key.LockTool=锁定工具位置
@@ -2681,5 +2681,5 @@ word.drying=烘干
 gui.familiarized=已驯化
 gui.familiarity=已驯化
 gui.baby=幼年
-gui.enoughSpace=作物需要日照才能生长
+gui.enoughSpace=树苗需要日照才能生长
 gui.forge.badChimney=需要足够的空间用于通风
