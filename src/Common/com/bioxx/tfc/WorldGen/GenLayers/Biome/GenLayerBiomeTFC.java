@@ -19,6 +19,7 @@ public class GenLayerBiomeTFC extends GenLayerTFC
 			TFCBiome.SWAMPLAND,
 			TFCBiome.ROLLING_HILLS,
 			TFCBiome.MOUNTAINS,
+			TFCBiome.JUNGLE,
 	};
 
 	public GenLayerBiomeTFC(long par1, GenLayer par3GenLayer, TFCWorldType par4)

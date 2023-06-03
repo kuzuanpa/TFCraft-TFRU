@@ -19,7 +19,7 @@ public class TFCWorldType extends WorldType
 		TFCBiome.OCEAN
 	};
 	private static final TFCBiome[] BIOMES_FLAT = new TFCBiome[] {
-		TFCBiome.HELL
+		TFCBiome.PLAINS
 	};
 	private static final TFCBiome[] BIOMES_DEFAULT = new TFCBiome[] {
 		TFCBiome.OCEAN,
@@ -29,6 +29,7 @@ public class TFCWorldType extends WorldType
 		TFCBiome.SWAMPLAND,
 		TFCBiome.ROLLING_HILLS,
 		TFCBiome.MOUNTAINS,
+		TFCBiome.JUNGLE,
 	};
 
 	public TFCWorldType(int i, String par2Str)

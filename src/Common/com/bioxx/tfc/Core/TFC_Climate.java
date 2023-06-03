@@ -197,7 +197,7 @@ public class TFC_Climate
 				temp += (8*rainMod)*zMod;
 			else
 				temp -= (8*rainMod)*zMod;
-				
+			temp+=world.getBiomeGenForCoords(x,z).temperature-5.0F;
 			return temp;
 		}
 		return -10;
@@ -309,8 +309,8 @@ public class TFC_Climate
 		}
 		return temp / 12;
 	}
-
-	public static float getBioTemperature(World world,int x, int z)
+/**This returns average temp of whole year**/
+	public static float getBioTemperatureAverage(World world, int x, int z)
 	{
 		float temp = 0;
 		for(int i = 0; i < 24; i++)
@@ -322,6 +322,7 @@ public class TFC_Climate
 		}
 		return temp / 24;
 	}
+
 
 	@SideOnly(Side.CLIENT)
 	/**

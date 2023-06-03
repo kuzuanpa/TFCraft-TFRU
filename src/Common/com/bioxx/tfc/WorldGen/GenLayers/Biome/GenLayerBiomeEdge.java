@@ -69,6 +69,13 @@ public class GenLayerBiomeEdge extends GenLayerTFC
 					else
 						outCache[x + z * xSize] = TFCBiome.PLAINS.biomeID;
 				}
+				else if (thisID == TFCBiome.JUNGLE.biomeID)
+				{
+					if (var10 == TFCBiome.JUNGLE.biomeID && var11 == TFCBiome.JUNGLE.biomeID && var12 == TFCBiome.JUNGLE.biomeID && var13 == TFCBiome.JUNGLE.biomeID)
+						outCache[x + z * xSize] = thisID;
+					else
+						outCache[x + z * xSize] = TFCBiome.PLAINS.biomeID;
+				}
 				else
 				{
 					outCache[x + z * xSize] = thisID;

@@ -355,7 +355,7 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal, IInnateA
     	
     	if(this.worldObj.rand.nextInt(30) == 0)
     	{
-    		float temperatureAvg = TFC_Climate.getBioTemperature(this.worldObj,(int) this.posX, (int) this.posZ);
+    		float temperatureAvg = TFC_Climate.getBioTemperatureAverage(this.worldObj,(int) this.posX, (int) this.posZ);
     		float rainfall = TFC_Climate.getRainfall(this.worldObj, (int) this.posX, 0, (int) this.posZ);
     		
     		if(		rainfall >= 1000 &&

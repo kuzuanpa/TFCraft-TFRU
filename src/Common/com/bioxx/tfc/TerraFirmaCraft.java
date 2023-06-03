@@ -119,7 +119,7 @@ public class TerraFirmaCraft
 
 
 		WorldType.DEFAULT = new TFCWorldType(0, "TFCDefault");
-		//can't remove because removing them won't make vanilla world gen properly
+		//can't remove because removing them won't make vanillaWorldGenerator functions properly
 		WorldType.FLAT = new TFCWorldType(1, "TFCFlat");
 		WorldType.LARGE_BIOMES = new TFCWorldType(2, "TFCLargeBiomes");
 		WorldType.AMPLIFIED = new TFCWorldType(3, "TFCAmplified");

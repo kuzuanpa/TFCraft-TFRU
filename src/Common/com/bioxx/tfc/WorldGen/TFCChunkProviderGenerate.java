@@ -33,8 +33,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
-public class TFCChunkProviderGenerate extends ChunkProviderGenerate
-{
+public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 	/** RNG. */
 	private Random rand;
 
@@ -64,13 +63,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	/** The biomes that are used to generate the chunk */
 	private BiomeGenBase[] biomesForGeneration;
 
-	private DataLayer[] rockLayer1;
-	private DataLayer[] rockLayer2;
-	private DataLayer[] rockLayer3;
-	private DataLayer[] evtLayer;
-	private DataLayer[] rainfallLayer;
-	private DataLayer[] stabilityLayer;
-	private DataLayer[] drainageLayer;
+	public static DataLayer[] rockLayer1;
+	public static DataLayer[] rockLayer2;
+	public static DataLayer[] rockLayer3;
+	public static DataLayer[] evtLayer;
+	public static DataLayer[] rainfallLayer;
+	public static DataLayer[] stabilityLayer;
+	public static DataLayer[] drainageLayer;
 
 
 	private Block[] idsTop;
@@ -589,7 +588,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				Block surfaceBlock = TFC_Core.getTypeForGrassWithRain(rock1.data1, rain);
 				Block subSurfaceBlock = TFC_Core.getTypeForDirtFromGrass(surfaceBlock);
 
-				float bioTemp = TFC_Climate.getBioTemperature(worldObj, chunkX * 16 + xCoord, chunkZ * 16 + zCoord);
+				float bioTemp = TFC_Climate.getBioTemperatureAverage(worldObj, chunkX * 16 + xCoord, chunkZ * 16 + zCoord);
 				int h = 0;
 				if(TFC_Core.isBeachBiome(getBiome(xCoord-1, zCoord).biomeID) || TFC_Core.isBeachBiome(getBiome(xCoord+1, zCoord).biomeID) || 
 						TFC_Core.isBeachBiome(getBiome(xCoord, zCoord+1).biomeID) || TFC_Core.isBeachBiome(getBiome(xCoord, zCoord-1).biomeID))

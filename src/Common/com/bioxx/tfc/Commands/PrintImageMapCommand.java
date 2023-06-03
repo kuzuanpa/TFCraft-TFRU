@@ -163,7 +163,7 @@ public class PrintImageMapCommand extends CommandBase
 				for(int z = -sizeHalf; z < sizeHalf; z++)
 				{
 					count++;
-					int temp = (int)(255*(TFC_Climate.getBioTemperature(world, xCoord+x*skipSize, zCoord+z*skipSize)/50));
+					int temp = (int)(255*(TFC_Climate.getBioTemperatureAverage(world, xCoord+x*skipSize, zCoord+z*skipSize)/50));
 					graphics.setColor(Color.getColor("", (temp << 16) + (temp << 8) + temp));	
 					graphics.drawRect(x+sizeHalf, z+sizeHalf, 1, 1);
 					if(count / (size*size) > perc)

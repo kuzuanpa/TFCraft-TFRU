@@ -44,6 +44,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		this.biomesToSpawnIn.add(TFCBiome.SWAMPLAND);
 		this.biomesToSpawnIn.add(TFCBiome.MOUNTAINS);
 		this.biomesToSpawnIn.add(TFCBiome.HIGH_PLAINS);
+		this.biomesToSpawnIn.add(TFCBiome.JUNGLE);
 	}
 
 	public TFCWorldChunkManager(World world)

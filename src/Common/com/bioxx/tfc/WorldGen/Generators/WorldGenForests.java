@@ -181,7 +181,7 @@ public class WorldGenForests implements IWorldGenerator
 			yCoord = world.getHeightValue(xCoord, zCoord);
 
 			//float temperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
-			float temperatureAvg = TFC_Climate.getBioTemperature(world, xCoord, zCoord);
+			float temperatureAvg = TFC_Climate.getBioTemperatureAverage(world, xCoord, zCoord);
 
 			try
 			{
