@@ -2,7 +2,10 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.*;
 
+import com.bioxx.tfc.Blocks.Liquids.BlockLiquidStatic;
+import com.bioxx.tfc.api.TFCFluids;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -26,6 +29,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
+import net.minecraftforge.fluids.Fluid;
 
 public class TESluice extends TileEntity implements IInventory
 {
@@ -443,6 +447,9 @@ public class TESluice extends TileEntity implements IInventory
 		boolean isFlowing = (meta & 4) == 4;
 		ForgeDirection dir = getDir(meta & 3);
 		Block water = worldObj.getBlock(xCoord + dir.offsetX, yCoord + 1, zCoord + dir.offsetZ);
+
+		Fluid liquid = TFCFluids.FRESHWATER;
+		if (water==TFCBlocks.saltWater) liquid=TFCFluids.SALTWATER;
 		boolean isInputWater = TFC_Core.isWater(water);
 		boolean isOutputAir = worldObj.isAirBlock(xCoord + dir.getOpposite().offsetX * 2, yCoord - 1, zCoord + dir.getOpposite().offsetZ * 2);
 		boolean isOutputWater = TFC_Core.isWater(worldObj.getBlock(xCoord + dir.getOpposite().offsetX * 2, yCoord - 1, zCoord + dir.getOpposite().offsetZ * 2));
@@ -460,7 +467,7 @@ public class TESluice extends TileEntity implements IInventory
 			}
 
 			//Set output water
-			worldObj.setBlock(xCoord + dir.getOpposite().offsetX * 2, yCoord - 1, zCoord + dir.getOpposite().offsetZ * 2, water);
+			worldObj.setBlock(xCoord + dir.getOpposite().offsetX * 2, yCoord - 1, zCoord + dir.getOpposite().offsetZ * 2,  water,worldObj.getBlockMetadata(xCoord+dir.offsetX,yCoord+1,zCoord+dir.offsetZ),2);
 		}
 		if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater) && isFlowing)
 		{
