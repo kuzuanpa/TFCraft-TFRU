@@ -398,7 +398,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	private void damageHammer()
 	{
 		anvilItemStacks[HAMMER_SLOT].setItemDamage(anvilItemStacks[HAMMER_SLOT].getItemDamage()+1);
-		if(anvilItemStacks[HAMMER_SLOT].getItemDamage() == anvilItemStacks[HAMMER_SLOT].getMaxDamage())
+		if(anvilItemStacks[HAMMER_SLOT].getItemDamage() >= anvilItemStacks[HAMMER_SLOT].getMaxDamage())
 			anvilItemStacks[HAMMER_SLOT] = null;
 	}
 
