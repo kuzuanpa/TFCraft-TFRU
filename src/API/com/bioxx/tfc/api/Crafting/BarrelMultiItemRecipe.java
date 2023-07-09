@@ -31,6 +31,7 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 	@Override
 	public Stack<ItemStack> getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
+		if(recipeOutIS==null)return new Stack<ItemStack>();
 		ItemStack out = recipeOutIS.copy();
 		if(inIS != null && inIS.getItem() instanceof IFood)
 		{

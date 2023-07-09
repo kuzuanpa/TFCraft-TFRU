@@ -835,7 +835,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 							worldObj.spawnEntityInWorld(new EntityItem(worldObj, xCoord, yCoord, zCoord, resultStacks.pop()));
 
 						this.setInventorySlotContents(0, result);
-					}
+					}  else this.setInventorySlotContents(0,null);
 				}
 			}
 			else if(getFluidStack() == null && !isCheese)recipe = null;
@@ -906,16 +906,16 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public static void registerRecipes()
 	{
-		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.potato), 160), new FluidStack(TFCFluids.FRESHWATER, 10000), null, new FluidStack(TFCFluids.VODKA, 10000)));
-		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.redApple), 160), new FluidStack(TFCFluids.FRESHWATER, 10000), null, new FluidStack(TFCFluids.CIDER, 10000)));
-		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.greenApple), 160), new FluidStack(TFCFluids.FRESHWATER, 10000), null, new FluidStack(TFCFluids.CIDER, 10000)));
-		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatDough), 160), new FluidStack(TFCFluids.FRESHWATER, 10000), null, new FluidStack(TFCFluids.WHISKEY, 10000)));
-		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.ryeDough), 160), new FluidStack(TFCFluids.FRESHWATER, 10000), null, new FluidStack(TFCFluids.RYEWHISKEY, 10000)));
-		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.barleyDough), 160), new FluidStack(TFCFluids.FRESHWATER, 10000), null, new FluidStack(TFCFluids.BEER, 10000)));
-		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.riceDough), 160), new FluidStack(TFCFluids.FRESHWATER, 10000), null, new FluidStack(TFCFluids.SAKE, 10000)));
-		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.sugar), 160), new FluidStack(TFCFluids.FRESHWATER, 10000), null, new FluidStack(TFCFluids.RUM, 10000)));
-		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.cornmealDough), 160), new FluidStack(TFCFluids.FRESHWATER, 10000), null, new FluidStack(TFCFluids.CORNWHISKEY, 10000)));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(null, new FluidStack(TFCFluids.MILKVINEGAR, 10000), null, new FluidStack(TFCFluids.MILKCURDLED, 10000)).setMinTechLevel(0).setRemovesLiquid(false));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.potato), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.VODKA, 60)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.redApple), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.CIDER, 60)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.greenApple), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.CIDER, 60)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatDough), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.WHISKEY, 60)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.ryeDough), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.RYEWHISKEY, 60)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.barleyDough), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.BEER, 60)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.riceDough), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.SAKE, 60)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.sugar), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.RUM, 60)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.cornmealDough), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.CORNWHISKEY, 60)));
+		BarrelManager.getInstance().addRecipe(new BarrelRecipe(null, new FluidStack(TFCFluids.MILKVINEGAR, 10000), null, new FluidStack(TFCFluids.MILKCURDLED, 100)).setMinTechLevel(0).setRemovesLiquid(false));
 		//BarrelManager.getInstance().addRecipe(new BarrelRecipeNoItem(new FluidStack(TFCFluid.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese), 160), null).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.logs, 1, 0), new FluidStack(TFCFluids.FRESHWATER, 1000), null, new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.logs, 1, 2), new FluidStack(TFCFluids.FRESHWATER, 1000), null, new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
