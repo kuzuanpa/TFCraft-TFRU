@@ -762,7 +762,52 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			}
 		}
 	}
+    public boolean handleTFCFood(int time){
+		if(getInputStack().hasTagCompound()&&Food.getWeight(getInputStack())>0.0F){
+			float inputStackSize = Food.getWeight(getInputStack());
+			int multiply = (int) Math.floor(inputStackSize/(Food.getWeight(recipe.recipeIS)));
+			if (multiply<1)return true;
+			ItemStack origIS = getInputStack() != null ? getInputStack().copy() : null;
+			FluidStack origFS = getFluidStack() != null ? getFluidStack().copy() : null;
+			//handle fluid
+			if(fluid.isFluidEqual(recipe.getResultFluid(origIS, origFS, time)) && recipe.removesLiquid) {
+				//if recipe uses fluid
+				FluidStack targetFS=recipe.getResultFluid(origIS, origFS, time);
+				fluid.amount -= targetFS.amount * multiply;
+			}
+			else {
+				//if recipe creates fluid
+				this.fluid = recipe.getResultFluid(origIS, origFS, time).copy();
+				if (fluid != null) this.fluid.amount = fluid.copy().amount*multiply;
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			}
+			//handle item
 
+			Stack<ItemStack> resultStacks = recipe.getResult(origIS, origFS, time);
+			if (!resultStacks.isEmpty())
+			{
+				//handle brine recipe
+				ItemStack result = resultStacks.pop();
+				if (fluid != null && fluid.getFluid() == TFCFluids.BRINE)
+				{
+					if (result == null && origIS != null)
+						result = origIS.copy();
+					if (result != null && result.getItem() instanceof IFood && (result.getItem() == TFCItems.cheese || ((IFood) result.getItem()).getFoodGroup() != EnumFoodGroup.Grain))
+					{
+						if (!Food.isBrined(result))
+							Food.setBrined(result, true);
+					}
+				}
+				Food.setWeight(result,Food.getWeight(result)*multiply);
+
+				storage[INPUT_SLOT] = result;
+
+				this.setInventorySlotContents(0, result);
+			}
+			return true;
+		}
+		return false;
+	}
 	public void processItems()
 	{
 		if(this.getInvCount() == 0)
@@ -783,17 +828,14 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						time = (int)TFC_Time.getTotalHours() - unsealtime;
 
 					//Make sure that the recipe meets the time requirements
-					if(recipe.isSealedRecipe() && time < recipe.sealTime)
-						return;
+					if(recipe.isSealedRecipe() && time < recipe.sealTime) return;
+					if(handleTFCFood(time))return;
 
 					ItemStack origIS = getInputStack() != null ? getInputStack().copy() : null;
 					FluidStack origFS = getFluidStack() != null ? getFluidStack().copy() : null;
 					if(fluid.isFluidEqual(recipe.getResultFluid(origIS, origFS, time)) && recipe.removesLiquid)
 					{
-						if (fluid.getFluid() == TFCFluids.BRINE && origIS != null && origIS.getItem() instanceof IFood)
-							fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount * Food.getWeight(origIS);
-						else
-							fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount;
+						fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount;
 					}
 					else
 					{
@@ -806,6 +848,8 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 					if (origFS != null && origFS.getFluid() != TFCFluids.MILKCURDLED && this.fluid.getFluid() == TFCFluids.MILKCURDLED)
 						this.sealtime = (int) TFC_Time.getTotalHours();
+
+
 
 					Stack<ItemStack> resultStacks = recipe.getResult(origIS, origFS, time);
 					if (!resultStacks.isEmpty())
