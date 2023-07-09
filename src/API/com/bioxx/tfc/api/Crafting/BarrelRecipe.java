@@ -2,6 +2,7 @@ package com.bioxx.tfc.api.Crafting;
 
 import java.util.Stack;
 
+import com.bioxx.tfc.api.Interfaces.IFood;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -61,6 +62,7 @@ public class BarrelRecipe
 
 	public Boolean matches(ItemStack item, FluidStack fluid)
 	{
+
 		boolean iStack = removesLiquid || recipeIS != null && item != null && fluid != null && recipeFluid != null && item.stackSize >= (int) Math.ceil(fluid.amount / recipeFluid.amount);
 		boolean fStack = !removesLiquid || recipeFluid != null && item != null && fluid != null && recipeOutFluid != null && fluid.amount >= item.stackSize * recipeOutFluid.amount;
 

@@ -3,6 +3,8 @@ package com.bioxx.tfc.TileEntities;
 import java.util.Random;
 import java.util.Stack;
 
+import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.relauncher.FMLLaunchHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,6 +31,8 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.*;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
+import org.apache.logging.log4j.Level;
+
 public class TEBarrel extends NetworkTileEntity implements IInventory
 {
 	public FluidStack fluid;
@@ -762,52 +766,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			}
 		}
 	}
-    public boolean handleTFCFood(int time){
-		if(getInputStack().hasTagCompound()&&Food.getWeight(getInputStack())>0.0F){
-			float inputStackSize = Food.getWeight(getInputStack());
-			int multiply = (int) Math.floor(inputStackSize/(Food.getWeight(recipe.recipeIS)));
-			if (multiply<1)return true;
-			ItemStack origIS = getInputStack() != null ? getInputStack().copy() : null;
-			FluidStack origFS = getFluidStack() != null ? getFluidStack().copy() : null;
-			//handle fluid
-			if(fluid.isFluidEqual(recipe.getResultFluid(origIS, origFS, time)) && recipe.removesLiquid) {
-				//if recipe uses fluid
-				FluidStack targetFS=recipe.getResultFluid(origIS, origFS, time);
-				fluid.amount -= targetFS.amount * multiply;
-			}
-			else {
-				//if recipe creates fluid
-				this.fluid = recipe.getResultFluid(origIS, origFS, time).copy();
-				if (fluid != null) this.fluid.amount = fluid.copy().amount*multiply;
-				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-			}
-			//handle item
 
-			Stack<ItemStack> resultStacks = recipe.getResult(origIS, origFS, time);
-			if (!resultStacks.isEmpty())
-			{
-				//handle brine recipe
-				ItemStack result = resultStacks.pop();
-				if (fluid != null && fluid.getFluid() == TFCFluids.BRINE)
-				{
-					if (result == null && origIS != null)
-						result = origIS.copy();
-					if (result != null && result.getItem() instanceof IFood && (result.getItem() == TFCItems.cheese || ((IFood) result.getItem()).getFoodGroup() != EnumFoodGroup.Grain))
-					{
-						if (!Food.isBrined(result))
-							Food.setBrined(result, true);
-					}
-				}
-				Food.setWeight(result,Food.getWeight(result)*multiply);
-
-				storage[INPUT_SLOT] = result;
-
-				this.setInventorySlotContents(0, result);
-			}
-			return true;
-		}
-		return false;
-	}
 	public void processItems()
 	{
 		if(this.getInvCount() == 0)
@@ -827,23 +786,21 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					else if(unsealtime > 0)
 						time = (int)TFC_Time.getTotalHours() - unsealtime;
 
+					FMLLog.log(Level.FATAL,"found recipe");
 					//Make sure that the recipe meets the time requirements
 					if(recipe.isSealedRecipe() && time < recipe.sealTime) return;
-					if(handleTFCFood(time))return;
 
 					ItemStack origIS = getInputStack() != null ? getInputStack().copy() : null;
 					FluidStack origFS = getFluidStack() != null ? getFluidStack().copy() : null;
-					if(fluid.isFluidEqual(recipe.getResultFluid(origIS, origFS, time)) && recipe.removesLiquid)
-					{
-						fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount;
-					}
-					else
-					{
-						this.fluid = recipe.getResultFluid(origIS, origFS, time).copy();
-						if (fluid != null && !(recipe instanceof BarrelLiquidToLiquidRecipe) && origFS != null)
-							this.fluid.amount = origFS.amount;
-
+					FluidStack targetFS=recipe.getResultFluid(origIS,origFS,time);
+					if (fluid.isFluidEqual(targetFS)&&recipe.removesLiquid) {
+						fluid.amount -= targetFS.amount;
+					} else if(targetFS!=null) {
+						this.fluid = targetFS.copy();
+						this.fluid.amount = fluid.copy().amount ;
 						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+					}else{
+						this.fluid.amount-=recipe.recipeFluid.amount;
 					}
 
 					if (origFS != null && origFS.getFluid() != TFCFluids.MILKCURDLED && this.fluid.getFluid() == TFCFluids.MILKCURDLED)
@@ -994,12 +951,12 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluids.MILK, 9000), new FluidStack(TFCFluids.VINEGAR, 1000), new FluidStack(TFCFluids.MILKVINEGAR, 10000)).setSealedRecipe(false).setMinTechLevel(0).setRemovesLiquid(false));
 		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluids.MILKVINEGAR, 9000), new FluidStack(TFCFluids.MILK, 1000), new FluidStack(TFCFluids.MILKVINEGAR, 10000)).setSealedRecipe(false).setMinTechLevel(0).setRemovesLiquid(false));
 
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.cornmealGround), 0.1f), new FluidStack(TFCFluids.FRESHWATER, 2), ItemFoodTFC.createTag(new ItemStack(TFCItems.cornmealDough), 0.1f),null,0).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.barleyGround), 0.1f), new FluidStack(TFCFluids.FRESHWATER, 2), ItemFoodTFC.createTag(new ItemStack(TFCItems.barleyDough), 0.1f),null,0).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.ryeGround), 0.1f), new FluidStack(TFCFluids.FRESHWATER, 2), ItemFoodTFC.createTag(new ItemStack(TFCItems.ryeDough), 0.1f),null,0).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.riceGround), 0.1f), new FluidStack(TFCFluids.FRESHWATER, 2), ItemFoodTFC.createTag(new ItemStack(TFCItems.riceDough), 0.1f),null,0).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.oatGround), 0.1f), new FluidStack(TFCFluids.FRESHWATER, 2), ItemFoodTFC.createTag(new ItemStack(TFCItems.oatDough), 0.1f),null,0).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatGround), 0.1f), new FluidStack(TFCFluids.FRESHWATER, 2), ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatDough), 0.1f),null,0).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.cornmealGround), 1f), new FluidStack(TFCFluids.FRESHWATER, 4), ItemFoodTFC.createTag(new ItemStack(TFCItems.cornmealDough), 1f),new FluidStack(TFCFluids.FRESHWATER,2),0).setSealedRecipe(false).setRemovesLiquid(true).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.barleyGround), 1f), new FluidStack(TFCFluids.FRESHWATER, 4), ItemFoodTFC.createTag(new ItemStack(TFCItems.barleyDough), 1f),new FluidStack(TFCFluids.FRESHWATER,2),0).setSealedRecipe(false).setRemovesLiquid(true).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.ryeGround), 1f), new FluidStack(TFCFluids.FRESHWATER, 4), ItemFoodTFC.createTag(new ItemStack(TFCItems.ryeDough), 1f),new FluidStack(TFCFluids.FRESHWATER,2),0).setSealedRecipe(false).setRemovesLiquid(true).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.riceGround), 1f), new FluidStack(TFCFluids.FRESHWATER, 4), ItemFoodTFC.createTag(new ItemStack(TFCItems.riceDough), 1f),new FluidStack(TFCFluids.FRESHWATER,2),0).setSealedRecipe(false).setRemovesLiquid(true).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.oatGround), 1f), new FluidStack(TFCFluids.FRESHWATER, 4), ItemFoodTFC.createTag(new ItemStack(TFCItems.oatDough), 1f),new FluidStack(TFCFluids.FRESHWATER,2),0).setSealedRecipe(false).setRemovesLiquid(true).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatGround), 1f), new FluidStack(TFCFluids.FRESHWATER, 4), ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatDough), 1f),new FluidStack(TFCFluids.FRESHWATER,2),0).setSealedRecipe(false).setRemovesLiquid(true).setMinTechLevel(0));
 
 		// 5000mb / 160oz = 31.25
 		// 10000mb / 160oz = 62.5

@@ -35,18 +35,14 @@ public class BarrelManager
 		preservativeRecipes.add(recipe);
 	}
 
-	public BarrelRecipe findMatchingRecipe(ItemStack item, FluidStack fluid, boolean sealed, int techLevel)
-	{
-		for(Object recipe : recipes)
-		{
-			BarrelRecipe br = (BarrelRecipe) recipe;
-			if(/*item != null && */fluid != null &&/*(br.inItemStack != null && item != null) && (br.inFluid != null && fluid != null) &&*/ br.matches(item, fluid))
-				if(br.sealedRecipe == sealed && br.minTechLevel <= techLevel)
+	public BarrelRecipe findMatchingRecipe(ItemStack item, FluidStack fluid, boolean sealed, int techLevel) {
+		for (BarrelRecipe br : recipes) {
+			if (/*item != null && */fluid != null &&/*(br.inItemStack != null && item != null) && (br.inFluid != null && fluid != null) &&*/ br.matches(item, fluid))
+				if (br.sealedRecipe == sealed && br.minTechLevel <= techLevel)
 					return br;
 		}
 		return null;
 	}
-	
 	public BarrelPreservativeRecipe findMatchingPreservativeRepice(TEBarrel barrel, ItemStack item, FluidStack fluid, boolean sealed)
 	{
 		for(BarrelPreservativeRecipe recipe : preservativeRecipes){

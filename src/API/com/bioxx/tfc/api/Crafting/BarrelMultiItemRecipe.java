@@ -14,9 +14,13 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 {
 	public boolean keepstacksize = true;
 	public BarrelMultiItemRecipe(ItemStack inputItem, FluidStack inputFluid,
-			ItemStack outIS, FluidStack outputFluid) {
+								 ItemStack outIS, FluidStack outputFluid) {
 		super(inputItem, inputFluid, outIS, outputFluid);
 	}
+	public BarrelMultiItemRecipe(ItemStack inputItem, FluidStack inputFluid,
+									  ItemStack outIS, FluidStack outputFluid,int sealtime) {
+	super(inputItem, inputFluid, outIS, outputFluid,sealtime);
+}
 
 	public BarrelMultiItemRecipe setKeepStackSize(boolean b)
 	{
@@ -53,7 +57,8 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 	@Override
 	public FluidStack getResultFluid(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
-		FluidStack fs = recipeOutFluid.copy(); 
+		if(recipeOutFluid==null)return null;
+		FluidStack fs = recipeOutFluid.copy();
 
 		if(inIS != null && inIS.getItem() instanceof IFood)
 		{
@@ -81,7 +86,7 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 		if (inIS != null && inFS != null && inIS.getItem() instanceof IFood)
 		{
 			float w = Food.getWeight(inIS);
-			if (inFS.isFluidEqual(recipeFluid) && w * recipeOutFluid.amount <= inFS.amount)
+			if (inFS.isFluidEqual(recipeFluid) &&(recipeOutFluid==null|| w * recipeOutFluid.amount <= inFS.amount))
 			{
 				return OreDictionary.itemMatches(recipeIS, inIS, false);
 			}
