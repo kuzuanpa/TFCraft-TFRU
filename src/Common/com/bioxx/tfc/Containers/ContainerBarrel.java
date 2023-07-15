@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.bioxx.tfc.Containers.Slots.SlotBarrel;
 import com.bioxx.tfc.Core.Player.PlayerTracker;
 import cpw.mods.fml.common.FMLLog;
 import net.minecraft.entity.item.EntityItem;
@@ -66,7 +67,7 @@ public class ContainerBarrel extends ContainerTFC
 		{
 			//Input slot
 			if(!barrel.getSealed())
-				addSlotToContainer(new SlotChest(barrel, 0, 80, 29).setSize(EnumSize.LARGE).addItemException(getExceptions()));
+				addSlotToContainer(new SlotBarrel(barrel, 0, 80, 29).setSize(EnumSize.LARGE).addItemException(getExceptions()));
 			else
 				addSlotToContainer(new SlotForShowOnly(barrel, 0, 80, 29));
 		}
@@ -77,7 +78,7 @@ public class ContainerBarrel extends ContainerTFC
 				for(int k = 0; k < 3; k++)
 				{
 					if(!barrel.getSealed())
-						addSlotToContainer(new SlotChest(barrel, k+(i*3), 53+(i*18), 17+(k*18)).setSize(EnumSize.LARGE).addItemException(ContainerChestTFC.getExceptions()));
+						addSlotToContainer(new SlotBarrel(barrel, k+(i*3), 53+(i*18), 17+(k*18)).setSize(EnumSize.LARGE).addItemException(ContainerChestTFC.getExceptions()));
 					else
 						addSlotToContainer(new SlotForShowOnly(barrel, k+(i*3), 53+(i*18), 17+(k*18)));
 				}
@@ -139,23 +140,11 @@ public class ContainerBarrel extends ContainerTFC
 
 		return origStack;
 	}
-	public void debug(int a){
-		FMLLog.log(Level.FATAL,"I"+a);
-	}public void debugd(double a){
-	FMLLog.log(Level.FATAL,"D"+a);
-}
 	//private int updatecounter = 0;
 	@Override
 	public void detectAndSendChanges()
 	{
 		super.detectAndSendChanges();
-		Slot slot = (Slot)(inventorySlots.get(0));
-		if (slot.getStack() != null && slot.getStack().getItem().getUnlocalizedName().equals("gt.multitileentity")&&slot.getStack().stackSize > 1){
-			slot.getStack().stackSize--;
-			this.inventoryPlayer.addItemStackToInventory(slot.getStack());
-			slot.getStack().stackSize = 1;
-			this.inventoryPlayer.player.addChatMessage(new ChatComponentTranslation("tfc.message.techiteminbarrel").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
-		}
 		for (int var1 = 0; var1 < this.crafters.size() && guiTab == 0; ++var1)
 		{
 			ICrafting var2 = (ICrafting)this.crafters.get(var1);
