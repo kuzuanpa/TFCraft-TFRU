@@ -906,6 +906,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public static void registerRecipes()
 	{
+		//TODO: seems the NEI plugin won't report the output fluid correctly although Barrel produce them very correctly, but nooooooo, the NEI plugin CLOSED source....
 		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.potato), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.VODKA, 60)));
 		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.redApple), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.CIDER, 60)));
 		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.greenApple), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.CIDER, 60)));
