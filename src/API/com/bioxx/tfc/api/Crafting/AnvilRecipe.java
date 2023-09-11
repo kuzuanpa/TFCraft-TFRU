@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -186,6 +187,7 @@ public class AnvilRecipe
 	 */
 	public ItemStack getCraftingResult(ItemStack input)
 	{
+		if (result==null) FMLLog.log(Level.FATAL,input1.toString()+input2.toString());
 		ItemStack is = result.copy();
 		if(this.inheritsDamage)
 			is.setItemDamage(input.getItemDamage());

@@ -17,7 +17,6 @@ effect.bleed=流血
 death.attack.alcohol=%1$s死于酒精中毒
 death.attack.heatStroke=%1$s死于中暑
 death.attack.caveIn=%1$s被落石砸死了
-tfc.message.techiteminbarrel=这个物品太精密了，不能放在桶里
 
 #==============
 #= Entities = 
@@ -2355,6 +2354,19 @@ gui.plans.tuyere=风口
 gui.plans.grill=烤架
 gui.plans.shears=剪刀
 gui.plans.trapdoor=活板门
+gui.plans.hopper=漏斗
+gui.plans.ring=环
+gui.plans.foil=箔
+gui.plans.gear=齿轮
+gui.plans.sturdymachine=坚固部件
+gui.plans.platecurved=弯曲板
+gui.plans.spring=弹簧
+gui.plans.springsmall=小弹簧
+gui.plans.chain=锁链
+gui.plans.casing=机器外壳
+gui.plans.robustcasing=强化机器外壳
+gui.plans.reinforcedcasing=高强度机器外壳
+
 
 #== Misc GUI ==
 gui.Blueprint=蓝图

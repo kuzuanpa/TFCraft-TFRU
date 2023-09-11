@@ -1,13 +1,13 @@
 package com.bioxx.tfc.api.Crafting;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import cpw.mods.fml.common.FMLLog;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.Level;
 
 public class AnvilManager
 {
@@ -29,17 +29,16 @@ public class AnvilManager
 		plans = new HashMap<String, PlanRecipe>();
 	}
 
-	public void addRecipe(AnvilRecipe recipe)
+		public void addRecipe(AnvilRecipe recipeToAdd)
 	{
-		recipes.add(recipe);
+		recipes.add(recipeToAdd);
 	}
 
-	public void addWeldRecipe(AnvilRecipe recipe)
+	public void addWeldRecipe(AnvilRecipe recipeToAdd)
 	{
-		recipe.flux = true;
-		recipesWeld.add(recipe);
+			recipeToAdd.flux = true;
+			recipesWeld.add(recipeToAdd);
 	}
-
 	public void clearRecipes()
 	{
 		recipes.clear();

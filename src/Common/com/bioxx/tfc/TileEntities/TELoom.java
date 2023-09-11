@@ -2,6 +2,9 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
+import eu.usrv.yamcore.auxiliary.ItemDescriptor;
+import eu.usrv.yamcore.command.YAMCommand;
+import eu.usrv.yamcore.items.ModItemManager;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -502,5 +505,6 @@ public class TELoom extends NetworkTileEntity implements IInventory
 		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(TFCItems.woolYarn,16), new ItemStack(TFCItems.woolCloth,1)),new ResourceLocation(Reference.MOD_ID, "textures/blocks/String.png"));
 		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(Items.string,24), new ItemStack(TFCItems.silkCloth,1)),new ResourceLocation(Reference.MOD_ID, "textures/blocks/Silk.png"));
 		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(TFCItems.juteFiber,12), new ItemStack(TFCItems.burlapCloth,1)),new ResourceLocation(Reference.MOD_ID, "textures/blocks/Rope.png"));
+		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(TFCItems.leather,8), new ItemDescriptor("Backpack","backpack").getItemStack(1)),new ResourceLocation(Reference.MOD_ID, "textures/blocks/Rope.png"));
 	}
 }
