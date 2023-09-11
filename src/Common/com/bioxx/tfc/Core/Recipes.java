@@ -3,6 +3,10 @@ package com.bioxx.tfc.Core;
 import java.util.List;
 import java.util.Random;
 
+import eu.usrv.yamcore.auxiliary.ItemDescriptor;
+import gregapi.data.MT;
+import gregapi.data.OP;
+import gregapi.oredict.OreDictMaterial;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -845,7 +849,6 @@ public class Recipes
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.leatherBoots, 1), new Object[] { "##   ","##   ","##   ","#### ","#####", '#', TFCItems.flatLeather});
 
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.quiver, 1), new Object[] { " ####","# ###","# ###","# ###"," ####", '#', TFCItems.flatLeather});
-		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Items.saddle, 1), new Object[] { "  #  ","#####","#####","#####","  #  ", '#', TFCItems.flatLeather});
 	}
 
 	private static void registerKnapping()
@@ -1288,6 +1291,18 @@ public class Recipes
 		manager.addPlan("shears", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.HITTHIRDFROMLAST}));
 		manager.addPlan("oillamp", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.BENDSECONDFROMLAST, RuleEnum.DRAWTHIRDFROMLAST}));
 		manager.addPlan("hopper", new PlanRecipe(new RuleEnum[]{RuleEnum.UPSETLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.BENDTHIRDFROMLAST}));
+		manager.addPlan("ring", new PlanRecipe(new RuleEnum[]{RuleEnum.SHRINKANY, RuleEnum.SHRINKANY, RuleEnum.SHRINKANY}));
+		manager.addPlan("foil", new PlanRecipe(new RuleEnum[]{RuleEnum.PUNCHANY, RuleEnum.PUNCHANY, RuleEnum.PUNCHANY}));
+		manager.addPlan("gear", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDANY, RuleEnum.HITANY, RuleEnum.SHRINKANY}));
+		manager.addPlan("sturdymachine", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.ANY, RuleEnum.BENDLAST}));
+		manager.addPlan("platecurved", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDANY, RuleEnum.BENDANY, RuleEnum.BENDANY}));
+		manager.addPlan("spring", new PlanRecipe(new RuleEnum[]{RuleEnum.ANY, RuleEnum.ANY, RuleEnum.UPSETANY}));
+		manager.addPlan("springsmall", new PlanRecipe(new RuleEnum[]{RuleEnum.ANY, RuleEnum.ANY, RuleEnum.UPSETANY}));
+		manager.addPlan("chain", new PlanRecipe(new RuleEnum[]{RuleEnum.DRAWANY, RuleEnum.DRAWANY, RuleEnum.DRAWANY}));
+		manager.addPlan("casingsmall", new PlanRecipe(new RuleEnum[]{RuleEnum.ANY, RuleEnum.HITANY, RuleEnum.HITANY}));
+		manager.addPlan("casing", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.BENDLAST, RuleEnum.ANY}));
+		manager.addPlan("robustcasing", new PlanRecipe(new RuleEnum[]{RuleEnum.HITANY, RuleEnum.HITANY, RuleEnum.HITANY}));
+		manager.addPlan("reinforcedcasing", new PlanRecipe(new RuleEnum[]{RuleEnum.HITANY, RuleEnum.HITANY, RuleEnum.HITANY}));
 
 		addWeldRecipes(manager);
 
@@ -1590,8 +1605,40 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.blueSteelIngot), null,"oillamp", AnvilReq.BLUESTEEL, new ItemStack(TFCBlocks.oilLamp, 1, 5)));
 
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronSheet2x), new ItemStack(TFCItems.wroughtIronSheet2x),"hopper", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.hopper, 1, 0)));
+		if(new ItemDescriptor("advancedRocketry","sawBlade").getItemStack(1)!=null)manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronSheet2x),new ItemStack(TFCItems.wroughtIronSheet2x),"axe",AnvilReq.STEEL,new ItemDescriptor("advancedRocketry","sawBlade").getItemStack(1)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronSheet),new ItemStack(TFCItems.wroughtIronSheet),"trapdoor",AnvilReq.BRONZE,new ItemStack(Items.iron_door,1)));
+		manager.addRecipe(new AnvilRecipe(OP.plateTriple.mat(MT.Fe,1),OP.plateTriple.mat(MT.Fe,1),"bucket",AnvilReq.BRONZE,new ItemStack(Items.cauldron,1)));
+		manager.addRecipe(new AnvilRecipe(OP.plateTriple.mat(MT.WroughtIron,1),OP.plateTriple.mat(MT.WroughtIron,1),"bucket",AnvilReq.BRONZE,new ItemStack(Items.cauldron,1)));
+		if(new ItemDescriptor("forestry","sturdyMachine").getItemStack(1)!=null)manager.addRecipe(new AnvilRecipe(OP.plateTriple.mat(MT.Bronze,1),OP.plateTriple.mat(MT.Bronze,1),"sturdyMachine",AnvilReq.COPPER,new ItemDescriptor("forestry","sturdyMachine").getItemStack(1)));
+
+		//GT Items
+		for(OreDictMaterial mat:new OreDictMaterial[]{MT.Pb,MT.Steel,MT.Cu,MT.WroughtIron,MT.Bronze,MT.Bi,MT.BlackBronze,MT.BismuthBronze,MT.Cupronickel,MT.Ni,MT.Sn,MT.Au,MT.Brass,MT.Electrum,MT.Ag,MT.RoseGold,MT.SterlingSilver,MT.Invar,MT.Ge,MT.Co,MT.AluminiumBrass,MT.Al,MT.TinAlloy,MT.Fe}){
+			AnvilReq req =getAnvilReqFromMaterial(mat);
+			manager.addRecipe(new AnvilRecipe(OP.ingotDouble.mat(mat,1), null, "plate", req, OP.plate.mat(mat,1)));
+			manager.addRecipe(new AnvilRecipe(OP.plateQuadruple.mat(mat,1), OP.plateQuadruple.mat(mat,1), "casing", req, OP.casingMachine.mat(mat,1)));
+		    manager.addRecipe(new AnvilRecipe(OP.casingMachine.mat(mat,1),OP.casingMachine.mat(mat,1), "robustcasing", req, OP.casingMachineDouble.mat(mat,1)));
+			manager.addRecipe(new AnvilRecipe(OP.casingMachineDouble.mat(mat,1), OP.casingMachineDouble.mat(mat,1), "reinforcedcasing", req, OP.casingMachineQuadruple.mat(mat,1)));
+		    manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat,1), null, "ring", req, OP.ring.mat(mat,1)));
+		    manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat,1), null, "casingsmall", req, OP.casingSmall.mat(mat,1)));
+		    manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat,1), OP.stick.mat(mat,1), "gear", req, OP.gearGtSmall.mat(mat,1)));
+		    manager.addRecipe(new AnvilRecipe(OP.plateQuadruple.mat(mat,1), OP.stickLong.mat(mat,1), "gear", req, OP.gearGt.mat(mat,1)));
+		    manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat,1),null, "foil", req, OP.foil.mat(mat,2)));
+		    manager.addRecipe(new AnvilRecipe(OP.stickLong.mat(mat,1),null, "spring", req, OP.spring.mat(mat,1)));
+		    manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat,1),null, "springsmall", req, OP.springSmall.mat(mat,2)));
+		    manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat,1),null, "platecurved", req, OP.plateCurved.mat(mat,1)));
+		    manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat,1),OP.stick.mat(mat,1), "chain", req, OP.chain.mat(mat,1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.plate.mat(mat,1),OP.plate.mat(mat,1),req,OP.plateDouble.mat(mat,1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.ingot.mat(mat,1),OP.ingot.mat(mat,1),req,OP.ingotDouble.mat(mat,1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.stick.mat(mat,1),OP.stick.mat(mat,1),req,OP.stickLong.mat(mat,1)));
+		}
 	}
 
+	private static AnvilReq getAnvilReqFromMaterial(OreDictMaterial mat){
+		if (mat==MT.Pb||mat==MT.Bronze||mat==MT.Bi||mat==MT.Ni||mat==MT.Sn||mat==MT.Au||mat==MT.Ge||mat==MT.Al)return AnvilReq.COPPER;
+		if (mat==MT.BlackBronze||mat==MT.WroughtIron||mat==MT.Fe||mat==MT.BismuthBronze||mat==MT.Cupronickel||mat==MT.Brass||mat==MT.Electrum||mat==MT.Ag||mat==MT.RoseGold||mat==MT.SterlingSilver) return AnvilReq.BRONZE;
+		if (mat==MT.Steel||mat==MT.Invar||mat==MT.Co||mat==MT.AluminiumBrass||mat==MT.TinAlloy)return AnvilReq.WROUGHTIRON;
+		return AnvilReq.STONE;
+	}
 	private static void addTrapDoor(Item sheet, int index)
 	{
 		AnvilManager manager = AnvilManager.getInstance();
@@ -1617,6 +1664,7 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.zincIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.metalTrapDoor, 1, index + (20 << 5))));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.electrumIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.metalTrapDoor, 1, index + (21 << 5))));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.cupronickelIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.metalTrapDoor, 1, index + (22 << 5))));
+
 	}
 
 	/**
@@ -1935,26 +1983,11 @@ public class Recipes
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.barleyGrain, 1), new ItemStack(TFCItems.barleyGround, 1)));//Barley Flour
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.riceGrain, 1), new ItemStack(TFCItems.riceGround, 1)));//Rice Flour
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.maizeEar, 1), new ItemStack(TFCItems.cornmealGround, 1)));//Cornmeal
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 16),new ItemStack( TFCItems.powder, 4, 1)));//Kaolinite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 20), new ItemStack(TFCItems.powder, 4, 2)));//Graphite Powder
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 27), new ItemStack(Items.redstone, 8)));//Cinnabar to Redstone
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 28), new ItemStack(Items.redstone, 8)));//Cryolite to Redstone
 		manager.addRecipe(new QuernRecipe(new ItemStack(Items.bone, 1), new ItemStack(TFCItems.dye, 2, 15)));//Bone Meal
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 34), new ItemStack(TFCItems.powder, 4, 6)));//Lapis Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.smallOreChunk, 1, 9), new ItemStack(TFCItems.powder, 1, 8)));//Small Malachite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 58), new ItemStack(TFCItems.powder, 2, 8)));//Poor Malachite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 9), new ItemStack(TFCItems.powder, 4, 8)));//Malachite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 44), new ItemStack(TFCItems.powder, 6, 8)));//Rich Malachite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.smallOreChunk, 1, 3), new ItemStack(TFCItems.powder, 1, 5)));//Small Hematite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 52), new ItemStack(TFCItems.powder, 2, 5)));//Poor Hematite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 3),new ItemStack( TFCItems.powder, 4, 5)));//Hematite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 38), new ItemStack(TFCItems.powder, 6, 5)));//Rich Hematite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.smallOreChunk, 1, 11), new ItemStack(TFCItems.powder, 1, 7)));//Small Limonite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 60), new ItemStack(TFCItems.powder, 2, 7)));//Poor Limonite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 11), new ItemStack(TFCItems.powder, 4, 7)));//Limonite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 46), new ItemStack(TFCItems.powder, 6, 7)));//Rich Limonite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 31), new ItemStack(TFCItems.fertilizer, 4)));//Sylvite to Fertilizer
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.looseRock, 1, 5), new ItemStack(TFCItems.powder, 4, 9)));//Rock Salt to Salt
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 29), new ItemStack(TFCItems.powder, 4,4)));//Cinnabar to Redstone
+
 	}
 
 	public static int valueOfString(String s)

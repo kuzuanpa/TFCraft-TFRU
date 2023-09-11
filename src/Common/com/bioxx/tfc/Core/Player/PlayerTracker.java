@@ -1,6 +1,5 @@
 package com.bioxx.tfc.Core.Player;
 
-import codechicken.nei.api.INEIGuiHandler;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.ICrafting;
