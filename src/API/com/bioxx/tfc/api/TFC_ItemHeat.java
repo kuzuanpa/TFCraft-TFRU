@@ -1,9 +1,17 @@
 package com.bioxx.tfc.api;
 
+import com.bioxx.tfc.TileEntities.TEAnvil;
+import gregapi.data.MD;
+import gregapi.item.ItemBase;
+import gregapi.item.multiitem.MultiItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import com.bioxx.tfc.Core.TFC_Core;
+import net.minecraft.util.EnumChatFormatting;
+
+import java.util.List;
 
 public class TFC_ItemHeat 
 {
@@ -228,12 +236,7 @@ public class TFC_ItemHeat
 
 	public static boolean hasTemp(ItemStack is)
 	{
-		if(is != null)
-		{
-			if(is.hasTagCompound() && is.getTagCompound().hasKey("temperature"))
-				return true;
-		}
-		return false;
+   		return (is!=null&&is.hasTagCompound() && is.getTagCompound().hasKey("temperature"));
 	}
 
 	public static float getTempIncrease(ItemStack is)

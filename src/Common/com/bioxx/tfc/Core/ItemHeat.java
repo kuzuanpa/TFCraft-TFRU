@@ -1,6 +1,9 @@
 package com.bioxx.tfc.Core;
 
 import cpw.mods.fml.common.FMLLog;
+import eu.usrv.yamcore.auxiliary.ItemDescriptor;
+import gregapi.block.multitileentity.MultiTileEntityRegistry;
+import gregapi.data.IL;
 import gregapi.data.MT;
 import gregapi.data.OP;
 import gregapi.oredict.OreDictMaterial;
@@ -482,6 +485,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.anvil3, 1, 0), steelRaw, null));
 		//Other
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.stick, 1, WILDCARD_VALUE), 1, 40, new ItemStack(TFCBlocks.torch, 2)));
+		if (MultiTileEntityRegistry.getRegistry("ktfru.multitileentity")!=null)manager.addIndex(new HeatIndex(MultiTileEntityRegistry.getRegistry("ktfru.multitileentity").getItem(32762,1),0.5,950,new ItemStack(TFCItems.bronzeUnshaped,7)).setKeepNBT(true));
 
 		manager.addIndex(new HeatIndex(OP.plate.mat(MT.Invar,1),1,1643,new ItemStack(TFCItems.unknownUnshaped,1)).setKeepNBT(true));
 		manager.addIndex(new HeatIndex(OP.plate.mat(MT.Ge,1),1,938,new ItemStack(TFCItems.unknownUnshaped,1 )).setKeepNBT(true));

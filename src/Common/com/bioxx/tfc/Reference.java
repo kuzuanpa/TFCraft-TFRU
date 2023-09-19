@@ -11,7 +11,7 @@ public class Reference
 
 	public static final String MOD_VERSION = VERSION_MAJOR+"."+VERSION_MINOR+"."+VERSION_REVISION;
 
-	public static final String MOD_DEPENDENCIES = "required-after:tfc_coremod";
+	public static final String MOD_DEPENDENCIES = "required-after:tfc_coremod,required:yamcore";
 	public static final String MOD_CHANNEL = "TerraFirmaCraft";
 	public static final String SERVER_PROXY_CLASS = "com.bioxx.tfc.CommonProxy";
 	public static final String CLIENT_PROXY_CLASS = "com.bioxx.tfc.ClientProxy";

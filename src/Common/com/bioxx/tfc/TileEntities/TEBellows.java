@@ -1,7 +1,10 @@
 package com.bioxx.tfc.TileEntities;
 
+import java.util.List;
 import java.util.Random;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -32,6 +35,7 @@ public class TEBellows extends NetworkTileEntity
 				if(blowTimer == 5)
 				{
 					blowDirection = 1;
+					moveEntitys();
 					if(!worldObj.isRemote)
 						giveAir();
 				}
@@ -73,6 +77,13 @@ public class TEBellows extends NetworkTileEntity
 		worldObj.spawnParticle("smoke", f + f4 - 0.3F, f1, f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 	}
 
+	public void moveEntitys(){
+		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		int x = BLOCK_MAP[meta][0];
+		int z = BLOCK_MAP[meta][1];
+		List<Entity> entitys = getWorldObj().getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord-0.2, zCoord,xCoord +1+x, yCoord+1, zCoord +1+z));
+		entitys.forEach(entity -> {entity.motionX+=x*0.5;entity.motionZ+=z*0.5;});
+	}
 	public void giveAir()
 	{
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);

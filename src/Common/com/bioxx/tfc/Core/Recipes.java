@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import eu.usrv.yamcore.auxiliary.ItemDescriptor;
+import gregapi.block.multitileentity.MultiTileEntityRegistry;
 import gregapi.data.MT;
 import gregapi.data.OP;
 import gregapi.oredict.OreDictMaterial;
@@ -1606,6 +1607,7 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.silverIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.oilLamp, 1, 3)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.sterlingSilverIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.oilLamp, 1, 4)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.blueSteelIngot), null,"oillamp", AnvilReq.BLUESTEEL, new ItemStack(TFCBlocks.oilLamp, 1, 5)));
+		if (MultiTileEntityRegistry.getRegistry("ktfru.multitileentity")!=null)manager.addRecipe(new AnvilRecipe(MultiTileEntityRegistry.getRegistry("ktfru.multitileentity").getItem(32762,1), OP.plate.mat(MT.Bronze,1),"casing", AnvilReq.COPPER, OP.casingMachine.mat(MT.Bronze,1)));
 
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronSheet2x), new ItemStack(TFCItems.wroughtIronSheet2x),"hopper", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.hopper, 1, 0)));
 		if(new ItemDescriptor("advancedRocketry","sawBlade").getItemStack(1)!=null)manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronSheet2x),new ItemStack(TFCItems.wroughtIronSheet2x),"axe",AnvilReq.STEEL,new ItemDescriptor("advancedRocketry","sawBlade").getItemStack(1)));
