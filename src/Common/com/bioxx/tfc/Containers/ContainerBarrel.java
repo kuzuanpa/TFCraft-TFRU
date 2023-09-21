@@ -130,8 +130,10 @@ public class ContainerBarrel extends ContainerTFC
 				}
 			}
 
-			if (slotStack.stackSize >= 0) slot.onSlotChanged();
-
+			if (slotStack.stackSize <= 0)
+				slot.putStack(null);
+			else
+				slot.onSlotChanged();
 			if (slotStack.stackSize == origStack.stackSize)
 				return null;
 
