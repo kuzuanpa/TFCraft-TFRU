@@ -7,6 +7,7 @@ import gregapi.data.IL;
 import gregapi.data.MT;
 import gregapi.data.OP;
 import gregapi.oredict.OreDictMaterial;
+import gregapi.util.UT;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
@@ -227,7 +228,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.blackSteelUnfinishedGreaves,1,1), blackSteelRaw,new ItemStack(TFCItems.blackSteelUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.blackSteelUnfinishedBoots,1,0), blackSteelRaw,new ItemStack(TFCItems.blackSteelUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.blackSteelUnfinishedBoots,1,1), blackSteelRaw,new ItemStack(TFCItems.blackSteelUnshaped,2,0)));
-		
+
 		//Blue Steel
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.blueSteelIngot,1), blueSteelRaw,new ItemStack(TFCItems.blueSteelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.blueSteelIngot2x,1), blueSteelRaw,new ItemStack(TFCItems.blueSteelUnshaped,2,0)));
@@ -242,7 +243,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.blueSteelUnfinishedGreaves,1,1), blueSteelRaw,new ItemStack(TFCItems.blueSteelUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.blueSteelUnfinishedBoots,1,0), blueSteelRaw,new ItemStack(TFCItems.blueSteelUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.blueSteelUnfinishedBoots,1,1), blueSteelRaw,new ItemStack(TFCItems.blueSteelUnshaped,2,0)));
-		
+
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.oilLamp, 1, 5), blueSteelRaw, null));
 		//Brass
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.brassIngot,1), brassRaw,new ItemStack(TFCItems.brassUnshaped,1)));
@@ -264,7 +265,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.bronzeUnfinishedGreaves,1,1), bronzeRaw,new ItemStack(TFCItems.bronzeUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.bronzeUnfinishedBoots,1,0), bronzeRaw,new ItemStack(TFCItems.bronzeUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.bronzeUnfinishedBoots,1,1), bronzeRaw,new ItemStack(TFCItems.bronzeUnshaped,2,0)));
-		
+
 		//Copper
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.copperIngot,1), copperRaw,new ItemStack(TFCItems.copperUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.copperIngot2x,1), copperRaw,new ItemStack(TFCItems.copperUnshaped,2,0)));
@@ -279,7 +280,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.copperUnfinishedGreaves,1,1), copperRaw,new ItemStack(TFCItems.copperUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.copperUnfinishedBoots,1,0), copperRaw,new ItemStack(TFCItems.copperUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.copperUnfinishedBoots,1,1), copperRaw,new ItemStack(TFCItems.copperUnshaped,2,0)));
-		
+
 		//Gold
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.goldIngot,1), goldRaw,new ItemStack(TFCItems.goldUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.goldIngot2x,1), goldRaw,new ItemStack(TFCItems.goldUnshaped,2,0)));
@@ -306,7 +307,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.wroughtIronUnfinishedBoots,1,0), ironRaw,new ItemStack(TFCItems.wroughtIronUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.wroughtIronUnfinishedBoots,1,1), ironRaw,new ItemStack(TFCItems.wroughtIronUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.wroughtIronKnifeHead, 1), ironRaw, new ItemStack(TFCItems.wroughtIronUnshaped, 1)));
-		
+
 		//Lead
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.leadIngot,1), leadRaw,new ItemStack(TFCItems.leadUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.leadIngot2x,1), leadRaw,new ItemStack(TFCItems.leadUnshaped,2,0)));
@@ -346,7 +347,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.redSteelUnfinishedGreaves,1,1), redSteelRaw,new ItemStack(TFCItems.redSteelUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.redSteelUnfinishedBoots,1,0), redSteelRaw,new ItemStack(TFCItems.redSteelUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.redSteelUnfinishedBoots,1,1), redSteelRaw,new ItemStack(TFCItems.redSteelUnshaped,2,0)));
-		
+
 		//Rose Gold
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.roseGoldIngot,1), roseGoldRaw,new ItemStack(TFCItems.roseGoldUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.roseGoldIngot2x,1), roseGoldRaw,new ItemStack(TFCItems.roseGoldUnshaped,2,0)));
@@ -375,7 +376,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.steelUnfinishedGreaves,1,1), steelRaw,new ItemStack(TFCItems.steelUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.steelUnfinishedBoots,1,0), steelRaw,new ItemStack(TFCItems.steelUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.steelUnfinishedBoots,1,1), steelRaw,new ItemStack(TFCItems.steelUnshaped,2,0)));
-		
+
 		//Sterling Silver
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.sterlingSilverIngot,1), sterlingSilverRaw,new ItemStack(TFCItems.sterlingSilverUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.sterlingSilverIngot2x,1), sterlingSilverRaw,new ItemStack(TFCItems.sterlingSilverUnshaped,2,0)));
@@ -486,6 +487,45 @@ public class ItemHeat
 		//Other
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.stick, 1, WILDCARD_VALUE), 1, 40, new ItemStack(TFCBlocks.torch, 2)));
 		if (MultiTileEntityRegistry.getRegistry("ktfru.multitileentity")!=null)manager.addIndex(new HeatIndex(MultiTileEntityRegistry.getRegistry("ktfru.multitileentity").getItem(32762,1),0.5,950,new ItemStack(TFCItems.bronzeUnshaped,7)).setKeepNBT(true));
+
+		manager.addIndex(new HeatIndex(IL.Ceramic_Basin_Raw.get(1),0.3,1400,IL.Ceramic_Basin.get(1)).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Mold_Raw.get(1),0.3,1400,IL.Ceramic_Mold.get(1)).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Faucet_Raw.get(1),0.3,1400,IL.Ceramic_Faucet.get(1)).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Crossing_Raw.get(1),0.3,1400,IL.Ceramic_Crossing.get(1)).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Jug_Raw.get(1),0.3,1400,IL.Ceramic_Mold.get(1)).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Juicer_Raw.get(1),0.3,1400,IL.Juicer.get(1)).setKeepNBT(false));
+
+		manager.addIndex(new HeatIndex(IL.Ceramic_Ingot_Mold_Raw          .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_01110_01110_01110_01110_01110))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Billet_Mold_Raw         .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_01100_11110_11110_01100_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Chunk_Mold_Raw          .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_11000_11000_00000_00000_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Plate_Mold_Raw          .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_11111_11111_11111_11111_11111))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Tiny_Plate_Mold_Raw     .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_01110_01110_01110_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Bolt_Mold_Raw           .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_00000_00100_00100_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Rod_Mold_Raw            .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_00000_11111_00000_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Long_Rod_Mold_Raw       .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_10000_01000_00100_00010_00001))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Item_Casing_Mold_Raw    .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_11101_11101_11101_00001_11100))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Ring_Mold_Raw           .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_01110_01010_01110_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Gear_Mold_Raw           .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_10101_01110_11011_01110_10101))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Small_Gear_Mold_Raw     .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_01010_11111_01010_11111_01010))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Sword_Mold_Raw          .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00100_01110_01110_01110_01110))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Pickaxe_Mold_Raw        .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_01110_10001_00000_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Spade_Mold_Raw          .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_01110_01110_01110_01010_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Shovel_Mold_Raw         .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00100_01110_01110_01110_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Universal_Spade_Mold_Raw.get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00100_01110_01100_01110_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Axe_Mold_Raw            .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_01110_01110_01000_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Double_Axe_Mold_Raw     .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_11111_11111_10001_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Saw_Mold_Raw            .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_11111_11111_00000_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Hammer_Mold_Raw         .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_01110_01110_01010_01110_01110))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_File_Mold_Raw           .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_01110_01110_01110_00100_00100))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Screwdriver_Mold_Raw    .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_00100_00100_00100_00100))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Chisel_Mold_Raw         .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_01110_00100_00100_00100_00100))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Arrow_Mold_Raw          .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_00100_00100_01110_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Hoe_Mold_Raw            .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_00110_01110_00000_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Sense_Mold_Raw          .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_01111_11111_00000_00000))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Plow_Mold_Raw           .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_11111_11111_11111_11111_00100))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Builderwand_Mold_Raw    .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_00100_11111_01110_01010))).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Nugget_Mold_Raw         .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_00000_00100_00000_00000))).setKeepNBT(false));
+
 
 		manager.addIndex(new HeatIndex(OP.plate.mat(MT.Invar,1),1,1643,new ItemStack(TFCItems.unknownUnshaped,1)).setKeepNBT(true));
 		manager.addIndex(new HeatIndex(OP.plate.mat(MT.Ge,1),1,938,new ItemStack(TFCItems.unknownUnshaped,1 )).setKeepNBT(true));

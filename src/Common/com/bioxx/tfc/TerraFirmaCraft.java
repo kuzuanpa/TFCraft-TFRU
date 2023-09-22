@@ -201,7 +201,6 @@ public class TerraFirmaCraft
 		TFC_OreDictionary.registerOreDict();
 		Recipes.registerRecipes();
 
-		ItemHeat.setupItemHeat();
 
 		TFC_Climate.initCache();
 
@@ -221,6 +220,8 @@ public class TerraFirmaCraft
 	@EventHandler
 	public void postInit (FMLPostInitializationEvent evt)
 	{
+		ItemHeat.setupItemHeat();
+
 		PACKET_PIPELINE.postInitialise();
 
 		// Now that blocks are resisted, go ahead and do worldgen configs

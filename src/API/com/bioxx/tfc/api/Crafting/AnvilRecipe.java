@@ -187,7 +187,7 @@ public class AnvilRecipe
 	 */
 	public ItemStack getCraftingResult(ItemStack input)
 	{
-		if (result==null) FMLLog.log(Level.FATAL,input1.toString()+input2.toString());
+		if (result==null) FMLLog.log(Level.FATAL,"Null Item at Anvil Recipe: "+input1.toString()+input2.toString());
 		ItemStack is = result.copy();
 		if(this.inheritsDamage)
 			is.setItemDamage(input.getItemDamage());

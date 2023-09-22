@@ -2,6 +2,7 @@ package com.bioxx.tfc.api;
 
 import java.util.Random;
 
+import gregapi.item.ItemBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
@@ -41,6 +42,10 @@ public class HeatIndex
 		output = out;
 	}
 
+	/**
+	 * set whether output ItemStack's NBTTag will be overwrite by input ItemStack
+	 * set to false to use NBTTag in output ItemStack
+	 */
 	public HeatIndex setKeepNBT(boolean k)
 	{
 		keepNBT = k;
@@ -94,6 +99,7 @@ public class HeatIndex
 	{
 		if(getOutputItem() == null)
 			return null;
+		if(output.getItem().getUnlocalizedName().startsWith("gt.")||output.getItem().getUnlocalizedName().startsWith("ktfru.")) return output;
 		int rand = 0;
 		if(outputMax - outputMin > 0) 
 		{
@@ -108,12 +114,12 @@ public class HeatIndex
 
 	public ItemStack getOutput(ItemStack in, Random r)
 	{
-		ItemStack is = getOutput(r);
-		if(is != null && this.keepNBT)
+		ItemStack out = getOutput(r);
+		if(out != null && this.keepNBT)
 		{
-			if(is.hasTagCompound())
+			if(out.hasTagCompound())
 			{
-				NBTTagCompound nbt = is.getTagCompound();
+				NBTTagCompound nbt = out.getTagCompound();
 				for(Object o : in.getTagCompound().func_150296_c())
 				{
 					NBTBase n = (NBTBase)o;
@@ -124,12 +130,12 @@ public class HeatIndex
 			}
 			else
 			{
-				is.setTagCompound(in.stackTagCompound);
-				if(TFC_ItemHeat.hasTemp(is))
-					TFC_ItemHeat.setTemp(is, TFC_ItemHeat.getTemp(is)*0.9f);
+				out.setTagCompound(in.stackTagCompound);
+				if(TFC_ItemHeat.hasTemp(out))
+					TFC_ItemHeat.setTemp(out, TFC_ItemHeat.getTemp(out)*0.9f);
 			}
 		}
-		return is;
+		return out;
 	}
 
 	public boolean matches(ItemStack is)
