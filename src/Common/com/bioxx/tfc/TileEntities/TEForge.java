@@ -123,7 +123,7 @@ public class TEForge extends TEFireEntity implements IInventory
 	}
 
 	public void cookItem(int i)
-	{
+	 {
 		HeatRegistry manager = HeatRegistry.getInstance();
 		Random r = new Random();
 		if(fireItemStacks[i] != null)

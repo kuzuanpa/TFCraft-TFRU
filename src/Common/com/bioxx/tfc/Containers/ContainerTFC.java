@@ -269,7 +269,6 @@ public class ContainerTFC extends Container
 	{
 		Slot slot = (Slot)this.inventorySlots.get( slotNum );
 		ItemStack is = transferStackInSlotTFC(entityplayer, slotNum);
-		FMLLog.log(Level.FATAL,"c");
 
 
 		// send a packet to make sure that the item is removed; that it stays removed.

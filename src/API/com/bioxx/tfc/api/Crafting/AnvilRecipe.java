@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Constant.Global;
+import org.apache.logging.log4j.Level;
 
 public class AnvilRecipe
 {
@@ -120,8 +121,8 @@ public class AnvilRecipe
 	 * Used to check if a recipe matches current crafting inventory
 	 */    
 	public boolean matches(AnvilRecipe recipe)
-	{   
-		if(     areItemStacksEqual(input1, recipe.input1) && 
+	{
+		if(     areItemStacksEqual(input1, recipe.input1) &&
 				areItemStacksEqual(input2, recipe.input2) &&
 				plan.equals(recipe.plan) &&
 				AnvilReq.matches(anvilreq, recipe.anvilreq))
