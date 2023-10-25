@@ -489,8 +489,12 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(IL.Ceramic_Mold_Raw.get(1),0.3,1400,IL.Ceramic_Mold.get(1)).setKeepNBT(false));
 		manager.addIndex(new HeatIndex(IL.Ceramic_Faucet_Raw.get(1),0.3,1400,IL.Ceramic_Faucet.get(1)).setKeepNBT(false));
 		manager.addIndex(new HeatIndex(IL.Ceramic_Crossing_Raw.get(1),0.3,1400,IL.Ceramic_Crossing.get(1)).setKeepNBT(false));
-		manager.addIndex(new HeatIndex(IL.Ceramic_Jug_Raw.get(1),0.3,1400,IL.Ceramic_Mold.get(1)).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Jug_Raw.get(1),0.3,1400,IL.Ceramic_Jug.get(1)).setKeepNBT(false));
 		manager.addIndex(new HeatIndex(IL.Juicer_Raw.get(1),0.3,1400,IL.Juicer.get(1)).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Porcelain_Cup_Raw.get(1),0.3,1400,IL.Porcelain_Cup.get(1)).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Measuring_Pot_Raw.get(1),0.3,1400,IL.Measuring_Pot.get(1)).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Tap_Raw.get(1),0.3,1400,IL.Ceramic_Tap.get(1)).setKeepNBT(false));
+		manager.addIndex(new HeatIndex(IL.Ceramic_Funnel_Raw.get(1),0.3,1400,IL.Ceramic_Funnel.get(1)).setKeepNBT(false));
 
 		manager.addIndex(new HeatIndex(IL.Ceramic_Ingot_Mold_Raw          .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_01110_01110_01110_01110_01110))).setKeepNBT(false));
 		manager.addIndex(new HeatIndex(IL.Ceramic_Billet_Mold_Raw         .get(1),0.3,1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_01100_11110_11110_01100_00000))).setKeepNBT(false));
