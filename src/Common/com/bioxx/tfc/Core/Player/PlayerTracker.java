@@ -1,6 +1,8 @@
 package com.bioxx.tfc.Core.Player;
 
 import codechicken.nei.api.INEIGuiHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.ICrafting;
@@ -116,15 +118,12 @@ public class PlayerTracker
 	}
 
 	@SubscribeEvent
-	public void onPlayerChangedDimension(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent event)  {
-		try
-		{
+	public void onPlayerChangedDimension(PlayerChangedDimensionEvent event)  {
+		try {
+			AbstractPacket pkt = new PlayerUpdatePacket(event.player, 2);
+			TerraFirmaCraft.PACKET_PIPELINE.sendTo(pkt, (EntityPlayerMP) event.player);
 			event.player.inventoryContainer.addCraftingToCrafters((ICrafting)event.player);
-		}
-		catch (IllegalArgumentException exception)
-		{
-			//LogHelper.error(ReferenceTAPI.MOD_NAME, "Inventory has already be resync'd");
-		}
+		} catch (IllegalArgumentException ignored) {}
 	}
 }
 

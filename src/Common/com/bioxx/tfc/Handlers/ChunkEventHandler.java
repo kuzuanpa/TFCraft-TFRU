@@ -132,7 +132,7 @@ public class ChunkEventHandler
 	{
 		TFC_Climate.removeCacheManager(event.world);
 		TFC_Core.removeCDM(event.world);
-		if(event.world.provider.dimensionId == 0) AnvilManager.getInstance().clearRecipes();
+		//AnvilManager.getInstance().clearRecipes();
 	}
 
 	@SubscribeEvent
@@ -140,7 +140,7 @@ public class ChunkEventHandler
 	{
 		if(event.world.provider.dimensionId == 0 && event.world.getTotalWorldTime() < 100)
 			createSpawn(event.world);
-		if(!event.world.isRemote && event.world.provider.dimensionId == 0 && AnvilManager.getInstance().getRecipeList().size() == 0)
+		if(!event.world.isRemote && AnvilManager.getInstance().getRecipeList().size() == 0)
 		{
 			TFC_Core.setupWorld(event.world);
 		}
