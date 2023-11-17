@@ -115,15 +115,12 @@ public class PlayerTracker
 	}
 
 	@SubscribeEvent
-	public void onPlayerChangedDimension(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent event)  {
-		try
-		{
+	public void onPlayerChangedDimension(PlayerChangedDimensionEvent event)  {
+		try {
+			AbstractPacket pkt = new PlayerUpdatePacket(event.player, 2);
+			TerraFirmaCraft.PACKET_PIPELINE.sendTo(pkt, (EntityPlayerMP) event.player);
 			event.player.inventoryContainer.addCraftingToCrafters((ICrafting)event.player);
-		}
-		catch (IllegalArgumentException exception)
-		{
-			//LogHelper.error(ReferenceTAPI.MOD_NAME, "Inventory has already be resync'd");
-		}
+		} catch (IllegalArgumentException ignored) {}
 	}
 }
 
