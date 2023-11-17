@@ -25,8 +25,6 @@ import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
-import vazkii.botania.common.item.relic.ItemAesirRing;
-import vazkii.botania.common.item.relic.ItemOdinRing;
 
 public class FoodStatsTFC
 {
@@ -429,8 +427,7 @@ public class FoodStatsTFC
 	{
 
 		return (int)(Math.min(1000+(player.experienceLevel * TFCOptions.healthGainRate),
-				TFCOptions.healthGainCap) * TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier())
-				* (ItemOdinRing.getOdinRing(player) !=null?2:1);
+				TFCOptions.healthGainCap) * TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier());
 	}
 
 	/**
