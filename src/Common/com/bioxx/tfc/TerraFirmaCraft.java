@@ -31,7 +31,6 @@ import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.*;
 import com.bioxx.tfc.Handlers.Network.PacketPipeline;
 import com.bioxx.tfc.WorldGen.TFCProvider;
-import com.bioxx.tfc.WorldGen.TFCProviderHell;
 import com.bioxx.tfc.WorldGen.TFCWorldType;
 import com.bioxx.tfc.WorldGen.Generators.*;
 import com.bioxx.tfc.api.SkillsManager;
@@ -45,6 +44,7 @@ import org.apache.logging.log4j.Logger;
 public class TerraFirmaCraft
 {
 	public static final Logger LOG = LogManager.getLogger(Reference.MOD_NAME);
+	public static final int TFCDimID=10;
 	public static boolean BotLoaded = false;
 	@Instance(Reference.MOD_ID)
 	public static TerraFirmaCraft instance;
@@ -118,25 +118,19 @@ public class TerraFirmaCraft
 		GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);
 
 
-		WorldType.DEFAULT = new TFCWorldType(0, "TFCDefault");
-		//can't remove because removing them won't make vanillaWorldGenerator functions properly
-		WorldType.FLAT = new TFCWorldType(1, "TFCFlat");
-		WorldType.LARGE_BIOMES = new TFCWorldType(2, "TFCLargeBiomes");
-		WorldType.AMPLIFIED = new TFCWorldType(3, "TFCAmplified");
-
 		//DimensionManager.unregisterDimension(-1);
-		DimensionManager.unregisterDimension(0);
+		//DimensionManager.unregisterDimension(0);
 		//DimensionManager.unregisterDimension(1);
 
 		//DimensionManager.unregisterProviderType(-1);
-		DimensionManager.unregisterProviderType(0);
+		//DimensionManager.unregisterProviderType(0);
 		//DimensionManager.unregisterProviderType(1);
 		//DimensionManager.registerProviderType(-1, TFCProviderHell.class, false);
-		DimensionManager.registerProviderType(0, TFCProvider.class, true);
+		DimensionManager.registerProviderType(TFCDimID, TFCProvider.class, false);
 		//DimensionManager.registerProviderType(1, TFCProvider.class, false);
 
 		//DimensionManager.registerDimension(-1, -1);
-		DimensionManager.registerDimension(0, 0);
+		DimensionManager.registerDimension(TFCDimID, TFCDimID);
 		//DimensionManager.registerDimension(1, 1);
 	}
 

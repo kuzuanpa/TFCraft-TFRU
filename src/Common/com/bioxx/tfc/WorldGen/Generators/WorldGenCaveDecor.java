@@ -2,6 +2,7 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
+import com.bioxx.tfc.WorldGen.TFCProvider;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
@@ -19,7 +20,8 @@ public class WorldGenCaveDecor implements IWorldGenerator
 	@Override
 	public void generate(Random rand, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
-	{
+	{		if(!(world.provider instanceof TFCProvider))return;
+
 		chunkX *= 16;
 		chunkZ *= 16;
 		for (int xCoord = 0; xCoord < 16; ++xCoord)

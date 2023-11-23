@@ -2,6 +2,7 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
+import com.bioxx.tfc.WorldGen.TFCProvider;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
@@ -22,6 +23,8 @@ public class WorldGenFissureCluster implements IWorldGenerator
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
+		if(!(world.provider instanceof TFCProvider))return;
+
 		rand = random;
 		chunkX *= 16;
 		chunkZ *= 16;

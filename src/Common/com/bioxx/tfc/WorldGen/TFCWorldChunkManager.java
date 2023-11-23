@@ -57,13 +57,8 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	{
 		this();
 		seed = genSeed;
-		//TerraFirmaCraft.log.info("================= "+worldtype.getWorldTypeName()+" =================");
-		// Making sure that only TFC World Types can be used
-		GenLayerTFC[] var4;
-		if(worldtype == TFCWorldType.flatWorldType)
-			var4 = GenLayerTFC.initialize(genSeed, TFCWorldType.flatWorldType);
-		else
-			var4 = GenLayerTFC.initialize(genSeed, TFCWorldType.defaultWorldType);
+
+ 		GenLayerTFC[] var4 = GenLayerTFC.initialize(genSeed, TFCWorldType.defaultWorldType);
 
 		this.genBiomes = var4[0];
 		this.biomeIndexLayer = var4[1];
@@ -185,6 +180,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	@Override
 	public ChunkPosition findBiomePosition(int xCoord, int zCoord, int radius, List biomeList, Random rand)
 	{
+		if(!(worldObj.provider instanceof TFCProvider))return null;
 		IntCache.resetIntCache();
 		int l = xCoord - radius >> 2;
 		int i1 = zCoord - radius >> 2;

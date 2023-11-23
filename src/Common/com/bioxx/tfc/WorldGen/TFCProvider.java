@@ -18,6 +18,8 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 
+import static com.bioxx.tfc.TerraFirmaCraft.TFCDimID;
+
 public class TFCProvider extends WorldProvider
 {
 	private int moonPhase;
@@ -26,6 +28,7 @@ public class TFCProvider extends WorldProvider
 	@Override
 	protected void registerWorldChunkManager()
 	{
+		super.registerWorldChunkManager();
 		/**
 		 * ChunkEventHandler.onLoadWorld gets called after the NEW World gen stuff.
 		 * Trying to make a NEW World will produce a crash because the cache is empty.
@@ -33,8 +36,7 @@ public class TFCProvider extends WorldProvider
 		 */
 		TFC_Climate.worldPair.put(worldObj, new WorldCacheManager(worldObj));
 		TFC_Core.addCDM(worldObj);
-
-		super.registerWorldChunkManager();
+		worldChunkMgr = new TFCWorldChunkManager(worldObj);
 	}
 
 	@Override
@@ -46,6 +48,7 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
+		if(worldObj.provider.dimensionId!=TFCDimID)return true;
 		int y = worldObj.getTopSolidOrLiquidBlock(x, z)-1;
 		if(y < Global.SEALEVEL || y > Global.SEALEVEL + 25) return false;
 		Block b = worldObj.getBlock(x, y, z);
@@ -205,7 +208,7 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public String getDimensionName()
 	{
-		return "DEFAULT";
+		return "TerraFirmaCraft";
 	}
 
 	/**

@@ -30,6 +30,8 @@ import com.bioxx.tfc.WorldGen.Generators.WorldGenWaterPlants;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 
+import static com.bioxx.tfc.TerraFirmaCraft.TFCDimID;
+
 public class ChunkEventHandler
 {
 	@SubscribeEvent
@@ -138,7 +140,7 @@ public class ChunkEventHandler
 	@SubscribeEvent
 	public void onLoadWorld(WorldEvent.Load event)
 	{
-		if(event.world.provider.dimensionId == 0 && event.world.getTotalWorldTime() < 100)
+		if(event.world.provider.dimensionId == TFCDimID && event.world.getTotalWorldTime() < 100)
 			createSpawn(event.world);
 		if(!event.world.isRemote && AnvilManager.getInstance().getRecipeList().size() == 0)
 		{

@@ -56,16 +56,7 @@ public class TFCWorldType extends WorldType
 	@Override
 	public WorldChunkManager getChunkManager(World world)
 	{
-		if (this == flatWorldType)
-		{
-			//			FlatGeneratorInfo var1 = FlatGeneratorInfo.createFlatGeneratorFromString(world.getWorldInfo().getGeneratorOptions());
-			//			return new TFCWorldChunkManagerHell(BiomeGenBase.getBiome(var1.getBiome()), 0.5F, 0.5F);
-			return new TFCWorldChunkManagerHell(TFCBiome.HELL, 0.5F, 0.5F, world);
-		}
-		else
-		{
-			return new TFCWorldChunkManager(world);
-		}
+		return new TFCWorldChunkManager(world);
 	}
 
 	@Override

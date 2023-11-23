@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.bioxx.tfc.WorldGen.TFCProvider;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -33,7 +34,8 @@ public class WorldGenOre implements IWorldGenerator
 
 	@Override
 	public void generate(Random rand, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
-	{
+	{		if(!(world.provider instanceof TFCProvider))return;
+
 		chunkX *= 16;
 		chunkZ *= 16;
 		this.chunkX = chunkX;

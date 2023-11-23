@@ -2,6 +2,7 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
+import com.bioxx.tfc.WorldGen.TFCProvider;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -26,6 +27,7 @@ public class WorldGenLargeRock implements IWorldGenerator
 
 	public boolean generate(World world, Random rand, int i, int j, int k)
 	{
+
 		int yOffset = 0;
 		boolean isFlatEnough = false;
 
@@ -88,7 +90,8 @@ public class WorldGenLargeRock implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
-	{
+	{		if(!(world.provider instanceof TFCProvider))return;
+
 		chunkX *= 16;
 		chunkZ *= 16;
 		int xCoord = 0;

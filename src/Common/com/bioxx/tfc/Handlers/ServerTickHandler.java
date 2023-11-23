@@ -11,6 +11,8 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.TFCOptions;
 
+import static com.bioxx.tfc.TerraFirmaCraft.TFCDimID;
+
 public class ServerTickHandler
 {
 	private long wSeed = Long.MIN_VALUE;
@@ -21,7 +23,7 @@ public class ServerTickHandler
 		World world = event.world;
 		if(event.phase == Phase.START)
 		{
-			if(world.provider.dimensionId == 0 && world.getWorldInfo().getSeed() != wSeed)
+			if(world.provider.dimensionId == TFCDimID && world.getWorldInfo().getSeed() != wSeed)
 			{
 				TFC_Core.setupWorld(world);
 				wSeed = world.getWorldInfo().getSeed();

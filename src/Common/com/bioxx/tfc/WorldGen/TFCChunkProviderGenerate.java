@@ -33,6 +33,8 @@ import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
+import static com.bioxx.tfc.TerraFirmaCraft.TFCDimID;
+
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 	/** RNG. */
 	private Random rand;
@@ -197,7 +199,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 		if (this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16) instanceof TFCBiome) // Fixes ClassCastException
 		{
 			biome = (TFCBiome) this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16);
-		}
+		}else biome=TFCBiome.getBiome(1);
 
 		this.rand.setSeed(this.worldObj.getSeed());
 		long var7 = this.rand.nextLong() / 2L * 2L + 1L;

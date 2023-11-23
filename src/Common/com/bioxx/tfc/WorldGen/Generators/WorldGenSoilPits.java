@@ -2,6 +2,7 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
+import com.bioxx.tfc.WorldGen.TFCProvider;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -26,7 +27,8 @@ public class WorldGenSoilPits implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
-	{
+	{		if(!(world.provider instanceof TFCProvider))return;
+
 		chunkX *= 16;
 		chunkZ *= 16;
 

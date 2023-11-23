@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.bioxx.tfc.Blocks.Terrain.BlockOre2;
 import com.bioxx.tfc.Blocks.Terrain.BlockOre3;
+import com.bioxx.tfc.WorldGen.TFCProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -108,7 +109,8 @@ public class WorldGenLooseRocks implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
-	{
+	{		if(!(world.provider instanceof TFCProvider))return;
+
 		chunkX *= 16;
 		chunkZ *= 16;
 
