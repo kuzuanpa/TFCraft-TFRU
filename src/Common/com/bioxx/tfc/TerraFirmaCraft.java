@@ -44,7 +44,7 @@ import org.apache.logging.log4j.Logger;
 public class TerraFirmaCraft
 {
 	public static final Logger LOG = LogManager.getLogger(Reference.MOD_NAME);
-	public static final int TFCDimID=10;
+	public static final int TFCDimID=11;
 	public static boolean BotLoaded = false;
 	@Instance(Reference.MOD_ID)
 	public static TerraFirmaCraft instance;
@@ -126,7 +126,7 @@ public class TerraFirmaCraft
 		//DimensionManager.unregisterProviderType(0);
 		//DimensionManager.unregisterProviderType(1);
 		//DimensionManager.registerProviderType(-1, TFCProviderHell.class, false);
-		DimensionManager.registerProviderType(TFCDimID, TFCProvider.class, false);
+		DimensionManager.registerProviderType(TFCDimID, TFCProvider.class, true);
 		//DimensionManager.registerProviderType(1, TFCProvider.class, false);
 
 		//DimensionManager.registerDimension(-1, -1);

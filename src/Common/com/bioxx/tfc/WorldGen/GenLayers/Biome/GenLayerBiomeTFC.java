@@ -36,7 +36,6 @@ public class GenLayerBiomeTFC extends GenLayerTFC
 	public int[] getInts(int par1, int par2, int par3, int par4)
 	{
 		int[] var5 = this.parent.getInts(par1, par2, par3, par4);
-		validateIntArray(var5, par3, par4);
 		int[] var6 = IntCache.getIntCache(par3 * par4);
 
 		for (int var7 = 0; var7 < par4; ++var7)
@@ -49,8 +48,6 @@ public class GenLayerBiomeTFC extends GenLayerTFC
 					var6[var8 + var7 * par3] = id;
 				else
 					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].biomeID;
-
-				validateInt(var6, var8 + var7 * par3);
 			}
 		}
 		return var6;

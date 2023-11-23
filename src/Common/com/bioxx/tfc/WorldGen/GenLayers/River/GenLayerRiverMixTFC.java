@@ -92,7 +92,6 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 				removeRiver(index, TFCBiome.LAKE.biomeID);
 				removeRiver(index, TFCBiome.MOUNTAINS_EDGE.biomeID);
 
-				validateInt(layerOut, index);
 			}
 		}
 		return layerOut.clone();

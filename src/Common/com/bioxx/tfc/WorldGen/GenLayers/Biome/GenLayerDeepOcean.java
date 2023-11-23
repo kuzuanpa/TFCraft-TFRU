@@ -24,7 +24,6 @@ public class GenLayerDeepOcean extends GenLayerTFC
 		int zSize = parZSize + 2;
 		int thisID;
 		int[] parentIDs = this.parent.getInts(parX - 1, parZ - 1, xSize, zSize);
-		validateIntArray(parentIDs, xSize, zSize);
 		int[] outCache = IntCache.getIntCache(parXSize * parZSize);
 
 		for (int z = 0; z < parZSize; ++z)

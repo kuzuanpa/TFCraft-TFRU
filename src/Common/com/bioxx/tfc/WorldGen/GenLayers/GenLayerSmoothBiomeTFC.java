@@ -24,7 +24,6 @@ public class GenLayerSmoothBiomeTFC extends GenLayerTFC
 		int var7 = par3 + 2;
 		int var8 = par4 + 2;
 		int[] var9 = this.parent.getInts(var5, var6, var7, var8);
-		validateIntArray(var9, var7, var8);
 		int[] var10 = new int[par3 * par4];
 
 		for (int var11 = 0; var11 < par4; ++var11)
@@ -60,7 +59,6 @@ public class GenLayerSmoothBiomeTFC extends GenLayerTFC
 						TerraFirmaCraft.LOG.catching(e);
 					}
 				var10[var12 + var11 * par3] = var17;
-				validateInt(var10, var12 + var11 * par3);
 			}
 		}
 		return var10;

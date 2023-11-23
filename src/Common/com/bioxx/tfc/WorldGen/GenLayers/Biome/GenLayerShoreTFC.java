@@ -58,7 +58,6 @@ public class GenLayerShoreTFC extends GenLayerTFC
 					var6[var8 + var7 * par3] = var9;
 				}
 
-				validateInt(var6, var8 + var7 * par3);
 			}
 		}
 		return var6;

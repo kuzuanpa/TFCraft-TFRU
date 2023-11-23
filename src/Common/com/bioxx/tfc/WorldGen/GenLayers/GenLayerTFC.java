@@ -223,7 +223,7 @@ public abstract class GenLayerTFC extends GenLayer
 			{
 				if(TFCBiome.biomeList[array[x+z*xSize]] == null)
 				{
-					TerraFirmaCraft.LOG.error("Error Array garbage data: " + array[x + z * xSize]);
+					//TerraFirmaCraft.LOG.error("Error Array garbage data: " + array[x + z * xSize]);
 					return;
 				}
 			}
