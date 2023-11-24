@@ -84,7 +84,7 @@ public class TerraFirmaCraft
 		//Register Tile Entites
 		proxy.registerTileEntities(true);
 		//Register Sound Handler (Client only)
-		proxy.registerSoundHandler();
+		//proxy.registerSoundHandler();
 		//Register Player Render Handler (Client only)
 		proxy.registerPlayerRenderEventHandler();
 

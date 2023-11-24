@@ -299,16 +299,5 @@
       "kitten_meow2",
       "kitten_meow3"
     ]
-  },
-    
-  "music.tfc": {
-    "category": "music",
-    "sounds": [
-      {"name": "music/m0", "stream": true},
-      {"name": "music/m1", "stream": true},
-      {"name": "music/m2", "stream": true},
-      {"name": "music/m3", "stream": true},
-      {"name": "music/m4", "stream": true}
-    ]
   }
 }
