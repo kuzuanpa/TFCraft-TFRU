@@ -105,6 +105,7 @@ public abstract class BlockSandLike extends BlockTerra {
             {
                 BlockCollapsible.tryToFall(world, i, j, k, this);
             }
+            updated=true;
             spreadCollapse(world,x+1,y,z,this,spreadDistance);
             spreadCollapse(world,x-1,y,z,this,spreadDistance);
             spreadCollapse(world,x,y+1,z,this,spreadDistance);
