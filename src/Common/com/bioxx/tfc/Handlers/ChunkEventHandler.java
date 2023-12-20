@@ -3,6 +3,7 @@ package com.bioxx.tfc.Handlers;
 import java.util.List;
 import java.util.Random;
 
+import com.bioxx.tfc.WorldGen.TFCProvider;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.ChunkPosition;
@@ -140,7 +141,7 @@ public class ChunkEventHandler
 	@SubscribeEvent
 	public void onLoadWorld(WorldEvent.Load event)
 	{
-		if(event.world.provider.dimensionId == TFCDimID && event.world.getTotalWorldTime() < 100)
+		if(event.world.provider instanceof TFCProvider && event.world.getTotalWorldTime() < 100)
 			createSpawn(event.world);
 		if(!event.world.isRemote && AnvilManager.getInstance().getRecipeList().size() == 0)
 		{
@@ -233,12 +234,15 @@ public class ChunkEventHandler
 			xCoord += rand.nextInt(16) - rand.nextInt(16);
 			zCoord += rand.nextInt(16) - rand.nextInt(16);
 			++var9;
-			if (var9 == 1000)
+			if (var9 >= 1000)
 				break;
 		}
 
 		WorldInfo info = world.getWorldInfo();
-		info.setSpawnPosition(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
+		//Previous code is completely unusable, because Minecraft pass a readonly WorldInfo (DerivedWorldInfo) there.
+		//info.setSpawnPosition(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
+		//So I save it in TFCProvider and wait for the first player joining the world to write it into worldInfo (same way as /setWorldSpawn),Codes are written in TFCMixin
+		((TFCProvider) world.provider).spawnPoint=new ChunkCoordinates(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
 		if(!info.getNBTTagCompound().hasKey("superseed"))
 			info.getNBTTagCompound().setLong("superseed", System.currentTimeMillis());
 		return new ChunkCoordinates(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);

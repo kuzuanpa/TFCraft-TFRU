@@ -29,7 +29,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
-public class BlockGrass extends BlockTerra
+public class BlockGrass extends BlockSandLike
 {
 	protected int textureOffset;
 
@@ -200,6 +200,7 @@ public class BlockGrass extends BlockTerra
 		if (!world.isRemote)
 		{
 			int meta = world.getBlockMetadata(i, j, k);
+			int randomNum=rand.nextInt(200000);
 			if(world.getBlock(i, j + 1, k) == Blocks.snow && !TFC_Core.isDryGrass(this))
 			{
 				world.setBlock(i, j, k, TFC_Core.getTypeForDryGrassFromSoil(this), meta, 0x2);
@@ -214,7 +215,6 @@ public class BlockGrass extends BlockTerra
 
 				float rain = TFC_Climate.getRainfall(world, i, j + 1, k);
 				float temp = TFC_Climate.getHeightAdjustedTemp(world, i, j+1, k);
-
 				if (TFC_Core.isGrass(this)  && world.getBlock(i, j + 1, k).getMaterial() != Material.water)
 				{
 					int chunkX = (int)Math.floor(i) >> 4;
@@ -225,18 +225,20 @@ public class BlockGrass extends BlockTerra
 						ChunkData data = TFC_Core.getCDM(world).getData(chunkX, chunkZ);
 						if (data == null || data.getSpawnProtectionWithUpdate() <= 234)
 						{
-							if(temp > 20 && !TFC_Core.isDryGrass(this) && world.isAirBlock(i, j + 1, k) )
-							{
-								if (rand.nextInt((int) ((16800-rain)/4)) == 0)
-									world.setBlock(i, j + 1, k, TFCBlocks.tallGrass, (world.rand.nextInt(30) == 0 ? 1 : 0), 0x2); // 1/30 chance to spawn fern	
-								else if (rand.nextInt(15000) == 0)
-									new WorldGenSaplings().generate(world, rand, i, j, k);	
-							}
-							else if (rand.nextInt(20000) == 0 && !WorldGenLooseRocks.rocksNearby(world, i, j, k) && temp < 15)
-								new WorldGenLooseRocks().generateRocks(world, rand, i, j, k);
-							else if (rand.nextInt(20000) == 0 && temp < 15)
-								new WorldGenLooseRocks().generateSticks(world, rand, i, j, k);
 
+							if(randomNum<rain&&temp > 20 && !TFC_Core.isDryGrass(this) && world.isAirBlock(i, j + 1, k) )
+							{
+								if (randomNum>rain+2000)
+									world.setBlock(i, j + 1, k, TFCBlocks.tallGrass, (world.rand.nextInt(30) == 0 ? 1 : 0), 0x2); // 1/30 chance to spawn fern
+								else if (randomNum>2000)
+									new WorldGenSaplings().generate(world, rand, i, j, k);
+							}
+							else if(0==randomNum) {
+							if (!WorldGenLooseRocks.rocksNearby(world, i, j, k) && temp < 15)
+								new WorldGenLooseRocks().generateRocks(world, rand, i, j, k);
+							else if (temp < 15)
+								new WorldGenLooseRocks().generateSticks(world, rand, i, j, k);
+							}
 						}
 						
 					}
@@ -266,7 +268,6 @@ public class BlockGrass extends BlockTerra
 					world.setBlock(i, j, k, TFC_Core.getTypeForGrassFromSoil(this), meta, 2);
 				}
 			}
-
 			world.markBlockForUpdate(i, j, k);
 		}
 	}
@@ -323,6 +324,7 @@ public class BlockGrass extends BlockTerra
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
+		super.onNeighborBlockChange(world, x, y, z, b);
 		if(world.isAirBlock(x, y - 1, z))
 		{
 			int meta = world.getBlockMetadata(x, y, z);

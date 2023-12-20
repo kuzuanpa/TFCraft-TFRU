@@ -24,6 +24,7 @@ public class TFCProvider extends WorldProvider
 {
 	private int moonPhase;
 	private int moonPhaseLastCalculated;
+	public ChunkCoordinates spawnPoint;
 	
 	@Override
 	protected void registerWorldChunkManager()
@@ -48,11 +49,10 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
-		if(worldObj.provider.dimensionId!=TFCDimID)return true;
 		int y = worldObj.getTopSolidOrLiquidBlock(x, z)-1;
 		if(y < Global.SEALEVEL || y > Global.SEALEVEL + 25) return false;
 		Block b = worldObj.getBlock(x, y, z);
-		return TFC_Core.isSand(b) || TFC_Core.isGrass(b);
+		return TFC_Core.isGrass(b);
 	}
 
 	@Override
@@ -206,18 +206,13 @@ public class TFCProvider extends WorldProvider
 	}*/
 
 	@Override
+	public ChunkCoordinates getSpawnPoint(){
+		return spawnPoint;
+	}
+	@Override
 	public String getDimensionName()
 	{
 		return "TerraFirmaCraft";
-	}
-
-	/**
-	 * Gets the hard-coded portal location to use when entering this dimension.
-	 */
-	@Override
-	public ChunkCoordinates getEntrancePortalLocation()
-	{
-		return getSpawnPoint();
 	}
 
 	/*@Override
