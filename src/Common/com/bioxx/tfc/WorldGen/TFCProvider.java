@@ -17,6 +17,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
+import net.minecraft.world.storage.WorldInfo;
 
 import static com.bioxx.tfc.TerraFirmaCraft.TFCDimID;
 
@@ -24,8 +25,7 @@ public class TFCProvider extends WorldProvider
 {
 	private int moonPhase;
 	private int moonPhaseLastCalculated;
-	public ChunkCoordinates spawnPoint;
-	
+
 	@Override
 	protected void registerWorldChunkManager()
 	{
@@ -207,7 +207,8 @@ public class TFCProvider extends WorldProvider
 
 	@Override
 	public ChunkCoordinates getSpawnPoint(){
-		return spawnPoint;
+		WorldInfo info = this.worldObj.getWorldInfo();
+		return new ChunkCoordinates(info.getSpawnX(), info.getSpawnY(), info.getSpawnZ());
 	}
 	@Override
 	public String getDimensionName()

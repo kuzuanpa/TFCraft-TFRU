@@ -239,10 +239,7 @@ public class ChunkEventHandler
 		}
 
 		WorldInfo info = world.getWorldInfo();
-		//Previous code is completely unusable, because Minecraft pass a readonly WorldInfo (DerivedWorldInfo) there.
-		//info.setSpawnPosition(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
-		//So I save it in TFCProvider and wait for the first player joining the world to write it into worldInfo (same way as /setWorldSpawn),Codes are written in TFCMixin
-		((TFCProvider) world.provider).spawnPoint=new ChunkCoordinates(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
+		info.setSpawnPosition(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
 		if(!info.getNBTTagCompound().hasKey("superseed"))
 			info.getNBTTagCompound().setLong("superseed", System.currentTimeMillis());
 		return new ChunkCoordinates(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
