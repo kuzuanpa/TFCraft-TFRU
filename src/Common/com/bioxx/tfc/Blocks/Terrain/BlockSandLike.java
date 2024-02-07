@@ -57,7 +57,6 @@ public abstract class BlockSandLike extends BlockTerra {
 
             if (!canFallOneBelow && count > 2 && !sides.isEmpty())
             {
-                spreadDistance=0;
                 switch (sides.get(random.nextInt(sides.size())))
                 {
                     case 0:

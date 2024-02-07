@@ -2,6 +2,7 @@ package com.bioxx.tfc.Handlers;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.boss.EntityDragonPart;
@@ -19,6 +20,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import org.apache.logging.log4j.Level;
 import vazkii.botania.common.item.equipment.armor.elementium.ItemElementiumArmor;
 import vazkii.botania.common.item.equipment.armor.manasteel.ItemManasteelArmor;
 import vazkii.botania.common.item.equipment.armor.manaweave.ItemManaweaveArmor;
@@ -39,73 +41,67 @@ import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 public class EntityDamageHandler
 {
 	@SubscribeEvent
-	public void onEntityHurt(LivingHurtEvent event)
-	{
+	public void onEntityHurt(LivingHurtEvent event) {
 		EntityLivingBase entity = event.entityLiving;
-		if(entity instanceof EntityPlayer)
-		{
-			float curMaxHealth = (float)((EntityPlayer)entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
-			float newMaxHealth = FoodStatsTFC.getMaxHealth((EntityPlayer)entity);
-			float h = ((EntityPlayer)entity).getHealth();
-			if(newMaxHealth != curMaxHealth)
-				((EntityPlayer)entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(newMaxHealth);
-			if(newMaxHealth < h)
-				((EntityPlayer)entity).setHealth(newMaxHealth);
+		if (entity instanceof EntityPlayer) {
+			float curMaxHealth = (float) ((EntityPlayer) entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
+			float newMaxHealth = FoodStatsTFC.getMaxHealth((EntityPlayer) entity);
+			float h = ((EntityPlayer) entity).getHealth();
+			if (newMaxHealth != curMaxHealth)
+				((EntityPlayer) entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(newMaxHealth);
+			if (newMaxHealth < h)
+				((EntityPlayer) entity).setHealth(newMaxHealth);
 		}
-		if(event.source == DamageSource.onFire)
-		{
-			event.ammount = 50;
-		}
-		else if(event.source == DamageSource.fall)
-		{
+		if (event.source == DamageSource.onFire) {
+			event.ammount = (25+entity.getRNG().nextInt(25));
+		} else if (event.source == DamageSource.inFire) {
+			event.ammount = (35+entity.getRNG().nextInt(15));
+		} else if (event.source == DamageSource.fall) {
 			//float healthMod = TFC_Core.getEntityMaxHealth(entity)/1000f;
 			event.ammount *= 80/*healthMod*/;
-		}
-		else if(event.source == DamageSource.drown)
-		{
+			entity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 5, 1));
+		} else if (event.source == DamageSource.drown) {
 			event.ammount = 50;
-		}
-		else if(event.source == DamageSource.lava)
-		{
-			event.ammount = 100;
-		}
-		else if(event.source == DamageSource.inWall)
-		{
-			event.ammount = 100;
-		}
-		else if(event.source == DamageSource.fallingBlock)
-		{
-			event.ammount = 100;
-		}
-		else if(event.source.isExplosion())
-		{
+		} else if (event.source == DamageSource.lava) {
+			event.ammount = (75+entity.getRNG().nextInt(25));
+		} else if (event.source == DamageSource.inWall) {
+			event.ammount = (80+entity.getRNG().nextInt(20));
+		} else if (event.source == DamageSource.anvil) {
+			event.ammount = applyArmorCalculations(entity, event.source, 400);
+		} else if (event.source == DamageSource.fallingBlock) {
+			event.ammount = (25+entity.getRNG().nextInt(75));
+		} else if (event.source.isExplosion()) {
 			event.ammount *= 30;
-		}
-		else if (event.source == DamageSource.magic || event.source == DamageSource.wither)
-		{
-			if ((entity.getHealth() - 25) > (TFC_Core.getEntityMaxHealth(entity)/10f))
-		{
-			event.ammount = 25;
-		}
-			else
-				event.ammount = (entity.getHealth() - (TFC_Core.getEntityMaxHealth(entity)/10f));
-		}
-		else if ("player".equals(event.source.damageType) || "mob".equals(event.source.damageType) || "arrow".equals(event.source.damageType))
-		{
+		} else if (event.source == DamageSource.magic || event.source == DamageSource.wither) {
+			if ((entity.getHealth() - 25) > (TFC_Core.getEntityMaxHealth(entity) / 10f)) {
+				event.ammount = 25;
+			} else
+				event.ammount = (entity.getHealth() - (TFC_Core.getEntityMaxHealth(entity) / 10f));
+		} else if ("player".equals(event.source.damageType) || "mob".equals(event.source.damageType) || "arrow".equals(event.source.damageType)) {
+			if(event.ammount<25.0f){
+				event.ammount*=50;
+				FMLLog.log(Level.FATAL,"triggered Uniformed damage//"+event.source.damageType.toString()+"/->/"+event.ammount);
+
+			}
 			event.ammount = applyArmorCalculations(entity, event.source, event.ammount);
-			if ("arrow".equals(event.source.damageType))
-			{
-				Entity e = ((EntityDamageSourceIndirect)event.source).getSourceOfDamage();
-				if(e instanceof EntityJavelin)
-				{
-					((EntityJavelin)e).setDamageTaken((short) (((EntityJavelin) e).damageTaken+10));
-					if (((EntityJavelin) e).damageTaken >= ((EntityJavelin) e).pickupItem.getMaxDamage())
-					{
+			if ("arrow".equals(event.source.damageType)) {
+				Entity e = ((EntityDamageSourceIndirect) event.source).getSourceOfDamage();
+				if (e instanceof EntityJavelin) {
+					((EntityJavelin) e).setDamageTaken((short) (((EntityJavelin) e).damageTaken + 10));
+					if (((EntityJavelin) e).damageTaken >= ((EntityJavelin) e).pickupItem.getMaxDamage()) {
 						e.setDead();
 					}
 				}
 			}
+		} else if (event.source.damageType.equals("indirectMagic")&&event.ammount<25){
+			event.ammount*=(25+entity.getRNG().nextInt(25));
+		} else if (event.source.damageType.equals("thrown")&&event.ammount<25){
+			event.ammount*=(25+entity.getRNG().nextInt(25));
 		}
+		else {
+			FMLLog.log(Level.FATAL,event.source.damageType.toString()+"/->/"+event.ammount);
+		}
+
 	}
 
 	protected int applyArmorCalculations(EntityLivingBase entity, DamageSource source, float originalDamage)
@@ -376,16 +372,11 @@ public class EntityDamageHandler
 		{
 			if (!target.hitByEntity(target))
 			{
-				float damageAmount = TFC_MobData.STEVE_DAMAGE;
+				float damageAmount = TFC_MobData.STEVE_DAMAGE+(player.getRNG().nextInt((int) TFC_MobData.STEVE_DAMAGE));
 				if(stack != null)
 				{
-					damageAmount = (float)player.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
-					//player.addChatMessage("Damage: " + i);
-					if(damageAmount == 1.0f)
-					{
-						damageAmount = TFC_MobData.STEVE_DAMAGE;
-						//i = player.inventory.getCurrentItem().getItem().getDamageVsEntity(target, player.inventory.getCurrentItem());
-					}
+					float damageAmount1 = (float)player.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+					if(damageAmount >= 1.0f) damageAmount = damageAmount1;
 				}
 
 				if (player.isPotionActive(Potion.damageBoost))

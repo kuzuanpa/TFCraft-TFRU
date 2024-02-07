@@ -34,6 +34,10 @@ public class BlockCollapsible extends BlockTerraContainer
 	public Block dropBlock;
 	public static boolean fallInstantly;
 
+	public static final long maxBlocksFallPerTick = 1000;
+
+	public static long fallenBlocks = 0;
+
 	protected BlockCollapsible(Material material, Block block)
 	{
 		super(material);
@@ -106,7 +110,7 @@ public class BlockCollapsible extends BlockTerraContainer
 		world.setBlockToAir(x, y, z);
 	}
 
-	/*public Boolean hasNaturalSupport(World world, int x, int y, int z)
+	public Boolean hasNaturalSupport(World world, int x, int y, int z,int range, float chance)
 	{
 		//Make sure that the block beneath the one we're checking is not a solid, if it is then return true and don't waste time here.
 		if(!world.isAirBlock(x, y - 1, z))
@@ -135,35 +139,8 @@ public class BlockCollapsible extends BlockTerraContainer
 			if(world.getBlock(x, y - 1, z - 1).isOpaqueCube() && world.getBlock(x, y - 2, z - 1).isOpaqueCube())
 				return true;
 		}
-
-		//Diagonals
-		if(world.getBlock(x + 1, y, z - 1).isOpaqueCube())
-		{
-			if(world.getBlock(x + 1, y - 1, z - 1).isOpaqueCube())
-				return true;
-		}
-
-		if(world.getBlock(x - 1, y, z - 1).isOpaqueCube())
-		{
-			if(world.getBlock(x - 1, y - 1, z - 1).isOpaqueCube())
-				return true;
-		}
-
-		if(world.getBlock(x + 1, y, z + 1).isOpaqueCube())
-		{
-			if(world.getBlock(x + 1, y - 1, z + 1).isOpaqueCube())
-				return true;
-		}
-
-		if(world.getBlock(x - 1, y, z + 1).isOpaqueCube())
-		{
-			if(world.getBlock(x - 1, y - 1, z + 1).isOpaqueCube())
-				return true;
-		}
-
-
 		return false;
-	}*/
+	}
 
 	public static Boolean isNearSupport(World world, int i, int j, int k, int range, float collapseChance)
 	{
@@ -208,7 +185,7 @@ public class BlockCollapsible extends BlockTerraContainer
 			return false;
 
 		int fallingBlockMeta = drop[1];
-		if (canFallBelow(world, x, y - 1, z) && !isNearSupport(world, x, y, z, 4, collapseChance) && isUnderLoad(world, x, y, z))
+		if (canFallBelow(world, x, y - 1, z)&& !hasNaturalSupport(world, x, y, z, 4, collapseChance) && !isNearSupport(world, x, y, z, 4, collapseChance) && isUnderLoad(world, x, y, z))
 		{
 			if (!world.isRemote && fallingBlock != Blocks.air)
 			{
@@ -262,10 +239,10 @@ public class BlockCollapsible extends BlockTerraContainer
 		{
 
 			int meta = world.getBlockMetadata(x, y, z);
-			if (canFallBelow(world, x, y - 1, z) && y >= 0 && (!isNearSupport(world, x, y, z, 4, 0) || block instanceof BlockSand))
+			if (fallenBlocks<maxBlocksFallPerTick&&canFallBelow(world, x, y - 1, z) && y >= 0 && (!isNearSupport(world, x, y, z, 4, 0) || block instanceof BlockSand))
 			{
 				byte byte0 = 32;
-
+				fallenBlocks++;
 				if (!fallInstantly && world.checkChunksExist(x - byte0, y - byte0, z - byte0, x + byte0, y + byte0, z + byte0))
 				{
 					if (!world.isRemote)

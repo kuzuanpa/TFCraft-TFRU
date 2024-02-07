@@ -9,9 +9,10 @@ buildscript {
             name = "forge"
             url = "https://maven.minecraftforge.net/"
         }
+
     }
     dependencies {
-        classpath ('com.anatawa12.forge:ForgeGradle:1.2-1.0.+') {
+        classpath ('com.anatawa12.forge:ForgeGradle:1.2-1.1.+') {
             changing = true
         }
     }
@@ -37,19 +38,26 @@ allprojects {
 	}
 }
 
+
 repositories {
-    maven { // The repo from which to get waila
-        name "Mobius Repo"
-        url "https://mobiusstrip.eu/maven"
+    maven {
+        name = "gt"
+        url = "https://gregtech.mechaenetia.com/"
     }
     maven { // the repo from which to get NEI and stuff 
         name 'CB Repo'
         url "https://chickenbones.net/maven/"
     }
 }
- 
-dependencies {
+    configurations {
+        shade
+        compile.extendsFrom shade
+    }
+
+    dependencies {
 	// Forcing version numbers for everything and using NO-NEI WAILA since the "transitive dependency resolution (gradle magic)" is currently borked.
+    implementation "thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev"
+
 }
 }
 

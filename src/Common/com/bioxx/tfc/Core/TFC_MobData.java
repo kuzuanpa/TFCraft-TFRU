@@ -3,7 +3,7 @@ package com.bioxx.tfc.Core;
 public class TFC_MobData 
 {
 	//Steve
-	public static final float STEVE_DAMAGE = 10f;
+	public static final float STEVE_DAMAGE = 25.0f;
 
 	//Zombie
 	public static final int ZOMBIE_DAMAGE = 25;

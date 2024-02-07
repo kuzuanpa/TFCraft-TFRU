@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Handlers;
 
+import com.bioxx.tfc.Blocks.Terrain.BlockCollapsible;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
@@ -48,9 +49,9 @@ public class ServerTickHandler
 				}
 			}
 		}
-		/*else if(event.phase == Phase.END)
+		else if(event.phase == Phase.END)
 		{
-		
-		}*/
+			BlockCollapsible.fallenBlocks=0;
+		}
 	}
 }

@@ -49,7 +49,7 @@ public class WorldGenBerryBush extends WorldGenerator
 
 
 		FloraIndex index = FloraManager.getInstance().findMatchingIndex(((BlockBerryBush)TFCBlocks.berryBush).getType(meta));
-		if(world.isAirBlock(i, j, k) && j < 250 && temp > index.minBioTemp && temp < index.maxBioTemp && 
+		if(world.isAirBlock(i, j, k) && (!world.isAirBlock(i, j-1, k)) && j < 250 && temp > index.minBioTemp && temp < index.maxBioTemp &&
 				rain >= index.minRain && rain <= index.maxRain && evt >= index.minEVT && evt <= index.maxEVT)
 		{
 			int cluster = clusterSize + random.nextInt(clusterSize)-(clusterSize/2);
