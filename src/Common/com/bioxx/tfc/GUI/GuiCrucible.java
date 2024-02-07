@@ -56,7 +56,6 @@ public class GuiCrucible extends GuiContainerTFC
 		{
 			if (crucibleTE.currentAlloy.outputAmount == 0)
 			{
-				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE + TFC_Core.translate("gui.empty"), 7, 7, 0x000000);
 				return;
 			}
 			else if (crucibleTE.currentAlloy.outputType != null)

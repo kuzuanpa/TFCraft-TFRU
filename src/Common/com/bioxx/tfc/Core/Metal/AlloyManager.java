@@ -37,19 +37,28 @@ public class AlloyManager
 	
 	public Metal matchesAlloy(List<AlloyMetal> ingred, Alloy.EnumTier furnaceTier)
 	{
-		Iterator<Alloy> iter = alloys.iterator();
 		Alloy match = null;
-		while (iter.hasNext())
-		{
-			match = iter.next();
-			if(furnaceTier.tier >= match.furnaceTier.tier)
-				match = match.matches(ingred);
-			else
-				match = null;
-			
-			if(match != null)
-				return match.outputType;
+		for (Alloy alloy : alloys) {
+			match = alloy;
+			//if(ingred.stream().anyMatch(alloy1-> alloy1.metalType==alloy.outputType)){ingred=reCalculateMetalPercent(ingred,alloy.outputType);}
+			if (furnaceTier.tier >= match.furnaceTier.tier) match = match.matches(ingred);
+			else match = null;
+			if (match != null) return match.outputType;
+		}
+		for (Alloy alloy : alloys) {
+			match = alloy;
+			if(ingred.stream().anyMatch(alloy1-> alloy1.metalType==alloy.outputType)){ingred=reCalculateMetalPercent(ingred,alloy.outputType);}
+			if (furnaceTier.tier >= match.furnaceTier.tier) match = match.matches(ingred);
+			else match = null;
+			if (match != null&&match.alloyIngred.stream().noneMatch(alloy1->alloy1.metalType==alloy.outputType))return match.outputType;
 		}
 		return null;
+	}
+
+	public List<AlloyMetal> reCalculateMetalPercent(List<AlloyMetal> list,Metal alloyToRemove){
+		list.removeIf(alloyMetal -> alloyMetal.metalType==alloyToRemove);
+		double totalAmount = list.stream().mapToDouble(alloy->alloy.metal).sum();
+		list.forEach(alloyMetal -> alloyMetal.metal = (float) (100*alloyMetal.metal/totalAmount));
+		return list;
 	}
 }

@@ -279,30 +279,24 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		return totalAmount;
 	}
 
-	private void updateCurrentAlloy()
+	protected void updateCurrentAlloy()
 	{
 		List<AlloyMetal> a = new ArrayList<AlloyMetal>();
-		Iterator<MetalPair> iter = metals.values().iterator();
 		float totalAmount = getTotalMetal();
-		iter = metals.values().iterator();
-		while(iter.hasNext())
-		{
-			MetalPair m = iter.next();
-			if(m != null)
-				a.add(new AlloyMetal(m.type, (m.amount / totalAmount) * 100f));
+		if(metals.size()>1) {
+			for (MetalPair m : metals.values()) {
+				if (m != null)
+					a.add(new AlloyMetal(m.type, (m.amount / totalAmount) * 100f));
+			}
+			Metal match = AlloyManager.INSTANCE.matchesAlloy(a, Alloy.EnumTier.TierV);
+			if (match != null) currentAlloy = new Alloy(match, totalAmount);
+			else currentAlloy = new Alloy(Global.UNKNOWN, totalAmount);
+		}else if(metals.size()==1){
+			currentAlloy=new Alloy(metals.values().iterator().next().type, totalAmount);
 		}
-
-		Metal match = AlloyManager.INSTANCE.matchesAlloy(a, Alloy.EnumTier.TierV);
-		if(match != null)
-		{
-			currentAlloy = new Alloy(match, totalAmount); 
-			currentAlloy.alloyIngred = a;
-		}
-		else
-		{
-			currentAlloy = new Alloy(Global.UNKNOWN, totalAmount);
-			currentAlloy.alloyIngred = a;
-		}
+		ArrayList<AlloyMetal> list=new ArrayList<>();
+		metals.values().forEach(metalPair -> list.add(new AlloyMetal(metalPair.type, (metalPair.amount / totalAmount) * 100f)));
+		currentAlloy.alloyIngred=list;
 	}
 
 	@Override

@@ -27,10 +27,6 @@ public class MetalRegistry
 
 		hash.put(m.name, m);
 		
-		Alloy alloy = new Alloy(m, soloTier);
-		alloy.addIngred(m, 99, 100);
-		AlloyManager.INSTANCE.addAlloy(alloy);
-		
 		return true;
 	}
 	

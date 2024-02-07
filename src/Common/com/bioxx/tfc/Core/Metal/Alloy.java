@@ -67,44 +67,37 @@ public class Alloy
 		return matches;
 	}
 
-	public Alloy matches(List<AlloyMetal> a)
+	public Alloy matches(List<AlloyMetal> list)
 	{
-		Iterator<AlloyMetal> iter = a.iterator();
 		boolean matches = true;
 		int amount = 0;
+		Iterator<AlloyMetal> iter = list.iterator();
 		while (iter.hasNext() && matches)
 		{
 			AlloyMetal am = iter.next();
 			matches = searchForAlloyMetal(am);
 			amount += am.metal;
 		}
-
-		if(!matches)
-			return null;
-		else
-			return new Alloy(this.outputType, amount);
+		if(matches) return new Alloy(this.outputType, amount);
+		return null;
 	}
+
+
 
 	public boolean searchForAlloyMetal(AlloyMetal am)
 	{
-		Iterator<AlloyMetal> iter = alloyIngred.iterator();
-		while(iter.hasNext())
-		{
-			AlloyMetalCompare amc = (AlloyMetalCompare) iter.next();
-			if(amc.compare(am))
-				return true;
+		for (AlloyMetal alloyMetal : alloyIngred) {
+			AlloyMetalCompare amc = (AlloyMetalCompare) alloyMetal;
+			if (amc.compare(am)) return true;
 		}
 		return false;
 	}
 
 	public float getPercentForMetal(Metal m)
 	{
-		Iterator<AlloyMetal> iter = alloyIngred.iterator();
 		//AlloyMetal am = new AlloyMetal(m, -1);
-		while(iter.hasNext())
-		{
-			AlloyMetal amc = iter.next();
-			if(amc.metalType == m)
+		for (AlloyMetal amc : alloyIngred) {
+			if (amc.metalType == m)
 				return amc.metal;
 		}
 		return 0;
