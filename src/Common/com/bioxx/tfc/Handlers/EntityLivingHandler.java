@@ -1,7 +1,13 @@
 package com.bioxx.tfc.Handlers;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.registry.GameData;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -50,6 +56,7 @@ import com.bioxx.tfc.api.Interfaces.IEquipable;
 import com.bioxx.tfc.api.Interfaces.IEquipable.EquipType;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
+import org.apache.logging.log4j.Level;
 
 public class EntityLivingHandler
 {
@@ -108,6 +115,15 @@ public class EntityLivingHandler
 					player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 20, 1));
 					player.addPotionEffect(new PotionEffect(Potion.weakness.id, 20, 1));
 					player.addPotionEffect(new PotionEffect(2, 20, 1));
+				}
+ 				if (foodstats.getSatisfaction() >24.0f)
+				{
+					player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 20, 0));
+					player.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 20, 1));
+				}
+				if (foodstats.getSatisfaction() >16.0f)
+				{
+					player.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 20, 0));
 				}
 
 				//Scan the players inventory for any items that are too heavy to carry normally

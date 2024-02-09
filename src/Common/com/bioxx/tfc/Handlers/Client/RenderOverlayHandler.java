@@ -16,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 
 import net.minecraftforge.client.GuiIngameForge;
@@ -192,7 +193,7 @@ public class RenderOverlayHandler
 			this.drawTexturedModalRect(mid-91, healthRowHeight, 0, 0, 90, 10);
 			float maxHealth = player.getMaxHealth();
 			float percentHealth = Math.min(player.getHealth() / maxHealth, 1.0f);
-			this.drawTexturedModalRect(mid-91, healthRowHeight, 0, 10, (int) (90*percentHealth), 10);
+			this.drawTexturedModalRect(mid-91, healthRowHeight, player.getActivePotionEffect(Potion.wither)!=null||player.getActivePotionEffect(Potion.poison)!=null?90:0, player.getActivePotionEffect(Potion.wither)!=null?10:player.getActivePotionEffect(Potion.poison)!=null?0:10, (int) (90*percentHealth), 10);
 
 			//Draw Food and Water
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
@@ -214,8 +215,11 @@ public class RenderOverlayHandler
 			}
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-			this.drawTexturedModalRect(mid+1, healthRowHeight, 0, 25, (int) (90*percentFood), 5);
-
+			this.drawTexturedModalRect(mid+1, healthRowHeight, 0, player.getActivePotionEffect(Potion.hunger)!=null?30:25, (int) (90*percentFood), 5);
+			if(foodstats.getSatisfaction()>0){
+				float satisPercent=Math.min(foodstats.getSatisfaction()/24,1);
+				this.drawTexturedModalRect(mid+1, healthRowHeight, 90, 30, (int)(90*satisPercent), 5);
+			}
 			this.drawTexturedModalRect(mid+1, healthRowHeight+5, 90, 20, 90, 5);
 			this.drawTexturedModalRect(mid+1, healthRowHeight+5, 90, 25, (int) (90*percentWater), 5);
 

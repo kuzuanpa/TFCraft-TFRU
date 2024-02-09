@@ -2,6 +2,7 @@ package com.bioxx.tfc.Food;
 
 import java.util.List;
 
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -40,6 +41,7 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Interfaces.IMergeableFood;
 import com.bioxx.tfc.api.Interfaces.ISize;
 import com.bioxx.tfc.api.Util.Helper;
+import org.apache.logging.log4j.Level;
 
 public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMergeableFood
 {
@@ -457,7 +459,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 				float tasteFactor = foodstats.getTasteFactor(is);
 				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount*tasteFactor);
-				foodstats.stomachLevel += eatAmount*tasteFactor;
+				foodstats.setSatisfaction(foodstats.getSatisfaction() + (eatAmount/3.0F * tasteFactor), Food.getFoodGroups(is));
+				foodstats.stomachLevel += eatAmount;
 				if(FoodStatsTFC.reduceFood(is, eatAmount))
 					is.stackSize = 0;
 			}

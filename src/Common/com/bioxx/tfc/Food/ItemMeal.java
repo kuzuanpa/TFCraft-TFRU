@@ -2,6 +2,7 @@ package com.bioxx.tfc.Food;
 
 import java.util.List;
 
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,6 +33,7 @@ import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
+import org.apache.logging.log4j.Level;
 
 public class ItemMeal extends ItemTerra implements IFood
 {
@@ -215,7 +217,8 @@ public class ItemMeal extends ItemTerra implements IFood
 
 				//fill the stomach
 				foodstats.stomachLevel += eatAmount * getFillingBoost();
-				foodstats.setSatisfaction(foodstats.getSatisfaction() + ((eatAmount / 3f) * tasteFactor), fg);
+				foodstats.setSatisfaction(foodstats.getSatisfaction() + (eatAmount * tasteFactor), fg);
+				FMLLog.log(Level.INFO, "Adding "+eatAmount+" nutrition from "+is.getDisplayName()+"//tasteFactor:"+tasteFactor);
 
 				//Now remove the eaten amount from the itemstack.
 				if (FoodStatsTFC.reduceFood(is, eatAmount))

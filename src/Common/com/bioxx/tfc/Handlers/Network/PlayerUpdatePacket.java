@@ -28,6 +28,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 	private float nutrGrain;
 	private float nutrProtein;
 	private float nutrDairy;
+	private float satisLevel;
 	private SkillStats playerSkills;
 	private String skillName;
 	private int skillLevel;
@@ -50,6 +51,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 			this.nutrGrain = fs.nutrGrain;
 			this.nutrProtein = fs.nutrProtein;
 			this.nutrDairy = fs.nutrDairy;
+			this.satisLevel=fs.satisfaction;
 		}
 		else if(this.flag == 2)
 		{
@@ -89,6 +91,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 			buffer.writeFloat(this.nutrGrain);
 			buffer.writeFloat(this.nutrProtein);
 			buffer.writeFloat(this.nutrDairy);
+			buffer.writeFloat(this.satisLevel);
 		}
 		else if(this.flag == 1)
 		{
@@ -123,6 +126,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 			this.nutrGrain = buffer.readFloat();
 			this.nutrProtein = buffer.readFloat();
 			this.nutrDairy = buffer.readFloat();
+			this.satisLevel = buffer.readFloat();
 		}
 		else if(this.flag == 1)
 		{
@@ -166,6 +170,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 			fs.nutrGrain = this.nutrGrain;
 			fs.nutrProtein = this.nutrProtein;
 			fs.nutrDairy = this.nutrDairy;
+			fs.satisfaction = this.satisLevel;
 			TFC_Core.setPlayerFoodStats(player, fs);
 		}
 		else if(this.flag == 1)

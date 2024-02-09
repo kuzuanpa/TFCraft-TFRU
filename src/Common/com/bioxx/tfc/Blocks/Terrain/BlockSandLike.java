@@ -1,8 +1,12 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
 import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -15,6 +19,11 @@ public abstract class BlockSandLike extends BlockTerra {
     }
     public int spreadDistance=0;
     public boolean updated=false;
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack is)
+    {
+        onNeighborBlockChange(world,x, y, z, this);
+    }
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
     {

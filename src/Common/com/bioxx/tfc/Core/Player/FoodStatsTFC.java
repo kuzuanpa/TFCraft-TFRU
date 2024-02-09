@@ -1,10 +1,12 @@
 package com.bioxx.tfc.Core.Player;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import baubles.api.IBauble;
 import baubles.common.container.InventoryBaubles;
 import baubles.common.lib.PlayerHandler;
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +27,7 @@ import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
+import org.apache.logging.log4j.Level;
 import vazkii.botania.common.item.relic.ItemOdinRing;
 
 public class FoodStatsTFC
@@ -50,7 +53,7 @@ public class FoodStatsTFC
 
 	/**This is how full the player is from the food that they've eaten.
 	 * It could also be how happy they are with what they've eaten*/
-	private float satisfaction;
+	public float satisfaction;
 
 	private float foodExhaustionLevel;
 	//private float waterExhaustionLevel;
@@ -345,24 +348,19 @@ public class FoodStatsTFC
 
 	}
 
-	public void setSatisfaction(float par1, int[] fg)
+	public void setSatisfaction(float par1, int[] foodgroup)
 	{
-		this.satisfaction = Math.min(par1, 10);
-		for(int i = 0; i < fg.length; i++)
-		{
-			if(fg[i] != -1)
-			{
-				EnumFoodGroup efg = FoodRegistry.getInstance().getFoodGroup(fg[i]);
-				switch(efg)
-				{
-				case Protein:satProtein = true;break;
-				case Grain:satGrain = true;break;
-				case Fruit:satFruit = true;break;
-				case Vegetable:satVeg = true;break;
-				case Dairy:satDairy = true;break;
-				default:
-					break;
-				}
+		this.satisfaction = Math.min(par1, 30);
+
+		for (int j : foodgroup) {
+			if (j == -1) continue;
+			EnumFoodGroup efg = FoodRegistry.getInstance().getFoodGroup(j);
+			switch (efg) {
+				case Protein: satProtein = true;break;
+				case Grain: satGrain = true;break;
+				case Fruit: satFruit = true;break;
+				case Vegetable: satVeg = true;break;
+				case Dairy: satDairy = true;break;
 			}
 		}
 	}
@@ -386,8 +384,7 @@ public class FoodStatsTFC
 	public int[] getPrefTaste()
 	{
 		Random r = new Random(getPlayerFoodSeed());
-		return new int[]
-				{ 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70) };
+		return new int[]{ 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70) };
 	}
 
 	public float getTasteFactor(ItemStack food)
@@ -395,22 +392,20 @@ public class FoodStatsTFC
 		//Random R = new Random(getPlayerFoodSeed());
 		float tasteFactor = 0.85f;
 		int[] tastePref = getPrefTaste();
-
+		FMLLog.log(Level.INFO, "Taste Pref: " + Arrays.toString(tastePref));
 		tasteFactor += getTasteDistanceFactor(tastePref[0], ((IFood)food.getItem()).getTasteSweet(food));
 		tasteFactor += getTasteDistanceFactor(tastePref[1], ((IFood)food.getItem()).getTasteSour(food));
 		tasteFactor += getTasteDistanceFactor(tastePref[2], ((IFood)food.getItem()).getTasteSalty(food));
 		tasteFactor += getTasteDistanceFactor(tastePref[3], ((IFood)food.getItem()).getTasteBitter(food));
 		tasteFactor += getTasteDistanceFactor(tastePref[4], ((IFood)food.getItem()).getTasteSavory(food));
 
-		return tasteFactor;
+		return Math.max(0,tasteFactor);
 	}
 
-	public float getTasteDistanceFactor(int pref, int val)
+	public float getTasteDistanceFactor(int prefer, int value)
 	{
-		int abs = Math.abs(pref-val);
-		if(abs < 11)
-			return (10-abs)*0.01f;
-		return 0;
+		int abs = Math.abs(prefer-value);
+		return (4-abs)*0.01f;
 	}
 
 	public float getNutritionHealthModifier()

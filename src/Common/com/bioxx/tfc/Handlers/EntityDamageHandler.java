@@ -78,11 +78,6 @@ public class EntityDamageHandler
 			} else
 				event.ammount = (entity.getHealth() - (TFC_Core.getEntityMaxHealth(entity) / 10f));
 		} else if ("player".equals(event.source.damageType) || "mob".equals(event.source.damageType) || "arrow".equals(event.source.damageType)) {
-			if(event.ammount<25.0f){
-				event.ammount*=50;
-				FMLLog.log(Level.FATAL,"triggered Uniformed damage//"+event.source.damageType.toString()+"/->/"+event.ammount);
-
-			}
 			event.ammount = applyArmorCalculations(entity, event.source, event.ammount);
 			if ("arrow".equals(event.source.damageType)) {
 				Entity e = ((EntityDamageSourceIndirect) event.source).getSourceOfDamage();
