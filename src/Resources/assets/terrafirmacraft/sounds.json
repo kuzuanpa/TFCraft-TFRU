@@ -300,7 +300,7 @@
       "kitten_meow3"
     ]
   },
-    
+
   "music.tfc": {
     "category": "music",
     "sounds": [
@@ -308,7 +308,12 @@
       {"name": "music/m1", "stream": true},
       {"name": "music/m2", "stream": true},
       {"name": "music/m3", "stream": true},
-      {"name": "music/m4", "stream": true}
+      {"name": "music/m4", "stream": true},
+      {"name": "music/m5", "stream": true},
+      {"name": "music/m6", "stream": true},
+      {"name": "music/m7", "stream": true},
+      {"name": "music/m8", "stream": true},
+      {"name": "music/m9", "stream": true}
     ]
   }
 }
