@@ -135,7 +135,7 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("oreUranium", new ItemStack(TFCItems.oreChunk, 1, 26)); //Pitchblende
 
 		OreDictionary.registerOre("oreRedstone", new ItemStack(TFCItems.oreChunk, 1, 27)); //Cinnabar
-		OreDictionary.registerOre("oreRedstone", new ItemStack(TFCItems.oreChunk, 1, 28)); //Cryolite
+		OreDictionary.registerOre("oreCryolite", new ItemStack(TFCItems.oreChunk, 1, 28)); //Cryolite
 
 		OreDictionary.registerOre("oreSaltpeter", new ItemStack(TFCItems.oreChunk, 1, 29));
 		OreDictionary.registerOre("oreSerpentine", new ItemStack(TFCItems.oreChunk, 1, 30));

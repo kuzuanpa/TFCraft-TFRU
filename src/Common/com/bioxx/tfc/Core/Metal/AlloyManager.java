@@ -38,13 +38,15 @@ public class AlloyManager
 	public Metal matchesAlloy(List<AlloyMetal> ingred, Alloy.EnumTier furnaceTier)
 	{
 		Alloy match = null;
+		Metal finalMetal = ingred.get(0).metalType;
+		if(ingred.size()==1||ingred.stream().allMatch(metal->metal.metalType==finalMetal))return ingred.get(0).metalType;
 		for (Alloy alloy : alloys) {
 			match = alloy;
-			//if(ingred.stream().anyMatch(alloy1-> alloy1.metalType==alloy.outputType)){ingred=reCalculateMetalPercent(ingred,alloy.outputType);}
 			if (furnaceTier.tier >= match.furnaceTier.tier) match = match.matches(ingred);
 			else match = null;
 			if (match != null) return match.outputType;
 		}
+		//If we can't find any alloy, try to remove this alloy and search again
 		for (Alloy alloy : alloys) {
 			match = alloy;
 			if(ingred.stream().anyMatch(alloy1-> alloy1.metalType==alloy.outputType)){ingred=reCalculateMetalPercent(ingred,alloy.outputType);}
