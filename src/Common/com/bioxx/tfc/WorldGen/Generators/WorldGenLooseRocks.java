@@ -31,37 +31,36 @@ public class WorldGenLooseRocks implements IWorldGenerator
 
 	public boolean generateRocks(World world, Random random, int i, int j, int k)
 	{
-		if ((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j + 1, k) == TFCBlocks.tallGrass) && 
-				(world.getBlock(i, j, k).getMaterial() == Material.grass || world.getBlock(i, j, k).getMaterial() == Material.rock) && world.getBlock(i, j, k).isOpaqueCube())
+		if (!((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j + 1, k) == TFCBlocks.tallGrass) &&
+				(world.getBlock(i, j, k).getMaterial() == Material.grass || world.getBlock(i, j, k).getMaterial() == Material.rock) && world.getBlock(i, j, k).isOpaqueCube()))return false;
+
+
+		if(world.setBlock(i, j+1, k, TFCBlocks.worldItem, 0, 2))
 		{
-			if(world.setBlock(i, j+1, k, TFCBlocks.worldItem, 0, 2))
+			TEWorldItem te =(TEWorldItem)world.getTileEntity(i, j + 1, k);
+			ItemStack sample = getCoreSample(world, i, j, k);
+			if(world.rand.nextInt(3) == 0 && sample != null)
 			{
-				TEWorldItem te =(TEWorldItem)world.getTileEntity(i, j + 1, k);
-				ItemStack sample = getCoreSample(world, i, j, k);
-				if(world.rand.nextInt(3) == 0 && sample != null)
-				{
-					te.storage[0] = sample;
-				}
-				else
-				{
-					DataLayer dl = TFC_Climate.getRockLayer(world, i, j, k, 0);
-					//BlockMeta rockLayer = new BlockMeta(dl.block, dl.data2);
-					te.storage[0] = new ItemStack(TFCItems.looseRock, 1, dl.data1);
-				}
+				te.storage[0] = sample;
 			}
-		}
+			else
+			{
+				DataLayer dl = TFC_Climate.getRockLayer(world, i, j, k, 0);
+				//BlockMeta rockLayer = new BlockMeta(dl.block, dl.data2);
+				te.storage[0] = new ItemStack(TFCItems.looseRock, 1, dl.data1);
+			}		}
+
 		return true;
 	}
-
 	private ItemStack getCoreSample(World world, int xCoord, int yCoord, int zCoord)
 	{
 		ArrayList<Item> coreSample = new ArrayList<Item>();
 		ArrayList<ItemStack> coreSampleStacks = new ArrayList<ItemStack>();
-		for (int x = -15; x < 16; x++)
+		for (int x = -15; x < 16; x+=2)
 		{
-			for (int z = -15; z < 16; z++)
+			for (int z = -15; z < 16; z+=2)
 			{
-				for(int y = yCoord; y > yCoord-35; y--)
+				for(int y = yCoord-4; y > yCoord-35; y-=2)
 				{
 					// Metal
 					if (world.blockExists(xCoord + x, y, zCoord + z) && world.getBlock(xCoord + x, y, zCoord + z) == TFCBlocks.ore)
@@ -108,8 +107,8 @@ public class WorldGenLooseRocks implements IWorldGenerator
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
-			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
-	{		if(!(world.provider instanceof TFCProvider))return;
+			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+		if(!(world.provider instanceof TFCProvider))return;
 
 		chunkX *= 16;
 		chunkZ *= 16;

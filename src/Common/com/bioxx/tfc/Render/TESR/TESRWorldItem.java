@@ -55,9 +55,7 @@ public class TESRWorldItem extends TESRBase
 					this.bindTexture(TextureMap.locationItemsTexture);
 				}
 
-				boolean fancy = RenderManager.instance.options.fancyGraphics;
-				//RenderManager.instance.options.fancyGraphics = true;
-				GL11.glPushMatrix(); //start
+				GL11.glPushMatrix();
 
 				if(RenderManager.instance.options.fancyGraphics)
 				{
@@ -80,7 +78,6 @@ public class TESRWorldItem extends TESRBase
 					tessellator.draw();
 				}
 				GL11.glPopMatrix(); //end
-				RenderManager.instance.options.fancyGraphics = fancy;
 			}
 		}
 	}

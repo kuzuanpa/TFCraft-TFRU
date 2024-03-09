@@ -85,7 +85,7 @@ public class WorldGenOre implements IWorldGenerator
 	private void oreLargeVein(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOreVein(block, meta ,baseRocks,
-				/*rarity*/rarity,/*veinSize*/60,/*veinAmt*/45,/*height*/20,/*diameter*/80,/*vDensity*/vDensity,/*hDensity*/hDensity,
+				/*rarity*/rarity,/*veinSize*/45,/*veinAmt*/45,/*height*/20,/*diameter*/80,/*vDensity*/vDensity,/*hDensity*/hDensity,
  worldObj, random, chunkX, chunkZ, min, max);
 	}
 
@@ -99,14 +99,14 @@ public class WorldGenOre implements IWorldGenerator
 	private void oreMedium(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOre(block, meta ,baseRocks,
-				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/40,/*height*/10,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,
+				/*rarity*/rarity,/*veinSize*/25,/*veinAmt*/40,/*height*/10,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,
  worldObj, random, chunkX, chunkZ, min, max);
 	}
 
 	private void oreLarge(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOre(block, meta ,baseRocks,
-				/*rarity*/rarity,/*veinSize*/60,/*veinAmt*/40,/*height*/5,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,
+				/*rarity*/rarity,/*veinSize*/45,/*veinAmt*/40,/*height*/5,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,
  worldObj, random, chunkX, chunkZ, min, max);
 	}
 

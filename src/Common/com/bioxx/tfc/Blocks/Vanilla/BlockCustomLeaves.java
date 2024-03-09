@@ -82,28 +82,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 		entity.motionZ *= 0.1D;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
-	{
-		Block block = world.getBlock(x, y, z);
-		/*if(!Minecraft.isFancyGraphicsEnabled() && block == this) 
-			return false;*/
-		if (side == 0 && this.minY > 0.0D)
-			return true;
-		else if (side == 1 && this.maxY < 1.0D)
-			return true;
-		else if (side == 2 && this.minZ > 0.0D)
-			return true;
-		else if (side == 3 && this.maxZ < 1.0D)
-			return true;
-		else if (side == 4 && this.minX > 0.0D)
-			return true;
-		else if (side == 5 && this.maxX < 1.0D)
-			return true;
-		else
-			return !block.isOpaqueCube();
-	}
+
 
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand)

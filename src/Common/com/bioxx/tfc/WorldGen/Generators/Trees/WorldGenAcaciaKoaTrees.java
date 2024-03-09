@@ -56,6 +56,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	{
 		super(par1);
 		treeId = id;
+
 	}
 
 	/**

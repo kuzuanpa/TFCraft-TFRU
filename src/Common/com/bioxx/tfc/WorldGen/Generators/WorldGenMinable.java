@@ -49,7 +49,7 @@ public class WorldGenMinable extends WorldGenerator
 	//private int mineGen = 1;
 	//private int subMineGen = 1;
 	private final int rarity;
-	private final int veinSi;
+	private final int veinSize;
 	private final int veinAm;
 	private final int height;
 	private int mineHeight = 2;
@@ -76,7 +76,7 @@ public class WorldGenMinable extends WorldGenerator
 		this.genInBlock = layerBlock;
 		this.genInBlockMeta = layerMeta;
 		this.rarity = rarity;
-		this.veinSi = veinSize;
+		this.veinSize = veinSize;
 		this.veinAm = veinAmount;
 		this.height = height;
 		this.diameter = diameter;
@@ -106,9 +106,9 @@ public class WorldGenMinable extends WorldGenerator
 			int posY = temp2;
 			int posZ = z + temp3;
 			if (!useMarcoVeins)
-				bODgenerate(worldObj, rand, posX, posY, posZ, veinSi); // generate based on values
+				bODgenerate(worldObj, rand, posX, posY, posZ, veinSize); // generate based on values
 			else
-				bODgenerateVein(worldObj, rand, posX, posY, posZ, veinSi);
+				bODgenerateVein(worldObj, rand, posX, posY, posZ, veinSize);
 		}
 	}
 

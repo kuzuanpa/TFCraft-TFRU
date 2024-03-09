@@ -167,8 +167,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return (world.getFullBlockLightValue(x, y, z) >= 8 || 
-				world.canBlockSeeTheSky(x, y, z)) && 
+		return (world.canBlockSeeTheSky(x, y, z)) &&
 				this.canThisPlantGrowOnThisBlock(world.getBlock(x, y - 1, z));
 	}
 

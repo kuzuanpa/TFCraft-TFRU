@@ -90,7 +90,7 @@ public class BlockFungi extends BlockMushroom
 		if (y >= 0 && y < 256)
 		{
 			Block var5 = world.getBlock(x, y - 1, z);
-			return var5 == Blocks.mycelium || world.getFullBlockLightValue(x, y, z) < 13 && this.canThisPlantGrowOnThisBlock(var5);
+			return var5 == Blocks.mycelium || !world.canBlockSeeTheSky(x,y,z) && this.canThisPlantGrowOnThisBlock(var5);
 		}
 		else
 		{
