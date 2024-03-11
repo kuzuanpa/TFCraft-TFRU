@@ -56,9 +56,15 @@ repositories {
 
     dependencies {
 	// Forcing version numbers for everything and using NO-NEI WAILA since the "transitive dependency resolution (gradle magic)" is currently borked.
-    implementation "thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev"
+        implementation "thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev"
+        implementation "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev"
+        implementation "codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev"
+        implementation "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
+        implementation "mcp.mobius.waila:Waila:1.5.10_1.7.10:dev"
+        implementation "com.azanor.baubles:Baubles:1.7.10-1.0.1.10:deobf"
 
-}
+
+    }
 }
 
 sourceSets {
