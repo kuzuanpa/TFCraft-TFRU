@@ -3,6 +3,7 @@ package com.bioxx.tfc.Entities;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.bioxx.tfc.Blocks.Terrain.BlockStone;
 import io.netty.buffer.ByteBuf;
 
 import net.minecraft.block.Block;
@@ -230,7 +231,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 		if (canDestroy(b) && (b.isAir(world, x, y, z) || 
 				!b.isOpaqueCube() && !b.renderAsNormalBlock() && !worldObj.isSideSolid(x, y, z, ForgeDirection.UP)))
 			return TFC_Core.setBlockWithDrops(worldObj, x, y, z, getBlock(), this.blockMeta);
-		else if (b instanceof BlockOre && TFCOptions.enableCaveInsDestroyOre)
+		else if (b instanceof BlockOre && (this.block instanceof BlockStone||this.block instanceof BlockCobble) && TFCOptions.enableCaveInsDestroyOre)
 			return world.setBlockToAir(x, y, z);
 		return false;
 	}
