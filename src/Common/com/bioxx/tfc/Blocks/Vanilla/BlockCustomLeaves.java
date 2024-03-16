@@ -6,6 +6,8 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -58,6 +60,14 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
+	{
+		if(Minecraft.isFancyGraphicsEnabled()) return true;
+		else return super.shouldSideBeRendered(world, x, y, z, side);
+	}
+
+	@Override
 	public boolean getBlocksMovement(IBlockAccess bAccess, int x, int y, int z)
 	{
 		return true;
@@ -78,16 +88,18 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
 	{
-		entity.motionX *= 0.1D;
-		entity.motionZ *= 0.1D;
-	}
+		int rand = new Random().nextInt(7);
 
+		entity.motionX *= (0.2D+0.1D*rand);
+		entity.motionZ *= (0.2D+0.1D*rand);
+	}
+	int a=0,b=200;
 
 
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
-		onNeighborBlockChange(world, x, y, z, null);
+		if(rand.nextInt(100)==1)onNeighborBlockChange(world, x, y, z, null);
 	}
 
 	@Override
@@ -204,16 +216,9 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 
 			if (res < 0)
 			{
-				if(world.getChunkFromBlockCoords(xOrig, zOrig) != null)
-					recursionCount += 1;
-					if(recursionCount<=recursionLimit){
-						this.destroyLeaves(world, xOrig, yOrig, zOrig);
-					}
-					else{
-						TerraFirmaCraft.LOG.warn(new StringBuilder().append("*** Recursion Limit " + recursionLimit + " REACHED***").toString());
-						this.beginLeavesDecay(world,  xOrig, yOrig, zOrig);
-					}
-					recursionCount -= 1;
+				if(world.getChunkFromBlockCoords(xOrig, zOrig) != null) recursionCount += 1;
+				if(recursionCount>recursionLimit) this.beginLeavesDecay(world,  xOrig, yOrig, zOrig);
+				recursionCount -= 1;
 			}
 		}
 	}
