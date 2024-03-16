@@ -2,7 +2,6 @@ package com.bioxx.tfc.api;
 
 import java.util.Random;
 
-import gregapi.item.ItemBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;

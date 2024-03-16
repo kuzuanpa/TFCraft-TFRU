@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.Stack;
 
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.FMLLaunchHandler;
 import eu.usrv.yamcore.auxiliary.FluidHelper;
 import gregapi.data.FL;
@@ -965,7 +966,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.oatGround), 1f), new FluidStack(TFCFluids.FRESHWATER, 4), ItemFoodTFC.createTag(new ItemStack(TFCItems.oatDough), 1f),new FluidStack(TFCFluids.FRESHWATER,2),0).setSealedRecipe(false).setRemovesLiquid(true).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatGround), 1f), new FluidStack(TFCFluids.FRESHWATER, 4), ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatDough), 1f),new FluidStack(TFCFluids.FRESHWATER,2),0).setSealedRecipe(false).setRemovesLiquid(true).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.powder, 1, 4), new FluidStack(TFCFluids.FRESHWATER, 1000), new ItemStack(Item.getItemFromBlock(TFCBlocks.ice)), null).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(OP.dust.mat(MT.Ash,1), new FluidStack(TFCFluids.FRESHWATER, 5000), null, FL.make("basepotashliquor",5000)).setMinTechLevel(0));
+        if(Loader.isModLoaded("gregtech"))		BarrelManager.getInstance().addRecipe(new BarrelRecipe(OP.dust.mat(MT.Ash,1), new FluidStack(TFCFluids.FRESHWATER, 5000), null, FL.make("basepotashliquor",5000)).setMinTechLevel(0));
 
 		// 5000mb / 160oz = 31.25
 		// 10000mb / 160oz = 62.5

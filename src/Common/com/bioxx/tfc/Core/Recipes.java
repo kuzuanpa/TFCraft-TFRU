@@ -3,6 +3,7 @@ package com.bioxx.tfc.Core;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.common.Loader;
 import eu.usrv.yamcore.auxiliary.ItemDescriptor;
 import gregapi.block.multitileentity.MultiTileEntityRegistry;
 import gregapi.data.MT;
@@ -1607,35 +1608,39 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.silverIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.oilLamp, 1, 3)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.sterlingSilverIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.oilLamp, 1, 4)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.blueSteelIngot), null,"oillamp", AnvilReq.BLUESTEEL, new ItemStack(TFCBlocks.oilLamp, 1, 5)));
-		if (MultiTileEntityRegistry.getRegistry("ktfru.multitileentity")!=null)manager.addRecipe(new AnvilRecipe(MultiTileEntityRegistry.getRegistry("ktfru.multitileentity").getItem(32762,1), OP.plate.mat(MT.Bronze,1),"casing", AnvilReq.COPPER, OP.casingMachine.mat(MT.Bronze,1)));
-
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronSheet2x), new ItemStack(TFCItems.wroughtIronSheet2x),"hopper", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.hopper, 1, 0)));
 		if(new ItemDescriptor("advancedRocketry","sawBlade").getItemStack(1)!=null)manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronSheet2x),new ItemStack(TFCItems.wroughtIronSheet2x),"axe",AnvilReq.STEEL,new ItemDescriptor("advancedRocketry","sawBlade").getItemStack(1)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronSheet),new ItemStack(TFCItems.wroughtIronSheet),"trapdoor",AnvilReq.BRONZE,new ItemStack(Items.iron_door,1)));
-		manager.addRecipe(new AnvilRecipe(OP.plateTriple.mat(MT.Fe,1),OP.plateTriple.mat(MT.Fe,1),"bucket",AnvilReq.BRONZE,new ItemStack(Items.cauldron,1)));
-		manager.addRecipe(new AnvilRecipe(OP.plateTriple.mat(MT.WroughtIron,1),OP.plateTriple.mat(MT.WroughtIron,1),"bucket",AnvilReq.BRONZE,new ItemStack(Items.cauldron,1)));
 		if(new ItemDescriptor("forestry","sturdyMachine").getItemStack(1)!=null)manager.addRecipe(new AnvilRecipe(OP.plateTriple.mat(MT.Bronze,1),OP.plateTriple.mat(MT.Bronze,1),"sturdyMachine",AnvilReq.COPPER,new ItemDescriptor("forestry","sturdyMachine").getItemStack(1)));
 
+
+		if(Loader.isModLoaded("gregtech")) {
+		if (MultiTileEntityRegistry.getRegistry("ktfru.multitileentity") != null) manager.addRecipe(new AnvilRecipe(MultiTileEntityRegistry.getRegistry("ktfru.multitileentity").getItem(32762, 1), OP.plate.mat(MT.Bronze, 1), "casing", AnvilReq.COPPER, OP.casingMachine.mat(MT.Bronze, 1)));
+
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronSheet2x), new ItemStack(TFCItems.wroughtIronSheet2x), "hopper", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.hopper, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronSheet), new ItemStack(TFCItems.wroughtIronSheet), "trapdoor", AnvilReq.BRONZE, new ItemStack(Items.iron_door, 1)));
+		manager.addRecipe(new AnvilRecipe(OP.plateTriple.mat(MT.Fe, 1), OP.plateTriple.mat(MT.Fe, 1), "bucket", AnvilReq.BRONZE, new ItemStack(Items.cauldron, 1)));
+		manager.addRecipe(new AnvilRecipe(OP.plateTriple.mat(MT.WroughtIron, 1), OP.plateTriple.mat(MT.WroughtIron, 1), "bucket", AnvilReq.BRONZE, new ItemStack(Items.cauldron, 1)));
+
 		//GT Items
-		for(OreDictMaterial mat:new OreDictMaterial[]{MT.Pb,MT.Steel,MT.Cu,MT.WroughtIron,MT.Bronze,MT.Bi,MT.BlackBronze,MT.BismuthBronze,MT.Cupronickel,MT.Ni,MT.Sn,MT.Au,MT.Brass,MT.Electrum,MT.Ag,MT.RoseGold,MT.SterlingSilver,MT.Invar,MT.Ge,MT.Co,MT.AluminiumBrass,MT.Al,MT.TinAlloy,MT.Fe}){
-			AnvilReq req =getAnvilReqFromMaterial(mat);
-			manager.addRecipe(new AnvilRecipe(OP.ingotDouble.mat(mat,1), null, "plate", req, OP.plate.mat(mat,1)));
-			manager.addRecipe(new AnvilRecipe(OP.plateQuadruple.mat(mat,1), OP.plateQuadruple.mat(mat,1), "casing", req, OP.casingMachine.mat(mat,1)));
-		    manager.addRecipe(new AnvilRecipe(OP.casingMachine.mat(mat,1),OP.casingMachine.mat(mat,1), "robustcasing", req, OP.casingMachineDouble.mat(mat,1)));
-			manager.addRecipe(new AnvilRecipe(OP.casingMachineDouble.mat(mat,1), OP.casingMachineDouble.mat(mat,1), "reinforcedcasing", req, OP.casingMachineQuadruple.mat(mat,1)));
-		    manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat,1), null, "ring", req, OP.ring.mat(mat,1)));
-		    manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat,1), null, "casingsmall", req, OP.casingSmall.mat(mat,1)));
-		    manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat,1), OP.stick.mat(mat,1), "gear", req, OP.gearGtSmall.mat(mat,1)));
-		    manager.addRecipe(new AnvilRecipe(OP.plateQuadruple.mat(mat,1), OP.stickLong.mat(mat,1), "gear", req, OP.gearGt.mat(mat,1)));
-		    manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat,1),null, "foil", req, OP.foil.mat(mat,2)));
-		    manager.addRecipe(new AnvilRecipe(OP.stickLong.mat(mat,1),null, "spring", req, OP.spring.mat(mat,1)));
-		    manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat,1),null, "springsmall", req, OP.springSmall.mat(mat,2)));
-		    manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat,1),null, "platecurved", req, OP.plateCurved.mat(mat,1)));
-		    manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat,1),OP.stick.mat(mat,1), "chain", req, OP.chain.mat(mat,1)));
-			manager.addWeldRecipe(new AnvilRecipe(OP.plate.mat(mat,1),OP.plate.mat(mat,1),req,OP.plateDouble.mat(mat,1)));
-			manager.addWeldRecipe(new AnvilRecipe(OP.ingot.mat(mat,1),OP.ingot.mat(mat,1),req,OP.ingotDouble.mat(mat,1)));
-			manager.addWeldRecipe(new AnvilRecipe(OP.stick.mat(mat,1),OP.stick.mat(mat,1),req,OP.stickLong.mat(mat,1)));
+		for (OreDictMaterial mat : new OreDictMaterial[]{MT.Pb, MT.Steel, MT.Cu, MT.WroughtIron, MT.Bronze, MT.Bi, MT.BlackBronze, MT.BismuthBronze, MT.Cupronickel, MT.Ni, MT.Sn, MT.Au, MT.Brass, MT.Electrum, MT.Ag, MT.RoseGold, MT.SterlingSilver, MT.Invar, MT.Ge, MT.Co, MT.AluminiumBrass, MT.Al, MT.TinAlloy, MT.Fe}) {
+			AnvilReq req = getAnvilReqFromMaterial(mat);
+			manager.addRecipe(new AnvilRecipe(OP.ingotDouble.mat(mat, 1), null, "plate", req, OP.plate.mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.plateQuadruple.mat(mat, 1), OP.plateQuadruple.mat(mat, 1), "casing", req, OP.casingMachine.mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.casingMachine.mat(mat, 1), OP.casingMachine.mat(mat, 1), "robustcasing", req, OP.casingMachineDouble.mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.casingMachineDouble.mat(mat, 1), OP.casingMachineDouble.mat(mat, 1), "reinforcedcasing", req, OP.casingMachineQuadruple.mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat, 1), null, "ring", req, OP.ring.mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat, 1), null, "casingsmall", req, OP.casingSmall.mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat, 1), OP.stick.mat(mat, 1), "gear", req, OP.gearGtSmall.mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.plateQuadruple.mat(mat, 1), OP.stickLong.mat(mat, 1), "gear", req, OP.gearGt.mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat, 1), null, "foil", req, OP.foil.mat(mat, 2)));
+			manager.addRecipe(new AnvilRecipe(OP.stickLong.mat(mat, 1), null, "spring", req, OP.spring.mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat, 1), null, "springsmall", req, OP.springSmall.mat(mat, 2)));
+			manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat, 1), null, "platecurved", req, OP.plateCurved.mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat, 1), OP.stick.mat(mat, 1), "chain", req, OP.chain.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.plate.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateDouble.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.ingot.mat(mat, 1), OP.ingot.mat(mat, 1), req, OP.ingotDouble.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.stick.mat(mat, 1), OP.stick.mat(mat, 1), req, OP.stickLong.mat(mat, 1)));
 		}
+	}
 	}
 
 	private static AnvilReq getAnvilReqFromMaterial(OreDictMaterial mat){
