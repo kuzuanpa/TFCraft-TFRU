@@ -514,6 +514,10 @@ public class TEForge extends TEFireEntity implements IInventory
 						fireItemStacks[c].stackSize = 1;
 				}
 			}
+			if(fireItemStacks[5]!=null&&fireItemStacks[5].stackSize<= 0)fireItemStacks[5]=null;
+			if(fireItemStacks[6]!=null&&fireItemStacks[6].stackSize<= 0)fireItemStacks[6]=null;
+			if(fireItemStacks[7]!=null&&fireItemStacks[7].stackSize<= 0)fireItemStacks[7]=null;
+			if(fireItemStacks[8]!=null&&fireItemStacks[8].stackSize<= 0)fireItemStacks[8]=null;
 		}
 	}
 
