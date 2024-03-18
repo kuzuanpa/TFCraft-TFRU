@@ -1636,8 +1636,21 @@ public class Recipes
 			manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat, 1), null, "springsmall", req, OP.springSmall.mat(mat, 2)));
 			manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat, 1), null, "platecurved", req, OP.plateCurved.mat(mat, 1)));
 			manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat, 1), OP.stick.mat(mat, 1), "chain", req, OP.chain.mat(mat, 1)));
+
 			manager.addWeldRecipe(new AnvilRecipe(OP.plate.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateDouble.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.plateDouble.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateTriple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.plateTriple.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateQuadruple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.plateQuadruple.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateQuintuple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.plateDouble.mat(mat, 1), OP.plateDouble.mat(mat, 1), req, OP.plateQuadruple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.plateTriple.mat(mat, 1), OP.plateDouble.mat(mat, 1), req, OP.plateQuintuple.mat(mat, 1)));
+
 			manager.addWeldRecipe(new AnvilRecipe(OP.ingot.mat(mat, 1), OP.ingot.mat(mat, 1), req, OP.ingotDouble.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.ingotDouble.mat(mat, 1), OP.ingot.mat(mat, 1), req, OP.ingotTriple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.ingotTriple.mat(mat, 1), OP.ingot.mat(mat, 1), req, OP.ingotQuadruple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.ingotQuadruple.mat(mat, 1), OP.ingot.mat(mat, 1), req, OP.ingotQuintuple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.ingotDouble.mat(mat, 1), OP.ingotDouble.mat(mat, 1), req, OP.ingotQuadruple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilRecipe(OP.ingotTriple.mat(mat, 1), OP.ingotDouble.mat(mat, 1), req, OP.ingotQuintuple.mat(mat, 1)));
+
 			manager.addWeldRecipe(new AnvilRecipe(OP.stick.mat(mat, 1), OP.stick.mat(mat, 1), req, OP.stickLong.mat(mat, 1)));
 		}
 	}
