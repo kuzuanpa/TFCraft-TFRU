@@ -139,16 +139,13 @@ public class HeatIndex
 
 	public boolean matches(ItemStack is)
 	{
-		if(is != null)
-		{
-			boolean b = is.getItem().getHasSubtypes();
-			if(is.getItem() != input.getItem())
-				return false;
-			else if (b &&input.getItemDamage() != 32767 &&
-						is.getItemDamage() != input.getItemDamage())
-				return false;
-		}
-		else return false;
+		if(is == null||input==null)return false;
+
+		boolean b = is.getItem().getHasSubtypes();
+		if((is.getItem() != input.getItem()))
+			return false;
+		else if (b &&input.getItemDamage() != 32767 && is.getItemDamage() != input.getItemDamage())
+			return false;
 		return true;
 	}
 }
