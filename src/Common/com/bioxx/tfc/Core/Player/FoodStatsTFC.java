@@ -12,6 +12,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 
@@ -91,11 +92,9 @@ public class FoodStatsTFC
 			BodyTempStats bodyTemp = TFC_Core.getBodyTempStats(player);
 			float temp = TFC_Climate.getHeightAdjustedTemp(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 
-			float tempWaterMod = temp;
-			if(tempWaterMod >= 25)
-				tempWaterMod = (tempWaterMod-25)*0.2f;
-			else
-				tempWaterMod = 0;
+			float tempWaterMod=0;
+			if(temp >= 25)
+				tempWaterMod = (temp-25)*0.2f;
 
 			/*
 			 * Standard filling reduction based upon time.
@@ -167,33 +166,34 @@ public class FoodStatsTFC
 			}
 
 			//Heal or hurt the player based on hunger.
-			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.HOUR_LENGTH/2)
+			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.HOUR_LENGTH/4)
 			{
-				this.foodHealTimer += TFC_Time.HOUR_LENGTH/2;
+				this.foodHealTimer += TFC_Time.HOUR_LENGTH/4;
 
 				if (this.stomachLevel >= this.getMaxStomach(player)/4 && player.shouldHeal())
 				{
 					//Player heals 1% per 30 in game minutes
 					player.heal((int) (player.getMaxHealth() * 0.01f));
 				}
-				/*else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.85f && !TFC_Core.isPlayerInDebugMode(player) && player.getSleepTimer() == 0)
+				else if (this.stomachLevel <= 0 && getNutritionHealthModifier() <= 0.05f && player.worldObj.difficultySetting.getDifficultyId() > 0)
 				{
-					//Players loses health at a rate of 5% per 30 minutes if they are starving
-					//Disabled so that the penalty for not eating is now entirely based upon nutrition.
-					//player.attackEntityFrom(DamageSource.starve, Math.max((int) (player.getMaxHealth() * 0.05f), 10));
-				}*/
+					//Players loses health when no nutrition and no food in stomach, starve to death when difficulty is hard
+					if(player.worldObj.difficultySetting.getDifficultyId()==3||player.getHealth()>100)player.attackEntityFrom(DamageSource.starve, player.getRNG().nextInt(16)+4);
+				}
 			}
 
 			if (!player.capabilities.isCreativeMode && updateStats)
 			{
 				for(;waterTimer < TFC_Time.getTotalTicks();  waterTimer++)
 				{
-					/**Reduce the player's water for normal living*/
+					/*Reduce the player's water for normal living*/
 					waterLevel -= 1+(tempWaterMod/2);
 					if(waterLevel < 0)
 						waterLevel = 0;
-					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 35)
-						player.attackEntityFrom(new DamageSource("heatStroke").setDamageBypassesArmor().setDamageIsAbsolute(), 2);
+					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0) {
+						if(temp > 35) player.attackEntityFrom(new DamageSource("heatStroke").setDamageBypassesArmor().setDamageIsAbsolute(), 4);
+						else if(temp > 15 && player.getRNG().nextInt(10)==0)player.attackEntityFrom(new DamageSource("thirst").setDamageBypassesArmor().setDamageIsAbsolute(), 1);
+					}
 				}
 			}
 		}
