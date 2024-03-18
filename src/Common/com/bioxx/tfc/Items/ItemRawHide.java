@@ -42,20 +42,7 @@ public class ItemRawHide extends ItemLooseRock
 	{
 		if(!world.isRemote)
 		{
-			if(itemstack.getItem() == TFCItems.hide && itemstack.getItemDamage() >= 2){
-				int d = (int) ((45 + (entityplayer.rotationYaw % 360 + 360f) % 360) / 90) % 4; //direction
-				int x2 = x + (d == 1 ? -1 : d == 3 ? 1 : 0); // the x-coord of the second block
-				int z2 = z + (d == 2 ? -1 : d == 0 ? 1 : 0);
-				if(world.getBlock(x, y, z)==TFCBlocks.thatch && side == 1 && world.getBlock(x2,y,z2)==TFCBlocks.thatch
-						&& world.isAirBlock(x, y+1, z) && world.isAirBlock(x2, y+1, z2)){
-					world.func_147480_a/*destroyBlock*/(x, y, z, false);
-					world.func_147480_a/*destroyBlock*/(x2, y, z2, false);
-					world.setBlock(x, y, z, TFCBlocks.strawHideBed, d, 2);
-					world.setBlock(x2, y, z2, TFCBlocks.strawHideBed, d+8, 2);
-					itemstack.stackSize--;
-				}
-			}
-			else if(itemstack.getItem() == TFCItems.soakedHide && side != ForgeDirection.DOWN.ordinal())
+			if(itemstack.getItem() == TFCItems.soakedHide && side != ForgeDirection.DOWN.ordinal())
 			{
 				if((world.getBlock(x, y, z) instanceof BlockLogHoriz || world.getBlock(x, y, z) instanceof BlockLogVert) && world.isAirBlock( x, y + 1, z ) && world.setBlock(x, y+1, z, TFCBlocks.leatherRack))
 				{
