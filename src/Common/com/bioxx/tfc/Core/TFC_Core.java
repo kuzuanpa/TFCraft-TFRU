@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import com.bioxx.tfc.Blocks.Terrain.BlockBuilding;
+import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
+import com.bioxx.tfc.Blocks.Terrain.BlockDirt;
+import com.bioxx.tfc.Blocks.Terrain.BlockStone;
 import com.bioxx.tfc.TileEntities.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
@@ -59,6 +63,8 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Interfaces.IFood;
+
+import javax.annotation.Nullable;
 
 public class TFC_Core
 {
@@ -542,21 +548,61 @@ public class TFC_Core
 	{
 		return isDirt(block) || isGravel(block) || isSand(block) || isGrassNormal(block) || isDryGrass(block);
 	}
+	@Nullable
+	public static Block getSmoothStoneFromStone(Block inBlock){
+		if(inBlock == TFCBlocks.stoneIgIn) 	return TFCBlocks.stoneIgInSmooth;
+		else if(inBlock == TFCBlocks.stoneIgEx) 	return TFCBlocks.stoneIgExSmooth;
+		else if(inBlock == TFCBlocks.stoneSed) 	return TFCBlocks.stoneSedSmooth;
+		else if(inBlock == TFCBlocks.stoneMM) 	return TFCBlocks.stoneMMSmooth;
+		return null;
+	}
 
+	@Nullable
+	public static Block getStoneBrickFromStone(Block inBlock){
+		if(inBlock == TFCBlocks.stoneIgIn)	return TFCBlocks.stoneIgInBrick;
+		else if(inBlock == TFCBlocks.stoneIgEx) return TFCBlocks.stoneIgExBrick;
+		else if(inBlock == TFCBlocks.stoneSed) return TFCBlocks.stoneSedBrick;
+		else if(inBlock == TFCBlocks.stoneMM) 	return TFCBlocks.stoneMMBrick;
+		return null;
+	}
+
+	@Nullable
+	public static Block getCobbleFromStone(Block blockStone){
+		if(blockStone == TFCBlocks.stoneIgIn) return TFCBlocks.stoneIgInCobble;
+		else if(blockStone == TFCBlocks.stoneIgEx) return TFCBlocks.stoneIgExCobble;
+		else if(blockStone == TFCBlocks.stoneSed) return TFCBlocks.stoneSedCobble;
+		else if(blockStone == TFCBlocks.stoneMM)return TFCBlocks.stoneMMCobble;
+		return null;
+	}
+	@Nullable
+	public static BlockBuilding getBuildingStoneFromStone(Block blockStone){
+		if(blockStone == TFCBlocks.stoneIgIn) return TFCBlocks.buildingBlocksStoneIgEx;
+		 else if(blockStone == TFCBlocks.stoneIgEx) return TFCBlocks.buildingBlocksStoneIgEx;
+		 else if(blockStone == TFCBlocks.stoneSed) return TFCBlocks.buildingBlocksStoneSed;
+		 else if(blockStone == TFCBlocks.stoneMM) return TFCBlocks.buildingBlocksStoneMM;
+		return null;
+	}
+
+	@Nullable
+	public static BlockBuilding getBuildingCobbleFromStone(Block blockStone){
+		if(blockStone == TFCBlocks.stoneIgIn) return TFCBlocks.buildingBlocksCobbleIgIn;
+		else if(blockStone == TFCBlocks.stoneIgEx) return TFCBlocks.buildingBlocksCobbleIgEx;
+		else if(blockStone == TFCBlocks.stoneSed) return TFCBlocks.buildingBlocksCobbleSed;
+		else if(blockStone == TFCBlocks.stoneMM) return TFCBlocks.buildingBlocksCobbleMM;
+		return null;
+	}
+	@Nullable
+	public static BlockBuilding getBuildingDirtFromStone(Block blockDirt){
+		if(blockDirt == TFCBlocks.dirt) return TFCBlocks.buildingBlocksDirt0;
+		else if(blockDirt == TFCBlocks.dirt2) return TFCBlocks.buildingBlocksDirt1;
+		return null;
+	}
 	public static int getSoilMetaFromStone(Block inBlock, int inMeta)
 	{
-		if(inBlock == TFCBlocks.stoneIgIn)
-			return inMeta;
-		else if(inBlock == TFCBlocks.stoneSed)
-			return inMeta+3;
-		else if(inBlock == TFCBlocks.stoneIgEx)
-			return inMeta+11;
-		else
-		{
-			if (inMeta == 0)
-				return inMeta + 15;
-			return inMeta-1;
-		}
+		if(inBlock == TFCBlocks.stoneIgIn) return inMeta;
+		else if(inBlock == TFCBlocks.stoneSed) return inMeta+3;
+		else if(inBlock == TFCBlocks.stoneIgEx) return inMeta+11;
+		else return  inMeta == 0?inMeta + 15:inMeta + 1;
 	}
 
 	public static int getSoilMeta( int inMeta)
@@ -566,16 +612,11 @@ public class TFC_Core
 
 	public static int getItemMetaFromStone(Block inBlock, int inMeta)
 	{
-		if(inBlock == TFCBlocks.stoneIgIn)
-			return inMeta;
-		else if(inBlock == TFCBlocks.stoneSed)
-			return inMeta+3;
-		else if(inBlock == TFCBlocks.stoneIgEx)
-			return inMeta+11;
-		else if(inBlock == TFCBlocks.stoneMM)
-			return inMeta+15;
-		else
-			return 0;
+		if(inBlock == TFCBlocks.stoneIgIn) return inMeta;
+		else if(inBlock == TFCBlocks.stoneSed) return inMeta+3;
+		else if(inBlock == TFCBlocks.stoneIgEx) return inMeta+11;
+		else if(inBlock == TFCBlocks.stoneMM) return inMeta+15;
+		return 0;
 	}
 
 	public static Block getTypeForGrassWithRain(int inMeta, float rain)

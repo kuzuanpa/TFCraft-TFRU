@@ -34,6 +34,16 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(stoneIgExCobble, ItemStone.class, "StoneIgExCobble");
 		GameRegistry.registerBlock(stoneSedCobble, ItemStone.class, "StoneSedCobble");
 		GameRegistry.registerBlock(stoneMMCobble, ItemStone.class, "StoneMMCobble");
+		GameRegistry.registerBlock(buildingBlocksStoneMM, ItemTerraBlock.class, "buildingBlocksStoneMM");
+		GameRegistry.registerBlock(buildingBlocksStoneSed, ItemTerraBlock.class, "buildingBlocksStoneSed");
+		GameRegistry.registerBlock(buildingBlocksStoneIgIn, ItemTerraBlock.class, "buildingBlocksStoneIgIn");
+		GameRegistry.registerBlock(buildingBlocksStoneIgEx, ItemTerraBlock.class, "buildingBlocksStoneIgEx");
+		GameRegistry.registerBlock(buildingBlocksCobbleMM,  ItemTerraBlock.class, "buildingBlocksCobbleMM");
+		GameRegistry.registerBlock(buildingBlocksCobbleSed, ItemTerraBlock.class, "buildingBlocksCobbleSed");
+		GameRegistry.registerBlock(buildingBlocksCobbleIgIn, ItemTerraBlock.class, "buildingBlocksCobbleIgIn");
+		GameRegistry.registerBlock(buildingBlocksCobbleIgEx, ItemTerraBlock.class, "buildingBlocksCobbleIgEx");
+		GameRegistry.registerBlock(buildingBlocksDirt0, ItemTerraBlock.class, "buildingBlocksDirt0");
+		GameRegistry.registerBlock(buildingBlocksDirt1, ItemTerraBlock.class, "buildingBlocksDirt1");
 		GameRegistry.registerBlock(stoneIgInSmooth, ItemStone.class, "StoneIgInSmooth");
 		GameRegistry.registerBlock(stoneIgExSmooth, ItemStone.class, "StoneIgExSmooth");
 		GameRegistry.registerBlock(stoneSedSmooth, ItemStone.class, "StoneSedSmooth");
@@ -199,6 +209,82 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(oilLamp, ItemOilLamp.class, "OilLamp");
 		GameRegistry.registerBlock(hopper, "Hopper");
 		GameRegistry.registerBlock(flowerPot, "FlowerPot");
+
+		buildingBlocksStoneMM.addBlock(stoneMM,0);
+		buildingBlocksStoneMM.addBlock(stoneMM,1);
+		buildingBlocksStoneMM.addBlock(stoneMM,2);
+		buildingBlocksStoneMM.addBlock(stoneMM,3);
+		buildingBlocksStoneMM.addBlock(stoneMM,4);
+		buildingBlocksStoneMM.addBlock(stoneMM,5);
+
+		buildingBlocksStoneSed.addBlock(stoneSed,0);
+		buildingBlocksStoneSed.addBlock(stoneSed,1);
+		buildingBlocksStoneSed.addBlock(stoneSed,2);
+		buildingBlocksStoneSed.addBlock(stoneSed,3);
+		buildingBlocksStoneSed.addBlock(stoneSed,4);
+		buildingBlocksStoneSed.addBlock(stoneSed,5);
+		buildingBlocksStoneSed.addBlock(stoneSed,6);
+		buildingBlocksStoneSed.addBlock(stoneSed,7);
+
+		buildingBlocksStoneIgEx.addBlock(stoneIgEx,0);
+		buildingBlocksStoneIgEx.addBlock(stoneIgEx,1);
+		buildingBlocksStoneIgEx.addBlock(stoneIgEx,2);
+		buildingBlocksStoneIgEx.addBlock(stoneIgEx,3);
+
+		buildingBlocksStoneIgIn.addBlock(stoneIgIn,0);
+		buildingBlocksStoneIgIn.addBlock(stoneIgIn,1);
+		buildingBlocksStoneIgIn.addBlock(stoneIgIn,2);
+
+
+		buildingBlocksCobbleMM.addBlock(stoneMMCobble,0);
+		buildingBlocksCobbleMM.addBlock(stoneMMCobble,1);
+		buildingBlocksCobbleMM.addBlock(stoneMMCobble,2);
+		buildingBlocksCobbleMM.addBlock(stoneMMCobble,3);
+		buildingBlocksCobbleMM.addBlock(stoneMMCobble,4);
+		buildingBlocksCobbleMM.addBlock(stoneMMCobble,5);
+
+		buildingBlocksCobbleSed.addBlock(stoneSedCobble,0);
+		buildingBlocksCobbleSed.addBlock(stoneSedCobble,1);
+		buildingBlocksCobbleSed.addBlock(stoneSedCobble,2);
+		buildingBlocksCobbleSed.addBlock(stoneSedCobble,3);
+		buildingBlocksCobbleSed.addBlock(stoneSedCobble,4);
+		buildingBlocksCobbleSed.addBlock(stoneSedCobble,5);
+		buildingBlocksCobbleSed.addBlock(stoneSedCobble,6);
+		buildingBlocksCobbleSed.addBlock(stoneSedCobble,7);
+
+		buildingBlocksCobbleIgEx.addBlock(stoneIgExCobble,0);
+		buildingBlocksCobbleIgEx.addBlock(stoneIgExCobble,1);
+		buildingBlocksCobbleIgEx.addBlock(stoneIgExCobble,2);
+		buildingBlocksCobbleIgEx.addBlock(stoneIgExCobble,3);
+
+		buildingBlocksCobbleIgIn.addBlock(stoneIgInCobble,0);
+		buildingBlocksCobbleIgIn.addBlock(stoneIgInCobble,1);
+		buildingBlocksCobbleIgIn.addBlock(stoneIgInCobble,2);
+
+		buildingBlocksDirt0.addBlock(dirt,0);
+		buildingBlocksDirt0.addBlock(dirt,1);
+		buildingBlocksDirt0.addBlock(dirt,2);
+		buildingBlocksDirt0.addBlock(dirt,3);
+		buildingBlocksDirt0.addBlock(dirt,4);
+		buildingBlocksDirt0.addBlock(dirt,5);
+		buildingBlocksDirt0.addBlock(dirt,6);
+		buildingBlocksDirt0.addBlock(dirt,7);
+		buildingBlocksDirt0.addBlock(dirt,8);
+		buildingBlocksDirt0.addBlock(dirt,9);
+		buildingBlocksDirt0.addBlock(dirt,10);
+		buildingBlocksDirt0.addBlock(dirt,11);
+		buildingBlocksDirt0.addBlock(dirt,12);
+		buildingBlocksDirt0.addBlock(dirt,13);
+		buildingBlocksDirt0.addBlock(dirt,14);
+		buildingBlocksDirt0.addBlock(dirt,15);
+
+		buildingBlocksDirt1.addBlock(dirt2,0);
+		buildingBlocksDirt1.addBlock(dirt2,1);
+		buildingBlocksDirt1.addBlock(dirt2,2);
+		buildingBlocksDirt1.addBlock(dirt2,3);
+		buildingBlocksDirt1.addBlock(dirt2,4);
+
+
 	}
 
 	public static void loadBlocks()
@@ -265,6 +351,17 @@ public class BlockSetup extends TFCBlocks
 		stoneIgEx = new BlockIgEx(Material.rock).setHardness(4F).setBlockName("IgExRock");
 		stoneIgExSmooth = new BlockIgExSmooth().setHardness(8F).setBlockName("IgExRockSmooth");
 		stoneIgExBrick = new BlockIgExBrick().setHardness(8F).setBlockName("IgExRockBrick");
+
+		buildingBlocksStoneMM    = new BlockBuilding(Material.rock,4.0F,"buildingBlocksStoneMM");
+		buildingBlocksStoneIgEx  = new BlockBuilding(Material.rock,4.0F,"buildingBlocksStoneIgEx");
+		buildingBlocksStoneIgIn  = new BlockBuilding(Material.rock,4.0F,"buildingBlocksStoneIgIn");
+		buildingBlocksStoneSed   = new BlockBuilding(Material.rock,4.0F,"buildingBlocksStoneSed");
+		buildingBlocksCobbleMM   = new BlockBuilding(Material.rock,4.0F,"buildingBlocksCobbleMM");
+		buildingBlocksCobbleIgEx = new BlockBuilding(Material.rock,4.0F,"buildingBlocksCobbleIgEx");
+		buildingBlocksCobbleIgIn = new BlockBuilding(Material.rock,4.0F,"buildingBlocksCobbleIgIn");
+		buildingBlocksCobbleSed  = new BlockBuilding(Material.rock,4.0F,"buildingBlocksCobbleSed");
+		buildingBlocksDirt0 = new BlockBuilding(Material.ground,3.0F,"buildingBlocksDirt0");
+		buildingBlocksDirt1 = new BlockBuilding(Material.ground,3.0F,"buildingBlocksDirt1");
 
 		stoneMMCobble = new BlockMMCobble(Material.rock).setHardness(7.5F).setBlockName("MMRockCobble");
 		stoneMM = new BlockMM(Material.rock).setHardness(4F).setBlockName("MMRock");
@@ -489,6 +586,7 @@ public class BlockSetup extends TFCBlocks
 		woodHoriz4.setHarvestLevel("hammer", 1);
 		woodVert.setHarvestLevel("hammer", 1);
 		woodVert2.setHarvestLevel("hammer", 1);
+
 	}
 
 	public static void setupFire()

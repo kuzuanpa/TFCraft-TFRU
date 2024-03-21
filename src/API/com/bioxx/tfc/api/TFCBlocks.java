@@ -1,5 +1,6 @@
 package com.bioxx.tfc.api;
 
+import com.bioxx.tfc.Blocks.Terrain.BlockBuilding;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 
@@ -73,6 +74,17 @@ public class TFCBlocks
 	public static Block stoneIgExCobble;
 	public static Block stoneSedCobble;
 	public static Block stoneMMCobble;
+	public static BlockBuilding buildingBlocksStoneMM;
+	public static BlockBuilding buildingBlocksStoneIgEx;
+	public static BlockBuilding buildingBlocksStoneIgIn;
+	public static BlockBuilding buildingBlocksStoneSed;
+	public static BlockBuilding buildingBlocksCobbleMM;
+	public static BlockBuilding buildingBlocksCobbleIgEx;
+	public static BlockBuilding buildingBlocksCobbleIgIn;
+	public static BlockBuilding buildingBlocksCobbleSed;
+
+	public static BlockBuilding buildingBlocksDirt0;
+	public static BlockBuilding buildingBlocksDirt1;
 	public static Block stoneIgInBrick;
 	public static Block stoneIgExBrick;
 	public static Block stoneSedBrick;

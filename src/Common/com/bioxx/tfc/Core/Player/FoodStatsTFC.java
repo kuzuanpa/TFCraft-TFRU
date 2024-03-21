@@ -7,6 +7,7 @@ import baubles.api.IBauble;
 import baubles.common.container.InventoryBaubles;
 import baubles.common.lib.PlayerHandler;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Loader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -424,7 +425,7 @@ public class FoodStatsTFC
 
 		return (int)(Math.min(1000+(player.experienceLevel * TFCOptions.healthGainRate),
 				TFCOptions.healthGainCap) * TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier())
-				* (ItemOdinRing.getOdinRing(player) !=null?2:1);
+				* ((Loader.isModLoaded("Botania")&&ItemOdinRing.getOdinRing(player) !=null)?2:1);
 	}
 
 	/**
