@@ -39,7 +39,7 @@ public class ItemSandwich extends ItemMeal
 	protected float getEatAmount(FoodStatsTFC fs, float amount)
 	{
 		float eatAmount = Math.min(amount, 10);
-		float stomachDiff = fs.stomachLevel+eatAmount-fs.getMaxStomach(fs.player);
+		float stomachDiff = fs.getFoodLevel()+eatAmount-fs.getMaxStomach(fs.player);
 		if(stomachDiff > 0)
 			eatAmount-=stomachDiff;
 		return eatAmount;

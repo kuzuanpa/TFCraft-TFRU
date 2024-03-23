@@ -549,7 +549,7 @@ public class TFC_Core
 		return isDirt(block) || isGravel(block) || isSand(block) || isGrassNormal(block) || isDryGrass(block);
 	}
 	@Nullable
-	public static Block getSmoothStoneFromStone(Block inBlock){
+	public static Block getSmoothStone(Block inBlock){
 		if(inBlock == TFCBlocks.stoneIgIn) 	return TFCBlocks.stoneIgInSmooth;
 		else if(inBlock == TFCBlocks.stoneIgEx) 	return TFCBlocks.stoneIgExSmooth;
 		else if(inBlock == TFCBlocks.stoneSed) 	return TFCBlocks.stoneSedSmooth;
@@ -558,7 +558,7 @@ public class TFC_Core
 	}
 
 	@Nullable
-	public static Block getStoneBrickFromStone(Block inBlock){
+	public static Block getStoneBrick(Block inBlock){
 		if(inBlock == TFCBlocks.stoneIgIn)	return TFCBlocks.stoneIgInBrick;
 		else if(inBlock == TFCBlocks.stoneIgEx) return TFCBlocks.stoneIgExBrick;
 		else if(inBlock == TFCBlocks.stoneSed) return TFCBlocks.stoneSedBrick;
@@ -567,7 +567,7 @@ public class TFC_Core
 	}
 
 	@Nullable
-	public static Block getCobbleFromStone(Block blockStone){
+	public static Block getCobble(Block blockStone){
 		if(blockStone == TFCBlocks.stoneIgIn) return TFCBlocks.stoneIgInCobble;
 		else if(blockStone == TFCBlocks.stoneIgEx) return TFCBlocks.stoneIgExCobble;
 		else if(blockStone == TFCBlocks.stoneSed) return TFCBlocks.stoneSedCobble;
@@ -575,7 +575,39 @@ public class TFC_Core
 		return null;
 	}
 	@Nullable
-	public static BlockBuilding getBuildingStoneFromStone(Block blockStone){
+	public static Block getBrickWall(Block blockStone){
+		if(blockStone == TFCBlocks.stoneIgIn) return TFCBlocks.wallBrickIgIn;
+		else if(blockStone == TFCBlocks.stoneIgEx) return TFCBlocks.wallBrickIgEx;
+		else if(blockStone == TFCBlocks.stoneSed) return TFCBlocks.wallBrickSed;
+		else if(blockStone == TFCBlocks.stoneMM)return TFCBlocks.wallBrickMM;
+		return null;
+	}
+	@Nullable
+	public static Block getSmoothWall(Block blockStone){
+		if(blockStone == TFCBlocks.stoneIgIn) return TFCBlocks.wallSmoothIgIn;
+		else if(blockStone == TFCBlocks.stoneIgEx) return TFCBlocks.wallSmoothIgEx;
+		else if(blockStone == TFCBlocks.stoneSed) return TFCBlocks.wallSmoothSed;
+		else if(blockStone == TFCBlocks.stoneMM)return TFCBlocks.wallSmoothMM;
+		return null;
+	}
+	@Nullable
+	public static Block getRawWall(Block blockStone){
+		if(blockStone == TFCBlocks.stoneIgIn) return TFCBlocks.wallSmoothIgIn;
+		else if(blockStone == TFCBlocks.stoneIgEx) return TFCBlocks.wallSmoothIgEx;
+		else if(blockStone == TFCBlocks.stoneSed) return TFCBlocks.wallSmoothSed;
+		else if(blockStone == TFCBlocks.stoneMM)return TFCBlocks.wallSmoothMM;
+		return null;
+	}
+	@Nullable
+	public static Block getCobbleWall(Block blockStone){
+		if(blockStone == TFCBlocks.stoneIgIn) return TFCBlocks.wallCobbleIgIn;
+		else if(blockStone == TFCBlocks.stoneIgEx) return TFCBlocks.wallCobbleIgEx;
+		else if(blockStone == TFCBlocks.stoneSed) return TFCBlocks.wallCobbleSed;
+		else if(blockStone == TFCBlocks.stoneMM)return TFCBlocks.wallCobbleMM;
+		return null;
+	}
+	@Nullable
+	public static BlockBuilding getBuildingStone(Block blockStone){
 		if(blockStone == TFCBlocks.stoneIgIn) return TFCBlocks.buildingBlocksStoneIgEx;
 		 else if(blockStone == TFCBlocks.stoneIgEx) return TFCBlocks.buildingBlocksStoneIgEx;
 		 else if(blockStone == TFCBlocks.stoneSed) return TFCBlocks.buildingBlocksStoneSed;
@@ -584,7 +616,7 @@ public class TFC_Core
 	}
 
 	@Nullable
-	public static BlockBuilding getBuildingCobbleFromStone(Block blockStone){
+	public static BlockBuilding getBuildingCobble(Block blockStone){
 		if(blockStone == TFCBlocks.stoneIgIn) return TFCBlocks.buildingBlocksCobbleIgIn;
 		else if(blockStone == TFCBlocks.stoneIgEx) return TFCBlocks.buildingBlocksCobbleIgEx;
 		else if(blockStone == TFCBlocks.stoneSed) return TFCBlocks.buildingBlocksCobbleSed;
@@ -592,7 +624,7 @@ public class TFC_Core
 		return null;
 	}
 	@Nullable
-	public static BlockBuilding getBuildingDirtFromStone(Block blockDirt){
+	public static BlockBuilding getBuildingDirt(Block blockDirt){
 		if(blockDirt == TFCBlocks.dirt) return TFCBlocks.buildingBlocksDirt0;
 		else if(blockDirt == TFCBlocks.dirt2) return TFCBlocks.buildingBlocksDirt1;
 		return null;

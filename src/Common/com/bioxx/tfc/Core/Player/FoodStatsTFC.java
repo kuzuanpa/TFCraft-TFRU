@@ -37,9 +37,10 @@ public class FoodStatsTFC
 	private boolean updateStats = !TFCOptions.enableDebugMode; // Replace with true to allow stat depleting with debug mode enabled
 
 	/** The player's food level. This measures how much food the player can handle.*/
-	public float stomachLevel = 24;
-	private final float stomachMax = 24.0f;
-	private float prevFoodLevel = 24;
+	public float stomachLevel = 20;
+	public float stomachLevelModifier = 0.0F;
+	private final float stomachMax = 20.0f;
+	private float prevFoodLevel = 20;
 
 	private final ResourceLocation drunkBlur = new ResourceLocation("shaders/post/blur.json");
 	private final ResourceLocation wastedBlur = new ResourceLocation("shaders/post/blur.json");//new ResourceLocation("shaders/post/blurPhosphor.json");
@@ -82,13 +83,15 @@ public class FoodStatsTFC
 		foodTimer = Math.max(TFC_Time.getTotalTicks(),TFC_Time.startTime);
 		foodHealTimer = Math.max(TFC_Time.getTotalTicks(),TFC_Time.startTime);
 	}
-
+	public void addFoodLevel(float amount){
+		stomachLevelModifier+=amount;
+	}
 	/**
 	 * Handles the food game logic.
 	 */
 	public void onUpdate(EntityPlayer player)
 	{
-		if(!player.worldObj.isRemote)
+		if(!player.worldObj.isRemote&&player.isEntityAlive()&&!player.capabilities.isCreativeMode)
 		{
 			BodyTempStats bodyTemp = TFC_Core.getBodyTempStats(player);
 			float temp = TFC_Climate.getHeightAdjustedTemp(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
@@ -106,8 +109,12 @@ public class FoodStatsTFC
 				this.foodHealTimer = TFC_Time.startTime;
 				this.waterTimer = TFC_Time.startTime;
 			}
+			//Sync vanilla hunger values
+			this.stomachLevel += (player.getFoodStats().getFoodLevel() - this.stomachLevel)/6F;
 
-			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.HOUR_LENGTH && !player.capabilities.isCreativeMode && updateStats)
+			if(stomachLevelModifier!=0)this.stomachLevel = (float)Math.ceil(Math.min(stomachMax,Math.max(stomachLevel + stomachLevelModifier,0)));
+			stomachLevelModifier = 0;
+			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.HOUR_LENGTH && updateStats)
 			{
 				this.foodTimer += TFC_Time.HOUR_LENGTH;
 				float drainMult = 1.0f;
@@ -127,7 +134,6 @@ public class FoodStatsTFC
 				{
 					satisfaction -= hunger;
 					hunger = 0;
-					foodExhaustionLevel = 0;
 				}
 				else
 				{
@@ -165,7 +171,9 @@ public class FoodStatsTFC
 				}
 				sendUpdate = true;
 			}
-
+			FMLLog.log(Level.ERROR, stomachLevel+"");
+			//Sync vanilla hunger values
+			player.getFoodStats().addStats((int) (this.stomachLevel - player.getFoodStats().getFoodLevel()), 0.0F);
 			//Heal or hurt the player based on hunger.
 			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.HOUR_LENGTH/4)
 			{
@@ -278,6 +286,7 @@ public class FoodStatsTFC
 			NBTTagCompound foodCompound = par1NBTTagCompound.getCompoundTag("foodCompound");
 			this.waterLevel = foodCompound.getFloat("waterLevel");
 			this.stomachLevel = foodCompound.getFloat("foodLevel");
+			this.stomachLevelModifier = foodCompound.getFloat("foodLevelModifier");
 			this.foodTimer = foodCompound.getLong("foodTickTimer");
 			this.foodHealTimer = foodCompound.getLong("foodHealTimer");
 			this.waterTimer = foodCompound.getLong("waterTimer");
@@ -306,6 +315,7 @@ public class FoodStatsTFC
 		NBTTagCompound foodNBT = new NBTTagCompound();
 		foodNBT.setFloat("waterLevel", this.waterLevel);
 		foodNBT.setFloat("foodLevel", this.stomachLevel);
+		foodNBT.setFloat("foodLevelModifier", this.stomachLevelModifier);
 		foodNBT.setLong("foodTickTimer", this.foodTimer);
 		foodNBT.setLong("foodHealTimer", this.foodHealTimer);
 		foodNBT.setLong("waterTimer", this.waterTimer);
@@ -393,7 +403,6 @@ public class FoodStatsTFC
 		//Random R = new Random(getPlayerFoodSeed());
 		float tasteFactor = 0.85f;
 		int[] tastePref = getPrefTaste();
-		FMLLog.log(Level.INFO, "Taste Pref: " + Arrays.toString(tastePref));
 		tasteFactor += getTasteDistanceFactor(tastePref[0], ((IFood)food.getItem()).getTasteSweet(food));
 		tasteFactor += getTasteDistanceFactor(tastePref[1], ((IFood)food.getItem()).getTasteSour(food));
 		tasteFactor += getTasteDistanceFactor(tastePref[2], ((IFood)food.getItem()).getTasteSalty(food));

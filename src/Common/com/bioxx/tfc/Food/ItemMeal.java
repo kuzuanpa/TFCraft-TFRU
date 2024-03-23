@@ -180,7 +180,7 @@ public class ItemMeal extends ItemTerra implements IFood
 	protected float getEatAmount(FoodStatsTFC fs, float amount)
 	{
 		float eatAmount = Math.min(amount, 5);
-		float stomachDiff = fs.stomachLevel+eatAmount-fs.getMaxStomach(fs.player);
+		float stomachDiff = fs.getFoodLevel()+eatAmount-fs.getMaxStomach(fs.player);
 		if(stomachDiff > 0)
 			eatAmount-=stomachDiff;
 		return eatAmount;
@@ -216,9 +216,8 @@ public class ItemMeal extends ItemTerra implements IFood
 				}
 
 				//fill the stomach
-				foodstats.stomachLevel += eatAmount * getFillingBoost();
+				foodstats.addFoodLevel(eatAmount * getFillingBoost());
 				foodstats.setSatisfaction(foodstats.getSatisfaction() + (eatAmount * tasteFactor), fg);
-				FMLLog.log(Level.INFO, "Adding "+eatAmount+" nutrition from "+is.getDisplayName()+"//tasteFactor:"+tasteFactor);
 
 				//Now remove the eaten amount from the itemstack.
 				if (FoodStatsTFC.reduceFood(is, eatAmount))

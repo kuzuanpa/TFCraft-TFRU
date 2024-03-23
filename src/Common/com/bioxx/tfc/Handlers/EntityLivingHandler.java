@@ -86,7 +86,7 @@ public class EntityLivingHandler
 
 
 				//Nullify the Old Food
-				player.getFoodStats().addStats(20 - player.getFoodStats().getFoodLevel(), 0.0F);
+				//player.getFoodStats().addStats(20 - player.getFoodStats().getFoodLevel(), 0.0F);
 				//Handle Food
 				FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 				foodstats.onUpdate(player);
@@ -110,7 +110,7 @@ public class EntityLivingHandler
 				{
 					setThirsty(player, false);
 				}
-				if (foodstats.stomachLevel / foodstats.getMaxStomach(player) <= 0.25f)
+				if (foodstats.getFoodLevel() / foodstats.getMaxStomach(player) <= 0.25f)
 				{
 					player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 20, 1));
 					player.addPotionEffect(new PotionEffect(Potion.weakness.id, 20, 1));
