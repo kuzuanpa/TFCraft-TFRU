@@ -39,7 +39,7 @@ public class FoodStatsTFC
 	/** The player's food level. This measures how much food the player can handle.*/
 	public float stomachLevel = 20;
 	public float stomachLevelModifier = 0.0F;
-	private final float stomachMax = 20.0f;
+	private final float stomachMax = 20.0f, vanillaPositiveRate=0.4F,vanillaNegativeRate=0.2F;
 	private float prevFoodLevel = 20;
 
 	private final ResourceLocation drunkBlur = new ResourceLocation("shaders/post/blur.json");
@@ -110,9 +110,10 @@ public class FoodStatsTFC
 				this.waterTimer = TFC_Time.startTime;
 			}
 			//Sync vanilla hunger values
-			this.stomachLevel += (player.getFoodStats().getFoodLevel() - this.stomachLevel)/6F;
-
-			if(stomachLevelModifier!=0)this.stomachLevel = (float)Math.ceil(Math.min(stomachMax,Math.max(stomachLevel + stomachLevelModifier,0)));
+			int vanillaHungerDelta = (int)(player.getFoodStats().getFoodLevel() - this.stomachLevel);
+			if(vanillaHungerDelta>=1)stomachLevelModifier+= vanillaHungerDelta*vanillaPositiveRate;
+			else if(vanillaHungerDelta<=-1) stomachLevelModifier += vanillaHungerDelta*vanillaNegativeRate;
+			if(stomachLevelModifier!=0)this.stomachLevel = (Math.min(stomachMax,Math.max(stomachLevel + stomachLevelModifier,0)));
 			stomachLevelModifier = 0;
 			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.HOUR_LENGTH && updateStats)
 			{
@@ -171,7 +172,7 @@ public class FoodStatsTFC
 				}
 				sendUpdate = true;
 			}
-			FMLLog.log(Level.ERROR, stomachLevel+"");
+
 			//Sync vanilla hunger values
 			player.getFoodStats().addStats((int) (this.stomachLevel - player.getFoodStats().getFoodLevel()), 0.0F);
 			//Heal or hurt the player based on hunger.
