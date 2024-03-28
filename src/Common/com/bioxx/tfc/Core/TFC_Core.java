@@ -11,6 +11,7 @@ import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
 import com.bioxx.tfc.Blocks.Terrain.BlockDirt;
 import com.bioxx.tfc.Blocks.Terrain.BlockStone;
 import com.bioxx.tfc.TileEntities.*;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.BlockStainedGlass;
@@ -1179,7 +1180,6 @@ public class TFC_Core
 	/**
 	 * @param is
 	 * @param baseDecayMod
-	 * @param nbt
 	 */
 	public static ItemStack tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecayFactor, float baseDecayMod)
 	{
@@ -1481,4 +1481,13 @@ public class TFC_Core
 
 		return world.isRaining() && isExposed;
 	}
+	public static String l10n(String key){
+		String possibleText = LanguageRegistry.instance().getStringLocalization(key);
+		if (isStringValid(possibleText)&& !possibleText.equals(key))return possibleText;
+		possibleText = StatCollector.translateToLocal(key);
+		if (isStringValid(possibleText)&& !possibleText.equals(key))return possibleText;
+		return key;
+	}
+	public static boolean isStringValid(String str){return str != null && !str.toString().isEmpty();}
+
 }

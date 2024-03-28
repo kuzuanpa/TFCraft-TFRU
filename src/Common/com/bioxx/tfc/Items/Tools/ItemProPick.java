@@ -2,6 +2,8 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.*;
 
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -165,9 +167,13 @@ public class ItemProPick extends ItemTerra
 
 							if (results.containsKey(oreName)){
 								results.get(oreName).count++;
-								results.get(oreName).averageCalculateX += blockX;
-								results.get(oreName).averageCalculateY += blockY;
-								results.get(oreName).averageCalculateZ += blockZ;
+								if( rank == SkillRank.Master){
+									results.get(oreName).oreExistsArea[blockY-y<-2?0:blockY-y>2?2:1][blockX-x<-2?0:blockX-x>2?2:1][blockZ-z<-2?0:blockZ-z>2?2:1]=true;
+								} else {
+									results.get(oreName).averageCalculateX += blockX;
+									results.get(oreName).averageCalculateY += blockY;
+									results.get(oreName).averageCalculateZ += blockZ;
+								}
 							}
 							else
 								results.put(oreName, new ProspectResult(ore, 1,blockX,blockY,blockZ));
@@ -233,22 +239,23 @@ public class ItemProPick extends ItemTerra
 		String oreName = result.itemStack.getUnlocalizedName() + ".name";
 
 		String quantityMsg;
-		if (result.count < 10)
+		if (result.count < 5)
 			quantityMsg = "gui.ProPick.FoundTraces";
-		else if (result.count < 20)
+		else if (result.count < 15)
 			quantityMsg = "gui.ProPick.FoundSmall";
 		else if (result.count < 40)
 			quantityMsg = "gui.ProPick.FoundMedium";
-		else if (result.count < 80)
+		else if (result.count < 90)
 			quantityMsg = "gui.ProPick.FoundLarge";
 		else
 			quantityMsg = "gui.ProPick.FoundVeryLarge";
 		String LocationMsg ="";
 		String DistanceMsg1 = "";
 		String DistanceMsg2 = "";
+		ArrayList<String> AreaMsgs = new ArrayList<>();
+		StringBuilder AreaMsg = new StringBuilder();
 
-
-		if (rank != SkillRank.Novice){
+		if (rank != SkillRank.Novice&&rank != SkillRank.Master){
 		//计算矿物中心
 		int aX =result.averageCalculateX / result.count;
 		int aY =result.averageCalculateY / result.count;
@@ -281,10 +288,14 @@ public class ItemProPick extends ItemTerra
 					else LocationMsg = "gui.ProPick.AtNorth";
 					break;
 			}
-			if (rank == SkillRank.Expert||rank == SkillRank.Master){
+			if (rank == SkillRank.Expert){
 				DistanceMsg1="gui.ProPick.About";
 			 DistanceMsg2 = (Math.floorDiv((int)Math.sqrt(Math.pow(Math.abs(aX),2)+Math.pow(Math.abs(aY),2)+Math.pow(Math.abs(aZ),2)) ,10) *10)+ "m";
 		}}
+		}else if(rank == SkillRank.Master){
+			for (int y=0;y<3;y++)for (int x=0;x<3;x++)for (int z=0;z<3;z++)if(result.oreExistsArea[y][x][z]) AreaMsgs.add("gui.ProPick.area."+y+x+z);
+			if(AreaMsgs.size()>0) AreaMsg.append(TFC_Core.l10n("gui.ProPick.area.at")).append(" ");
+			for (String str : AreaMsgs) AreaMsg.append(TFC_Core.l10n(str)).append(" ");
 		}
 		TFC_Core.sendInfoMessage(player,
 				new ChatComponentTranslation(quantityMsg)
@@ -294,7 +305,8 @@ public class ItemProPick extends ItemTerra
 				.appendSibling(new ChatComponentTranslation(LocationMsg)
 			    .appendText(" ")
 			    .appendSibling(new ChatComponentTranslation(DistanceMsg1)
-				.appendSibling(new ChatComponentText(DistanceMsg2))))));
+				.appendSibling(new ChatComponentText(DistanceMsg2)
+				.appendSibling(new ChatComponentText(AreaMsg.toString())))))));
 				
 		oreName = null;
 		result = null;
@@ -309,8 +321,11 @@ public class ItemProPick extends ItemTerra
 
 	private class ProspectResult
 	{
+		public final boolean f=false;
+		public final boolean t=true;
 		public ItemStack itemStack;
 		public int count;
+		public boolean[][][] oreExistsArea={{{f,f,f},{f,f,f},{f,f,f}},{{f,f,f},{f,f,f},{f,f,f}},{{f,f,f},{f,f,f},{f,f,f}}};
 		public int averageCalculateX;
 		public int averageCalculateY;
 		public int averageCalculateZ;

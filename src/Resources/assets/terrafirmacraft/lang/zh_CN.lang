@@ -2583,7 +2583,7 @@ gui.seeds.failedTemp=这里太冷了，无法进行种植，作物活不长。
 gui.seeds.failedSun=这里日照不足，无法进行种植，作物活不长。
 
 gui.ProPick.Found=勘测到
-gui.ProPick.FoundTraces=勘测到微量的
+gui.ProPick.FoundTraces=勘测到痕量的
 gui.ProPick.FoundSmall=勘测到少量的
 gui.ProPick.FoundMedium=勘测到中等量的
 gui.ProPick.FoundLarge=勘测到大量的
@@ -2596,7 +2596,34 @@ gui.ProPick.Down=于下方
 gui.ProPick.AtNorth=于北方
 gui.ProPick.AtSouth=于南方
 gui.ProPick.About=大约
-
+gui.ProPick.area.at=位于区域:
+gui.ProPick.area.000=下层西北方
+gui.ProPick.area.001=下层西方
+gui.ProPick.area.002=下层西南方
+gui.ProPick.area.010=下层北方
+gui.ProPick.area.011=正下方
+gui.ProPick.area.012=下层南方
+gui.ProPick.area.020=下层东北方
+gui.ProPick.area.021=下层东方
+gui.ProPick.area.022=下层东南方
+gui.ProPick.area.100=西北方
+gui.ProPick.area.101=西方
+gui.ProPick.area.102=西南方
+gui.ProPick.area.110=北方
+gui.ProPick.area.111=附近
+gui.ProPick.area.112=南方
+gui.ProPick.area.120=东北方
+gui.ProPick.area.121=东方
+gui.ProPick.area.122=东南方
+gui.ProPick.area.200=上层西北方
+gui.ProPick.area.201=上层西方
+gui.ProPick.area.202=上层西南方
+gui.ProPick.area.210=上层北方
+gui.ProPick.area.211=正上方
+gui.ProPick.area.212=上层南方
+gui.ProPick.area.220=上层东北方
+gui.ProPick.area.221=上层东方
+gui.ProPick.area.222=上层东南方
 
 
 #== Creative Tabs ==
