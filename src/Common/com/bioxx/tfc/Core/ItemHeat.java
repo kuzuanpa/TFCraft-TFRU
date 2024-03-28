@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Core;
 
+import com.bioxx.tfc.Items.ItemIngot;
 import cpw.mods.fml.common.Loader;
 import gregapi.block.multitileentity.MultiTileEntityRegistry;
 import gregapi.data.IL;
@@ -256,8 +257,9 @@ public class ItemHeat
 		//Other
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.stick, 1, WILDCARD_VALUE), 1, 40, new ItemStack(TFCBlocks.torch, 2)));
 		if (Loader.isModLoaded("gregtech")) {
-			if (MultiTileEntityRegistry.getRegistry("ktfru.multitileentity") != null)
-				manager.addIndex(new HeatIndex(MultiTileEntityRegistry.getRegistry("ktfru.multitileentity").getItem(32762, 1), 0.5, 950, new ItemStack(TFCItems.bronzeUnshaped, 7)).setKeepNBT(true));
+			if (MultiTileEntityRegistry.getRegistry("ktfru.multitileentity") != null) manager.addIndex(new HeatIndex(MultiTileEntityRegistry.getRegistry("ktfru.multitileentity").getItem(32762, 1), 0.5, 950, new ItemStack(TFCItems.bronzeUnshaped, 7)).setKeepNBT(true));
+			//Compact when GT gives other mod's Copper Ingot
+			if (! (OP.ingot.mat(MT.Cu,1).getItem() instanceof ItemIngot))			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.copperIngot,1), copperRaw,new ItemStack(TFCItems.copperUnshaped,1)));
 
 			manager.addIndex(new HeatIndex(IL.Ceramic_Basin_Raw.get(1), 0.3, 1400, IL.Ceramic_Basin.get(1)).setKeepNBT(false));
 			manager.addIndex(new HeatIndex(IL.Ceramic_Mold_Raw.get(1), 0.3, 1400, IL.Ceramic_Mold.get(1)).setKeepNBT(false));
@@ -303,7 +305,7 @@ public class ItemHeat
 			manager.addIndex(new HeatIndex(IL.Ceramic_Nugget_Mold_Raw.get(1), 0.3, 1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_00000_00100_00000_00000))).setKeepNBT(false));
 
 
-			for (OreDictMaterial mat : new OreDictMaterial[]{MT.Pt,MT.Pb, MT.Steel, MT.Cu, MT.WroughtIron, MT.Bronze, MT.Bi, MT.BlackBronze, MT.BismuthBronze, MT.Cupronickel, MT.Ni, MT.Sn, MT.Au, MT.Brass, MT.Electrum, MT.Ag, MT.RoseGold, MT.SterlingSilver, MT.Invar, MT.Al, MT.TinAlloy, MT.Fe,MT.RedAlloy}) {
+			for (OreDictMaterial mat : new OreDictMaterial[]{MT.RedSteel,MT.BlueSteel,MT.BlackSteel,MT.Pt,MT.Pb, MT.Steel, MT.Cu, MT.WroughtIron, MT.Bronze, MT.Bi, MT.BlackBronze, MT.BismuthBronze, MT.Cupronickel, MT.Ni, MT.Sn, MT.Au, MT.Brass, MT.Electrum, MT.Ag, MT.RoseGold, MT.SterlingSilver, MT.Invar, MT.Al, MT.TinAlloy, MT.Fe,MT.RedAlloy}) {
 				long temp = getMeltPoint(mat);
 				Item unshaped = getUnshaped(mat);
 				manager.addIndex(new HeatIndex(OP.casingMachine.mat(mat, 1),          1, temp, new ItemStack(unshaped, 8 )).setMinMax(0) .setKeepNBT(true));
@@ -371,7 +373,6 @@ public class ItemHeat
 			//Copper
 			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.copperIngot,1), copperRaw,new ItemStack(TFCItems.copperUnshaped,1)));
 			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.copperIngot2x,1), copperRaw,new ItemStack(TFCItems.copperUnshaped,2,0)));
-			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.copperUnshaped,1), copperRaw,new ItemStack(TFCItems.copperUnshaped,1)));
 			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.copperSheet,1), copperRaw,new ItemStack(TFCItems.copperUnshaped,1,0)));
 			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.copperSheet2x,1), copperRaw,new ItemStack(TFCItems.copperUnshaped,2,0)));
 			//Gold
@@ -394,11 +395,6 @@ public class ItemHeat
 			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.nickelIngot2x,1), nickelRaw,new ItemStack(TFCItems.nickelUnshaped,2,0)));
 			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.nickelSheet,1), nickelRaw,new ItemStack(TFCItems.nickelUnshaped,1,0)));
 			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.nickelSheet2x,1), nickelRaw,new ItemStack(TFCItems.nickelUnshaped,2,0)));
-			//Pig Iron
-			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronIngot,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,1)));
-			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronIngot2x,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,2,0)));
-			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronSheet,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,1,0)));
-			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronSheet2x,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,2,0)));
 			//Platinum
 			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.platinumIngot,1), platinumRaw,new ItemStack(TFCItems.platinumUnshaped,1)));
 			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.platinumIngot2x,1), platinumRaw,new ItemStack(TFCItems.platinumUnshaped,2,0)));
@@ -451,6 +447,9 @@ public class ItemHeat
 			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.cupronickelSheet2x,1), cupronickelRaw,new ItemStack(TFCItems.cupronickelUnshaped,2,0)));
 
 		}
+		//Cu
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.copperUnshaped,1), copperRaw,new ItemStack(TFCItems.copperUnshaped,1)));
+
 		//Bi
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.bismuthUnshaped,1), bismuthRaw,new ItemStack(TFCItems.bismuthUnshaped,1)));
 		//Bismuth Bronze
@@ -496,6 +495,12 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.blueSteelUnfinishedBoots,1,0), blueSteelRaw,new ItemStack(TFCItems.blueSteelUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.blueSteelUnfinishedBoots,1,1), blueSteelRaw,new ItemStack(TFCItems.blueSteelUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.oilLamp, 1, 5), blueSteelRaw, null));
+		//Pig Iron
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronIngot,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronIngot2x,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronUnshaped,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronSheet,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,1,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronSheet2x,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,2,0)));
 		//Brass
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.brassUnshaped,1), brassRaw,new ItemStack(TFCItems.brassUnshaped,1)));
 		//Bronze
@@ -537,8 +542,6 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.leadUnshaped,1), leadRaw,new ItemStack(TFCItems.leadUnshaped,1)));
 		//Ni
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.nickelUnshaped,1), nickelRaw,new ItemStack(TFCItems.nickelUnshaped,1)));
-		//Pig Iron
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronUnshaped,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,1)));
 		//Pt
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.oilLamp, 1, 1), platinumRaw, null));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.platinumUnshaped,1), platinumRaw,new ItemStack(TFCItems.platinumUnshaped,1)));
