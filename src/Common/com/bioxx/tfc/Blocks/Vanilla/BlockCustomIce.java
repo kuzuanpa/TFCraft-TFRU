@@ -1,13 +1,17 @@
 package com.bioxx.tfc.Blocks.Vanilla;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockIce;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -24,6 +28,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 import com.bioxx.tfc.api.TFCBlocks;
+import net.minecraftforge.event.ForgeEventFactory;
 
 public class BlockCustomIce extends BlockIce
 {
@@ -40,19 +45,27 @@ public class BlockCustomIce extends BlockIce
 	 * block and l is the block's subtype/damage.
 	 */
 	@Override
-	public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6)
+	public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta)
 	{
-		/*super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
-		Material var7 = par1World.getBlock(par3, par4 - 1, par5).getMaterial();
+		if (this.canSilkHarvest(world, player,x,y,z,meta) && EnchantmentHelper.getSilkTouchModifier(player)) {
+			ArrayList<ItemStack> items = new ArrayList();
+			ItemStack itemstack = this.createStackedBlock(meta);
+			if (itemstack != null) {
+				items.add(itemstack);
+			}
 
-		if (var7.blocksMovement() || var7.isLiquid())
-			par1World.setBlock(par3, par4, par5, getBlockMelt(par1World, par3, par4, par5, true), 0, 2);*/
-	}
+			ForgeEventFactory.fireBlockHarvesting(items, world, this, x, y, z, meta, 0, 1.0F, true, player);
+			Iterator var9 = items.iterator();
 
-	@Override
-	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
-	{
-		return world.setBlock(x, y, z, getBlockMelt(world, x, y, z, true), 0, 2);
+			while(var9.hasNext()) {
+				ItemStack is = (ItemStack)var9.next();
+				this.dropBlockAsItem(world, x, y, z, is);
+			}
+		}else if(world.provider.isHellWorld){
+			world.setBlockToAir(x, y, z);
+		}else {
+			world.setBlock(x, y, z, getBlockMelt(meta), 0, 2);
+		}
 	}
 
 	@Override
@@ -140,18 +153,12 @@ public class BlockCustomIce extends BlockIce
 		return this.getLightOpacity();
 	}
 
-	protected Block getBlockMelt(World world, int i, int j, int k, boolean moving)
+	protected Block getBlockMelt(int meta)
 	{
-		Block block = world.getBlock(i,j,k);
-
-		if(block != this)
-			return block;
-
-		int meta = world.getBlockMetadata(i, j, k);
 		switch(meta){
-		case 0: return TFCBlocks.saltWater;
-		case 1: return TFCBlocks.freshWater;
-		default: return TFCBlocks.saltWater;
+			case 1: return TFCBlocks.freshWater;
+			case 0:
+			default: return TFCBlocks.saltWater;
 		}
 	}
 
