@@ -593,10 +593,10 @@ public class TFC_Core
 	}
 	@Nullable
 	public static Block getRawWall(Block blockStone){
-		if(blockStone == TFCBlocks.stoneIgIn) return TFCBlocks.wallSmoothIgIn;
-		else if(blockStone == TFCBlocks.stoneIgEx) return TFCBlocks.wallSmoothIgEx;
-		else if(blockStone == TFCBlocks.stoneSed) return TFCBlocks.wallSmoothSed;
-		else if(blockStone == TFCBlocks.stoneMM)return TFCBlocks.wallSmoothMM;
+		if(blockStone == TFCBlocks.stoneIgIn) return TFCBlocks.wallRawIgIn;
+		else if(blockStone == TFCBlocks.stoneIgEx) return TFCBlocks.wallRawIgEx;
+		else if(blockStone == TFCBlocks.stoneSed) return TFCBlocks.wallRawSed;
+		else if(blockStone == TFCBlocks.stoneMM)return TFCBlocks.wallRawMM;
 		return null;
 	}
 	@Nullable
@@ -609,7 +609,7 @@ public class TFC_Core
 	}
 	@Nullable
 	public static BlockBuilding getBuildingStone(Block blockStone){
-		if(blockStone == TFCBlocks.stoneIgIn) return TFCBlocks.buildingBlocksStoneIgEx;
+		if(blockStone == TFCBlocks.stoneIgIn) return TFCBlocks.buildingBlocksStoneIgIn;
 		 else if(blockStone == TFCBlocks.stoneIgEx) return TFCBlocks.buildingBlocksStoneIgEx;
 		 else if(blockStone == TFCBlocks.stoneSed) return TFCBlocks.buildingBlocksStoneSed;
 		 else if(blockStone == TFCBlocks.stoneMM) return TFCBlocks.buildingBlocksStoneMM;
