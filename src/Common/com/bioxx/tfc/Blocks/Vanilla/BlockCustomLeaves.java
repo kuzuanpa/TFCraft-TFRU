@@ -216,8 +216,14 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 
 			if (res < 0)
 			{
-				if(world.getChunkFromBlockCoords(xOrig, zOrig) != null) recursionCount += 1;
-				if(recursionCount>recursionLimit) this.beginLeavesDecay(world,  xOrig, yOrig, zOrig);
+				if(world.getChunkFromBlockCoords(xOrig, zOrig) != null)
+					recursionCount += 1;
+				if(recursionCount<=recursionLimit){
+					this.destroyLeaves(world, xOrig, yOrig, zOrig);
+				}
+				else{
+					this.beginLeavesDecay(world,  xOrig, yOrig, zOrig);
+				}
 				recursionCount -= 1;
 			}
 		}
