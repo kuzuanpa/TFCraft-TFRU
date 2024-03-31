@@ -99,7 +99,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
-		if(rand.nextInt(100)==1)onNeighborBlockChange(world, x, y, z, null);
+		if(rand.nextInt(10)==1)onNeighborBlockChange(world, x, y, z, null);
 	}
 
 	@Override
@@ -219,7 +219,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 				if(world.getChunkFromBlockCoords(xOrig, zOrig) != null)
 					recursionCount += 1;
 				if(recursionCount<=recursionLimit){
-					this.destroyLeaves(world, xOrig, yOrig, zOrig);
+					this.removeLeaves(world, xOrig, yOrig, zOrig);
 				}
 				else{
 					this.beginLeavesDecay(world,  xOrig, yOrig, zOrig);
@@ -227,11 +227,6 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 				recursionCount -= 1;
 			}
 		}
-	}
-
-	private void destroyLeaves(World world, int x, int y, int z)
-	{
-		world.setBlockToAir(x, y, z);
 	}
 
 	private void removeLeaves(World world, int x, int y, int z)
