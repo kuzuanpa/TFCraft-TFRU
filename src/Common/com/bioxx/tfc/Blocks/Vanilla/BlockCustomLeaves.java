@@ -232,8 +232,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	private void removeLeaves(World world, int x, int y, int z)
 	{
 		dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-		if(world.rand.nextInt(100) < 30)
-			dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.stick, 1));
+		if(world.rand.nextInt(16)==0) dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.stick, 1));
 		world.setBlockToAir(x, y, z);
 	}
 
