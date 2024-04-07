@@ -793,7 +793,6 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					else if(unsealtime > 0)
 						time = (int)TFC_Time.getTotalHours() - unsealtime;
 
-					FMLLog.log(Level.FATAL,"found recipe");
 					//Make sure that the recipe meets the time requirements
 					if(recipe.isSealedRecipe() && time < recipe.sealTime) return;
 
@@ -959,12 +958,6 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluids.MILK, 9000), new FluidStack(TFCFluids.VINEGAR, 1000), new FluidStack(TFCFluids.MILKVINEGAR, 10000)).setSealedRecipe(false).setMinTechLevel(0).setRemovesLiquid(false));
 		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluids.MILKVINEGAR, 9000), new FluidStack(TFCFluids.MILK, 1000), new FluidStack(TFCFluids.MILKVINEGAR, 10000)).setSealedRecipe(false).setMinTechLevel(0).setRemovesLiquid(false));
 
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.cornmealGround), 1f), new FluidStack(TFCFluids.FRESHWATER, 4), ItemFoodTFC.createTag(new ItemStack(TFCItems.cornmealDough), 1f),new FluidStack(TFCFluids.FRESHWATER,2),0).setSealedRecipe(false).setRemovesLiquid(true).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.barleyGround), 1f), new FluidStack(TFCFluids.FRESHWATER, 4), ItemFoodTFC.createTag(new ItemStack(TFCItems.barleyDough), 1f),new FluidStack(TFCFluids.FRESHWATER,2),0).setSealedRecipe(false).setRemovesLiquid(true).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.ryeGround), 1f), new FluidStack(TFCFluids.FRESHWATER, 4), ItemFoodTFC.createTag(new ItemStack(TFCItems.ryeDough), 1f),new FluidStack(TFCFluids.FRESHWATER,2),0).setSealedRecipe(false).setRemovesLiquid(true).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.riceGround), 1f), new FluidStack(TFCFluids.FRESHWATER, 4), ItemFoodTFC.createTag(new ItemStack(TFCItems.riceDough), 1f),new FluidStack(TFCFluids.FRESHWATER,2),0).setSealedRecipe(false).setRemovesLiquid(true).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.oatGround), 1f), new FluidStack(TFCFluids.FRESHWATER, 4), ItemFoodTFC.createTag(new ItemStack(TFCItems.oatDough), 1f),new FluidStack(TFCFluids.FRESHWATER,2),0).setSealedRecipe(false).setRemovesLiquid(true).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatGround), 1f), new FluidStack(TFCFluids.FRESHWATER, 4), ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatDough), 1f),new FluidStack(TFCFluids.FRESHWATER,2),0).setSealedRecipe(false).setRemovesLiquid(true).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.powder, 1, 4), new FluidStack(TFCFluids.FRESHWATER, 1000), new ItemStack(Item.getItemFromBlock(TFCBlocks.ice)), null).setMinTechLevel(0));
         if(Loader.isModLoaded("gregtech"))		BarrelManager.getInstance().addRecipe(new BarrelRecipe(OP.dust.mat(MT.Ash,1), new FluidStack(TFCFluids.FRESHWATER, 5000), null, FL.make("basepotashliquor",5000)).setMinTechLevel(0));
 
