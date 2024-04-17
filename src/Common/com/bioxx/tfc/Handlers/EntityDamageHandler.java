@@ -2,10 +2,12 @@ package com.bioxx.tfc.Handlers;
 
 import java.util.Random;
 
+import com.bioxx.tfc.api.TFCItems;
 import cpw.mods.fml.common.FMLLog;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.boss.EntityDragonPart;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -70,6 +72,16 @@ public class EntityDamageHandler
 			event.ammount = applyArmorCalculations(entity, event.source, 400);
 		} else if (event.source == DamageSource.fallingBlock) {
 			event.ammount = (25+entity.getRNG().nextInt(75));
+		} else if (event.source.damageType.equals("hotFloor")) { //Lava Block from Et future Requiem
+			event.ammount = (2+entity.getRNG().nextInt(3));
+		} else if (event.source.damageType.equals("cryotheum")) { //Cryotheum from Thermal Expansion
+			event.ammount = (40+entity.getRNG().nextInt(10));
+		} else if (event.source.damageType.equals("blizz")) { //blizz (ice)from Thermal Expansion
+			event.ammount = (100+entity.getRNG().nextInt(100));
+		} else if (event.source.damageType.equals("basalz")) { //basalz (stone)from Thermal Expansion
+			event.ammount = (200+entity.getRNG().nextInt(100));
+		} else if (event.source.damageType.equals("blitz")) { //blitz (wind)from Thermal Expansion
+			event.ammount = (10+entity.getRNG().nextInt(40));
 		} else if (event.source.isExplosion()) {
 			event.ammount *= 30;
 		} else if (event.source == DamageSource.magic || event.source == DamageSource.wither) {
@@ -96,7 +108,8 @@ public class EntityDamageHandler
 		else {
 			FMLLog.log(Level.FATAL,event.source.damageType.toString()+"/->/"+event.ammount);
 		}
-
+		//An Item Bonus for high damage
+		if(entity.getMaxHealth() > 500 && event.ammount > entity.getMaxHealth()*0.9F&&event.ammount > entity.getHealth()){entity.worldObj.spawnEntityInWorld(new EntityItem(entity.worldObj,entity.posX,entity.posY,entity.posZ,new ItemStack(TFCItems.sedShovel,1)));}
 	}
 
 	protected int applyArmorCalculations(EntityLivingBase entity, DamageSource source, float originalDamage)
