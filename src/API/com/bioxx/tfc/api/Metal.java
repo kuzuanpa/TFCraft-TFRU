@@ -8,6 +8,7 @@ public class Metal
 	public Item meltedItem;
 	public Item ingot;
 	public boolean canUse = true;
+	public int tier;
 
 	public Metal(String name)
 	{

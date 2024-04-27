@@ -108,8 +108,6 @@ public class EntityDamageHandler
 		else {
 			FMLLog.log(Level.FATAL,event.source.damageType.toString()+"/->/"+event.ammount);
 		}
-		//An Item Bonus for high damage
-		if(entity.getMaxHealth() > 500 && event.ammount > entity.getMaxHealth()*0.9F&&event.ammount > entity.getHealth()){entity.worldObj.spawnEntityInWorld(new EntityItem(entity.worldObj,entity.posX,entity.posY,entity.posZ,new ItemStack(TFCItems.sedShovel,1)));}
 	}
 
 	protected int applyArmorCalculations(EntityLivingBase entity, DamageSource source, float originalDamage)

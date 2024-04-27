@@ -39,7 +39,7 @@ public class AlloyManager
 	{
 		Alloy match = null;
 		Metal finalMetal = ingred.get(0).metalType;
-		if(ingred.size()==1||ingred.stream().allMatch(metal->metal.metalType==finalMetal))return ingred.get(0).metalType;
+		if((ingred.size()==1||ingred.stream().allMatch(metal->metal.metalType==finalMetal))&&furnaceTier.tier >= ingred.get(0).metalType.tier)return ingred.get(0).metalType;
 		for (Alloy alloy : alloys) {
 			match = alloy;
 			if (furnaceTier.tier >= match.furnaceTier.tier) match = match.matches(ingred);

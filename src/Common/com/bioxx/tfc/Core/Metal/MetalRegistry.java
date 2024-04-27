@@ -22,6 +22,7 @@ public class MetalRegistry
 	//Returns true if the metal was added or false if a metal with a similar name already exists;
 	public boolean addMetal(Metal m, Alloy.EnumTier soloTier)
 	{
+		m.tier= soloTier.tier;
 		if(hash.containsKey(m.name))
 			return false;
 
