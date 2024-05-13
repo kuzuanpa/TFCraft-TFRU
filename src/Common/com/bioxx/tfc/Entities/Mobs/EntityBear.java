@@ -8,6 +8,7 @@ import java.util.Random;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -99,7 +100,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		sex = rand.nextInt(2);
 		if (getGender() == GenderEnum.MALE)
 			tasks.addTask (6, new EntityAIMate (this, moveSpeed));
-		this.tasks.addTask(1, new EntityAIAvoidEntityTFC(this, EntityOcelotTFC.class, 32.0F, 1.2D, 1.6D));
+		this.tasks.addTask(1, new EntityAIAvoidEntityTFC(this, EntityOcelot.class, 32.0F, 1.2D, 1.6D));
 		tasks.addTask (7, new EntityAIWander (this, moveSpeed));
 		tasks.addTask (8, new EntityAIWatchClosest (this, EntityPlayer.class, 8F));
 		tasks.addTask (9, new EntityAILookIdle (this));

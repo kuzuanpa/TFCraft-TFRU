@@ -6,6 +6,8 @@ import java.util.List;
 
 import net.minecraft.block.BlockColored;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -91,8 +93,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		this.targetPheasant = new EntityAITargetNonTamedTFC(this, EntityPheasantTFC.class, 200, false);
 		this.targetPig = new EntityAITargetNonTamedTFC(this, EntityPigTFC.class, 200, false);
 		this.targetCow = new EntityAITargetNonTamedTFC(this, EntityCowTFC.class, 200, false);
-		this.targetDeer = new EntityAITargetNonTamedTFC(this, EntityDeer.class, 200, false);
-		this.targetHorse = new EntityAITargetNonTamedTFC(this, EntityHorseTFC.class, 200, false);
+
+
 		if (this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL)
 		{
 			peacefulAI = false;
@@ -100,8 +102,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 			this.targetTasks.addTask(7, targetPheasant);
 			this.targetTasks.addTask(7, targetPig);
 			this.targetTasks.addTask(7, targetCow);
-			this.targetTasks.addTask(7, targetDeer);
-			this.targetTasks.addTask(7, targetHorse);
+			this.targetTasks.addTask(7, new EntityAINearestAttackableTarget(this, EntitySkeleton.class, 200, false));
+			this.targetTasks.addTask(7, new EntityAINearestAttackableTarget(this, EntitySkeletonTFC.class, 200, false));
 		}
 		else
 			peacefulAI = true;
@@ -761,8 +763,6 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 				this.targetTasks.removeTask(targetPheasant);
 				this.targetTasks.removeTask(targetPig);
 				this.targetTasks.removeTask(targetCow);
-				this.targetTasks.removeTask(targetDeer);
-				this.targetTasks.removeTask(targetHorse);
 			}
 			else if (peacefulAI && this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL)
 			{
@@ -771,8 +771,6 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 				this.targetTasks.addTask(7, targetPheasant);
 				this.targetTasks.addTask(7, targetPig);
 				this.targetTasks.addTask(7, targetCow);
-				this.targetTasks.addTask(7, targetDeer);
-				this.targetTasks.addTask(7, targetHorse);
 			}
 		}
 	}

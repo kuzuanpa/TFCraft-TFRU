@@ -6,6 +6,8 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
@@ -42,6 +44,8 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIRestrictSun(this));
 		this.tasks.addTask(3, new EntityAIFleeSun(this, 1D));
+		this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityWolf.class, 6.0F, 1.0D, 1.2D));
+		this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityWolfTFC.class, 6.0F, 1.0D, 1.2D));
 		this.tasks.addTask(5, new EntityAIWander(this, 1D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(6, new EntityAILookIdle(this));

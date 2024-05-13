@@ -970,38 +970,7 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal, IInnateA
 	{
 		super.updateAITasks();
 	}
-    
-    /**
-     * main AI tick function, replaces updateEntityActionState
-     */
-    public void updateAITick()
-    {
-        if (this.getMoveHelper().isUpdating())
-        {
-            double d0 = this.getMoveHelper().getSpeed();
 
-            if (d0 == 0.6D)
-            {
-                this.setSneaking(true);
-                this.setSprinting(false);
-            }
-            else if (d0 == 1.33D)
-            {
-                this.setSneaking(false);
-                this.setSprinting(true);
-            }
-            else
-            {
-                this.setSneaking(false);
-                this.setSprinting(false);
-            }
-        }
-        else
-        {
-            this.setSneaking(false);
-            this.setSprinting(false);
-        }
-    }
     
     /**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
