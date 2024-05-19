@@ -3,10 +3,12 @@ package com.bioxx.tfc.Core;
 import com.bioxx.tfc.Items.ItemIngot;
 import cpw.mods.fml.common.Loader;
 import gregapi.block.multitileentity.MultiTileEntityRegistry;
+import gregapi.code.ModData;
 import gregapi.data.IL;
 import gregapi.data.MT;
 import gregapi.data.OP;
 import gregapi.oredict.OreDictMaterial;
+import gregapi.util.ST;
 import gregapi.util.UT;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -257,6 +259,10 @@ public class ItemHeat
 		//Other
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.stick, 1, WILDCARD_VALUE), 1, 40, new ItemStack(TFCBlocks.torch, 2)));
 		if (Loader.isModLoaded("gregtech")) {
+			if (Loader.isModLoaded("moegadd")) {
+				manager.addIndex(new HeatIndex(ST.make(new ModData("moegadd","MoegAddon"),"CeramicBottleMoldFull",1), 1, 1000, ST.make(new ModData("moegadd","MoegAddon"),"CeramicBottleMoldMoltenGlass",1)));
+				manager.addIndex(new HeatIndex(ST.make(new ModData("moegadd","MoegAddon"),"CeramicBlockMoldFull",1), 1, 1000, ST.make(new ModData("moegadd","MoegAddon"),"CeramicBlockMoldMoltenGlass",1)));
+			}
 			if (MultiTileEntityRegistry.getRegistry("ktfru.multitileentity") != null) manager.addIndex(new HeatIndex(MultiTileEntityRegistry.getRegistry("ktfru.multitileentity").getItem(32762, 1), 0.5, 950, new ItemStack(TFCItems.bronzeUnshaped, 7)).setKeepNBT(true));
 			//Compact when GT gives other mod's Copper Ingot
 			if (! (OP.ingot.mat(MT.Cu,1).getItem() instanceof ItemIngot))			manager.addIndex(new HeatIndex(new ItemStack(TFCItems.copperIngot,1), copperRaw,new ItemStack(TFCItems.copperUnshaped,1)));

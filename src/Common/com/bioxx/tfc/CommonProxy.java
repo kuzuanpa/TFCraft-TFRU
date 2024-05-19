@@ -144,27 +144,27 @@ public class CommonProxy
 		EntityRegistry.registerGlobalEntityID(EntityFallingBlockTFC.class, "fallingBlock", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityBarrel.class, "barrel", EntityRegistry.findGlobalUniqueEntityId());
 
-		EntityRegistry.registerModEntity(EntityJavelin.class        , "javelin",      1,  TerraFirmaCraft.instance, 64, 5, true);
-		EntityRegistry.registerModEntity(EntitySquidTFC.class       , "squidTFC",     2,  TerraFirmaCraft.instance, 64, 5, true);
-		EntityRegistry.registerModEntity(EntityCowTFC.class         , "cowTFC",       6,  TerraFirmaCraft.instance, 128,5, true);
-		EntityRegistry.registerModEntity(EntityWolfTFC.class        , "wolfTFC",      7,  TerraFirmaCraft.instance, 128,5, true);
-		EntityRegistry.registerModEntity(EntityBear.class           , "bearTFC",      8,  TerraFirmaCraft.instance, 128,5, true);
-		EntityRegistry.registerModEntity(EntityPolarBear.class      , "polarbearTFC", 30, TerraFirmaCraft.instance, 128,5, true);
-		EntityRegistry.registerModEntity(EntityChickenTFC.class     , "chickenTFC",   9,  TerraFirmaCraft.instance, 128,5, true);
-		EntityRegistry.registerModEntity(EntityPigTFC.class         , "pigTFC",       10, TerraFirmaCraft.instance, 128,5, true);
-		EntityRegistry.registerModEntity(EntityDeer.class           , "deerTFC",      11, TerraFirmaCraft.instance, 128,5, true);
-		EntityRegistry.registerModEntity(EntityCustomMinecart.class , "minecartTFC",  12, TerraFirmaCraft.instance, 80, 5, true);
-		EntityRegistry.registerModEntity(EntitySkeletonTFC.class    , "skeletonTFC",  13, TerraFirmaCraft.instance, 128,5, true);
-		EntityRegistry.registerModEntity(EntityZombieTFC.class      , "zombieTFC",    14, TerraFirmaCraft.instance, 128,5, true);
-		EntityRegistry.registerModEntity(EntitySpiderTFC.class      , "spiderTFC",    15, TerraFirmaCraft.instance, 128,5, true);
-		EntityRegistry.registerModEntity(EntityCaveSpiderTFC.class  , "caveSpiderTFC",19, TerraFirmaCraft.instance, 128,5, true);
-		EntityRegistry.registerModEntity(EntityEndermanTFC.class    , "endermanTFC",  21, TerraFirmaCraft.instance, 128,5, true);
-		EntityRegistry.registerModEntity(EntityStand.class          , "standTFC",     25, TerraFirmaCraft.instance, 64, 20, false);
-		EntityRegistry.registerModEntity(EntityPheasantTFC.class    , "PheasantTFC",  26, TerraFirmaCraft.instance, 128,5, true);
-		EntityRegistry.registerModEntity(EntityFishTFC.class        , "fishTFC",      27, TerraFirmaCraft.instance, 64, 5, true);
-		EntityRegistry.registerModEntity(EntityFallingBlockTFC.class, "fallingBlock", 28, TerraFirmaCraft.instance, 128,20, true);
-		EntityRegistry.registerModEntity(EntityBarrel.class         , "barrel",       29, TerraFirmaCraft.instance, 64, 20, true);
-		EntityRegistry.registerModEntity(EntityOcelotTFC.class      , "ocelotTFC",    31, TerraFirmaCraft.instance, 128,5, true);
+        EntityRegistry.registerModEntity(EntityJavelin.class        , "javelin",      1,  TerraFirmaCraft.instance, 64, 5 ,true);
+		EntityRegistry.registerModEntity(EntitySquidTFC.class       , "squidTFC",     2,  TerraFirmaCraft.instance, 64, 5 ,true);
+		EntityRegistry.registerModEntity(EntityCowTFC.class         , "cowTFC",       6,  TerraFirmaCraft.instance, 128,5 ,true);
+		EntityRegistry.registerModEntity(EntityWolfTFC.class        , "wolfTFC",      7,  TerraFirmaCraft.instance, 128,5 ,true);
+		EntityRegistry.registerModEntity(EntityBear.class           , "bearTFC",      8,  TerraFirmaCraft.instance, 128,5 ,true);
+		EntityRegistry.registerModEntity(EntityPolarBear.class      , "polarbearTFC", 30, TerraFirmaCraft.instance, 128,5 ,true);
+		EntityRegistry.registerModEntity(EntityChickenTFC.class     , "chickenTFC",   9,  TerraFirmaCraft.instance, 128,5 ,true);
+		EntityRegistry.registerModEntity(EntityPigTFC.class         , "pigTFC",       10, TerraFirmaCraft.instance, 128,5 ,true);
+		EntityRegistry.registerModEntity(EntityDeer.class           , "deerTFC",      11, TerraFirmaCraft.instance, 128,5 ,true);
+		EntityRegistry.registerModEntity(EntityCustomMinecart.class , "minecartTFC",  12, TerraFirmaCraft.instance, 80, 5 ,true);
+		EntityRegistry.registerModEntity(EntitySkeletonTFC.class    , "skeletonTFC",  13, TerraFirmaCraft.instance, 128,5 ,true);
+		EntityRegistry.registerModEntity(EntityZombieTFC.class      , "zombieTFC",    14, TerraFirmaCraft.instance, 128,5 ,true);
+		EntityRegistry.registerModEntity(EntitySpiderTFC.class      , "spiderTFC",    15, TerraFirmaCraft.instance, 128,5 ,true);
+		EntityRegistry.registerModEntity(EntityCaveSpiderTFC.class  , "caveSpiderTFC",19, TerraFirmaCraft.instance, 128,5 ,true);
+		EntityRegistry.registerModEntity(EntityEndermanTFC.class    , "endermanTFC",  21, TerraFirmaCraft.instance, 128,5 ,true);
+		EntityRegistry.registerModEntity(EntityStand.class          , "standTFC",     25, TerraFirmaCraft.instance, 64, 20,false);
+		EntityRegistry.registerModEntity(EntityPheasantTFC.class    , "PheasantTFC",  26, TerraFirmaCraft.instance, 128,5 ,true);
+		EntityRegistry.registerModEntity(EntityFishTFC.class        , "fishTFC",      27, TerraFirmaCraft.instance, 64, 5 ,true);
+		EntityRegistry.registerModEntity(EntityFallingBlockTFC.class, "fallingBlock", 28, TerraFirmaCraft.instance, 128,20,true);
+		EntityRegistry.registerModEntity(EntityBarrel.class         , "barrel",       29, TerraFirmaCraft.instance, 64, 20,true);
+		EntityRegistry.registerModEntity(EntityOcelotTFC.class      , "ocelotTFC",    31, TerraFirmaCraft.instance, 128,5 ,true);
 		/*Function<EntitySpawnMessage, Entity> spawnFunction = new Function<EntitySpawnMessage, Entity>()
 				{
 			@Override
