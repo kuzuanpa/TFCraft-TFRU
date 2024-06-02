@@ -448,8 +448,6 @@ public class TESluice extends TileEntity implements IInventory
 		ForgeDirection dir = getDir(meta & 3);
 		Block water = worldObj.getBlock(xCoord + dir.offsetX, yCoord + 1, zCoord + dir.offsetZ);
 
-		Fluid liquid = TFCFluids.FRESHWATER;
-		if (water==TFCBlocks.saltWater) liquid=TFCFluids.SALTWATER;
 		boolean isInputWater = TFC_Core.isWater(water);
 		boolean isOutputAir = worldObj.isAirBlock(xCoord + dir.getOpposite().offsetX * 2, yCoord - 1, zCoord + dir.getOpposite().offsetZ * 2);
 		boolean isOutputWater = TFC_Core.isWater(worldObj.getBlock(xCoord + dir.getOpposite().offsetX * 2, yCoord - 1, zCoord + dir.getOpposite().offsetZ * 2));

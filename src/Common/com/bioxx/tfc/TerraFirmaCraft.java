@@ -89,14 +89,14 @@ public class TerraFirmaCraft
 		//Register Player Render Handler (Client only)
 		proxy.registerPlayerRenderEventHandler();
 
-		SkillsManager.instance.registerSkill(Global.SKILL_GENERAL_SMITHING, 250);
-		SkillsManager.instance.registerSkill(Global.SKILL_TOOLSMITH, 100);
-		SkillsManager.instance.registerSkill(Global.SKILL_ARMORSMITH, 100);
-		SkillsManager.instance.registerSkill(Global.SKILL_WEAPONSMITH, 100);
-		SkillsManager.instance.registerSkill(Global.SKILL_AGRICULTURE, 300);
-		SkillsManager.instance.registerSkill(Global.SKILL_COOKING, 200);
-		SkillsManager.instance.registerSkill(Global.SKILL_PROSPECTING, 1500);
-		SkillsManager.instance.registerSkill(Global.SKILL_BUTCHERING, 100);
+		SkillsManager.instance.registerSkill(Global.SKILL_GENERAL_SMITHING, 150);
+		SkillsManager.instance.registerSkill(Global.SKILL_TOOLSMITH, 70);
+		SkillsManager.instance.registerSkill(Global.SKILL_ARMORSMITH, 50);
+		SkillsManager.instance.registerSkill(Global.SKILL_WEAPONSMITH, 50);
+		SkillsManager.instance.registerSkill(Global.SKILL_AGRICULTURE, 150);
+		SkillsManager.instance.registerSkill(Global.SKILL_COOKING, 100);
+		SkillsManager.instance.registerSkill(Global.SKILL_PROSPECTING, 1000);
+		SkillsManager.instance.registerSkill(Global.SKILL_BUTCHERING, 80);
 
 		//Load Items
 		ItemSetup.setup();
