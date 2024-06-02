@@ -60,7 +60,7 @@ fishingRod.gotAway=它跑掉了...
 #================
 #= Achievements =
 #================
-achievement.achLooseRock=确实是块石头
+achievement.achLooseRock=只是块石头
 achievement.achLooseRock.desc=拾取岩石
 achievement.achSmallOre=无石不翻
 achievement.achSmallOre.desc=找到矿石颗粒
@@ -2582,6 +2582,8 @@ gui.goldpan.overused=这片区域资源似乎已经采尽,你可能不会再发�
 gui.seeds.failedTemp=这里太冷了，无法进行种植，作物活不长。
 gui.seeds.failedSun=这里日照不足，无法进行种植，作物活不长。
 
+gui.ProPick.cannotDeepSearch=你看不出任何深处矿物的痕迹
+gui.ProPick.deepSearch=从深处
 gui.ProPick.Found=勘测到
 gui.ProPick.FoundTraces=勘测到痕量的
 gui.ProPick.FoundSmall=勘测到少量的
