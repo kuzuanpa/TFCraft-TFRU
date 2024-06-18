@@ -141,6 +141,6 @@ public class Global
 	public static final float FOOD_MAX_WEIGHT = 160;
 	public static final float FOOD_MIN_DROP_WEIGHT = 0.1f;
 
-	public static final int SEALEVEL = 144;
+	public static final int worldHeightAverage = 124;
 	public static final int HOT_LIQUID_TEMP = 550; // Woods Auto-Ignition temperature is ~575
 }

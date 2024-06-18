@@ -33,11 +33,12 @@ public abstract class GenRockLayer extends GenLayerTFC
 		drawImage(512, layer, "Rock 5");
 		layer = new GenLayerSmoothTFC(1000L, layer);
 		drawImage(512, layer, "Rock 6");
-		for (int zoomLevel = 0; zoomLevel < 5; ++zoomLevel)
-		{
-			layer = new GenLayerZoomTFC(1000 + zoomLevel, layer);
-			drawImage(512, layer, "Rock "+(7+zoomLevel));
-		}
+		layer = new GenLayerZoomTFC(1001L, layer);
+		drawImage(512, layer, "Rock 7");
+		layer = new GenLayerZoomTFC(1002L, layer);
+		drawImage(512, layer, "Rock 8");
+		layer = new GenLayerZoomTFC(1003L, layer);
+		drawImage(512, layer, "Rock 9");
 
 		GenLayerSmoothTFC smoothedLayer = new GenLayerSmoothTFC(1000L, layer);
 		GenLayerVoronoiZoomTFC voronoiLayer = new GenLayerVoronoiZoomTFC(10L, smoothedLayer);

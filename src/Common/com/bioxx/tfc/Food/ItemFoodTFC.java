@@ -458,7 +458,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 					eatAmount-=stomachDiff;
 
 				float tasteFactor = foodstats.getTasteFactor(is);
-				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount*tasteFactor);
+				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount*0.7F+eatAmount*tasteFactor*0.3F);
 				foodstats.setSatisfaction(foodstats.getSatisfaction() + (eatAmount/3.0F * tasteFactor), Food.getFoodGroups(is));
 				foodstats.addFoodLevel(eatAmount);
 				if(FoodStatsTFC.reduceFood(is, eatAmount))

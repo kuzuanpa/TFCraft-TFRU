@@ -158,7 +158,7 @@ public class TFC_Climate
 			float zMod = getZFactor(z);
 			float zTemp = zMod * getMaxTemperature() - 20 + ((zMod - 0.5f) * 10);
 
-			float rain = getRainfall(world, x, Global.SEALEVEL, z);
+			float rain = getRainfall(world, x, Global.worldHeightAverage, z);
 			float rainMod = (1-(rain/4000))*zMod;
 
 			int month = TFC_Time.getSeasonFromDayOfYear(day,z);
@@ -260,9 +260,9 @@ public class TFC_Climate
 		//The equation looks rather complicated, but you can see it here:
 		// http://www.wolframalpha.com/input/?i=%28%28%28x%5E2+%2F+677.966%29+*+%280.5%29*%28%28%28110+-+x%29+%2B+%7C110+-+x%7C%29%2F%28110+-
 		// +x%29%29%29+%2B+%28%280.5%29*%28%28%28x+-+110%29+%2B+%7Cx+-+110%7C%29%2F%28x+-+110%29%29+*+x+*+0.16225%29%29+0+to+440
-		if(y > Global.SEALEVEL)
+		if(y > Global.worldHeightAverage)
 		{
-			int i = y - Global.SEALEVEL;
+			int i = y - Global.worldHeightAverage;
 			if (i >= Y_FACTOR_CACHE.length) {
 				i = Y_FACTOR_CACHE.length - 1;
 			}

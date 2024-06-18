@@ -33,8 +33,6 @@ import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
-import static com.bioxx.tfc.TerraFirmaCraft.TFCDimID;
-
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 	/** RNG. */
 	private Random rand;
@@ -100,7 +98,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 
 	private int[] seaLevelOffsetMap = new int[256];
 	private int[] chunkHeightMap = new int[256];
-
 	private MapGenCavesTFC caveGen = new MapGenCavesTFC();
 	private MapGenRavineTFC surfaceRavineGen = new MapGenRavineTFC(125, 30);//surface
 	private MapGenRavineTFC ravineGen = new MapGenRavineTFC(20, 50);//deep
@@ -176,7 +173,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 
 		ChunkData data = new ChunkData(chunk).createNew(worldObj, chunkX, chunkZ);
 		data.heightmap = seaLevelOffsetMap;
-		data.rainfallMap = this.rainfallLayer;
+		data.rainfallMap = rainfallLayer;
 		TFC_Core.getCDM(worldObj).addData(chunk, data);
 		//chunk.heightMap = chunkHeightMap;
 		chunk.generateSkylightMap();
@@ -219,13 +216,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 		if(TFC_Climate.getStability(worldObj, xCoord, zCoord) == 1)
 			waterRand = 6;
 
-		if (!var11 && this.rand.nextInt(waterRand) == 0)
-		{
-			x = xCoord + this.rand.nextInt(16) + 8;
-			z = zCoord + this.rand.nextInt(16) + 8;
-			y = Global.SEALEVEL - rand.nextInt(45);
-			//fissureGen.generate(this.worldObj, this.rand, x, y, z);
-		}
+		//if (!var11 && this.rand.nextInt(waterRand) == 0)
+		//{
+		//	x = xCoord + this.rand.nextInt(16) + 8;
+		//	z = zCoord + this.rand.nextInt(16) + 8;
+		//	y = Global.worldHeightAverage - rand.nextInt(65);
+		//	//fissureGen.generate(this.worldObj, this.rand, x, y, z);
+		//}
 
 		if (biome != null)
 		{
@@ -254,7 +251,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 		List<SpawnListEntry> spawnableCreatureList = new ArrayList<SpawnListEntry>();
 		spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 24, 0, 0));
 		float temp = TFC_Climate.getBioTemperatureHeight(world, x, world.getTopSolidOrLiquidBlock(x, z), z);
-		float rain = TFC_Climate.getRainfall(world, x, 150, z);
+		float rain = TFC_Climate.getRainfall(world, x, Global.worldHeightAverage+16, z);
 		float evt = 0.0f;
 		if (TFC_Climate.getCacheManager(world) != null && TFC_Climate.getCacheManager(world).getEVTLayerAt(x, z) != null)
 			evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
@@ -566,7 +563,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 	{
 		int seaLevel = 16;
 		int worldHeight = 256;
-		int indexOffset = 128;
+		int indexOffset = Global.worldHeightAverage-16;
 		double var6 = 0.03125D;
 		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, var6 * 4.0D, var6 * 1.0D, var6 * 4.0D);
 		boolean[] cliffMap = new boolean[256];
@@ -598,7 +595,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 					if(!TFC_Core.isBeachBiome(getBiome(xCoord, zCoord).biomeID))
 						cliffMap[arrayIndex] = true;
 				}
-				for (int height = 127; height >= 0; --height)
+				for (int height = Global.worldHeightAverage-17; height >= 0; --height)
 				{
 					int indexBig = (arrayIndex) * worldHeight + height + indexOffset;
 					int index = (arrayIndex) * 128 + height;
@@ -718,7 +715,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 							}
 
 							//Determine the soil depth based on world height
-							int dirtH = Math.max(8-((height + 96 - Global.SEALEVEL) / 16), 0);
+							int dirtH = Math.max(8-((height + 96 - Global.worldHeightAverage) / 16), 0);
 
 							if(var13 > 0)
 							{
@@ -805,7 +802,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 				DataLayer stability = stabilityLayer[arrayIndexDL];
 				TFCBiome biome = (TFCBiome) getBiome(xCoord, zCoord);
 
-				for (int height = 127; height >= 0; --height)
+				for (int height = Global.worldHeightAverage-17; height >= 0; --height)
 				{
 					//int index = ((arrayIndex) * 128 + height);
 					int indexBig = (arrayIndex) * 256 + height;

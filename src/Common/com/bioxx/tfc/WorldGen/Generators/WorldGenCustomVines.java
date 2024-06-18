@@ -18,7 +18,7 @@ public class WorldGenCustomVines extends WorldGenerator
 		int var6 = x;
 		int var7 = z;
 
-		for (; y > Global.SEALEVEL; --y)
+		for (; y > Global.worldHeightAverage; --y)
 		{
 			if (world.isAirBlock(x, y, z))
 			{

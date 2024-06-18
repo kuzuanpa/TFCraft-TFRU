@@ -580,7 +580,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		{
 			//TerraFirmaCraft.log.info(this.entityId+", Vec: "+attackedVec.xCoord+", "+attackedVec.yCoord+", "+attackedVec.zCoord);
 			Vec3 positionVec = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-			if(this.getFearSource() != null && this.getDistanceSqToEntity(this.getFearSource()) > Global.SEALEVEL)
+			if(this.getFearSource() != null && this.getDistanceSqToEntity(this.getFearSource()) > Global.worldHeightAverage)
 			{
 				this.setFearSource(null);
 			}

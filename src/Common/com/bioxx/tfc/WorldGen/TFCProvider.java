@@ -19,8 +19,6 @@ import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 import net.minecraft.world.storage.WorldInfo;
 
-import static com.bioxx.tfc.TerraFirmaCraft.TFCDimID;
-
 public class TFCProvider extends WorldProvider
 {
 	private int moonPhase;
@@ -50,7 +48,7 @@ public class TFCProvider extends WorldProvider
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
 		int y = worldObj.getTopSolidOrLiquidBlock(x, z)-1;
-		if(y < Global.SEALEVEL || y > Global.SEALEVEL + 25) return false;
+		if(y < Global.worldHeightAverage || y > Global.worldHeightAverage + 25) return false;
 		Block b = worldObj.getBlock(x, y, z);
 		return TFC_Core.isGrass(b);
 	}
