@@ -18,7 +18,6 @@ public class TFCBiome extends BiomeGenBase
 {
 	public static float riverDepthMin = -0.5F;
 	public static float riverDepthMax = -0.3F;
-	public float temperatureTFC;
 
 	public BiomeDecoratorTFC theBiomeDecorator;
 
@@ -82,7 +81,6 @@ public class TFCBiome extends BiomeGenBase
 		this.fillerBlock = Blocks.dirt;
 		this.rootHeight = 0.1F;
 		this.heightVariation = 0.3F;
-		temperatureTFC = 0.5F;
 		this.rainfall = 0.5F;
 		this.spawnableMonsterList = new ArrayList<SpawnListEntry>();
 		this.spawnableCreatureList = new ArrayList<SpawnListEntry>();
@@ -196,7 +194,6 @@ public class TFCBiome extends BiomeGenBase
 	public TFCBiome setTemperatureRainfall(float par1, float par2)
 	{
 		this.temperature=par1;
-		temperatureTFC = par1;
 		this.rainfall = par2;
 		return this;
 	}
