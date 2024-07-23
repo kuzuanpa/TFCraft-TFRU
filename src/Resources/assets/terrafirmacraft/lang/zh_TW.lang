@@ -50,7 +50,7 @@ entity.standTFC.name=盔甲架
 entity.barrel.name=桶子
 entity.fallingBlock.name=落下的方塊
 
-entity.notFamiliar=這隻動物不會理你。
+entity.notFamiliar=這隻動物不理你。
 fishingRod.lineTension=線快被拉斷了！
 fishingRod.lineSnap=線被扯斷了！
 fishingRod.bite=噢！牠咬一口啦！

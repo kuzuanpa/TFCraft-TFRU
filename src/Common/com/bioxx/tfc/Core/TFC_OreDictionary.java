@@ -53,71 +53,71 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("fenceWood", new ItemStack(TFCBlocks.fence2, 1, WILD));
 
 		//Ores
-		OreDictionary.registerOre("oreNormalCopper", new ItemStack(TFCItems.oreChunk, 1, 0)); //Native Copper
-		OreDictionary.registerOre("oreNormalCopper", new ItemStack(TFCItems.oreChunk, 1, 9)); //Malachite
-		OreDictionary.registerOre("oreNormalCopper", new ItemStack(TFCItems.oreChunk, 1, 13)); //Tetrahedrite		
-		OreDictionary.registerOre("oreSmallCopper", new ItemStack(TFCItems.smallOreChunk, 1, 0)); //Native Copper
-		OreDictionary.registerOre("oreSmallCopper", new ItemStack(TFCItems.smallOreChunk, 1, 9)); //Malachite
-		OreDictionary.registerOre("oreSmallCopper", new ItemStack(TFCItems.smallOreChunk, 1, 13)); //Tetrahedrite		
-		OreDictionary.registerOre("oreRichCopper", new ItemStack(TFCItems.oreChunk, 1, 35)); //Native Copper
-		OreDictionary.registerOre("oreRichCopper", new ItemStack(TFCItems.oreChunk, 1, 44)); //Malachite
-		OreDictionary.registerOre("oreRichCopper", new ItemStack(TFCItems.oreChunk, 1, 48)); //Tetrahedrite		
-		OreDictionary.registerOre("orePoorCopper", new ItemStack(TFCItems.oreChunk, 1, 49)); //Native Copper
-		OreDictionary.registerOre("orePoorCopper", new ItemStack(TFCItems.oreChunk, 1, 58)); //Malachite
-		OreDictionary.registerOre("orePoorCopper", new ItemStack(TFCItems.oreChunk, 1, 62)); //Tetrahedrite
-
-		OreDictionary.registerOre("oreNormalGold", new ItemStack(TFCItems.oreChunk, 1, 1)); //Native Gold
-		OreDictionary.registerOre("oreSmallGold", new ItemStack(TFCItems.smallOreChunk, 1, 1)); //Native Gold
-		OreDictionary.registerOre("oreRichGold", new ItemStack(TFCItems.oreChunk, 1, 36)); //Native Gold
-		OreDictionary.registerOre("orePoorGold", new ItemStack(TFCItems.oreChunk, 1, 50)); //Native Gold
-
-		OreDictionary.registerOre("oreNormalPlatinum", new ItemStack(TFCItems.oreChunk, 1, 2)); //Native Platinum
-		OreDictionary.registerOre("oreSmallPlatinum", new ItemStack(TFCItems.smallOreChunk, 1, 2)); //Native Platinum
-		OreDictionary.registerOre("oreRichPlatinum", new ItemStack(TFCItems.oreChunk, 1, 37)); //Native Platinum
-		OreDictionary.registerOre("orePoorPlatinum", new ItemStack(TFCItems.oreChunk, 1, 51)); //Native Platinum
-
-		OreDictionary.registerOre("oreNormalIron", new ItemStack(TFCItems.oreChunk, 1, 3)); //Hematite
-		OreDictionary.registerOre("oreNormalIron", new ItemStack(TFCItems.oreChunk, 1, 10)); //Magnetite
-		OreDictionary.registerOre("oreNormalIron", new ItemStack(TFCItems.oreChunk, 1, 11)); //Limonite
-		OreDictionary.registerOre("oreSmallIron", new ItemStack(TFCItems.smallOreChunk, 1, 3)); //Hematite
-		OreDictionary.registerOre("oreSmallIron", new ItemStack(TFCItems.smallOreChunk, 1, 10)); //Magnetite
-		OreDictionary.registerOre("oreSmallIron", new ItemStack(TFCItems.smallOreChunk, 1, 11)); //Limonite		
-		OreDictionary.registerOre("oreRichIron", new ItemStack(TFCItems.oreChunk, 1, 38)); //Hematite
-		OreDictionary.registerOre("oreRichIron", new ItemStack(TFCItems.oreChunk, 1, 45)); //Magnetite
-		OreDictionary.registerOre("oreRichIron", new ItemStack(TFCItems.oreChunk, 1, 46)); //Limonite		
-		OreDictionary.registerOre("orePoorIron", new ItemStack(TFCItems.oreChunk, 1, 52)); //Hematite
-		OreDictionary.registerOre("orePoorIron", new ItemStack(TFCItems.oreChunk, 1, 59)); //Magnetite
-		OreDictionary.registerOre("orePoorIron", new ItemStack(TFCItems.oreChunk, 1, 60)); //Limonite
-
-		OreDictionary.registerOre("oreNormalSilver", new ItemStack(TFCItems.oreChunk, 1, 4)); //Native Silver
-		OreDictionary.registerOre("oreSmallSilver", new ItemStack(TFCItems.smallOreChunk, 1, 4)); //Native Silver
-		OreDictionary.registerOre("oreRichSilver", new ItemStack(TFCItems.oreChunk, 1, 39)); //Native Silver
-		OreDictionary.registerOre("orePoorSilver", new ItemStack(TFCItems.oreChunk, 1, 53)); //Native Silver
-
-		OreDictionary.registerOre("oreNormalTin", new ItemStack(TFCItems.oreChunk, 1, 5)); //Cassiterite
-		OreDictionary.registerOre("oreSmallTin", new ItemStack(TFCItems.smallOreChunk, 1, 5)); //Cassiterite
-		OreDictionary.registerOre("oreRichTin", new ItemStack(TFCItems.oreChunk, 1, 40)); //Cassiterite
-		OreDictionary.registerOre("orePoorTin", new ItemStack(TFCItems.oreChunk, 1, 54)); //Cassiterite
-
-		OreDictionary.registerOre("oreNormalLead", new ItemStack(TFCItems.oreChunk, 1, 6)); //Galena
-		OreDictionary.registerOre("oreSmallLead", new ItemStack(TFCItems.smallOreChunk, 1, 6)); //Galena
-		OreDictionary.registerOre("oreRichLead", new ItemStack(TFCItems.oreChunk, 1, 41)); //Galena
-		OreDictionary.registerOre("orePoorLead", new ItemStack(TFCItems.oreChunk, 1, 55)); //Galena
-
-		OreDictionary.registerOre("oreNormalBismuth", new ItemStack(TFCItems.oreChunk, 1, 7)); //Bismuthinite
-		OreDictionary.registerOre("oreSmallBismuth", new ItemStack(TFCItems.smallOreChunk, 1, 7)); //Bismuthinite
-		OreDictionary.registerOre("oreRichBismuth", new ItemStack(TFCItems.oreChunk, 1, 42)); //Bismuthinite
-		OreDictionary.registerOre("orePoorBismuth", new ItemStack(TFCItems.oreChunk, 1, 56)); //Bismuthinite
-
-		OreDictionary.registerOre("oreNormalNickel", new ItemStack(TFCItems.oreChunk, 1, 8)); //Garnierite
-		OreDictionary.registerOre("oreSmallNickel", new ItemStack(TFCItems.smallOreChunk, 1, 8)); //Garnierite
-		OreDictionary.registerOre("oreRichNickel", new ItemStack(TFCItems.oreChunk, 1, 43)); //Garnierite
-		OreDictionary.registerOre("orePoorNickel", new ItemStack(TFCItems.oreChunk, 1, 57)); //Garnierite
-
-		OreDictionary.registerOre("oreNormalZinc", new ItemStack(TFCItems.oreChunk, 1, 12)); //Sphalerite
-		OreDictionary.registerOre("oreSmallZinc", new ItemStack(TFCItems.smallOreChunk, 1, 12)); //Sphalerite
-		OreDictionary.registerOre("oreRichZinc", new ItemStack(TFCItems.oreChunk, 1, 47)); //Sphalerite
-		OreDictionary.registerOre("orePoorZinc", new ItemStack(TFCItems.oreChunk, 1, 61)); //Sphalerite
+		//OreDictionary.registerOre("oreNormalCopper", new ItemStack(TFCItems.oreChunk, 1, 0)); //Native Copper
+		//OreDictionary.registerOre("oreNormalCopper", new ItemStack(TFCItems.oreChunk, 1, 9)); //Malachite
+		//OreDictionary.registerOre("oreNormalCopper", new ItemStack(TFCItems.oreChunk, 1, 13)); //Tetrahedrite
+		//OreDictionary.registerOre("oreSmallCopper", new ItemStack(TFCItems.smallOreChunk, 1, 0)); //Native Copper
+		//OreDictionary.registerOre("oreSmallCopper", new ItemStack(TFCItems.smallOreChunk, 1, 9)); //Malachite
+		//OreDictionary.registerOre("oreSmallCopper", new ItemStack(TFCItems.smallOreChunk, 1, 13)); //Tetrahedrite
+		//OreDictionary.registerOre("oreRichCopper", new ItemStack(TFCItems.oreChunk, 1, 35)); //Native Copper
+		//OreDictionary.registerOre("oreRichCopper", new ItemStack(TFCItems.oreChunk, 1, 44)); //Malachite
+		//OreDictionary.registerOre("oreRichCopper", new ItemStack(TFCItems.oreChunk, 1, 48)); //Tetrahedrite
+		//OreDictionary.registerOre("orePoorCopper", new ItemStack(TFCItems.oreChunk, 1, 49)); //Native Copper
+		//OreDictionary.registerOre("orePoorCopper", new ItemStack(TFCItems.oreChunk, 1, 58)); //Malachite
+		//OreDictionary.registerOre("orePoorCopper", new ItemStack(TFCItems.oreChunk, 1, 62)); //Tetrahedrite
+		//
+		//OreDictionary.registerOre("oreNormalGold", new ItemStack(TFCItems.oreChunk, 1, 1)); //Native Gold
+		//OreDictionary.registerOre("oreSmallGold", new ItemStack(TFCItems.smallOreChunk, 1, 1)); //Native Gold
+		//OreDictionary.registerOre("oreRichGold", new ItemStack(TFCItems.oreChunk, 1, 36)); //Native Gold
+		//OreDictionary.registerOre("orePoorGold", new ItemStack(TFCItems.oreChunk, 1, 50)); //Native Gold
+		//
+		//OreDictionary.registerOre("oreNormalPlatinum", new ItemStack(TFCItems.oreChunk, 1, 2)); //Native Platinum
+		//OreDictionary.registerOre("oreSmallPlatinum", new ItemStack(TFCItems.smallOreChunk, 1, 2)); //Native Platinum
+		//OreDictionary.registerOre("oreRichPlatinum", new ItemStack(TFCItems.oreChunk, 1, 37)); //Native Platinum
+		//OreDictionary.registerOre("orePoorPlatinum", new ItemStack(TFCItems.oreChunk, 1, 51)); //Native Platinum
+		//
+		//OreDictionary.registerOre("oreNormalIron", new ItemStack(TFCItems.oreChunk, 1, 3)); //Hematite
+		//OreDictionary.registerOre("oreNormalIron", new ItemStack(TFCItems.oreChunk, 1, 10)); //Magnetite
+		//OreDictionary.registerOre("oreNormalIron", new ItemStack(TFCItems.oreChunk, 1, 11)); //Limonite
+		//OreDictionary.registerOre("oreSmallIron", new ItemStack(TFCItems.smallOreChunk, 1, 3)); //Hematite
+		//OreDictionary.registerOre("oreSmallIron", new ItemStack(TFCItems.smallOreChunk, 1, 10)); //Magnetite
+		//OreDictionary.registerOre("oreSmallIron", new ItemStack(TFCItems.smallOreChunk, 1, 11)); //Limonite
+		//OreDictionary.registerOre("oreRichIron", new ItemStack(TFCItems.oreChunk, 1, 38)); //Hematite
+		//OreDictionary.registerOre("oreRichIron", new ItemStack(TFCItems.oreChunk, 1, 45)); //Magnetite
+		//OreDictionary.registerOre("oreRichIron", new ItemStack(TFCItems.oreChunk, 1, 46)); //Limonite
+		//OreDictionary.registerOre("orePoorIron", new ItemStack(TFCItems.oreChunk, 1, 52)); //Hematite
+		//OreDictionary.registerOre("orePoorIron", new ItemStack(TFCItems.oreChunk, 1, 59)); //Magnetite
+		//OreDictionary.registerOre("orePoorIron", new ItemStack(TFCItems.oreChunk, 1, 60)); //Limonite
+		//
+		//OreDictionary.registerOre("oreNormalSilver", new ItemStack(TFCItems.oreChunk, 1, 4)); //Native Silver
+		//OreDictionary.registerOre("oreSmallSilver", new ItemStack(TFCItems.smallOreChunk, 1, 4)); //Native Silver
+		//OreDictionary.registerOre("oreRichSilver", new ItemStack(TFCItems.oreChunk, 1, 39)); //Native Silver
+		//OreDictionary.registerOre("orePoorSilver", new ItemStack(TFCItems.oreChunk, 1, 53)); //Native Silver
+		//
+		//OreDictionary.registerOre("oreNormalTin", new ItemStack(TFCItems.oreChunk, 1, 5)); //Cassiterite
+		//OreDictionary.registerOre("oreSmallTin", new ItemStack(TFCItems.smallOreChunk, 1, 5)); //Cassiterite
+		//OreDictionary.registerOre("oreRichTin", new ItemStack(TFCItems.oreChunk, 1, 40)); //Cassiterite
+		//OreDictionary.registerOre("orePoorTin", new ItemStack(TFCItems.oreChunk, 1, 54)); //Cassiterite
+		//
+		//OreDictionary.registerOre("oreNormalLead", new ItemStack(TFCItems.oreChunk, 1, 6)); //Galena
+		//OreDictionary.registerOre("oreSmallLead", new ItemStack(TFCItems.smallOreChunk, 1, 6)); //Galena
+		//OreDictionary.registerOre("oreRichLead", new ItemStack(TFCItems.oreChunk, 1, 41)); //Galena
+		//OreDictionary.registerOre("orePoorLead", new ItemStack(TFCItems.oreChunk, 1, 55)); //Galena
+		//
+		//OreDictionary.registerOre("oreNormalBismuth", new ItemStack(TFCItems.oreChunk, 1, 7)); //Bismuthinite
+		//OreDictionary.registerOre("oreSmallBismuth", new ItemStack(TFCItems.smallOreChunk, 1, 7)); //Bismuthinite
+		//OreDictionary.registerOre("oreRichBismuth", new ItemStack(TFCItems.oreChunk, 1, 42)); //Bismuthinite
+		//OreDictionary.registerOre("orePoorBismuth", new ItemStack(TFCItems.oreChunk, 1, 56)); //Bismuthinite
+		//
+		//OreDictionary.registerOre("oreNormalNickel", new ItemStack(TFCItems.oreChunk, 1, 8)); //Garnierite
+		//OreDictionary.registerOre("oreSmallNickel", new ItemStack(TFCItems.smallOreChunk, 1, 8)); //Garnierite
+		//OreDictionary.registerOre("oreRichNickel", new ItemStack(TFCItems.oreChunk, 1, 43)); //Garnierite
+		//OreDictionary.registerOre("orePoorNickel", new ItemStack(TFCItems.oreChunk, 1, 57)); //Garnierite
+		//
+		//OreDictionary.registerOre("oreNormalZinc", new ItemStack(TFCItems.oreChunk, 1, 12)); //Sphalerite
+		//OreDictionary.registerOre("oreSmallZinc", new ItemStack(TFCItems.smallOreChunk, 1, 12)); //Sphalerite
+		//OreDictionary.registerOre("oreRichZinc", new ItemStack(TFCItems.oreChunk, 1, 47)); //Sphalerite
+		//OreDictionary.registerOre("orePoorZinc", new ItemStack(TFCItems.oreChunk, 1, 61)); //Sphalerite
 
 		OreDictionary.registerOre("oreCoal", new ItemStack(TFCItems.oreChunk, 1, 14)); //Bituminous Coal
 		OreDictionary.registerOre("oreCoal", new ItemStack(TFCItems.oreChunk, 1, 15)); //Lignite
@@ -153,7 +153,7 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("dustLapis", new ItemStack(TFCItems.powder, 1, 6)); //Lapis
 		OreDictionary.registerOre("dustSalt", new ItemStack(TFCItems.powder, 1, 9)); //Salt
 
-		//Nuggets
+		//Nuggetsq
 		OreDictionary.registerOre("blockBismuth", new ItemStack(TFCBlocks.metalBlock, 1, 0));
 		OreDictionary.registerOre("nuggetAnyBronze", new ItemStack(TFCItems.smallMetalChunk, 1, 1));
 		OreDictionary.registerOre("nuggetBismuthBronze", new ItemStack(TFCItems.smallMetalChunk, 1, 1));
