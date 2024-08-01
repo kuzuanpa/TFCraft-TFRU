@@ -24,22 +24,22 @@ public class TFCBiome extends BiomeGenBase
 	public static TFCBiome[] biomeList = new TFCBiome[256];
 
 	/** An array of all the biomes, indexed by biome id. */
-	public static final TFCBiome OCEAN           = new TFCBiome(40).setBiomeName("Ocean").setMinMaxHeight(-0.9F, 0.00001F).setBiomeColor(0x0000ff).setTemperatureRainfall(2.0F, 0.0F);
-	public static final TFCBiome PLAINS          = new TFCBiome(41).setBiomeName("Plains").setMinMaxHeight(0.1F, 0.16F).setBiomeColor(0x69dfa0).setTemperatureRainfall(5.0F, 0.0F);
-	public static final TFCBiome LAKE            = new TFCBiome(42).setBiomeName("Lake").setMinMaxHeight(-0.5F, 0.001F).setBiomeColor(0x4a8e9e).setLilyPads(2).setTemperatureRainfall(5.0F, 0.0F);
-	public static final TFCBiome HIGH_HILLS      = new TFCBiome(43).setBiomeName("High Hills").setMinMaxHeight(0.8F, 1.6F).setBiomeColor(0x044f27).setTemperatureRainfall(2.0F, 0.0F);
-	public static final TFCBiome SWAMPLAND       = new TFCBiome(46).setBiomeName("Swamp").setMinMaxHeight(-0.1F, 0.1F).setBiomeColor(0x1f392b).setLilyPads(8).setWaterPlants(45).setTemperatureRainfall(5.5F, 0.0F);
-	public static final TFCBiome RIVER           = new TFCBiome(47).setBiomeName("River").setMinMaxHeight(riverDepthMin, riverDepthMax).setBiomeColor(0xffffff).setTemperatureRainfall(4.0F, 0.0F);
-	public static final TFCBiome HELL            = new TFCBiome(48).setColor(16711680).setBiomeName("Hell").setDisableRain().setTemperatureRainfall(20.0F, 0.0F);
-	public static final TFCBiome BEACH           = new TFCBiome(49).setColor(0xfade55).setBiomeName("Beach").setMinMaxHeight(0.01F, 0.02F).setBiomeColor(0xffb873).setTemperatureRainfall(2.0F, 0.0F);
-	public static final TFCBiome GRAVEL_BEACH    = new TFCBiome(50).setColor(0xfade55).setBiomeName("Gravel Beach").setMinMaxHeight(0.01F, 0.02F).setBiomeColor(0x8f7963).setTemperatureRainfall(2.0F, 0.0F);
-	public static final TFCBiome DEEP_OCEAN      = new TFCBiome(51).setBiomeName("Deep Ocean").setMinMaxHeight(-1.5F, 0.00001F).setBiomeColor(0x0e055a).setTemperatureRainfall(0.0F, 0.0F);
-	public static final TFCBiome HIGH_HILLS_EDGE = new TFCBiome(52).setBiomeName("High Hills Edge").setMinMaxHeight(0.2F, 0.4F).setBiomeColor(0x30a767).setTemperatureRainfall(2.0F, 0.0F);
-	public static final TFCBiome JUNGLE          = new TFCBiome(53).setBiomeName("Jungle").setMinMaxHeight(0.2F, 0.23F).setBiomeColor(0x3bbb0b).setTemperatureRainfall(6.0F, 0.0F).setLilyPads(2).setWaterPlants(10);
-	public static final TFCBiome ROLLING_HILLS   = new TFCBiome(54).setBiomeName("Rolling Hills").setMinMaxHeight(0.1F, 0.4F).setBiomeColor(0x87b434).setTemperatureRainfall(2.0F, 0.0F);
-	public static final TFCBiome MOUNTAINS       = new TFCBiome(55).setBiomeName("Mountains").setMinMaxHeight(0.8F, 1.6F).setBiomeColor(0x707960).setTemperatureRainfall(1.5F, 0.0F);
-	public static final TFCBiome MOUNTAINS_EDGE  = new TFCBiome(56).setBiomeName("Mountains Edge").setMinMaxHeight(0.4F, 0.8F).setBiomeColor(0xb2bc9f).setTemperatureRainfall(2.0F, 0.0F);
-	public static final TFCBiome HIGH_PLAINS     = new TFCBiome(57).setBiomeName("High Plains").setMinMaxHeight(0.4F, 0.43F).setBiomeColor(0xa6a41c).setTemperatureRainfall(3.0F, 0.0F);
+	public static final TFCBiome OCEAN           = new TFCBiome(40)                   .setBiomeName("Ocean")          .setMinMaxHeight(-0.9F, 0.00005F)              .setBiomeColor(0x0000ff).setTemperatureRainfall(2.0F, 1.0F);
+	public static final TFCBiome PLAINS          = new TFCBiome(41)                   .setBiomeName("Plains")         .setMinMaxHeight(0.1F, 0.16F)                  .setBiomeColor(0x69dfa0).setTemperatureRainfall(5.0F, 0.2F);
+	public static final TFCBiome LAKE            = new TFCBiome(42)                   .setBiomeName("Lake")           .setMinMaxHeight(-0.5F, 0.001F)                .setBiomeColor(0x4a8e9e).setTemperatureRainfall(5.0F, 0.1F).setLilyPads(2);
+	public static final TFCBiome HIGH_HILLS      = new TFCBiome(43)                   .setBiomeName("High Hills")     .setMinMaxHeight(0.8F, 1.6F)                   .setBiomeColor(0x044f27).setTemperatureRainfall(2.0F, 0.1F);
+	public static final TFCBiome SWAMPLAND       = new TFCBiome(46)                   .setBiomeName("Swamp")          .setMinMaxHeight(-0.1F, 0.1F)                  .setBiomeColor(0x1f392b).setTemperatureRainfall(5.5F, 0.4F).setLilyPads(8).setWaterPlants(45);
+	public static final TFCBiome RIVER           = new TFCBiome(47)                   .setBiomeName("River")          .setMinMaxHeight(riverDepthMin, riverDepthMax) .setBiomeColor(0xffffff).setTemperatureRainfall(4.0F, 0.4F);
+	public static final TFCBiome HELL            = new TFCBiome(48).setColor(16711680).setBiomeName("Hell")           .setDisableRain().setTemperatureRainfall(20.0F, 0.0F);
+	public static final TFCBiome BEACH           = new TFCBiome(49).setColor(0xfade55).setBiomeName("Beach")          .setMinMaxHeight(0.01F, 0.02F)                 .setBiomeColor(0xffb873).setTemperatureRainfall(2.0F, 0.4F);
+	public static final TFCBiome GRAVEL_BEACH    = new TFCBiome(50).setColor(0xfade55).setBiomeName("Gravel Beach")   .setMinMaxHeight(0.01F, 0.02F)                 .setBiomeColor(0x8f7963).setTemperatureRainfall(2.0F, 0.4F);
+	public static final TFCBiome DEEP_OCEAN      = new TFCBiome(51)                   .setBiomeName("Deep Ocean")     .setMinMaxHeight(-1.5F, 0.00001F)              .setBiomeColor(0x0e055a).setTemperatureRainfall(0.0F, 0.5F);
+	public static final TFCBiome HIGH_HILLS_EDGE = new TFCBiome(52)                   .setBiomeName("High Hills Edge").setMinMaxHeight(0.2F, 0.4F)                   .setBiomeColor(0x30a767).setTemperatureRainfall(2.0F, 0.2F);
+	public static final TFCBiome JUNGLE          = new TFCBiome(53)                   .setBiomeName("Jungle")         .setMinMaxHeight(0.2F, 0.23F)                  .setBiomeColor(0x3bbb0b).setTemperatureRainfall(6.0F, 0.4F).setLilyPads(2).setWaterPlants(10);
+	public static final TFCBiome ROLLING_HILLS   = new TFCBiome(54)                   .setBiomeName("Rolling Hills")  .setMinMaxHeight(0.1F, 0.4F)                   .setBiomeColor(0x87b434).setTemperatureRainfall(2.0F, 0.1F);
+	public static final TFCBiome MOUNTAINS       = new TFCBiome(55)                   .setBiomeName("Mountains")      .setMinMaxHeight(0.8F, 1.6F)                   .setBiomeColor(0x707960).setTemperatureRainfall(1.5F, 0.1F);
+	public static final TFCBiome MOUNTAINS_EDGE  = new TFCBiome(56)                   .setBiomeName("Mountains Edge") .setMinMaxHeight(0.4F, 0.8F)                   .setBiomeColor(0xb2bc9f).setTemperatureRainfall(2.0F, 0.1F);
+	public static final TFCBiome HIGH_PLAINS     = new TFCBiome(57)                   .setBiomeName("High Plains")    .setMinMaxHeight(0.4F, 0.43F)                  .setBiomeColor(0xa6a41c).setTemperatureRainfall(3.0F, 0.1F);
 
 	protected static WorldGenAcaciaKoaTrees worldGenAcaciaKoaTrees;
 	protected static WorldGenCustomTallTrees worldGenAshTallTrees;
@@ -191,10 +191,10 @@ public class TFCBiome extends BiomeGenBase
 	}
 
 	@Override
-	public TFCBiome setTemperatureRainfall(float par1, float par2)
+	public TFCBiome setTemperatureRainfall(float temp, float rain)
 	{
-		this.temperature=par1;
-		this.rainfall = par2;
+		this.temperature=temp;
+		this.rainfall = rain;
 		return this;
 	}
 

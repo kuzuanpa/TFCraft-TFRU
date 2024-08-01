@@ -60,8 +60,8 @@ public class EntityDamageHandler
 			event.ammount = (35+entity.getRNG().nextInt(15));
 		} else if (event.source == DamageSource.fall) {
 			//float healthMod = TFC_Core.getEntityMaxHealth(entity)/1000f;
-			event.ammount *= 80/*healthMod*/;
-			entity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 5, 1));
+			entity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), (int) event.ammount/2, event.ammount<10?1:3));
+			event.ammount *= 50/*healthMod*/;
 		} else if (event.source == DamageSource.drown) {
 			event.ammount = 50;
 		} else if (event.source == DamageSource.lava) {
@@ -72,6 +72,8 @@ public class EntityDamageHandler
 			event.ammount = applyArmorCalculations(entity, event.source, 400);
 		} else if (event.source == DamageSource.fallingBlock) {
 			event.ammount = (25+entity.getRNG().nextInt(75));
+		} else if (event.source == DamageSource.outOfWorld) {
+			event.ammount = 200;
 		} else if (event.source.damageType.equals("hotFloor")) { //Lava Block from Et future Requiem
 			event.ammount = (2+entity.getRNG().nextInt(3));
 		} else if (event.source.damageType.equals("cryotheum")) { //Cryotheum from Thermal Expansion

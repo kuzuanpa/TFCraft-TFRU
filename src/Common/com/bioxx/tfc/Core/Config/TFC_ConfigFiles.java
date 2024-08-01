@@ -520,12 +520,12 @@ public class TFC_ConfigFiles
 
 
 		//Surface Ore
-		oreList.put("Bituminous Coal",      getOreData("Bituminous Coal",       "default","small",MOD_ID + ":Ore1", 14, 180, new String[]{"sedimentary"}                                   ,  86, 240, 70, 60));
-		oreList.put("Native Copper Surface",getOreData("Native Copper Surface", "veins", "small", MOD_ID + ":Ore1",  0, 30, new String[]{"igneous intrusive", "igneous extrusive"}         , 108, 240, 30, 30));
-		oreList.put("Cassiterite Surface" , getOreData("Cassiterite Surface"  , "veins", "small", MOD_ID + ":Ore1",  5, 30, new String[]{"granite"}                                        , 108, 240, 30, 30));
-		oreList.put("Bismuthinite Surface", getOreData("Bismuthinite Surface" , "veins", "small", MOD_ID + ":Ore1",  7, 30, new String[]{"igneous extrusive", "sedimentary"}               , 108, 240, 30, 30));
-		oreList.put("Sphalerite Surface"  , getOreData("Sphalerite Surface"   , "veins", "small", MOD_ID + ":Ore1", 12, 30, new String[]{"metamorphic"}                                    , 108, 240, 30, 30));
-		oreList.put("Tetrahedrite Surface", getOreData("Tetrahedrite Surface" , "veins", "small", MOD_ID + ":Ore1", 13, 30, new String[]{"metamorphic","sedimentary"}                      , 108, 240, 30, 30));
+		oreList.put("Bituminous Coal",      getOreData("Bituminous Coal",       "default","small",MOD_ID + ":Ore1", 14, 180, new String[]{"sedimentary"}                                   ,  86, 240, 60, 60));
+		oreList.put("Native Copper Surface",getOreData("Native Copper Surface", "veins", "small", MOD_ID + ":Ore1",  0, 30, new String[]{"igneous intrusive", "igneous extrusive"}         , 108, 240, 20, 20));
+		oreList.put("Cassiterite Surface" , getOreData("Cassiterite Surface"  , "veins", "small", MOD_ID + ":Ore1",  5, 30, new String[]{"granite"}                                        , 108, 240, 20, 20));
+		oreList.put("Bismuthinite Surface", getOreData("Bismuthinite Surface" , "veins", "small", MOD_ID + ":Ore1",  7, 30, new String[]{"igneous extrusive", "sedimentary"}               , 108, 240, 20, 20));
+		oreList.put("Sphalerite Surface"  , getOreData("Sphalerite Surface"   , "veins", "small", MOD_ID + ":Ore1", 12, 30, new String[]{"metamorphic"}                                    , 108, 240, 20, 20));
+		oreList.put("Tetrahedrite Surface", getOreData("Tetrahedrite Surface" , "veins", "small", MOD_ID + ":Ore1", 13, 30, new String[]{"metamorphic","sedimentary"}                      , 108, 240, 20, 20));
 
 		// getCategoryNames returns an ImmutableSet
 		for (String s : oresConfig.getCategoryNames())
