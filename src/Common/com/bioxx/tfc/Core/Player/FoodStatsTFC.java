@@ -39,7 +39,7 @@ public class FoodStatsTFC
 	/** The player's food level. This measures how much food the player can handle.*/
 	public float stomachLevel = 20;
 	public float stomachLevelModifier = 0.0F;
-	private final float stomachMax = 20.0f, vanillaPositiveRate=0.4F,vanillaNegativeRate=0.2F;
+	private final float stomachMax = 20.0f, vanillaPositiveRate=0.4F,vanillaNegativeRate=0.3F;
 	private float prevFoodLevel = 20;
 
 	private final ResourceLocation drunkBlur = new ResourceLocation("shaders/post/blur.json");

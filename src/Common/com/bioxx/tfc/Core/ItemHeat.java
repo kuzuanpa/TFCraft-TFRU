@@ -180,6 +180,12 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.unknownIngot,1), copperRaw,new ItemStack(TFCItems.unknownUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.unknownUnshaped,1), copperRaw,new ItemStack(TFCItems.unknownUnshaped,1)));
 
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronUnshaped,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronIngot,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronIngot2x,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,2)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronSheet,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronSheet2x,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,2)));
+
 
 		//Food
 		//Proteins
