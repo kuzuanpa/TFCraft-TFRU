@@ -62,27 +62,29 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class TFC_Core
 {
-	private static Map<Integer, ChunkDataManager> cdmMap = new HashMap<Integer, ChunkDataManager>();
+	private static final Map<Integer, ChunkDataManager> cdmMap = new HashMap<Integer, ChunkDataManager>();
+	private static final Map<Integer, ChunkDataManager> cdmMapRemote = new HashMap<Integer, ChunkDataManager>();
 	public static boolean preventEntityDataUpdate;
 
 	public static ChunkDataManager getCDM(World world)
 	{
-		int key = world.isRemote ? 128 | world.provider.dimensionId : world.provider.dimensionId;
-		return cdmMap.get(key);
+		return world.isRemote ? cdmMapRemote.get(world.provider.dimensionId):cdmMap.get(world.provider.dimensionId);
+	}
+	public static ChunkDataManager getRemoteCDM(World world)
+	{
+		return cdmMapRemote.get(world.provider.dimensionId);
 	}
 
 	public static ChunkDataManager addCDM(World world)
 	{
-		int key = world.isRemote ? 128 | world.provider.dimensionId : world.provider.dimensionId;
-		if(!cdmMap.containsKey(key))
-			return cdmMap.put(key, new ChunkDataManager(world));
-		else return cdmMap.get(key);
+		Map<Integer, ChunkDataManager> map = world.isRemote? cdmMapRemote:cdmMap;
+		if(!map.containsKey(world.provider.dimensionId)) return map.put(world.provider.dimensionId, new ChunkDataManager(world));
+		else return map.get(world.provider.dimensionId);
 	}
 
 	public static ChunkDataManager removeCDM(World world)
 	{
-		int key = world.isRemote ? 128 | world.provider.dimensionId : world.provider.dimensionId;
-		return cdmMap.remove(key);
+		return world.isRemote? cdmMapRemote.remove(world.provider.dimensionId) : cdmMap.remove(world.provider.dimensionId);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -1106,7 +1108,6 @@ public class TFC_Core
 	/**
 	 * @param is
 	 * @param baseDecayMod
-	 * @param nbt
 	 */
 	public static ItemStack tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecayFactor, float baseDecayMod)
 	{

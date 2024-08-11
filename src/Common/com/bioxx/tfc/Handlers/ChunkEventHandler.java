@@ -140,7 +140,7 @@ public class ChunkEventHandler
 	{
 		if(event.world.provider.dimensionId == 0 && event.world.getTotalWorldTime() < 100)
 			createSpawn(event.world);
-		if(!event.world.isRemote && event.world.provider.dimensionId == 0 && AnvilManager.getInstance().getRecipeList().size() == 0)
+		if(!event.world.isRemote && AnvilManager.getInstance().getRecipeList().isEmpty())
 		{
 			TFC_Core.setupWorld(event.world);
 		}
@@ -191,8 +191,10 @@ public class ChunkEventHandler
 				// Why was this line here in the first place?
 				//spawnProtectionTag = new NBTTagCompound();
 				event.getData().setTag("ChunkData", spawnProtectionTag);
-				if(data.isUnloaded)
+				if(data.isUnloaded) {
 					TFC_Core.getCDM(event.world).removeData(x, z);
+					TFC_Core.getRemoteCDM(event.world).removeData(x, z);
+				}
 			}
 		}
 	}
