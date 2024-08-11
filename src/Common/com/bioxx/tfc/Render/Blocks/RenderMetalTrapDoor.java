@@ -19,6 +19,7 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 	{
 		IBlockAccess access = renderer.blockAccess;
 		TEMetalTrapDoor te = (TEMetalTrapDoor)access.getTileEntity(i, j, k);
+		if(te == null)return false; //Random NullPointer crash, why???
 		int side = te.data & 7;
 		int hinge = te.data >> 4;
 		float f = 0.0625f;
