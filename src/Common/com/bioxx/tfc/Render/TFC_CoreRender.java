@@ -32,6 +32,7 @@ public class TFC_CoreRender
 {
 	public static boolean renderBlockSlab(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
+		if(!(renderblocks.blockAccess.getTileEntity(x, y, z) instanceof TEPartial)) return false;
 		TEPartial te = (TEPartial) renderblocks.blockAccess.getTileEntity(x, y, z);
 		//int md = renderblocks.blockAccess.getBlockMetadata(x, y, z);
 
@@ -108,7 +109,7 @@ public class TFC_CoreRender
 			var9 = 0.0F;
 			var10 = 0.5F;
 		}*/
-
+		if(!(renderblocks.blockAccess.getTileEntity(x, y, z) instanceof TEPartial)) return false;
 		TEPartial te = (TEPartial) renderblocks.blockAccess.getTileEntity(x, y, z);
 		if(te.typeID <= 0)
 			return false;
@@ -243,7 +244,7 @@ public class TFC_CoreRender
 			renderblocks.renderStandardBlock(block, i, j, k);
 		}
 
-		if(!((TEFruitTreeWood)blockAccess.getTileEntity(i, j, k)).isTrunk && blockAccess.getBlock(i, j-1, k) != TFCBlocks.fruitTreeWood && !blockAccess.getBlock(i, j-1, k).isOpaqueCube())
+		if(!(blockAccess.getTileEntity(i, j, k) instanceof TEFruitTreeWood) && ((TEFruitTreeWood)blockAccess.getTileEntity(i, j, k)).isTrunk && blockAccess.getBlock(i, j-1, k) != TFCBlocks.fruitTreeWood && !blockAccess.getBlock(i, j-1, k).isOpaqueCube())
 		{
 			renderblocks.setRenderBounds(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
 			renderblocks.renderStandardBlock(block, i, j, k);

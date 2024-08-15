@@ -3,6 +3,7 @@ package com.bioxx.tfc.Handlers;
 import java.util.List;
 import java.util.Random;
 
+import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
@@ -125,9 +126,15 @@ public class ChunkEventHandler
 	@SubscribeEvent
 	public void onUnload(ChunkEvent.Unload event)
 	{
-		if(TFC_Core.getCDM(event.world) != null && 
-				TFC_Core.getCDM(event.world).getData(event.getChunk().xPosition, event.getChunk().zPosition) != null)
-			TFC_Core.getCDM(event.world).getData(event.getChunk().xPosition, event.getChunk().zPosition).isUnloaded = true;
+		//TODO: Random NPE crash, why???
+		World w = event.world;
+		ChunkDataManager cdm = TFC_Core.getCDM(w);
+		if(cdm == null) return;
+		Chunk c = event.getChunk();
+		int posX=c.xPosition;
+		int posZ=c.zPosition;
+		ChunkData cd = cdm.getData(posX, posZ);
+		if(cd != null) cd.isUnloaded = true;
 	}
 
 	@SubscribeEvent
@@ -196,7 +203,8 @@ public class ChunkEventHandler
 				event.getData().setTag("ChunkData", spawnProtectionTag);
 				if(data.isUnloaded) {
 					TFC_Core.getCDM(event.world).removeData(x, z);
-					TFC_Core.getRemoteCDM(event.world).removeData(x, z);
+					//fix memory leak
+					if(TFC_Core.getRemoteCDM(event.world)!=null)TFC_Core.getRemoteCDM(event.world).removeData(x, z);
 				}
 			}
 		}

@@ -194,120 +194,121 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		NBTTagCompound stackTagCompound = itemstack.getTagCompound();
-
-		if (entityplayer.isSneaking() &&stackTagCompound == null && itemstack.getItem().getUnlocalizedName().indexOf("Double") == -1 &&
-			this.isPlaceable(itemstack))
-		{
-			int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
-			if (!world.isRemote && entityplayer.isSneaking() && (world.getBlock(x, y, z) != TFCBlocks.ingotPile || side != 1 && side != 0))
-			{
-
-				if(createPile(itemstack, entityplayer, world, x, y, z, side, dir))
-				{
-
-					itemstack.stackSize = itemstack.stackSize-1;
-					world.addBlockEvent(x,y,z,TFCBlocks.ingotPile,0,0);
-					return true;
-
-				}
-			}
-			else if(world.getBlock(x, y, z) == TFCBlocks.ingotPile)
-			{
-				TEIngotPile te = (TEIngotPile)world.getTileEntity(x, y, z);
-				//TileEntityIngotPile te2 = (TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getTileEntity(x, y, z);
-				if(te != null)
-				{
-					te.getBlockType().onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
-					if(te.storage[0] != null && te.contentsMatch(0,itemstack) && te.storage[0].stackSize < 64) 
-					{
-						te.injectContents(0,1);
-						te.validate();
-					} 
-					else if(te.storage[0] != null && !te.contentsMatch(0,itemstack) && te.storage[0].stackSize < 64) 
-					{
-						return false;
-					}
-					else if(te.storage[0] == null) 
-					{
-						te.addContents(0, new ItemStack(this,1));
-					} 
-					else
-					{
-						if(createPile(itemstack, entityplayer, world, x, y, z, side, dir))
-						{
-							itemstack.stackSize = itemstack.stackSize-1;
-							/*if (world.getTileEntity(x,y,z) != null)
-							{
-								//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
-							}*/
-							world.addBlockEvent(x,y,z,TFCBlocks.ingotPile,0,0);
-							te.getBlockType().onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
-						}
-						return true;
-
-					}
-					itemstack.stackSize = itemstack.stackSize-1;
-					/*if (world.getTileEntity(x,y,z) != null)
-					{
-						//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
-					}*/
-					world.addBlockEvent(x,y,z,TFCBlocks.ingotPile,0,0);
-					return true;
-				}
-
-			}
-			else
-			{
-				int m = itemstack.getItemDamage();
-				if(side == 1)
-				{
-					if (m>=16){
-						world.setBlock(x, y+1, z, TFCBlocks.ingotPile, m, 0x2);
-						itemstack.stackSize = itemstack.stackSize-1;
-					}
-					else{
-						world.setBlock(x, y+1, z, TFCBlocks.ingotPile, m, 0x2);
-						itemstack.stackSize = itemstack.stackSize-1;
-					}
-				}
-				else if(side == 0 && world.isAirBlock(x, y-1, z))
-				{
-					if(m >=16){
-						world.setBlock(x, y-1, z, TFCBlocks.ingotPile, m, 0x2);
-						itemstack.stackSize = itemstack.stackSize-1;
-					}
-					else{
-						world.setBlock(x, y-1, z, TFCBlocks.ingotPile, m, 0x2);
-						itemstack.stackSize = itemstack.stackSize-1;
-					}
-				}
-				else if(side == 2 && world.isAirBlock(x, y, z-1))
-				{
-					setSide(world, itemstack, m, dir, x, y, z, 0, 0, -1);
-				}
-				else if(side == 3 && world.isAirBlock(x, y, z+1))
-				{
-					setSide(world, itemstack, m, dir, x, y, z, 0, 0, 1);
-				}
-				else if(side == 4 && world.isAirBlock(x-1, y, z))
-				{
-					setSide(world, itemstack, m, dir, x, y, z, -1, 0, 0);
-				}
-				else if(side == 5 && world.isAirBlock(x+1, y, z))
-				{
-					setSide(world, itemstack, m, dir, x, y, z, 1, 0, 0);
-				}
-				/*if (world.getTileEntity(x,y,z) != null && world.getTileEntity(x,y,z) instanceof TEIngotPile)
-				{
-					//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(this.getItem() - 16028 - 256);
-				}*/
-				world.addBlockEvent(x,y,z,TFCBlocks.ingotPile,0,0);
-				return true;
-			}
-
-		}
 		return false;
+	//	NBTTagCompound stackTagCompound = itemstack.getTagCompound();
+	   //
+	//	if (entityplayer.isSneaking() &&stackTagCompound == null && itemstack.getItem().getUnlocalizedName().indexOf("Double") == -1 &&
+	//		this.isPlaceable(itemstack))
+	//	{
+	//		int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
+	//		if (!world.isRemote && entityplayer.isSneaking() && (world.getBlock(x, y, z) != TFCBlocks.ingotPile || side != 1 && side != 0))
+	//		{
+	   //
+	//			if(createPile(itemstack, entityplayer, world, x, y, z, side, dir))
+	//			{
+	   //
+	//				itemstack.stackSize = itemstack.stackSize-1;
+	//				world.addBlockEvent(x,y,z,TFCBlocks.ingotPile,0,0);
+	//				return true;
+	   //
+	//			}
+	//		}
+	//		else if(world.getBlock(x, y, z) == TFCBlocks.ingotPile)
+	//		{
+	//			TEIngotPile te = (TEIngotPile)world.getTileEntity(x, y, z);
+	//			//TileEntityIngotPile te2 = (TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getTileEntity(x, y, z);
+	//			if(te != null)
+	//			{
+	//				te.getBlockType().onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
+	//				if(te.storage[0] != null && te.contentsMatch(0,itemstack) && te.storage[0].stackSize < 64)
+	//				{
+	//					te.injectContents(0,1);
+	//					te.validate();
+	//				}
+	//				else if(te.storage[0] != null && !te.contentsMatch(0,itemstack) && te.storage[0].stackSize < 64)
+	//				{
+	//					return false;
+	//				}
+	//				else if(te.storage[0] == null)
+	//				{
+	//					te.addContents(0, new ItemStack(this,1));
+	//				}
+	//				else
+	//				{
+	//					if(createPile(itemstack, entityplayer, world, x, y, z, side, dir))
+	//					{
+	//						itemstack.stackSize = itemstack.stackSize-1;
+	//						/*if (world.getTileEntity(x,y,z) != null)
+	//						{
+	//							//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
+	//						}*/
+	//						world.addBlockEvent(x,y,z,TFCBlocks.ingotPile,0,0);
+	//						te.getBlockType().onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
+	//					}
+	//					return true;
+	   //
+	//				}
+	//				itemstack.stackSize = itemstack.stackSize-1;
+	//				/*if (world.getTileEntity(x,y,z) != null)
+	//				{
+	//					//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
+	//				}*/
+	//				world.addBlockEvent(x,y,z,TFCBlocks.ingotPile,0,0);
+	//				return true;
+	//			}
+	   //
+	//		}
+	//		else
+	//		{
+	//			int m = itemstack.getItemDamage();
+	//			if(side == 1)
+	//			{
+	//				if (m>=16){
+	//					world.setBlock(x, y+1, z, TFCBlocks.ingotPile, m, 0x2);
+	//					itemstack.stackSize = itemstack.stackSize-1;
+	//				}
+	//				else{
+	//					world.setBlock(x, y+1, z, TFCBlocks.ingotPile, m, 0x2);
+	//					itemstack.stackSize = itemstack.stackSize-1;
+	//				}
+	//			}
+	//			else if(side == 0 && world.isAirBlock(x, y-1, z))
+	//			{
+	//				if(m >=16){
+	//					world.setBlock(x, y-1, z, TFCBlocks.ingotPile, m, 0x2);
+	//					itemstack.stackSize = itemstack.stackSize-1;
+	//				}
+	//				else{
+	//					world.setBlock(x, y-1, z, TFCBlocks.ingotPile, m, 0x2);
+	//					itemstack.stackSize = itemstack.stackSize-1;
+	//				}
+	//			}
+	//			else if(side == 2 && world.isAirBlock(x, y, z-1))
+	//			{
+	//				setSide(world, itemstack, m, dir, x, y, z, 0, 0, -1);
+	//			}
+	//			else if(side == 3 && world.isAirBlock(x, y, z+1))
+	//			{
+	//				setSide(world, itemstack, m, dir, x, y, z, 0, 0, 1);
+	//			}
+	//			else if(side == 4 && world.isAirBlock(x-1, y, z))
+	//			{
+	//				setSide(world, itemstack, m, dir, x, y, z, -1, 0, 0);
+	//			}
+	//			else if(side == 5 && world.isAirBlock(x+1, y, z))
+	//			{
+	//				setSide(world, itemstack, m, dir, x, y, z, 1, 0, 0);
+	//			}
+	//			/*if (world.getTileEntity(x,y,z) != null && world.getTileEntity(x,y,z) instanceof TEIngotPile)
+	//			{
+	//				//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(this.getItem() - 16028 - 256);
+	//			}*/
+	//			world.addBlockEvent(x,y,z,TFCBlocks.ingotPile,0,0);
+	//			return true;
+	//		}
+	   //
+	//	}
+	//	return false;
 	}
 
 	public boolean isValid(World world, int i, int j, int k)

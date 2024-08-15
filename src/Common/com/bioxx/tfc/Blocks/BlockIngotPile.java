@@ -50,7 +50,7 @@ public class BlockIngotPile extends BlockTerraContainer
 		}
 		else
 		{
-			if((TEIngotPile)world.getTileEntity(x, y, z) != null)
+			if(world.getTileEntity(x, y, z) instanceof TEIngotPile)
 			{
 				TEIngotPile tileentityingotpile;
 				tileentityingotpile = (TEIngotPile)world.getTileEntity(x, y, z);
@@ -168,6 +168,7 @@ public class BlockIngotPile extends BlockTerraContainer
 	{
 		//int meta = world.getBlockMetadata(x, y, z);
 		//int direction = getDirectionFromMetadata(meta);
+		if(!(world.getTileEntity(x, y, z) instanceof TEIngotPile))return null;
 		TEIngotPile te = (TEIngotPile)world.getTileEntity(x, y, z);
 
 		if (te.getStackInSlot(0)!=null)
@@ -181,6 +182,7 @@ public class BlockIngotPile extends BlockTerraContainer
 	{
 		//int meta = bAccess.getBlockMetadata(x, y, z);
 		//int direction = getDirectionFromMetadata(meta);
+		if(!(bAccess.getTileEntity(x, y, z) instanceof TEIngotPile))return;
 		TEIngotPile te = (TEIngotPile)bAccess.getTileEntity(x, y, z);
 
 		if (te.getStackInSlot(0)!=null)

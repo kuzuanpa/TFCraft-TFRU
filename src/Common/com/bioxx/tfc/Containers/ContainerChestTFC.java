@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Containers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -63,10 +64,7 @@ public class ContainerChestTFC extends ContainerTFC
 	public static List<Item> getExceptions()
 	{
 		List<Item> exceptions = new ArrayList<Item>();
-		for (Item ingot : TEIngotPile.getIngots())
-		{
-			exceptions.add(ingot);
-		}
+        exceptions.addAll(Arrays.asList(TEIngotPile.getIngots()));
 		exceptions.add(TFCItems.logs);
 		exceptions.add(Item.getItemFromBlock(TFCBlocks.barrel));
 		exceptions.add(Item.getItemFromBlock(TFCBlocks.vessel));
