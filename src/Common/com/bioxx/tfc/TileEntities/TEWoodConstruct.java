@@ -17,7 +17,7 @@ public class TEWoodConstruct extends NetworkTileEntity
 	public static int plankDetailLevel = 8;
 
 	//This should not be stored and are calculated at runtime on the client only for faster subsequent rendering operations
-	public boolean[] solidCheck = new boolean[48];
+	//public boolean[] solidCheck = new boolean[48];
 
 	public TEWoodConstruct()
 	{

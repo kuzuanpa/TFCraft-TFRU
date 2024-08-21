@@ -25,6 +25,7 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 
 	private void renderOld(int i, int j, int k, Block block, RenderBlocks renderer)
 	{
+		if(!(renderer.blockAccess.getTileEntity(i, j, k) instanceof TEWoodConstruct))return;
 		TEWoodConstruct te = (TEWoodConstruct) renderer.blockAccess.getTileEntity(i, j, k);
 		//int md = renderer.blockAccess.getBlockMetadata(i, j, k);
 
@@ -48,33 +49,33 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 		for(int index = 0; index < dd;)
 		{
 			int in3 = index >> 3;
-			if(te.solidCheck[in3])
-			{
-				minX = 0;
-				maxX = 1;
-				minY = 0;
-				maxY = 1;
-				minZ = div * in3;
-				maxZ = minZ + div;
-				if(!breaking)
-					renderer.overrideBlockTexture = TFCBlocks.woodConstruct.getIcon(0, te.woodTypes[index]);
-				index++;
-				render = true;
-			}
-			else if(te.solidCheck[in3+24])
-			{
-				minX = 0;
-				maxX = 1;
-				minY = div * ((index & 7) + in3); //NOPMD
-				maxY = minY + div;
-				minZ = 0;
-				maxZ = 1;
-				if(!breaking)
-					renderer.overrideBlockTexture = TFCBlocks.woodConstruct.getIcon(0, te.woodTypes[index]);
-				index+=8;
-				render = true;
-			}
-			else if(te.data.get(index))
+			//if(te.solidCheck[in3])
+			//{
+			//	minX = 0;
+			//	maxX = 1;
+			//	minY = 0;
+			//	maxY = 1;
+			//	minZ = div * in3;
+			//	maxZ = minZ + div;
+			//	if(!breaking)
+			//		renderer.overrideBlockTexture = TFCBlocks.woodConstruct.getIcon(0, te.woodTypes[index]);
+			//	index++;
+			//	render = true;
+			//}
+			//else if(te.solidCheck[in3+24])
+			//{
+			//	minX = 0;
+			//	maxX = 1;
+			//	minY = div * ((index & 7) + in3); //NOPMD
+			//	maxY = minY + div;
+			//	minZ = 0;
+			//	maxZ = 1;
+			//	if(!breaking)
+			//		renderer.overrideBlockTexture = TFCBlocks.woodConstruct.getIcon(0, te.woodTypes[index]);
+			//	index+=8;
+			//	render = true;
+			//}  else
+			if(te.data.get(index))
 			{
 				minX = 0;
 				maxX = 1;
@@ -106,20 +107,20 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 		renderer.uvRotateBottom = 0;
 		for(int index = 0; index < dd; )
 		{
-			if(te.solidCheck[(dd+index) >> 3])
-			{
-				minX = 0;
-				maxX = 1;
-				minY = 0;
-				maxY = 1;
-				minZ = div * (index >> 3);
-				maxZ = minZ + div;
-				if(!breaking)
-					renderer.overrideBlockTexture = TFCBlocks.woodConstruct.getIcon(0, te.woodTypes[index + dd]);
-				index+=8;
-				render = true;
-			}
-			else if(te.data.get(index + dd))
+			//if(te.solidCheck[(dd+index) >> 3])
+			//{
+			//	minX = 0;
+			//	maxX = 1;
+			//	minY = 0;
+			//	maxY = 1;
+			//	minZ = div * (index >> 3);
+			//	maxZ = minZ + div;
+			//	if(!breaking)
+			//		renderer.overrideBlockTexture = TFCBlocks.woodConstruct.getIcon(0, te.woodTypes[index + dd]);
+			//	index+=8;
+			//	render = true;
+			//}  else
+			if(te.data.get(index + dd))
 			{
 				minX = div * (index & 7);
 				maxX = minX + div;
@@ -158,20 +159,20 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 
 		for(int index = 0; index < dd;)
 		{
-			if(te.solidCheck[(dd2+index) >> 3])
-			{
-				minX = 0;
-				maxX = 1;
-				minY = div * (index >> 3);
-				maxY = minY + div;
-				minZ = 0;
-				maxZ = 1;
-				if(!breaking)
-					renderer.overrideBlockTexture = TFCBlocks.woodConstruct.getIcon(0, te.woodTypes[index + dd2]);
-				index+=8;
-				render = true;
-			}
-			else if(te.data.get(index+dd2))
+			//if(te.solidCheck[(dd2+index) >> 3])
+			//{
+			//	minX = 0;
+			//	maxX = 1;
+			//	minY = div * (index >> 3);
+			//	maxY = minY + div;
+			//	minZ = 0;
+			//	maxZ = 1;
+			//	if(!breaking)
+			//		renderer.overrideBlockTexture = TFCBlocks.woodConstruct.getIcon(0, te.woodTypes[index + dd2]);
+			//	index+=8;
+			//	render = true;
+			//}else
+			if(te.data.get(index+dd2))
 			{
 				minX = div * (index & 7);
 				maxX = minX + div;

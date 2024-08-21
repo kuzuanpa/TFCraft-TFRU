@@ -545,12 +545,11 @@ public class TFC_CoreRender
 		boolean substrateRender = false;
 		boolean plantRender = false;
 		TileEntity te = renderblocks.blockAccess.getTileEntity(par2, par3, par4);
-		if(te instanceof TEWaterPlant){
-			TEWaterPlant wp = (TEWaterPlant) te;
-			if(wp.getBlockFromType() != null){
-				substrateRender = renderblocks.renderStandardBlockWithColorMultiplier(wp.getBlockFromType(), par2, par3, par4,1,1,1);
-				plantRender = RenderFlora.render(par1Block, par2, par3, par4, renderblocks);
-			}
+		if(!(te instanceof TEWaterPlant))return false;
+		TEWaterPlant wp = (TEWaterPlant) te;
+		if(wp.getBlockFromType() != null){
+			substrateRender = renderblocks.renderStandardBlockWithColorMultiplier(wp.getBlockFromType(), par2, par3, par4,1,1,1);
+			plantRender = RenderFlora.render(par1Block, par2, par3, par4, renderblocks);
 		}
 		return substrateRender && plantRender;
 	}
