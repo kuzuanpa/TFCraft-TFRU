@@ -244,7 +244,7 @@ public class TFC_CoreRender
 			renderblocks.renderStandardBlock(block, i, j, k);
 		}
 
-		if(!(blockAccess.getTileEntity(i, j, k) instanceof TEFruitTreeWood) && ((TEFruitTreeWood)blockAccess.getTileEntity(i, j, k)).isTrunk && blockAccess.getBlock(i, j-1, k) != TFCBlocks.fruitTreeWood && !blockAccess.getBlock(i, j-1, k).isOpaqueCube())
+		if(!(blockAccess.getTileEntity(i, j, k) instanceof TEFruitTreeWood && ((TEFruitTreeWood)blockAccess.getTileEntity(i, j, k)).isTrunk) && blockAccess.getBlock(i, j-1, k) != TFCBlocks.fruitTreeWood && !blockAccess.getBlock(i, j-1, k).isOpaqueCube())
 		{
 			renderblocks.setRenderBounds(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
 			renderblocks.renderStandardBlock(block, i, j, k);

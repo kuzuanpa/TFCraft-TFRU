@@ -549,11 +549,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 		return this.canFlowDirections;
 	}
 
-	private void convertFlowingToSource(World world, int x, int y, int z)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
-		world.setBlock(x, y, z, Block.getBlockById(Block.getIdFromBlock(this) + 1), meta, 2);
-	}
+	abstract public void convertFlowingToSource(World world, int x, int y, int z);
 
 	private int getFlowPriorities(World world, int x, int y, int z, int distance, int side)
 	{

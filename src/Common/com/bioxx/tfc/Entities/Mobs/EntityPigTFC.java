@@ -214,19 +214,6 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		this.dataWatcher.addObject(23, Integer.valueOf(0)); // familiarity, familiarizedToday, pregnant, empty slot
 		this.dataWatcher.addObject(24, String.valueOf("0")); // Time of conception, stored as a string since we can't do long
 	}
-
-	/**
-	 * Called when the mob is falling. Calculates and applies fall damage.
-	 */
-	@Override
-	protected void fall(float par1)
-	{
-		super.fall(par1);
-
-		if (par1 > 5.0F && this.riddenByEntity instanceof EntityPlayer)
-			((EntityPlayer)this.riddenByEntity).triggerAchievement(AchievementList.flyPig);
-	}
-
 	@Override
 	public void familiarize(EntityPlayer ep) 
 	{

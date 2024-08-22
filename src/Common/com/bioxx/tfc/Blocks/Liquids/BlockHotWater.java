@@ -2,6 +2,7 @@ package com.bioxx.tfc.Blocks.Liquids;
 
 import java.util.Random;
 
+import com.bioxx.tfc.api.TFCBlocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -96,5 +97,11 @@ public class BlockHotWater extends BlockCustomLiquid
 				e.heal(Math.max(diff * 0.001f, 0.0001f));
 			}
 		}
+	}
+	@Override
+	public void convertFlowingToSource(World world, int x, int y, int z)
+	{
+		int meta = world.getBlockMetadata(x, y, z);
+		world.setBlock(x, y, z, TFCBlocks.hotWaterStationary, meta, 2);
 	}
 }

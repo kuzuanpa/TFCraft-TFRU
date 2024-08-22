@@ -2,6 +2,7 @@ package com.bioxx.tfc.Blocks.Liquids;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -26,6 +27,7 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.api.TFCBlocks;
+import org.apache.logging.log4j.Level;
 
 public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 {
@@ -155,8 +157,8 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 
 					if (world.getBlock(i, j, k).getMaterial() == Material.air)
 					{
-						if (this.isFlammable(world, i - 1, j, k) || this.isFlammable(world, i + 1, j, k) || 
-								this.isFlammable(world, i, j, k - 1) || this.isFlammable(world, i, j, k + 1) || 
+						if (this.isFlammable(world, i - 1, j, k) || this.isFlammable(world, i + 1, j, k) ||
+								this.isFlammable(world, i, j, k - 1) || this.isFlammable(world, i, j, k + 1) ||
 								this.isFlammable(world, i, j - 1, k) || this.isFlammable(world, i, j + 1, k))
 						{
 							world.setBlock(i, j, k, Blocks.fire);
@@ -182,8 +184,8 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 
 						if (block.getMaterial() == Material.air)
 						{
-							if (this.isFlammable(world, x - 1, y, z) || this.isFlammable(world, x + 1, y, z) || 
-									this.isFlammable(world, x, y, z - 1) || this.isFlammable(world, x, y, z + 1) || 
+							if (this.isFlammable(world, x - 1, y, z) || this.isFlammable(world, x + 1, y, z) ||
+									this.isFlammable(world, x, y, z - 1) || this.isFlammable(world, x, y, z + 1) ||
 									this.isFlammable(world, x, y - 1, z) || this.isFlammable(world, x, y + 1, z))
 							{
 								world.setBlock(x, y, z, Blocks.fire);

@@ -160,8 +160,9 @@ public class BlockAnvil extends BlockTerraContainer
 	{
 		int meta = bAccess.getBlockMetadata(x, y, z);
 		int direction = getDirectionFromMetadata(meta);
-		TEAnvil te = (TEAnvil)bAccess.getTileEntity(x, y, z);
-
+		TileEntity t = bAccess.getTileEntity(x, y, z);
+		if(!(t instanceof TEAnvil))return;
+		TEAnvil te = (TEAnvil)t;
 		if(te.anvilTier != AnvilReq.STONE.Tier)
 		{
 			if(direction == 0)
