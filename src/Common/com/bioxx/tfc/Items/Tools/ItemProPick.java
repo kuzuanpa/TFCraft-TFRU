@@ -285,8 +285,8 @@ public class ItemProPick extends ItemTerra
 					else LocationMsg = "gui.ProPick.Up";
 					break;
 				case 2:
-					if (aZ < 0) LocationMsg = "gui.ProPick.AtSouth";
-					else LocationMsg = "gui.ProPick.AtNorth";
+					if (aZ < 0) LocationMsg = "gui.ProPick.AtNorth";
+					else LocationMsg = "gui.ProPick.AtSouth";
 					break;
 			}
 			if (rank == SkillRank.Expert){
@@ -295,7 +295,7 @@ public class ItemProPick extends ItemTerra
 		}}
 		}else if(rank == SkillRank.Master){
 			for (int y=0;y<3;y++)for (int x=0;x<3;x++)for (int z=0;z<3;z++)if(result.oreExistsArea[y][x][z]) AreaMsgs.add("gui.ProPick.area."+y+x+z);
-			if(AreaMsgs.size()>0) AreaMsg.append(TFC_Core.l10n("gui.ProPick.area.at")).append(" ");
+			if(!AreaMsgs.isEmpty()) AreaMsg.append(TFC_Core.l10n("gui.ProPick.area.at")).append(" ");
 			for (String str : AreaMsgs) AreaMsg.append(TFC_Core.l10n(str)).append(" ");
 		}
 		TFC_Core.sendInfoMessage(player,

@@ -62,7 +62,6 @@ public class TerraFirmaCraft
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		try{Class.forName("optifine.OptiFineTweaker");throw new IllegalArgumentException("Optifine Not Supported!");}catch (ClassNotFoundException ignored){};
 		TFC_ConfigFiles.preInit(event.getModConfigurationDirectory());
 		TFC_ConfigFiles.reloadGeneral(); // No special needs
 		// No world gen here, other mods may need to load first!
