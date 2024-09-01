@@ -20,6 +20,7 @@ public class RenderPottery implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
+		if(!(world.getTileEntity(x, y, z) instanceof TEPottery))return false;
 		TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
 		boolean breaking = renderer.overrideBlockTexture != null;
 		

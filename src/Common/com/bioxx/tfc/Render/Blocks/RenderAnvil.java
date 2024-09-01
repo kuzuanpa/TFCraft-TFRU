@@ -24,6 +24,7 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler
 		if(renderblocks.overrideBlockTexture != null)
 			breaking = true;
 
+		if(!(blockAccess.getTileEntity(i, j, k) instanceof TEAnvil))return false;
 		TEAnvil te = (TEAnvil)blockAccess.getTileEntity(i, j, k);
 		if(te.anvilTier != AnvilReq.STONE.Tier)
 		{

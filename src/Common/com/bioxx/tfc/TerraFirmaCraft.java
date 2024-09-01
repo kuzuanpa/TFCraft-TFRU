@@ -3,7 +3,7 @@
 //=======================================================
 package com.bioxx.tfc;
 
-import net.minecraft.world.WorldType;
+import com.bioxx.tfc.Enchant.TFCEnchant;
 
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeModContainer;
@@ -31,7 +31,6 @@ import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.*;
 import com.bioxx.tfc.Handlers.Network.PacketPipeline;
 import com.bioxx.tfc.WorldGen.TFCProvider;
-import com.bioxx.tfc.WorldGen.TFCWorldType;
 import com.bioxx.tfc.WorldGen.Generators.*;
 import com.bioxx.tfc.api.SkillsManager;
 import com.bioxx.tfc.api.TFCBlocks;
@@ -203,6 +202,7 @@ public class TerraFirmaCraft
 		ItemSetup.registerFurnaceFuel();
 		GameRegistry.registerFuelHandler(new TFCFuelHandler());
 
+		TFCEnchant.registerEnchantments();
 		//Register ChiselModes
 		proxy.registerChiselModes();
 

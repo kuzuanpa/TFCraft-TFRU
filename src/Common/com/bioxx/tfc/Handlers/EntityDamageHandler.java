@@ -96,8 +96,8 @@ public class EntityDamageHandler
 			if ("arrow".equals(event.source.damageType)) {
 				Entity e = ((EntityDamageSourceIndirect) event.source).getSourceOfDamage();
 				if (e instanceof EntityJavelin) {
-					((EntityJavelin) e).setDamageTaken((short) (((EntityJavelin) e).damageTaken + 10));
-					if (((EntityJavelin) e).damageTaken >= ((EntityJavelin) e).pickupItem.getMaxDamage()) {
+					((EntityJavelin) e).pickupItemStack.damageItem(10,entity);
+					if (((EntityJavelin) e).pickupItemStack.stackSize == 0) {
 						e.setDead();
 					}
 				}

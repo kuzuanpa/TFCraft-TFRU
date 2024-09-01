@@ -20,8 +20,7 @@ import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 
 public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 {
-	public short damageTaken;
-	public Item pickupItem = TFCItems.arrow;
+	public ItemStack pickupItemStack= null;
 	public float damageBuff;
 	public float duraBuff;
 
@@ -45,14 +44,9 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 		super(world, par2EntityLivingBase, force);
 	}
 
-	public void setDamageTaken(short d)
+	public void setPickupItem(ItemStack stack)
 	{
-		damageTaken = d;
-	}
-
-	public void setPickupItem(Item item)
-	{
-		pickupItem = item;
+		pickupItemStack = stack;
 	}
 
 	@Override
@@ -66,7 +60,7 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 			boolean inground = nbt.hasKey("inGround") && nbt.getByte("inGround") == 1;
 			if(inground)
 			{
-				ItemStack is = new ItemStack(this.pickupItem, 1, this.damageTaken);
+				ItemStack is = pickupItemStack;
 				if (duraBuff != 0)
 					AnvilManager.setDurabilityBuff(is, duraBuff);
 				if (damageBuff != 0)
@@ -101,24 +95,11 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 	}
 
 	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
-		if(!worldObj.isRemote && this.isDead)
-		{
-			int maxDamage = this.pickupItem instanceof ItemJavelin ? this.pickupItem.getMaxDamage() : 1;
-			if (this.ticksExisted < 1200 && maxDamage > this.damageTaken)
-				this.isDead = false;
-		}
-	}
-
-	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
 		super.readEntityFromNBT(nbt);
 //		if (nbt.hasKey("itemID"))
 //			this.itemID = nbt.getInteger("itemID");
-		this.damageTaken = nbt.getShort("damageTaken");
 	}
 
 	@Override
@@ -126,7 +107,6 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 	{
 		super.writeEntityToNBT(nbt);
 //		nbt.setInteger("itemID", itemID);
-		nbt.setShort("damageTaken", this.damageTaken);
 	}
 
 	@Override

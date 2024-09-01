@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.List;
 
+import com.bioxx.tfc.Enchant.TFCEnchant;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -32,16 +33,16 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
-public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjectile, IQuiverAmmo
+public class ItemJavelin extends ItemWeapon implements ICausesDamage, IProjectile, IQuiverAmmo
 {
 	public float weaponDamage;
-	private float weaponRangeDamage;
+	private final float weaponRangeDamage;
 
 	public ItemJavelin(ToolMaterial par2EnumToolMaterial, float damage)
 	{
-		super(10F, par2EnumToolMaterial, Sets.newHashSet(new Block[] {Blocks.air}));
+		super(par2EnumToolMaterial,damage);
 		this.maxStackSize = 1;
-		this.weaponDamage = damage;
+		this.weaponDamage = damage/2;
 		this.weaponRangeDamage = damage;
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses()/2);
 		setCreativeTab(TFCTabs.TFC_WEAPONS);
@@ -62,15 +63,6 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 		name = name.replace("Sed ", "");
 		name = name.replace("MM ", "");
 		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + "tools/" + name);
-	}
-
-	/**
-	 * Return the enchantability factor of the item, most of the time is based on material.
-	 */
-	@Override
-	public int getItemEnchantability()
-	{
-		return 1;
 	}
 
 	/**
@@ -124,11 +116,11 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 			javelin.duraBuff = AnvilManager.getDurabilityBuff(itemstack);
 			javelin.damageBuff = AnvilManager.getDamageBuff(itemstack);
 
-			int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, itemstack);
+			int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.sharpness.effectId, itemstack);
 
 			if (var9 > 0)
 			{
-				javelin.setDamage(javelin.getDamage() + var9 * 0.5D + 0.5D);
+				javelin.setDamage(javelin.getDamage() + var9 * 125D + 125D);
 			}
 
 			int var10 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, itemstack);
@@ -143,9 +135,12 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 				javelin.setFire(100);
 			}
 
+			if(force>0.9F)javelin.setPiercingCount(EnchantmentHelper.getEnchantmentLevel(TFCEnchant.piercing.effectId, itemstack));
+			javelin.setFidelityLevel(EnchantmentHelper.getEnchantmentLevel(TFCEnchant.fidelity.effectId, itemstack));
+
 			world.playSoundAtEntity(player, "random.bow", 1.0F, 0.3F);
-			javelin.setDamageTaken((short) itemstack.getItemDamage());
-			javelin.setPickupItem(itemstack.getItem());
+
+			javelin.setPickupItem(itemstack);
 
 			player.inventory.mainInventory[player.inventory.currentItem] = null;
 
@@ -253,4 +248,6 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	public EnumItemReach getReach(ItemStack is){
 		return EnumItemReach.FAR;
 	}
+
+
 }
