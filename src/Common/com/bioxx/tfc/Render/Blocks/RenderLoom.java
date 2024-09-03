@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Render.Blocks;
 
+import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -24,6 +25,8 @@ public class RenderLoom implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
+		if(!(world.getTileEntity(x,y,z) instanceof TELoom))return false;
+
 		TELoom te = (TELoom) world.getTileEntity(x, y, z);
 		Block materialBlock;
 		if(te.loomType < 16)

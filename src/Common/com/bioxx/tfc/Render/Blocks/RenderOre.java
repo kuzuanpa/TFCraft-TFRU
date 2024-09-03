@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Render.Blocks;
 
+import com.bioxx.tfc.TileEntities.TESmokeRack;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -42,8 +43,9 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 
 	public static IIcon getRockTexture(World worldObj, int xCoord, int yCoord, int zCoord)
 	{
+		if(!(worldObj.getTileEntity(xCoord,yCoord,zCoord) instanceof TEOre))return null;
 		TEOre te = (TEOre)worldObj.getTileEntity(xCoord, yCoord, zCoord);
-		if(te!= null && te.baseBlockID > 0)
+		if(te.baseBlockID > 0)
 		{
 			return Block.getBlockById(te.baseBlockID).getIcon(5, te.baseBlockMeta);
 		}

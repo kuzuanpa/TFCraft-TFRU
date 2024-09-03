@@ -20,6 +20,7 @@ public class RenderVessel implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
+		if(!(world.getTileEntity(x, y, z) instanceof TEBarrel))return false;
 		TEBarrel te = (TEBarrel) world.getTileEntity(x, y, z);
 		renderer.renderAllFaces = true;
 

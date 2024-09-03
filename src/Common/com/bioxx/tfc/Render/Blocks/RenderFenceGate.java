@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Render.Blocks;
 
+import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -23,6 +24,8 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int par2, int par3, int par4, Block block, int modelId, RenderBlocks renderer)
 	{
+		if(!(renderer.blockAccess.getTileEntity(par2, par3, par4) instanceof TEFenceGate))return false;
+
 		Block par1BlockFenceGate = ((IMultipleBlock)block).getBlockTypeForRender();
 		boolean flag = true;
 		int l = ((TEFenceGate)renderer.blockAccess.getTileEntity(par2, par3, par4)).getDirection();

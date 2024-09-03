@@ -21,6 +21,7 @@ public class RenderFence  implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderblocks)
 	{
+		if(!(block instanceof BlockTFCFence))return false;
 		BlockTFCFence par1BlockFence = (BlockTFCFence)block;
 		boolean flag = false;
 		float f = 0.375F;

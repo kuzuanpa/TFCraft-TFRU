@@ -17,6 +17,7 @@ public class RenderSmokeRack implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
+		if(!(world.getTileEntity(x, y, z) instanceof TESmokeRack))return false;
 		TESmokeRack te = (TESmokeRack) world.getTileEntity(x, y, z);
 		renderer.renderAllFaces = true;
 		renderer.renderStandardBlock(block, x, y, z);

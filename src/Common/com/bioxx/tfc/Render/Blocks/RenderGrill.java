@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Render.Blocks;
 
+import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -53,7 +54,9 @@ public class RenderGrill  implements ISimpleBlockRenderingHandler
 		}
 		else
 		{ */
-			BlockGrill grill = (BlockGrill) block;
+		if(!(block instanceof BlockGrill))return false;
+
+		BlockGrill grill = (BlockGrill) block;
 			int meta = world.getBlockMetadata(i, j, k);
 
 			if (!grill.isGrillOpen(meta))

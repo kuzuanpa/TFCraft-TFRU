@@ -29,6 +29,7 @@ public class TESRQuern extends TESRBase implements ISimpleBlockRenderingHandler
 	@Override
 	public void renderTileEntityAt(TileEntity te, double xDis, double yDis, double zDis, float f)
 	{
+		if(!(te instanceof TEQuern))return;
 		TEQuern teq = (TEQuern) te;
 
 		Tessellator tess = Tessellator.instance;
@@ -46,7 +47,7 @@ public class TESRQuern extends TESRBase implements ISimpleBlockRenderingHandler
 				//this.renderSquareTop(tess); // Renders the top Quern box
 
 				renderWoodHandle(tess, teq.rotatetimer, teq.getWorldObj().rand, 0.8); // Renders the wooden handle
-				
+
 				if(teq.storage[0] != null) renderItem(teq.storage[0]); // Renders the input slot item
 			}
 		}

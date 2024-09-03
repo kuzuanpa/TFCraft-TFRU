@@ -29,12 +29,11 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int i, int j, int k, Block block, int modelId, RenderBlocks renderblocks)
 	{
-		IBlockAccess blockAccess = renderblocks.blockAccess;
-		TEToolRack te = (TEToolRack)blockAccess.getTileEntity(i, j, k);
-		int dir = blockAccess.getBlockMetadata(i, j, k);
+		if(!((renderblocks.blockAccess.getTileEntity(i, j, k))instanceof TEToolRack))return false;
+		TEToolRack te = (TEToolRack)renderblocks.blockAccess.getTileEntity(i, j, k);
+		int dir = renderblocks.blockAccess.getBlockMetadata(i, j, k);
 		boolean breaking = renderblocks.overrideBlockTexture != null;
-		if(te != null)
-		{
+
 			if ( ! breaking )
 				renderblocks.overrideBlockTexture = block.getIcon(0, te.woodType);
 			
@@ -63,7 +62,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				renderRackDir3(block, i, j, k, renderblocks, 0.7f);
 				renderRackDir3(block, i, j, k, renderblocks, 0.3f);
 			}
-		}
+
 		
 		if ( ! breaking )
 			renderblocks.clearOverrideBlockTexture();

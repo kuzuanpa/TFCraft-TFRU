@@ -88,7 +88,7 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 					renderblocks.setRenderBounds(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
 					renderblocks.renderStandardBlock(block, i, j, k);
 				}
-				else if(!hasVerticalBeam)//if the block does not contain a vertical beam
+				else//if the block does not contain a vertical beam
 				{
 					renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 1.0F);
 					renderblocks.renderStandardBlock(block, i, j, k);

@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Render.Blocks;
 
+import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -16,6 +17,8 @@ public class RenderLeatherRack implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
+		if(!(world.getTileEntity(x,y,z) instanceof TELeatherRack))return false;
+
 		TELeatherRack te = (TELeatherRack)world.getTileEntity(x, y, z);
 		BlockLeatherRack blk = (BlockLeatherRack)block;
 		//float f0 = 0;

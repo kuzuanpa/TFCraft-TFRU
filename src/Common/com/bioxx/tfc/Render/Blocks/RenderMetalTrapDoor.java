@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Render.Blocks;
 
+import com.bioxx.tfc.TileEntities.TESmokeRack;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -17,9 +18,12 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 {
 	public static boolean render(Block block, int i, int j, int k, RenderBlocks renderer)
 	{
+
 		IBlockAccess access = renderer.blockAccess;
+		if(!(access.getTileEntity(i, j, k) instanceof TEMetalTrapDoor))return false;
+
 		TEMetalTrapDoor te = (TEMetalTrapDoor)access.getTileEntity(i, j, k);
-		if(te == null)return false; //Random NullPointer crash, why???
+
 		int side = te.data & 7;
 		int hinge = te.data >> 4;
 		float f = 0.0625f;

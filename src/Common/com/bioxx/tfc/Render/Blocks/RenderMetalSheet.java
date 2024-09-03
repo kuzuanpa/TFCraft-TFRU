@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Render.Blocks;
 
+import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -13,7 +14,10 @@ public class RenderMetalSheet implements ISimpleBlockRenderingHandler
 {
 	public static boolean render(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
+
 		IBlockAccess access = renderblocks.blockAccess;
+		if(!(access.getTileEntity(i, j, k) instanceof TEMetalSheet))return false;
+
 		TEMetalSheet te = (TEMetalSheet)access.getTileEntity(i, j, k);
 
 		double yMax = 1;

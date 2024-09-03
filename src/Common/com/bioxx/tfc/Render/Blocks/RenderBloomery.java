@@ -17,11 +17,10 @@ public class RenderBloomery implements ISimpleBlockRenderingHandler
 	public static boolean render(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockAccess = renderblocks.blockAccess;
-
+		if(!(blockAccess.getTileEntity(i, j, k) instanceof TEBloomery))return false;
 		int meta = blockAccess.getBlockMetadata(i, j, k);
 		int dir = meta & 3;
 		TEBloomery te = (TEBloomery)blockAccess.getTileEntity(i, j, k);
-		if(te != null)
 			if(te.isFlipped)
 				dir = BlockEarlyBloomery.flipDir(dir);
 		float f = 0.125F;
