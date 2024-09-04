@@ -76,40 +76,40 @@ public class EntityJavelin extends EntityProjectileTFC implements ICausesDamage
 			NBTTagCompound nbt = new NBTTagCompound();
 			this.writeToNBT(nbt);
 
-			if(inGround || isReturning)
+			if(!inGround&&!isReturning || (pickupItemStack==null|| pickupItemStack.stackSize<=0))return;
+
+			ItemStack is = pickupItemStack;
+			if (duraBuff != 0)
+				AnvilManager.setDurabilityBuff(is, duraBuff);
+			if (damageBuff != 0)
+				AnvilManager.setDamageBuff(is, damageBuff);
+
+			EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, is);
+
+			if (this.canBePickedUp == 1)
 			{
-				ItemStack is = pickupItemStack;
-				if (duraBuff != 0)
-					AnvilManager.setDurabilityBuff(is, duraBuff);
-				if (damageBuff != 0)
-					AnvilManager.setDamageBuff(is, damageBuff);
+				EntityItemPickupEvent event = new EntityItemPickupEvent(player, ei);
 
-				EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, is);
-
-				if (this.canBePickedUp == 1)
-				{
-					EntityItemPickupEvent event = new EntityItemPickupEvent(player, ei);
-
-					if (MinecraftForge.EVENT_BUS.post(event))
-						return;
-				}
-
-				ItemStack itemstack = ei.getEntityItem();
-
-				boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
-				if (itemstack.stackSize <= 0)
-					flag = true;
-				else if (this.canBePickedUp == 1 && !player.inventory.addItemStackToInventory(itemstack))
-					flag = false;
-
-				if (flag)
-				{
-					this.playSound("random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-
-					player.onItemPickup(this, 1);
-					this.setDead();
-				}
+				if (MinecraftForge.EVENT_BUS.post(event))
+					return;
 			}
+
+			ItemStack itemstack = ei.getEntityItem();
+
+			boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
+			if (itemstack.stackSize <= 0)
+				flag = true;
+			else if (this.canBePickedUp == 1 && !player.inventory.addItemStackToInventory(itemstack))
+				flag = false;
+
+			if (flag)
+			{
+				this.playSound("random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+
+				player.onItemPickup(this, 1);
+				this.setDead();
+			}
+
 		}
 	}
 

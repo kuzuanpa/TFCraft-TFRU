@@ -95,7 +95,7 @@ public class EntityDamageHandler
 			event.ammount = applyArmorCalculations(entity, event.source, event.ammount);
 			if ("arrow".equals(event.source.damageType)) {
 				Entity e = ((EntityDamageSourceIndirect) event.source).getSourceOfDamage();
-				if (e instanceof EntityJavelin) {
+				if (e instanceof EntityJavelin && ((EntityJavelin) e).pickupItemStack!=null) {
 					((EntityJavelin) e).pickupItemStack.damageItem(10,entity);
 					if (((EntityJavelin) e).pickupItemStack.stackSize == 0) {
 						e.setDead();

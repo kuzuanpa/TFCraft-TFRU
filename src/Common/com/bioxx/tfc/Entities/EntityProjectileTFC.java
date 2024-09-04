@@ -58,7 +58,7 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 			this.writeToNBT(nbt);
 
 			boolean inground = nbt.hasKey("inGround") && nbt.getByte("inGround") == 1;
-			if(inground)
+			if(inground&&pickupItemStack!=null&&pickupItemStack.stackSize>0)
 			{
 				ItemStack is = pickupItemStack;
 				if (duraBuff != 0)
