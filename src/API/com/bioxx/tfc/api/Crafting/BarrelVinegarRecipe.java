@@ -1,7 +1,9 @@
 package com.bioxx.tfc.api.Crafting;
 
+import com.bioxx.tfc.Food.ItemFoodTFC;
 import net.minecraft.item.ItemStack;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.api.Food;
@@ -28,5 +30,32 @@ public class BarrelVinegarRecipe extends BarrelRecipe
 			}
 		}
 		return false;
+	}
+	public FluidStack getResultFluid(ItemStack inIS, FluidStack inFS, int sealedTime)
+	{
+		if(recipeOutFluid != null)
+		{
+			FluidStack fs = null;
+			// The FluidStack .copy() method does not make a copy of the NBT tag, which may have been the cause of the quantum entanglement
+			if (recipeOutFluid.tag != null)
+			{
+				fs = new FluidStack(recipeOutFluid.getFluid(), recipeOutFluid.amount, (NBTTagCompound) recipeOutFluid.tag.copy());
+			}
+			else
+			{
+				fs = new FluidStack(recipeOutFluid.getFluid(), recipeOutFluid.amount);
+			}
+
+			if (!removesLiquid && inFS != null)
+			{
+				fs.amount = inFS.amount;
+			}
+			else if (inIS != null && inFS != null)
+			{
+				fs.amount = (int) Math.min(inFS.amount,fs.amount*Food.getWeight(inIS));
+			}
+			return fs;
+		}
+		return null;
 	}
 }

@@ -514,9 +514,7 @@ public class TFC_CoreRender
 		}
 
 		return Minecraft.isAmbientOcclusionEnabled() && block.getLightValue() == 0 ? 
-				(renderBlocks.partialRenderBounds ? 
-						renderBlocks.renderStandardBlockWithAmbientOcclusion(block, xCoord, yCoord, zCoord, f, f1, f2) : 
-							renderBlocks.renderStandardBlockWithAmbientOcclusion(block, xCoord, yCoord, zCoord, f, f1, f2)) : 
+				(renderBlocks.renderStandardBlockWithAmbientOcclusion(block, xCoord, yCoord, zCoord, f, f1, f2)) :
 								renderBlocks.renderStandardBlockWithColorMultiplier(block, xCoord, yCoord, zCoord, f, f1, f2);
 	}
 
