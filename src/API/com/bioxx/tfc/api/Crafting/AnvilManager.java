@@ -2,17 +2,14 @@ package com.bioxx.tfc.api.Crafting;
 
 import java.util.*;
 
-import cpw.mods.fml.common.FMLLog;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.Level;
 
 public class AnvilManager
 {
 	private static final AnvilManager INSTANCE = new AnvilManager();
-	public static final AnvilManager getInstance()
+	public static AnvilManager getInstance()
 	{
 		return INSTANCE;
 	}
@@ -21,6 +18,8 @@ public class AnvilManager
 	private List<AnvilRecipe> recipes;
 	private List<AnvilRecipe> recipesWeld;
 	private Map<String, PlanRecipe> plans;
+
+	public Map<String,Integer> planMinimalSteps= new HashMap<>();
 
 	private AnvilManager()
 	{
@@ -53,10 +52,16 @@ public class AnvilManager
 	public void addPlan(String s, PlanRecipe r)
 	{
 		s = s.toLowerCase();
-		if(!plans.containsKey(s))
+		if(!plans.containsKey(s)){
 			plans.put(s, r);
+			planMinimalSteps.put(s,getMinimalSteps(r));
+		}
 	}
 
+	public int getMinimalSteps(PlanRecipe plan){
+		//TODO
+		return 15;
+	}
 	public PlanRecipe getPlan(String s)
 	{
 		return plans.get(s);
@@ -166,5 +171,17 @@ public class AnvilManager
 		NBTTagCompound nbt = getCraftTag(is);
 		nbt.setFloat("damagebuff", value);
 		setCraftTag(is, nbt);
+	}
+	public static void setPerfect(ItemStack is)
+	{
+		NBTTagCompound nbt = getCraftTag(is);
+		nbt.setBoolean("perfectCrafted", true);
+		setCraftTag(is, nbt);
+	}
+
+	public static boolean getPerfect(ItemStack is)
+	{
+		NBTTagCompound nbt = getCraftTag(is);
+		return nbt.getBoolean("perfectCrafted");
 	}
 }

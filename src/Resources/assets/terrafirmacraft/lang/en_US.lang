@@ -2505,6 +2505,7 @@ gui.Advanced=Advanced
 gui.Shift=Shift
 gui.Hold=Hold
 gui.SmithingBonus=Smithing Bonus
+gui.PerfectSmith=Perfect Smith!
 gui.ItemWorked=This item has been worked
 
 gui.slot=Slot

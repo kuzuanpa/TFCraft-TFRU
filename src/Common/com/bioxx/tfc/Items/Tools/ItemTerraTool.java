@@ -55,8 +55,8 @@ public class ItemTerraTool extends ItemTool implements ISize
 
 	public static void addSmithingBonusInformation(ItemStack is, List<String> arraylist)
 	{
-		if (AnvilManager.getDurabilityBuff(is) > 0)
-			arraylist.add(TFC_Core.translate("gui.SmithingBonus") + " : +" + Helper.roundNumber(AnvilManager.getDurabilityBuff(is) * 100, 10) + "%");
+		if (AnvilManager.getDurabilityBuff(is) > 0) arraylist.add(TFC_Core.translate("gui.SmithingBonus") + " : +" + Helper.roundNumber(AnvilManager.getDurabilityBuff(is) * 100, 10) + "%");
+		if (AnvilManager.getPerfect(is))arraylist.add(TFC_Core.translate("gui.PerfectSmith"));
 	}
 
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)

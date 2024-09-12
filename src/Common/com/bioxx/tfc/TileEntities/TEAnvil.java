@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
 import cpw.mods.fml.relauncher.Side;
@@ -71,7 +72,19 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	public static final int FLUX_SLOT = 6;
 	public static final int HAMMER_SLOT = 0;
 
+	public static final float MINIMAL_BUFF = 0.5F;
+	public static final float BUFF_DECREASE_STEP = 0.1F;
+	public static final float BUFF_INIT_VALUE = 1.5F;
+	public static final float BUFF_PERFECT_BONUS = 0.8F;
+
+
+	public static final float MINIMAL_EXP = 0.5F;
+	public static final float EXP_DECREASE_STEP = 0.2F;
+	public static final float EXP_INIT_VALUE = 2.0F;
+	public static final float EXP_PERFECT_BONUS = 5.0F;
+
 	public static final String ITEM_CRAFTING_VALUE_TAG = "itemCraftingValue";
+	public static final String ITEM_CRAFTING_STEPS_TAG = "itemWorkedSteps";
 	public static final String ITEM_CRAFTING_RULE_1_TAG = "itemCraftingRule1";
 	public static final String ITEM_CRAFTING_RULE_2_TAG = "itemCraftingRule2";
 	public static final String ITEM_CRAFTING_RULE_3_TAG = "itemCraftingRule3";
@@ -82,11 +95,13 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		itemCraftingValue = 0;
 		itemCraftingRules = new int[]{-1,-1,-1};
 		craftingValue = 0;
-		anvilTier = AnvilReq.STONE.Tier;
-		stonePair = new int[]{0,0};
+        stonePair = new int[]{0,0};
 		craftingPlan = "";
 	}
 
+	public static int getMinimalStep(String plan){
+		return AnvilManager.getInstance().planMinimalSteps.get(plan);
+	}
 	@Override
 	public void updateEntity()
 	{
@@ -134,15 +149,23 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 						//If the lastWorker is not null, then we attempt to apply some crafting buffs to items based on the players skills
 						if (output != null && lastWorker != null && recipe != null)
 						{
+							int stepsMoreThanMinimal = getItemWorkedSteps()-getMinimalStep(craftingPlan);
+
+							float buff = (Math.max(recipe.getSkillMult(lastWorker),0.001F) * Math.max(MINIMAL_BUFF,(BUFF_INIT_VALUE-(stepsMoreThanMinimal*BUFF_DECREASE_STEP)))) + (stepsMoreThanMinimal==0 ? BUFF_PERFECT_BONUS:0F);
+
+							System.out.print(buff);
 							if (output.getItem() instanceof ItemMiscToolHead)
 							{
-								AnvilManager.setDurabilityBuff(output, recipe.getSkillMult(lastWorker));
-								AnvilManager.setDamageBuff(output, recipe.getSkillMult(lastWorker));
+								AnvilManager.setDurabilityBuff(output, buff);
+								AnvilManager.setDamageBuff(output, buff);
+								if(stepsMoreThanMinimal==0)AnvilManager.setPerfect(output);
 							}
 							else if (output.getItem() instanceof ItemTFCArmor)
 							{
-								AnvilManager.setDurabilityBuff(output, recipe.getSkillMult(lastWorker));
+								AnvilManager.setDurabilityBuff(output, buff);
+								if(stepsMoreThanMinimal==0)AnvilManager.setPerfect(output);
 							}
+
 
 							if (output.getItem() instanceof ItemIngot)
 							{
@@ -163,7 +186,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 									lastWorker.triggerAchievement(TFC_Achievements.achRedBucket);
 							}
 
-							increaseSkills(recipe);
+							increaseSkills(recipe,stepsMoreThanMinimal);
 							removeRules(INPUT1_SLOT);
 						}
 						// We need to call this after the NBT is set, since this call sets lastWorker to null if the output has no further recipes.
@@ -184,13 +207,13 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			anvilItemStacks[INPUT1_SLOT].stackSize = 1;
 	}
 
-	public void increaseSkills(AnvilRecipe recipe)
+	public void increaseSkills(AnvilRecipe recipe,int stepsMoreThanMinimal)
 	{
 		if(lastWorker!= null)
 		{
 			for(String s : recipe.skillsList)
 			{
-				TFC_Core.getSkillStats(lastWorker).increaseSkill(s, recipe.craftingXP);
+				TFC_Core.getSkillStats(lastWorker).increaseSkill(s, (int) (recipe.craftingXP * Math.max(MINIMAL_EXP,stepsMoreThanMinimal==0?EXP_PERFECT_BONUS: (EXP_INIT_VALUE-stepsMoreThanMinimal*EXP_DECREASE_STEP))));
 			}
 		}
 	}
@@ -224,7 +247,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	{
 		AnvilManager manager = AnvilManager.getInstance();
 		Object[] plans = manager.getPlans().keySet().toArray();
-		Map<String, AnvilRecipe> planList = new HashMap<String, AnvilRecipe>();
+		Map<String, AnvilRecipe> planList = new HashMap<>();
 		//Here we go through and assemble a list of all possible recipes using the input parameters
 		for(Object p : plans)
 		{
@@ -238,7 +261,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		//We need to pre-emptively remove split blooms from the plan list if the input bloom is too small
 		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].getItem() == TFCItems.bloom)
 		{
-			if(anvilItemStacks[INPUT1_SLOT].getItemDamage() <= 100 && planList.containsKey("splitbloom"))
+			if(anvilItemStacks[INPUT1_SLOT].getItemDamage() <= 100)
 				planList.remove("splitbloom");
 		}
 
@@ -416,7 +439,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			if(canBeWorked())
 			{
 				workedRecently = LAG_FIX_DELAY;
-				setItemCraftingValue(-9);
+				addItemCraftValue(-9);
 				updateRules(0,1);
 				damageHammer();
 			}
@@ -431,7 +454,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			if(canBeWorked())
 			{
 				workedRecently = LAG_FIX_DELAY;
-				setItemCraftingValue(-3);
+				addItemCraftValue(-3);
 				updateRules(0,1);
 				damageHammer();
 			}
@@ -447,7 +470,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			if(canBeWorked())
 			{
 				workedRecently = LAG_FIX_DELAY;
-				setItemCraftingValue(-15);
+				addItemCraftValue(-15);
 				updateRules(1,1);
 				damageHammer();
 			}
@@ -463,7 +486,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			if(canBeWorked())
 			{
 				workedRecently = LAG_FIX_DELAY;
-				setItemCraftingValue(-6);
+				addItemCraftValue(-6);
 				updateRules(0,1);
 				damageHammer();
 			}
@@ -479,7 +502,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			if(canBeWorked())
 			{
 				workedRecently = LAG_FIX_DELAY;
-				setItemCraftingValue(2);
+				addItemCraftValue(2);
 				updateRules(3,1);
 				damageHammer();
 			}
@@ -495,7 +518,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			if(canBeWorked())
 			{
 				workedRecently = LAG_FIX_DELAY;
-				setItemCraftingValue(7);
+				addItemCraftValue(7);
 				updateRules(4,1);
 				damageHammer();
 			}
@@ -511,7 +534,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			if(canBeWorked())
 			{
 				workedRecently = LAG_FIX_DELAY;
-				setItemCraftingValue(13);
+				addItemCraftValue(13);
 				updateRules(5,1);
 				damageHammer();
 			}
@@ -527,7 +550,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			if(canBeWorked())
 			{
 				workedRecently = LAG_FIX_DELAY;
-				setItemCraftingValue(16);
+				addItemCraftValue(16);
 				updateRules(6,1);
 				damageHammer();
 			}
@@ -547,7 +570,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			{
 				AnvilManager manager = AnvilManager.getInstance();
 				//new Random(worldObj.getSeed());  // Why is this here?
-				AnvilRecipe recipe = new AnvilRecipe(anvilItemStacks[WELD1_SLOT],anvilItemStacks[WELD2_SLOT],"", 
+				AnvilRecipe recipe = new AnvilRecipe(anvilItemStacks[WELD1_SLOT],anvilItemStacks[WELD2_SLOT],"",
 						0,
 						anvilItemStacks[FLUX_SLOT] != null ? true : false, anvilTier, null);
 
@@ -661,7 +684,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		return false;
 	}
 
-	public boolean setItemCraftingValue(int i)
+	public boolean addItemCraftValue(int i)
 	{
 		ItemStack input = anvilItemStacks[INPUT1_SLOT];
 		if (input != null)
@@ -670,6 +693,8 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			if (input.hasTagCompound())
 			{
 				tag = input.getTagCompound();
+
+				//Set Crafting Value
 				if (tag.hasKey(ITEM_CRAFTING_VALUE_TAG))
 				{
 					short craftingValue = tag.getShort(ITEM_CRAFTING_VALUE_TAG);
@@ -681,14 +706,20 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 					// Use Math.max to prevent negative values
 					tag.setShort(ITEM_CRAFTING_VALUE_TAG, (short) Math.max(0, i));
 				}
+				//Set Worked Steps
+				if (tag.hasKey(ITEM_CRAFTING_STEPS_TAG))	tag.setShort(ITEM_CRAFTING_STEPS_TAG, (short) Math.max(0, tag.getShort(ITEM_CRAFTING_STEPS_TAG) + 1));
+				else tag.setShort(ITEM_CRAFTING_STEPS_TAG, (short) 1);
 			}
 			else
 			{
 				tag = new NBTTagCompound();
 				// Use Math.max to prevent negative values
 				tag.setShort(ITEM_CRAFTING_VALUE_TAG, (short) Math.max(0, i));
+				tag.setShort(ITEM_CRAFTING_STEPS_TAG, (short) 1);
 				input.setTagCompound(tag);
 			}
+			System.out.print(getItemWorkedSteps());
+
 
 			return true;
 		}
@@ -696,6 +727,16 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		return false;
 	}
 
+	public int getItemWorkedSteps()
+	{
+		ItemStack input = anvilItemStacks[INPUT1_SLOT];
+		if (input != null && input.hasTagCompound() && input.getTagCompound().hasKey(ITEM_CRAFTING_STEPS_TAG))
+		{
+			return input.getTagCompound().getShort(ITEM_CRAFTING_STEPS_TAG);
+		}
+
+		return 0;
+	}
 	public int getItemCraftingValue()
 	{
 		ItemStack input = anvilItemStacks[INPUT1_SLOT];

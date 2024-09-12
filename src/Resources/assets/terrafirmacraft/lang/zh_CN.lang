@@ -2716,6 +2716,7 @@ gui.Blueprint.Inst1=或 §b右键§7旋转蓝图
 gui.Blueprint.missingTool=蓝图需要锤子和凿子才能使用
 gui.empty=空
 gui.SmithingBonus=锻造熟练度加成
+gui.PerfectSmith=完美锻造!
 gui.ItemWorked=此物品被加工过
 word.smoking=烟熏
 word.drying=烘干
