@@ -212,31 +212,22 @@ public class InventoryPlayerTFC extends InventoryPlayer {
 	}
 
 	@Override
-	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)//par1 index ItemStack 调用的物品
+	public void setInventorySlotContents(int index, ItemStack content)
 	{
 
 		ItemStack[] aitemstack = this.mainInventory;
 
-		/*if (par1 >= this.mainInventory.length + this.extraEquipInventory.length)  //这里是par1>= 36 + 1[默认是1]
+		if (index >= this.mainInventory.length + 4)
 		{
-			par1 -= this.mainInventory.length + this.extraEquipInventory.length;//这里是par1 -= 36 + 1[默认是1]
-			aitemstack = this.armorInventory;       this.armorInventory数组 0 1 2 3 [0=头盔 1=胸甲 2=裤子 3=鞋子][头盔TFC原版index=40 胸甲=39 裤子=38 鞋子=37]
-		}
-		else if(par1 >= this.mainInventory.length){
-			par1-= aitemstack.length;
-			aitemstack = this.extraEquipInventory;
-		}*/
-		if (par1 >= this.mainInventory.length + 4)
-		{
-		    par1-= this.mainInventory.length + 4;
+		    index-= this.mainInventory.length + 4;
 			aitemstack = this.extraEquipInventory;
 		}
-		else if(par1 >= this.mainInventory.length){
-			par1 -= this.mainInventory.length;
+		else if(index >= this.mainInventory.length){
+			index -= this.mainInventory.length;
 			aitemstack = this.armorInventory;
 		}
 
-		aitemstack[par1] = par2ItemStack;
+		aitemstack[index] = content;
 	}
 
 	/*

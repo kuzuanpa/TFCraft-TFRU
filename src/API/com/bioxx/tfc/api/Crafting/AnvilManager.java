@@ -93,12 +93,10 @@ public class AnvilManager
 
 	public Object[] findCompleteRecipe(AnvilRecipe recipe, int[] rules)
 	{
-		for (int k = 0; k < recipes.size(); k++)
-		{
-			AnvilRecipe irecipe = recipes.get(k);
-			if (irecipe != null && irecipe.isComplete(INSTANCE, recipe, rules))
-				return new Object[] {irecipe, irecipe.getCraftingResult(recipe.input1)};
-		}
+        for (AnvilRecipe irecipe : recipes) {
+            if (irecipe != null && irecipe.isComplete(INSTANCE, recipe, rules))
+                return new Object[]{irecipe, irecipe.getCraftingResult(recipe.input1)};
+        }
 
 		return null;
 	}
