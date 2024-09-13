@@ -16,7 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.bioxx.tfc.api.*;
-import ua.pp.shurgent.tfctech.core.ModItems;
 
 public class ItemHeat
 {
@@ -619,9 +618,9 @@ public class ItemHeat
 			case 8602/*RoseGold*/      :return TFCItems.roseGoldUnshaped;
 			case 8601/*SterlingSilver*/:return TFCItems.sterlingSilverUnshaped;
 			case 780 /*Pt*/            :return TFCItems.platinumUnshaped;
-			case 8661/*Invar*/         :return ModItems.invarUnshaped;
-			case 130 /*Al*/            :return ModItems.aluminumUnshaped;
-			case 8660/*RedAlloy*/      :return ModItems.redAlloyUnshaped;
+			case 8661/*Invar*/         ://return ModItems.invarUnshaped;
+			case 130 /*Al*/            ://return ModItems.aluminumUnshaped;
+			case 8660/*RedAlloy*/      ://return ModItems.redAlloyUnshaped;
 			case 8667/*TinAlloy*/      :
 			default:return TFCItems.unknownUnshaped;
 		}

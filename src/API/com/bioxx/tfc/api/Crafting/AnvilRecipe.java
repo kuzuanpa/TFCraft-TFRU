@@ -1,96 +1,55 @@
 package com.bioxx.tfc.api.Crafting;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
+import com.bioxx.tfc.api.Enums.RuleEnum;
+import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.FMLLog;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Constant.Global;
 import org.apache.logging.log4j.Level;
 
-public class AnvilRecipe
-{
+public class AnvilRecipe {
 	public ItemStack result;
-	public String plan = "";
+	public String planName = "";
 	public ItemStack input1;
 	public ItemStack input2;
-	public boolean flux;
 	public int craftingValue;
 	public int anvilreq;
 	public boolean inheritsDamage;
 	public int craftingXP = 1;
-	public List<String> skillsList = new ArrayList<String>();
+	public List<String> skillsList = new ArrayList<>();
 	public static int craftingBoundDefault = 50;
-
-	public AnvilRecipe(ItemStack in, ItemStack in2, String p, boolean flux, AnvilReq req, ItemStack result)
-	{
-		this(in, in2, p.toLowerCase(), 0, flux, req.Tier, result);
-		this.craftingValue = 70 + new Random(TFC_Core.getSuperSeed(AnvilManager.world)+(in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault);
-	}
+	private final long seed;
+	public int minStep;
 
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, AnvilReq req, ItemStack result)
 	{
-		this(in, in2, p.toLowerCase(), 0, false, req.Tier, result);
-		this.craftingValue = 70 + new Random(TFC_Core.getSuperSeed(AnvilManager.world)+(in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault);
+		this(in, in2, p.toLowerCase(), req.Tier, result);
 	}
 
 	public AnvilRecipe setCraftingBound(int max)
 	{
-		craftingValue = 70 + new Random(TFC_Core.getSuperSeed(AnvilManager.world)+(input1 != null ? Item.getIdFromItem(input1.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(max);
+		craftingValue = 70 + new Random(seed).nextInt(max);
+		this.minStep=getMinimalSteps(AnvilManager.getInstance().getPlan(planName), craftingValue);
 		return this;
 	}
 
-	public AnvilRecipe(ItemStack in, ItemStack in2, String p, int cv, boolean flux, int req, ItemStack result)
+	public AnvilRecipe(ItemStack in, ItemStack in2, String p, int req, ItemStack result)
 	{
 		input1 = in;
 		input2 = in2;
-		this.flux = flux;
-		this.craftingValue = cv;
 		anvilreq = req;
 		this.result = result;
+		this.seed=TFC_Core.getSuperSeed(AnvilManager.world)+(input1 != null ? Item.getIdFromItem(input1.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0);
+		this.craftingValue = 70 + new Random(seed).nextInt(craftingBoundDefault);
+		this.planName = p;
 		inheritsDamage = false;
-		this.plan = p;
 		skillsList.add(Global.SKILL_GENERAL_SMITHING);
-	}
-
-	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req)
-	{
-		this(in, p, flux, req.Tier);
-	}
-
-	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, int req)
-	{
-		input1 = in;
-		input2 = p;
-		this.flux = flux;
-		anvilreq = req;
-		inheritsDamage = false;
-	}
-
-	public AnvilRecipe(ItemStack in, ItemStack p, String s, boolean flux, int req)
-	{
-		this(in, p, flux, req);
-		this.plan = s;
-	}
-
-	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req, ItemStack res)
-	{
-		this(in, p, req, res);
-		this.flux = flux;
-	}
-
-	public AnvilRecipe(ItemStack in, ItemStack p, AnvilReq req, ItemStack res)
-	{
-		input1 = in;
-		input2 = p;
-		anvilreq = req.Tier;
-		this.result = res;
-		inheritsDamage = false;
+		getMinimalSteps(AnvilManager.getInstance().getPlan(planName), craftingValue);
 	}
 
 	public AnvilRecipe clearRecipeSkills()
@@ -120,58 +79,36 @@ public class AnvilRecipe
 	/**
 	 * Used to check if a recipe matches current crafting inventory
 	 */    
-	public boolean matches(AnvilRecipe recipe)
+	public boolean matches(ItemStack in1, ItemStack in2, String thePlan, int req)
 	{
-		if(     areItemStacksEqual(input1, recipe.input1) &&
-				areItemStacksEqual(input2, recipe.input2) &&
-				plan.equals(recipe.plan) &&
-				AnvilReq.matches(anvilreq, recipe.anvilreq))
-		{
-			return !this.flux || recipe.flux;
-		}
-		return false;
-	}
+        return areItemStacksEqual(input1, in1) &&
+                areItemStacksEqual(input2, in2) &&
+                planName.equals(thePlan) &&
+                AnvilReq.matches(anvilreq, req);
+    }
 
-	public boolean isComplete(AnvilManager am, AnvilRecipe recipe, int[] rules)
+	public boolean isComplete(AnvilManager am, ItemStack in1, ItemStack in2, String thePlan, int req, int craftingValue, int[] rules)
 	{
-		PlanRecipe pr = am.getPlan(recipe.plan);
-		if(     areItemStacksEqual(input1, recipe.input1) && 
-				areItemStacksEqual(input2, recipe.input2) &&
-				plan.equals(recipe.plan) &&
-				pr.rules[0].matches(rules, 0) && pr.rules[1].matches(rules, 1) && pr.rules[2].matches(rules, 2) && 
-				craftingValue == recipe.craftingValue && AnvilReq.matches(anvilreq, recipe.anvilreq))
-			if(this.flux && recipe.flux)
-				return true;
-			else if (!this.flux)
-				return true;
-		return false;
-	}
-
-	public boolean isComplete(AnvilRecipe recipe)
-	{
-		if(recipe.input1 == this.input1 && recipe.input2 == input2 && 
-				craftingValue == recipe.craftingValue && plan.equals(recipe.plan) && AnvilReq.matches(anvilreq, recipe.anvilreq))
-			if(this.flux && recipe.flux)
-				return true;
-			else if (!this.flux)
-				return true;
-		return false;
-	}
+		PlanRecipe pr = am.getPlan(thePlan);
+        return areItemStacksEqual(input1, in1) &&
+                areItemStacksEqual(input2, in2) &&
+                planName.equals(thePlan) &&
+                pr.rules[0].matches(rules, 0) && pr.rules[1].matches(rules, 1) && pr.rules[2].matches(rules, 2) &&
+                this.craftingValue == craftingValue &&
+                AnvilReq.matches(anvilreq, req);
+    }
 
 	private boolean areItemStacksEqual(ItemStack is1, ItemStack is2)
 	{
+		// XOR, if both are null return true
 		if (is1 != null && is2 != null)
 		{
 			if (is1.getItem() != is2.getItem())
 				return false;
 
-			if (is1.getItemDamage() != 32767 && is1.getItemDamage() != is2.getItemDamage())
-				return false;
+			return is1.getItemDamage() == 32767 || is1.getItemDamage() == is2.getItemDamage();
 		}
-		else if (is1 == null && is2 != null || is1 != null && is2 == null) // XOR, if both are null return true
-			return false;
-
-		return true;
+		else return is1 == null && is2 == null;
 	}
 
 	/**
@@ -215,9 +152,9 @@ public class AnvilRecipe
 		return 0;
 	}
 
-	public String getPlan()
+	public String getPlanName()
 	{
-		return plan;
+		return planName;
 	}
 
 	public ItemStack getInput1()
@@ -228,11 +165,6 @@ public class AnvilRecipe
 	public ItemStack getInput2()
 	{
 		return input2;
-	}
-
-	public boolean isFlux()
-	{
-		return flux;
 	}
 
 	public int getAnvilreq()
@@ -253,6 +185,155 @@ public class AnvilRecipe
 	public List<String> getSkillsList()
 	{
 		return skillsList;
+	}
+
+	private static final boolean outputAllResult=false;
+	public int getMinimalSteps(PlanRecipe plan,int craftingValue){
+		try {
+			long timeStarted=System.nanoTime();
+			generatePossibleLastReqOpt(plan.rules);
+			Arrays.fill(bestOptNum, Integer.MAX_VALUE);
+			bestOptNum[0] = 0;
+			for (String[] currPosReqOpt : AllPosLastReqOpt) {
+				int offset = 0;
+				int EffLenth = 0;
+				for (String opt : currPosReqOpt) { //获取当前操作序列的偏移量，任意匹配的操作实际上不算必须操作
+					offset += optSet.get(opt);
+					if (!Objects.equals(opt, "9") && !Objects.equals(opt, "-1")) EffLenth++;
+				}
+				OffsetToOptNum.put(offset,
+						TraceFromStart(0, craftingValue - offset) + EffLenth);
+			}
+			//取OffsetToOptNum中最小的值
+			if(outputAllResult||Collections.min(OffsetToOptNum.values())>20||Collections.min(OffsetToOptNum.values())<0){
+			FMLLog.log(Level.FATAL,"DEBUG: Successfully getMinimalSteps "+Collections.min(OffsetToOptNum.values())+"for: "+planName+", CraftValue: "+craftingValue);
+			FMLLog.log(Level.FATAL,"DEBUG: Took: "+(System.nanoTime()-timeStarted)+"ns");}
+			return Collections.min(OffsetToOptNum.values());
+		}catch (Throwable t){
+
+			FMLLog.log(Level.FATAL,t,"Exception when getMinimalSteps: "+planName+" / "+craftingValue);
+			FMLLog.getLogger().throwing(t);
+			return 1;
+		}
+	}
+
+	private static final HashMap<String, Integer> optSet = new HashMap<>();
+
+	private final HashMap<Integer,Integer> OffsetToOptNum = new HashMap<>(); // 存储不同可能的末端操作序列对应的最优操作数
+
+	private static final int lowerBound = 0;
+	private static final int upperBound = 150;
+
+	private final int[] bestOptNum = new int[upperBound - lowerBound + 1];
+
+	private ArrayList<String[]> AllPosLastReqOpt = new ArrayList<>();
+
+	static {
+		optSet.put("0_1", -3);
+		optSet.put("0_2", -6);
+		optSet.put("0_3", -9);
+		optSet.put("1", -15);
+		optSet.put("3", 2);
+		optSet.put("4", 7);
+		optSet.put("5", 13);
+		optSet.put("6", 16);
+		optSet.put("-1",0); //Any
+		optSet.put("9",0);  //Unknown
+	}
+
+	public boolean isHaveMatchedOpt(RuleEnum currOpt){
+		// 去除不符合条件的操作序列
+		ArrayList<String[]> PosLastReqOpt = new ArrayList<>();
+
+		for (String[] currPosReqOpt : AllPosLastReqOpt) {
+			//对中间操作序列中的精确匹配
+			boolean accurateMatch = false;
+			for (int i = 0; i < currPosReqOpt.length; i++)
+				if (currOpt.matches(
+						Integer.parseInt(currPosReqOpt[i].split("_")[0]),
+						i)) {
+					//当前序列中的操作符合条件，保存到temp
+					PosLastReqOpt.add(currPosReqOpt);
+					accurateMatch = true;
+					break;
+				}
+			if (accurateMatch) continue;
+//            if(!PosLastReqOpt.isEmpty()) continue; //如果已经有精确匹配，跳过模糊匹配
+			//无精确匹配，对中间操作序列中模糊匹配位点替换为当前操作值
+			for (int i = 0; i < currPosReqOpt.length; i++)
+				if (currPosReqOpt[i].equals("9")){
+//                    String[] temp = currPosReqOpt.clone();
+//                    temp[i] = String.valueOf(currOpt.Action);
+//                    PosLastReqOpt.add(temp);
+					if(currOpt.Action == 0) {
+						PosLastReqOpt.add(CopyAndReplace(currPosReqOpt, i, "0_1"));
+						PosLastReqOpt.add(CopyAndReplace(currPosReqOpt, i, "0_2"));
+						PosLastReqOpt.add(CopyAndReplace(currPosReqOpt, i, "0_3"));
+					}
+					else PosLastReqOpt.add(CopyAndReplace(currPosReqOpt, i, String.valueOf(currOpt.Action)));
+					break;
+				}
+		}
+		AllPosLastReqOpt = PosLastReqOpt;
+		return !AllPosLastReqOpt.isEmpty();
+
+	}
+
+	public void createNewOptSeq(String opt, int pos){
+		// 生成新的操作序列
+		String[] temp = new String[3];
+		Arrays.fill(temp, "9"); //初始化9代表未知的操作
+		temp[pos] = opt;
+		AllPosLastReqOpt.add(temp);
+	}
+
+	public String[] CopyAndReplace(String[] currPosReqOpt, int pos, String opt){
+		String[] temp = currPosReqOpt.clone();
+		temp[pos] = opt;
+		return temp;
+	}
+
+	public void createNewOptSeq(int opt, int pos){
+		int act = opt;
+		//如果act为0，则加入0_1,0_2,0_3
+		if (act == 0) {
+			createNewOptSeq("0_1", pos);
+			createNewOptSeq("0_2", pos);
+			createNewOptSeq("0_3", pos);
+		}
+		else createNewOptSeq(String.valueOf(act), pos);
+	}
+
+	public void generatePossibleLastReqOpt(RuleEnum[] LastReqOpt){
+		// 遍历LastReqOpt，生成所有可能的最后若干操作
+		for(RuleEnum opt : LastReqOpt)
+			if (!isHaveMatchedOpt(opt))
+				for (int lpos = opt.Min; lpos <= opt.Max; lpos++)
+					createNewOptSeq(opt.Action, lpos);
+	}
+
+	public int TraceFromStart (int Start, int Dest){
+		//从Start开始，依BFS更新bestOptNum，直到到达Dest
+		//初始化队列
+		Queue<Integer> q = new ArrayDeque<>();
+		q.add(Start);
+
+		while (!q.isEmpty()){
+			int CurrDest = q.poll();
+			for (String opt : optSet.keySet()){
+				int NextDest = CurrDest - optSet.get(opt);
+				if (NextDest < lowerBound) continue;
+				if (NextDest > upperBound) continue;
+				if (bestOptNum[NextDest] > bestOptNum[CurrDest] + 1){
+					bestOptNum[NextDest] = bestOptNum[CurrDest] + 1;
+					q.add(NextDest);
+				}
+			}
+
+			if (CurrDest == Dest) return bestOptNum[Dest];
+		}
+
+		return bestOptNum[Dest];
 	}
 }
 

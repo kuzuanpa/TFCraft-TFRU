@@ -14,7 +14,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 
-import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
 import cpw.mods.fml.relauncher.Side;
@@ -99,9 +98,6 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		craftingPlan = "";
 	}
 
-	public static int getMinimalStep(String plan){
-		return AnvilManager.getInstance().planMinimalSteps.get(plan);
-	}
 	@Override
 	public void updateEntity()
 	{
@@ -149,7 +145,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 						//If the lastWorker is not null, then we attempt to apply some crafting buffs to items based on the players skills
 						if (output != null && lastWorker != null && recipe != null)
 						{
-							int stepsMoreThanMinimal = getItemWorkedSteps()-getMinimalStep(craftingPlan);
+							int stepsMoreThanMinimal = getItemWorkedSteps()-recipe.minStep;
 
 							float buff = (Math.max(recipe.getSkillMult(lastWorker),0.001F) * Math.max(MINIMAL_BUFF,(BUFF_INIT_VALUE-(stepsMoreThanMinimal*BUFF_DECREASE_STEP)))) + (stepsMoreThanMinimal==0 ? BUFF_PERFECT_BONUS:0F);
 
@@ -227,9 +223,8 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 		if(itemCraftingValue == workRecipe.getCraftingValue())
 		{
-			out = manager.findCompleteRecipe(new AnvilRecipe(anvilItemStacks[INPUT1_SLOT],anvilItemStacks[INPUT2_SLOT], craftingPlan,
-					workRecipe.getCraftingValue(), 
-					anvilItemStacks[FLUX_SLOT] != null ? true : false, anvilTier, null), getItemRules());
+			out = manager.findCompleteRecipe(anvilItemStacks[INPUT1_SLOT],anvilItemStacks[INPUT2_SLOT], craftingPlan,anvilTier,
+					workRecipe.getCraftingValue(), getItemRules());
 		}
 		return out;
 	}
@@ -251,8 +246,8 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		//Here we go through and assemble a list of all possible recipes using the input parameters
 		for(Object p : plans)
 		{
-			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(anvilItemStacks[INPUT1_SLOT], anvilItemStacks[INPUT2_SLOT], 
-					(String)p, anvilItemStacks[FLUX_SLOT] != null, anvilTier));
+			AnvilRecipe ar = manager.findMatchingRecipe(anvilItemStacks[INPUT1_SLOT], anvilItemStacks[INPUT2_SLOT],
+					(String)p, anvilTier);
 
 			if(ar != null) 
 				planList.put((String)p, ar);
@@ -568,19 +563,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 				(anvilItemStacks[WELD2_SLOT].getItemDamage() == 0 || anvilItemStacks[WELD2_SLOT].getItem().getHasSubtypes()) &&
 					workedRecently == 0 && anvilItemStacks[WELDOUT_SLOT] == null)
 			{
-				AnvilManager manager = AnvilManager.getInstance();
-				//new Random(worldObj.getSeed());  // Why is this here?
-				AnvilRecipe recipe = new AnvilRecipe(anvilItemStacks[WELD1_SLOT],anvilItemStacks[WELD2_SLOT],"",
-						0,
-						anvilItemStacks[FLUX_SLOT] != null ? true : false, anvilTier, null);
-
-				AnvilRecipe recipe2 = new AnvilRecipe(anvilItemStacks[WELD2_SLOT],anvilItemStacks[WELD1_SLOT],"",
-						0,
-						anvilItemStacks[FLUX_SLOT] != null ? true : false, anvilTier, null);
-
-				ItemStack result = manager.findCompleteWeldRecipe(recipe);
-				if(result == null)
-					result = manager.findCompleteWeldRecipe(recipe2);
+				ItemStack result = getResult();
 
 				if(result != null)
 				{
@@ -600,6 +583,15 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			this.sendAnvilUsePacket(7);
 		}
 	}
+
+	private ItemStack getResult() {
+		AnvilManager manager = AnvilManager.getInstance();
+		//new Random(worldObj.getSeed());  // Why is this here?
+
+		ItemStack result = manager.findCompleteWeldRecipe(anvilItemStacks[WELD1_SLOT],anvilItemStacks[WELD2_SLOT], anvilTier);
+		return result;
+	}
+
 	@Override
 	public void closeInventory()
 	{

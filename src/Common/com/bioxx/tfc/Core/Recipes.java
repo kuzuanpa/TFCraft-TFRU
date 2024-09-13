@@ -1314,37 +1314,37 @@ public class Recipes
 		 * Normal Recipes Start Here
 		 */
 		//Ingots
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.pigIronIngot), null, "ingot", false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.highCarbonSteelIngot)).clearRecipeSkills()); 
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.pigIronIngot), null, "ingot", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.highCarbonSteelIngot)).clearRecipeSkills()); 
 
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.highCarbonBlackSteelIngot), null, "ingot", false, AnvilReq.STEEL, new ItemStack(TFCItems.blackSteelIngot)).clearRecipeSkills());
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.highCarbonBlueSteelIngot), null, "ingot", false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelIngot)).clearRecipeSkills());
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.highCarbonRedSteelIngot), null, "ingot",  false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelIngot)).clearRecipeSkills());
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.highCarbonSteelIngot), null, "ingot", false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelIngot)).clearRecipeSkills());
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.weakRedSteelIngot), new ItemStack(TFCItems.smallMetalChunk,1,3), "ingot",  false, AnvilReq.MANASTEEL, new ItemStack(TFCItems.redSteelIngot)).clearRecipeSkills());
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.highCarbonBlackSteelIngot), null, "ingot", AnvilReq.STEEL, new ItemStack(TFCItems.blackSteelIngot)).clearRecipeSkills());
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.highCarbonBlueSteelIngot), null, "ingot", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelIngot)).clearRecipeSkills());
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.highCarbonRedSteelIngot), null, "ingot",  AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelIngot)).clearRecipeSkills());
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.highCarbonSteelIngot), null, "ingot", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelIngot)).clearRecipeSkills());
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.weakRedSteelIngot), new ItemStack(TFCItems.smallMetalChunk,1,3), "ingot", AnvilReq.MANASTEEL, new ItemStack(TFCItems.redSteelIngot)).clearRecipeSkills());
 
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthIngot2x), null, "sheet", false, AnvilReq.STONE, new ItemStack(TFCItems.bismuthSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeIngot2x), null, "sheet", false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.bismuthBronzeSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackBronzeIngot2x), null, "sheet", false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.blackBronzeSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackSteelIngot2x), null, "sheet", false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blackSteelSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.blueSteelIngot2x), null, "sheet", false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.blueSteelSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.brassIngot2x), null, "sheet", false, AnvilReq.COPPER, new ItemStack(TFCItems.brassSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bronzeIngot2x), null, "sheet", false, AnvilReq.BRONZE, new ItemStack(TFCItems.bronzeSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.copperIngot2x), null, "sheet", false, AnvilReq.COPPER, new ItemStack(TFCItems.copperSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.goldIngot2x), null, "sheet", false, AnvilReq.COPPER, new ItemStack(TFCItems.goldSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronIngot2x), null, "sheet", false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.wroughtIronSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.leadIngot2x), null, "sheet", false, AnvilReq.COPPER, new ItemStack(TFCItems.leadSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.nickelIngot2x), null, "sheet", false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.nickelSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.pigIronIngot2x), null, "sheet", false, AnvilReq.BRONZE, new ItemStack(TFCItems.pigIronSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.platinumIngot2x), null, "sheet", false, AnvilReq.BRONZE, new ItemStack(TFCItems.platinumSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.redSteelIngot2x), null, "sheet", false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.redSteelSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.roseGoldIngot2x), null, "sheet", false, AnvilReq.BRONZE, new ItemStack(TFCItems.roseGoldSheet)));       
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.silverIngot2x), null, "sheet", false, AnvilReq.COPPER, new ItemStack(TFCItems.silverSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.steelIngot2x), null, "sheet", false, AnvilReq.STEEL, new ItemStack(TFCItems.steelSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.sterlingSilverIngot2x), null, "sheet", false, AnvilReq.BRONZE, new ItemStack(TFCItems.sterlingSilverSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.tinIngot2x), null, "sheet", false, AnvilReq.STONE, new ItemStack(TFCItems.tinSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.zincIngot2x), null, "sheet", false, AnvilReq.STONE, new ItemStack(TFCItems.zincSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.electrumIngot2x), null, "sheet", false, AnvilReq.COPPER, new ItemStack(TFCItems.electrumSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.cupronickelIngot2x), null, "sheet", false, AnvilReq.COPPER, new ItemStack(TFCItems.cupronickelSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthIngot2x), null, "sheet", AnvilReq.STONE, new ItemStack(TFCItems.bismuthSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeIngot2x), null, "sheet", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.bismuthBronzeSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackBronzeIngot2x), null, "sheet", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.blackBronzeSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackSteelIngot2x), null, "sheet", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blackSteelSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.blueSteelIngot2x), null, "sheet", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.blueSteelSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.brassIngot2x), null, "sheet", AnvilReq.COPPER, new ItemStack(TFCItems.brassSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bronzeIngot2x), null, "sheet", AnvilReq.BRONZE, new ItemStack(TFCItems.bronzeSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.copperIngot2x), null, "sheet", AnvilReq.COPPER, new ItemStack(TFCItems.copperSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.goldIngot2x), null, "sheet", AnvilReq.COPPER, new ItemStack(TFCItems.goldSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronIngot2x), null, "sheet", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.wroughtIronSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.leadIngot2x), null, "sheet", AnvilReq.COPPER, new ItemStack(TFCItems.leadSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.nickelIngot2x), null, "sheet", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.nickelSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.pigIronIngot2x), null, "sheet", AnvilReq.BRONZE, new ItemStack(TFCItems.pigIronSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.platinumIngot2x), null, "sheet", AnvilReq.BRONZE, new ItemStack(TFCItems.platinumSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.redSteelIngot2x), null, "sheet", AnvilReq.REDSTEEL, new ItemStack(TFCItems.redSteelSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.roseGoldIngot2x), null, "sheet", AnvilReq.BRONZE, new ItemStack(TFCItems.roseGoldSheet)));       
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.silverIngot2x), null, "sheet", AnvilReq.COPPER, new ItemStack(TFCItems.silverSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.steelIngot2x), null, "sheet", AnvilReq.STEEL, new ItemStack(TFCItems.steelSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.sterlingSilverIngot2x), null, "sheet", AnvilReq.BRONZE, new ItemStack(TFCItems.sterlingSilverSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.tinIngot2x), null, "sheet", AnvilReq.STONE, new ItemStack(TFCItems.tinSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.zincIngot2x), null, "sheet", AnvilReq.STONE, new ItemStack(TFCItems.zincSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.electrumIngot2x), null, "sheet", AnvilReq.COPPER, new ItemStack(TFCItems.electrumSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.cupronickelIngot2x), null, "sheet", AnvilReq.COPPER, new ItemStack(TFCItems.cupronickelSheet)));
 
 		//Picks
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeIngot), null, "pickaxe", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.bismuthBronzePickaxeHead, 1)).addRecipeSkill(Global.SKILL_TOOLSMITH));
@@ -1461,7 +1461,7 @@ public class Recipes
 		//Scythes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeIngot), null, "scythe", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.bismuthBronzeScytheHead, 1)).addRecipeSkill(Global.SKILL_TOOLSMITH));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackBronzeIngot), null,"scythe", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.blackBronzeScytheHead, 1)).addRecipeSkill(Global.SKILL_TOOLSMITH));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackSteelIngot),null,"scythe", false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blackSteelScytheHead, 1)).addRecipeSkill(Global.SKILL_TOOLSMITH));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackSteelIngot),null,"scythe", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blackSteelScytheHead, 1)).addRecipeSkill(Global.SKILL_TOOLSMITH));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.blueSteelIngot), null,"scythe", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.blueSteelScytheHead, 1)).addRecipeSkill(Global.SKILL_TOOLSMITH));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bronzeIngot), null,"scythe", AnvilReq.BRONZE, new ItemStack(TFCItems.bronzeScytheHead, 1)).addRecipeSkill(Global.SKILL_TOOLSMITH));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.copperIngot), null,"scythe", AnvilReq.COPPER, new ItemStack(TFCItems.copperScytheHead, 1)).addRecipeSkill(Global.SKILL_TOOLSMITH));
@@ -1623,7 +1623,7 @@ public class Recipes
 		//GT Items
 		for (OreDictMaterial mat : new OreDictMaterial[]{MT.Pb, MT.Steel, MT.Cu, MT.WroughtIron, MT.Bronze, MT.Bi, MT.BlackBronze, MT.BismuthBronze, MT.Cupronickel, MT.Ni, MT.Sn, MT.Au, MT.Brass, MT.Electrum, MT.Ag, MT.RoseGold, MT.SterlingSilver, MT.Invar, MT.Ge, MT.Co, MT.AluminiumBrass, MT.Al, MT.TinAlloy, MT.Fe}) {
 			AnvilReq req = getAnvilReqFromMaterial(mat);
-			manager.addRecipe(new AnvilRecipe(OP.ingotDouble.mat(mat, 1), null, "plate", req, OP.plate.mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.ingotDouble.mat(mat, 1), null, "sheet", req, OP.plate.mat(mat, 1)));
 			manager.addRecipe(new AnvilRecipe(OP.plateQuadruple.mat(mat, 1), OP.plateQuadruple.mat(mat, 1), "casing", req, OP.casingMachine.mat(mat, 1)));
 			manager.addRecipe(new AnvilRecipe(OP.casingMachine.mat(mat, 1), OP.casingMachine.mat(mat, 1), "robustcasing", req, OP.casingMachineDouble.mat(mat, 1)));
 			manager.addRecipe(new AnvilRecipe(OP.casingMachineDouble.mat(mat, 1), OP.casingMachineDouble.mat(mat, 1), "reinforcedcasing", req, OP.casingMachineQuadruple.mat(mat, 1)));
@@ -1637,21 +1637,21 @@ public class Recipes
 			manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat, 1), null, "platecurved", req, OP.plateCurved.mat(mat, 1)));
 			manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat, 1), OP.stick.mat(mat, 1), "chain", req, OP.chain.mat(mat, 1)));
 
-			manager.addWeldRecipe(new AnvilRecipe(OP.plate.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateDouble.mat(mat, 1)));
-			manager.addWeldRecipe(new AnvilRecipe(OP.plateDouble.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateTriple.mat(mat, 1)));
-			manager.addWeldRecipe(new AnvilRecipe(OP.plateTriple.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateQuadruple.mat(mat, 1)));
-			manager.addWeldRecipe(new AnvilRecipe(OP.plateQuadruple.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateQuintuple.mat(mat, 1)));
-			manager.addWeldRecipe(new AnvilRecipe(OP.plateDouble.mat(mat, 1), OP.plateDouble.mat(mat, 1), req, OP.plateQuadruple.mat(mat, 1)));
-			manager.addWeldRecipe(new AnvilRecipe(OP.plateTriple.mat(mat, 1), OP.plateDouble.mat(mat, 1), req, OP.plateQuintuple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilWeldRecipe(OP.plate.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateDouble.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilWeldRecipe(OP.plateDouble.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateTriple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilWeldRecipe(OP.plateTriple.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateQuadruple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilWeldRecipe(OP.plateQuadruple.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateQuintuple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilWeldRecipe(OP.plateDouble.mat(mat, 1), OP.plateDouble.mat(mat, 1), req, OP.plateQuadruple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilWeldRecipe(OP.plateTriple.mat(mat, 1), OP.plateDouble.mat(mat, 1), req, OP.plateQuintuple.mat(mat, 1)));
 
-			manager.addWeldRecipe(new AnvilRecipe(OP.ingot.mat(mat, 1), OP.ingot.mat(mat, 1), req, OP.ingotDouble.mat(mat, 1)));
-			manager.addWeldRecipe(new AnvilRecipe(OP.ingotDouble.mat(mat, 1), OP.ingot.mat(mat, 1), req, OP.ingotTriple.mat(mat, 1)));
-			manager.addWeldRecipe(new AnvilRecipe(OP.ingotTriple.mat(mat, 1), OP.ingot.mat(mat, 1), req, OP.ingotQuadruple.mat(mat, 1)));
-			manager.addWeldRecipe(new AnvilRecipe(OP.ingotQuadruple.mat(mat, 1), OP.ingot.mat(mat, 1), req, OP.ingotQuintuple.mat(mat, 1)));
-			manager.addWeldRecipe(new AnvilRecipe(OP.ingotDouble.mat(mat, 1), OP.ingotDouble.mat(mat, 1), req, OP.ingotQuadruple.mat(mat, 1)));
-			manager.addWeldRecipe(new AnvilRecipe(OP.ingotTriple.mat(mat, 1), OP.ingotDouble.mat(mat, 1), req, OP.ingotQuintuple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilWeldRecipe(OP.ingot.mat(mat, 1), OP.ingot.mat(mat, 1), req, OP.ingotDouble.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilWeldRecipe(OP.ingotDouble.mat(mat, 1), OP.ingot.mat(mat, 1), req, OP.ingotTriple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilWeldRecipe(OP.ingotTriple.mat(mat, 1), OP.ingot.mat(mat, 1), req, OP.ingotQuadruple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilWeldRecipe(OP.ingotQuadruple.mat(mat, 1), OP.ingot.mat(mat, 1), req, OP.ingotQuintuple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilWeldRecipe(OP.ingotDouble.mat(mat, 1), OP.ingotDouble.mat(mat, 1), req, OP.ingotQuadruple.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilWeldRecipe(OP.ingotTriple.mat(mat, 1), OP.ingotDouble.mat(mat, 1), req, OP.ingotQuintuple.mat(mat, 1)));
 
-			manager.addWeldRecipe(new AnvilRecipe(OP.stick.mat(mat, 1), OP.stick.mat(mat, 1), req, OP.stickLong.mat(mat, 1)));
+			manager.addWeldRecipe(new AnvilWeldRecipe(OP.stick.mat(mat, 1), OP.stick.mat(mat, 1), req, OP.stickLong.mat(mat, 1)));
 		}
 	}
 	}
@@ -1698,100 +1698,100 @@ public class Recipes
 		/**
 		 * Weld Recipes
 		 */
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthIngot),new ItemStack(TFCItems.bismuthIngot),AnvilReq.STONE, new ItemStack(TFCItems.bismuthIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeIngot),new ItemStack(TFCItems.bismuthBronzeIngot),AnvilReq.COPPER, new ItemStack(TFCItems.bismuthBronzeIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackBronzeIngot),new ItemStack(TFCItems.blackBronzeIngot),AnvilReq.COPPER, new ItemStack(TFCItems.blackBronzeIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackSteelIngot),new ItemStack(TFCItems.blackSteelIngot),AnvilReq.STEEL, new ItemStack(TFCItems.blackSteelIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blueSteelIngot),new ItemStack(TFCItems.blueSteelIngot),AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.brassIngot),new ItemStack(TFCItems.brassIngot),AnvilReq.COPPER, new ItemStack(TFCItems.brassIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bronzeIngot),new ItemStack(TFCItems.bronzeIngot),AnvilReq.COPPER, new ItemStack(TFCItems.bronzeIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.copperIngot),new ItemStack(TFCItems.copperIngot),AnvilReq.STONE, new ItemStack(TFCItems.copperIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.goldIngot),new ItemStack(TFCItems.goldIngot),AnvilReq.COPPER, new ItemStack(TFCItems.goldIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronIngot),new ItemStack(TFCItems.wroughtIronIngot),AnvilReq.BRONZE, new ItemStack(TFCItems.wroughtIronIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.leadIngot),new ItemStack(TFCItems.leadIngot),AnvilReq.COPPER, new ItemStack(TFCItems.leadIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.nickelIngot),new ItemStack(TFCItems.nickelIngot),AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.nickelIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.pigIronIngot),new ItemStack(TFCItems.pigIronIngot),AnvilReq.BRONZE, new ItemStack(TFCItems.pigIronIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.platinumIngot),new ItemStack(TFCItems.platinumIngot),AnvilReq.BRONZE, new ItemStack(TFCItems.platinumIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.redSteelIngot),new ItemStack(TFCItems.redSteelIngot),AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.roseGoldIngot),new ItemStack(TFCItems.roseGoldIngot),AnvilReq.COPPER, new ItemStack(TFCItems.roseGoldIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.silverIngot),new ItemStack(TFCItems.silverIngot),AnvilReq.COPPER, new ItemStack(TFCItems.silverIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.steelIngot),new ItemStack(TFCItems.steelIngot),AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.sterlingSilverIngot),new ItemStack(TFCItems.sterlingSilverIngot),AnvilReq.BRONZE, new ItemStack(TFCItems.sterlingSilverIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.tinIngot),new ItemStack(TFCItems.tinIngot),AnvilReq.STONE, new ItemStack(TFCItems.tinIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.zincIngot),new ItemStack(TFCItems.zincIngot),AnvilReq.STONE, new ItemStack(TFCItems.zincIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.electrumIngot),new ItemStack(TFCItems.electrumIngot),AnvilReq.COPPER, new ItemStack(TFCItems.electrumIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.cupronickelIngot),new ItemStack(TFCItems.cupronickelIngot),AnvilReq.COPPER, new ItemStack(TFCItems.cupronickelIngot2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.weakSteelIngot),new ItemStack(TFCItems.pigIronIngot),AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.highCarbonBlackSteelIngot, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.weakBlueSteelIngot),new ItemStack(TFCItems.blackSteelIngot),AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.highCarbonBlueSteelIngot, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.weakRedSteelIngot),new ItemStack(TFCItems.blackSteelIngot),AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.highCarbonRedSteelIngot, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.bismuthIngot),new ItemStack(TFCItems.bismuthIngot),AnvilReq.STONE, new ItemStack(TFCItems.bismuthIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.bismuthBronzeIngot),new ItemStack(TFCItems.bismuthBronzeIngot),AnvilReq.COPPER, new ItemStack(TFCItems.bismuthBronzeIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blackBronzeIngot),new ItemStack(TFCItems.blackBronzeIngot),AnvilReq.COPPER, new ItemStack(TFCItems.blackBronzeIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blackSteelIngot),new ItemStack(TFCItems.blackSteelIngot),AnvilReq.STEEL, new ItemStack(TFCItems.blackSteelIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blueSteelIngot),new ItemStack(TFCItems.blueSteelIngot),AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.brassIngot),new ItemStack(TFCItems.brassIngot),AnvilReq.COPPER, new ItemStack(TFCItems.brassIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.bronzeIngot),new ItemStack(TFCItems.bronzeIngot),AnvilReq.COPPER, new ItemStack(TFCItems.bronzeIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.copperIngot),new ItemStack(TFCItems.copperIngot),AnvilReq.STONE, new ItemStack(TFCItems.copperIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.goldIngot),new ItemStack(TFCItems.goldIngot),AnvilReq.COPPER, new ItemStack(TFCItems.goldIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.wroughtIronIngot),new ItemStack(TFCItems.wroughtIronIngot),AnvilReq.BRONZE, new ItemStack(TFCItems.wroughtIronIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.leadIngot),new ItemStack(TFCItems.leadIngot),AnvilReq.COPPER, new ItemStack(TFCItems.leadIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.nickelIngot),new ItemStack(TFCItems.nickelIngot),AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.nickelIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.pigIronIngot),new ItemStack(TFCItems.pigIronIngot),AnvilReq.BRONZE, new ItemStack(TFCItems.pigIronIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.platinumIngot),new ItemStack(TFCItems.platinumIngot),AnvilReq.BRONZE, new ItemStack(TFCItems.platinumIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.redSteelIngot),new ItemStack(TFCItems.redSteelIngot),AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.roseGoldIngot),new ItemStack(TFCItems.roseGoldIngot),AnvilReq.COPPER, new ItemStack(TFCItems.roseGoldIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.silverIngot),new ItemStack(TFCItems.silverIngot),AnvilReq.COPPER, new ItemStack(TFCItems.silverIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.steelIngot),new ItemStack(TFCItems.steelIngot),AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.sterlingSilverIngot),new ItemStack(TFCItems.sterlingSilverIngot),AnvilReq.BRONZE, new ItemStack(TFCItems.sterlingSilverIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.tinIngot),new ItemStack(TFCItems.tinIngot),AnvilReq.STONE, new ItemStack(TFCItems.tinIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.zincIngot),new ItemStack(TFCItems.zincIngot),AnvilReq.STONE, new ItemStack(TFCItems.zincIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.electrumIngot),new ItemStack(TFCItems.electrumIngot),AnvilReq.COPPER, new ItemStack(TFCItems.electrumIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.cupronickelIngot),new ItemStack(TFCItems.cupronickelIngot),AnvilReq.COPPER, new ItemStack(TFCItems.cupronickelIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.weakSteelIngot),new ItemStack(TFCItems.pigIronIngot),AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.highCarbonBlackSteelIngot, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.weakBlueSteelIngot),new ItemStack(TFCItems.blackSteelIngot),AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.highCarbonBlueSteelIngot, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.weakRedSteelIngot),new ItemStack(TFCItems.blackSteelIngot),AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.highCarbonRedSteelIngot, 1)));
 
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthSheet),new ItemStack(TFCItems.bismuthSheet),AnvilReq.STONE, new ItemStack(TFCItems.bismuthSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeSheet),new ItemStack(TFCItems.bismuthBronzeSheet),AnvilReq.COPPER, new ItemStack(TFCItems.bismuthBronzeSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackBronzeSheet),new ItemStack(TFCItems.blackBronzeSheet),AnvilReq.COPPER, new ItemStack(TFCItems.blackBronzeSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackSteelSheet),new ItemStack(TFCItems.blackSteelSheet),AnvilReq.STEEL, new ItemStack(TFCItems.blackSteelSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blueSteelSheet),new ItemStack(TFCItems.blueSteelSheet),AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.brassSheet),new ItemStack(TFCItems.brassSheet),AnvilReq.COPPER, new ItemStack(TFCItems.brassSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bronzeSheet),new ItemStack(TFCItems.bronzeSheet),AnvilReq.COPPER, new ItemStack(TFCItems.bronzeSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.copperSheet),new ItemStack(TFCItems.copperSheet),AnvilReq.STONE, new ItemStack(TFCItems.copperSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.goldSheet),new ItemStack(TFCItems.goldSheet),AnvilReq.COPPER, new ItemStack(TFCItems.goldSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronSheet),new ItemStack(TFCItems.wroughtIronSheet),AnvilReq.BRONZE, new ItemStack(TFCItems.wroughtIronSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.leadSheet),new ItemStack(TFCItems.leadSheet),AnvilReq.COPPER, new ItemStack(TFCItems.leadSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.nickelSheet),new ItemStack(TFCItems.nickelSheet),AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.nickelSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.pigIronSheet),new ItemStack(TFCItems.pigIronSheet),AnvilReq.BRONZE, new ItemStack(TFCItems.pigIronSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.platinumSheet),new ItemStack(TFCItems.platinumSheet),AnvilReq.BRONZE, new ItemStack(TFCItems.platinumSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.redSteelSheet),new ItemStack(TFCItems.redSteelSheet),AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.roseGoldSheet),new ItemStack(TFCItems.roseGoldSheet),AnvilReq.COPPER, new ItemStack(TFCItems.roseGoldSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.silverSheet),new ItemStack(TFCItems.silverSheet),AnvilReq.COPPER, new ItemStack(TFCItems.silverSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.steelSheet),new ItemStack(TFCItems.steelSheet),AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.sterlingSilverSheet),new ItemStack(TFCItems.sterlingSilverSheet),AnvilReq.BRONZE, new ItemStack(TFCItems.sterlingSilverSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.tinSheet),new ItemStack(TFCItems.tinSheet),AnvilReq.STONE, new ItemStack(TFCItems.tinSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.zincSheet),new ItemStack(TFCItems.zincSheet),AnvilReq.STONE, new ItemStack(TFCItems.zincSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.electrumSheet),new ItemStack(TFCItems.electrumSheet),AnvilReq.COPPER, new ItemStack(TFCItems.electrumSheet2x, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.cupronickelSheet),new ItemStack(TFCItems.cupronickelSheet),AnvilReq.COPPER, new ItemStack(TFCItems.cupronickelSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.bismuthSheet),new ItemStack(TFCItems.bismuthSheet),AnvilReq.STONE, new ItemStack(TFCItems.bismuthSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.bismuthBronzeSheet),new ItemStack(TFCItems.bismuthBronzeSheet),AnvilReq.COPPER, new ItemStack(TFCItems.bismuthBronzeSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blackBronzeSheet),new ItemStack(TFCItems.blackBronzeSheet),AnvilReq.COPPER, new ItemStack(TFCItems.blackBronzeSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blackSteelSheet),new ItemStack(TFCItems.blackSteelSheet),AnvilReq.STEEL, new ItemStack(TFCItems.blackSteelSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blueSteelSheet),new ItemStack(TFCItems.blueSteelSheet),AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.brassSheet),new ItemStack(TFCItems.brassSheet),AnvilReq.COPPER, new ItemStack(TFCItems.brassSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.bronzeSheet),new ItemStack(TFCItems.bronzeSheet),AnvilReq.COPPER, new ItemStack(TFCItems.bronzeSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.copperSheet),new ItemStack(TFCItems.copperSheet),AnvilReq.STONE, new ItemStack(TFCItems.copperSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.goldSheet),new ItemStack(TFCItems.goldSheet),AnvilReq.COPPER, new ItemStack(TFCItems.goldSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.wroughtIronSheet),new ItemStack(TFCItems.wroughtIronSheet),AnvilReq.BRONZE, new ItemStack(TFCItems.wroughtIronSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.leadSheet),new ItemStack(TFCItems.leadSheet),AnvilReq.COPPER, new ItemStack(TFCItems.leadSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.nickelSheet),new ItemStack(TFCItems.nickelSheet),AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.nickelSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.pigIronSheet),new ItemStack(TFCItems.pigIronSheet),AnvilReq.BRONZE, new ItemStack(TFCItems.pigIronSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.platinumSheet),new ItemStack(TFCItems.platinumSheet),AnvilReq.BRONZE, new ItemStack(TFCItems.platinumSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.redSteelSheet),new ItemStack(TFCItems.redSteelSheet),AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.roseGoldSheet),new ItemStack(TFCItems.roseGoldSheet),AnvilReq.COPPER, new ItemStack(TFCItems.roseGoldSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.silverSheet),new ItemStack(TFCItems.silverSheet),AnvilReq.COPPER, new ItemStack(TFCItems.silverSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.steelSheet),new ItemStack(TFCItems.steelSheet),AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.sterlingSilverSheet),new ItemStack(TFCItems.sterlingSilverSheet),AnvilReq.BRONZE, new ItemStack(TFCItems.sterlingSilverSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.tinSheet),new ItemStack(TFCItems.tinSheet),AnvilReq.STONE, new ItemStack(TFCItems.tinSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.zincSheet),new ItemStack(TFCItems.zincSheet),AnvilReq.STONE, new ItemStack(TFCItems.zincSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.electrumSheet),new ItemStack(TFCItems.electrumSheet),AnvilReq.COPPER, new ItemStack(TFCItems.electrumSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.cupronickelSheet),new ItemStack(TFCItems.cupronickelSheet),AnvilReq.COPPER, new ItemStack(TFCItems.cupronickelSheet2x, 1)));
 
 		//chest
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeUnfinishedChestplate,1,0),new ItemStack(TFCItems.bismuthBronzeSheet2x),true,AnvilReq.COPPER, new ItemStack(TFCItems.bismuthBronzeUnfinishedChestplate,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackBronzeUnfinishedChestplate,1,0),new ItemStack(TFCItems.blackBronzeSheet2x),true,AnvilReq.COPPER, new ItemStack(TFCItems.blackBronzeUnfinishedChestplate,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackSteelUnfinishedChestplate,1,0),new ItemStack(TFCItems.blackSteelSheet2x),true,AnvilReq.STEEL, new ItemStack(TFCItems.blackSteelUnfinishedChestplate,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blueSteelUnfinishedChestplate,1,0),new ItemStack(TFCItems.blueSteelSheet2x),true,AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelUnfinishedChestplate,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bronzeUnfinishedChestplate,1,0),new ItemStack(TFCItems.bronzeSheet2x),true,AnvilReq.COPPER, new ItemStack(TFCItems.bronzeUnfinishedChestplate,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.copperUnfinishedChestplate,1,0),new ItemStack(TFCItems.copperSheet2x),true,AnvilReq.STONE, new ItemStack(TFCItems.copperUnfinishedChestplate,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronUnfinishedChestplate,1,0),new ItemStack(TFCItems.wroughtIronSheet2x),true,AnvilReq.BRONZE, new ItemStack(TFCItems.wroughtIronUnfinishedChestplate,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.redSteelUnfinishedChestplate,1,0),new ItemStack(TFCItems.redSteelSheet2x),true,AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelUnfinishedChestplate,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.steelUnfinishedChestplate,1,0),new ItemStack(TFCItems.steelSheet2x),true,AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelUnfinishedChestplate,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.bismuthBronzeUnfinishedChestplate,1,0),new ItemStack(TFCItems.bismuthBronzeSheet2x),  AnvilReq.COPPER, new ItemStack(TFCItems.bismuthBronzeUnfinishedChestplate,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blackBronzeUnfinishedChestplate,1,0),new ItemStack(TFCItems.blackBronzeSheet2x),  AnvilReq.COPPER, new ItemStack(TFCItems.blackBronzeUnfinishedChestplate,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blackSteelUnfinishedChestplate,1,0),new ItemStack(TFCItems.blackSteelSheet2x),  AnvilReq.STEEL, new ItemStack(TFCItems.blackSteelUnfinishedChestplate,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blueSteelUnfinishedChestplate,1,0),new ItemStack(TFCItems.blueSteelSheet2x),  AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelUnfinishedChestplate,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.bronzeUnfinishedChestplate,1,0),new ItemStack(TFCItems.bronzeSheet2x),  AnvilReq.COPPER, new ItemStack(TFCItems.bronzeUnfinishedChestplate,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.copperUnfinishedChestplate,1,0),new ItemStack(TFCItems.copperSheet2x),  AnvilReq.STONE, new ItemStack(TFCItems.copperUnfinishedChestplate,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.wroughtIronUnfinishedChestplate,1,0),new ItemStack(TFCItems.wroughtIronSheet2x),  AnvilReq.BRONZE, new ItemStack(TFCItems.wroughtIronUnfinishedChestplate,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.redSteelUnfinishedChestplate,1,0),new ItemStack(TFCItems.redSteelSheet2x),  AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelUnfinishedChestplate,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.steelUnfinishedChestplate,1,0),new ItemStack(TFCItems.steelSheet2x),  AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelUnfinishedChestplate,1, 1)));
 
 		//greaves
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeUnfinishedGreaves,1,0),new ItemStack(TFCItems.bismuthBronzeSheet),true,AnvilReq.COPPER, new ItemStack(TFCItems.bismuthBronzeUnfinishedGreaves,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackBronzeUnfinishedGreaves,1,0),new ItemStack(TFCItems.blackBronzeSheet),true,AnvilReq.COPPER, new ItemStack(TFCItems.blackBronzeUnfinishedGreaves,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackSteelUnfinishedGreaves,1,0),new ItemStack(TFCItems.blackSteelSheet),true,AnvilReq.STEEL, new ItemStack(TFCItems.blackSteelUnfinishedGreaves,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blueSteelUnfinishedGreaves,1,0),new ItemStack(TFCItems.blueSteelSheet),true,AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelUnfinishedGreaves,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bronzeUnfinishedGreaves,1,0),new ItemStack(TFCItems.bronzeSheet),true,AnvilReq.COPPER, new ItemStack(TFCItems.bronzeUnfinishedGreaves,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.copperUnfinishedGreaves,1,0),new ItemStack(TFCItems.copperSheet),true,AnvilReq.STONE, new ItemStack(TFCItems.copperUnfinishedGreaves,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronUnfinishedGreaves,1,0),new ItemStack(TFCItems.wroughtIronSheet),true,AnvilReq.BRONZE, new ItemStack(TFCItems.wroughtIronUnfinishedGreaves,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.redSteelUnfinishedGreaves,1,0),new ItemStack(TFCItems.redSteelSheet),true,AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelUnfinishedGreaves,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.steelUnfinishedGreaves,1,0),new ItemStack(TFCItems.steelSheet),true,AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelUnfinishedGreaves,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.bismuthBronzeUnfinishedGreaves,1,0),new ItemStack(TFCItems.bismuthBronzeSheet),  AnvilReq.COPPER, new ItemStack(TFCItems.bismuthBronzeUnfinishedGreaves,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blackBronzeUnfinishedGreaves,1,0),new ItemStack(TFCItems.blackBronzeSheet),  AnvilReq.COPPER, new ItemStack(TFCItems.blackBronzeUnfinishedGreaves,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blackSteelUnfinishedGreaves,1,0),new ItemStack(TFCItems.blackSteelSheet),  AnvilReq.STEEL, new ItemStack(TFCItems.blackSteelUnfinishedGreaves,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blueSteelUnfinishedGreaves,1,0),new ItemStack(TFCItems.blueSteelSheet),  AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelUnfinishedGreaves,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.bronzeUnfinishedGreaves,1,0),new ItemStack(TFCItems.bronzeSheet),  AnvilReq.COPPER, new ItemStack(TFCItems.bronzeUnfinishedGreaves,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.copperUnfinishedGreaves,1,0),new ItemStack(TFCItems.copperSheet),  AnvilReq.STONE, new ItemStack(TFCItems.copperUnfinishedGreaves,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.wroughtIronUnfinishedGreaves,1,0),new ItemStack(TFCItems.wroughtIronSheet),  AnvilReq.BRONZE, new ItemStack(TFCItems.wroughtIronUnfinishedGreaves,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.redSteelUnfinishedGreaves,1,0),new ItemStack(TFCItems.redSteelSheet),  AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelUnfinishedGreaves,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.steelUnfinishedGreaves,1,0),new ItemStack(TFCItems.steelSheet),  AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelUnfinishedGreaves,1, 1)));
 
 		//Helmet
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeUnfinishedHelmet,1,0),new ItemStack(TFCItems.bismuthBronzeSheet),true,AnvilReq.COPPER, new ItemStack(TFCItems.bismuthBronzeUnfinishedHelmet,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackBronzeUnfinishedHelmet,1,0),new ItemStack(TFCItems.blackBronzeSheet),true,AnvilReq.COPPER, new ItemStack(TFCItems.blackBronzeUnfinishedHelmet,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackSteelUnfinishedHelmet,1,0),new ItemStack(TFCItems.blackSteelSheet),true,AnvilReq.STEEL, new ItemStack(TFCItems.blackSteelUnfinishedHelmet,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blueSteelUnfinishedHelmet,1,0),new ItemStack(TFCItems.blueSteelSheet),true,AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelUnfinishedHelmet,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bronzeUnfinishedHelmet,1,0),new ItemStack(TFCItems.bronzeSheet),true,AnvilReq.COPPER, new ItemStack(TFCItems.bronzeUnfinishedHelmet,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.copperUnfinishedHelmet,1,0),new ItemStack(TFCItems.copperSheet),true,AnvilReq.STONE, new ItemStack(TFCItems.copperUnfinishedHelmet,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronUnfinishedHelmet,1,0),new ItemStack(TFCItems.wroughtIronSheet),true,AnvilReq.BRONZE, new ItemStack(TFCItems.wroughtIronUnfinishedHelmet,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.redSteelUnfinishedHelmet,1,0),new ItemStack(TFCItems.redSteelSheet),true,AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelUnfinishedHelmet,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.steelUnfinishedHelmet,1,0),new ItemStack(TFCItems.steelSheet),true,AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelUnfinishedHelmet,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.bismuthBronzeUnfinishedHelmet,1,0),new ItemStack(TFCItems.bismuthBronzeSheet),  AnvilReq.COPPER, new ItemStack(TFCItems.bismuthBronzeUnfinishedHelmet,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blackBronzeUnfinishedHelmet,1,0),new ItemStack(TFCItems.blackBronzeSheet),  AnvilReq.COPPER, new ItemStack(TFCItems.blackBronzeUnfinishedHelmet,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blackSteelUnfinishedHelmet,1,0),new ItemStack(TFCItems.blackSteelSheet),  AnvilReq.STEEL, new ItemStack(TFCItems.blackSteelUnfinishedHelmet,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blueSteelUnfinishedHelmet,1,0),new ItemStack(TFCItems.blueSteelSheet),  AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelUnfinishedHelmet,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.bronzeUnfinishedHelmet,1,0),new ItemStack(TFCItems.bronzeSheet),  AnvilReq.COPPER, new ItemStack(TFCItems.bronzeUnfinishedHelmet,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.copperUnfinishedHelmet,1,0),new ItemStack(TFCItems.copperSheet),  AnvilReq.STONE, new ItemStack(TFCItems.copperUnfinishedHelmet,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.wroughtIronUnfinishedHelmet,1,0),new ItemStack(TFCItems.wroughtIronSheet),  AnvilReq.BRONZE, new ItemStack(TFCItems.wroughtIronUnfinishedHelmet,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.redSteelUnfinishedHelmet,1,0),new ItemStack(TFCItems.redSteelSheet),  AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelUnfinishedHelmet,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.steelUnfinishedHelmet,1,0),new ItemStack(TFCItems.steelSheet),  AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelUnfinishedHelmet,1, 1)));
 
 		//Boots
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeUnfinishedBoots,1,0),new ItemStack(TFCItems.bismuthBronzeSheet),true,AnvilReq.COPPER, new ItemStack(TFCItems.bismuthBronzeUnfinishedBoots,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackBronzeUnfinishedBoots,1,0),new ItemStack(TFCItems.blackBronzeSheet),true,AnvilReq.COPPER, new ItemStack(TFCItems.blackBronzeUnfinishedBoots,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackSteelUnfinishedBoots,1,0),new ItemStack(TFCItems.blackSteelSheet),true,AnvilReq.STEEL, new ItemStack(TFCItems.blackSteelUnfinishedBoots,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.blueSteelUnfinishedBoots,1,0),new ItemStack(TFCItems.blueSteelSheet),true,AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelUnfinishedBoots,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bronzeUnfinishedBoots,1,0),new ItemStack(TFCItems.bronzeSheet),true,AnvilReq.COPPER, new ItemStack(TFCItems.bronzeUnfinishedBoots,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.copperUnfinishedBoots,1,0),new ItemStack(TFCItems.copperSheet),true,AnvilReq.STONE, new ItemStack(TFCItems.copperUnfinishedBoots,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronUnfinishedBoots,1,0),new ItemStack(TFCItems.wroughtIronSheet),true,AnvilReq.BRONZE, new ItemStack(TFCItems.wroughtIronUnfinishedBoots,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.redSteelUnfinishedBoots,1,0),new ItemStack(TFCItems.redSteelSheet),true,AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelUnfinishedBoots,1, 1)));
-		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.steelUnfinishedBoots,1,0),new ItemStack(TFCItems.steelSheet),true,AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelUnfinishedBoots,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.bismuthBronzeUnfinishedBoots,1,0),new ItemStack(TFCItems.bismuthBronzeSheet),  AnvilReq.COPPER, new ItemStack(TFCItems.bismuthBronzeUnfinishedBoots,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blackBronzeUnfinishedBoots,1,0),new ItemStack(TFCItems.blackBronzeSheet),  AnvilReq.COPPER, new ItemStack(TFCItems.blackBronzeUnfinishedBoots,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blackSteelUnfinishedBoots,1,0),new ItemStack(TFCItems.blackSteelSheet),  AnvilReq.STEEL, new ItemStack(TFCItems.blackSteelUnfinishedBoots,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.blueSteelUnfinishedBoots,1,0),new ItemStack(TFCItems.blueSteelSheet),  AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.blueSteelUnfinishedBoots,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.bronzeUnfinishedBoots,1,0),new ItemStack(TFCItems.bronzeSheet),  AnvilReq.COPPER, new ItemStack(TFCItems.bronzeUnfinishedBoots,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.copperUnfinishedBoots,1,0),new ItemStack(TFCItems.copperSheet),  AnvilReq.STONE, new ItemStack(TFCItems.copperUnfinishedBoots,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.wroughtIronUnfinishedBoots,1,0),new ItemStack(TFCItems.wroughtIronSheet),  AnvilReq.BRONZE, new ItemStack(TFCItems.wroughtIronUnfinishedBoots,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.redSteelUnfinishedBoots,1,0),new ItemStack(TFCItems.redSteelSheet),  AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.redSteelUnfinishedBoots,1, 1)));
+		manager.addWeldRecipe(new AnvilWeldRecipe(new ItemStack(TFCItems.steelUnfinishedBoots,1,0),new ItemStack(TFCItems.steelSheet),  AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.steelUnfinishedBoots,1, 1)));
 	}
 
 	public static void registerFoodRecipes()

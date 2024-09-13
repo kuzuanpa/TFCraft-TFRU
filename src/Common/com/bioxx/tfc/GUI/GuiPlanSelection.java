@@ -98,7 +98,7 @@ public class GuiPlanSelection extends GuiContainerTFC
 		ArrayList planList = new ArrayList();
 		for (Object p : plans)
 		{
-			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT], anvilTE.anvilItemStacks[TEAnvil.INPUT2_SLOT], (String) p, AnvilReq.getReqFromInt(anvilTE.anvilTier), null));
+			AnvilRecipe ar = manager.findMatchingRecipe(anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT], anvilTE.anvilItemStacks[TEAnvil.INPUT2_SLOT], (String) p, anvilTE.anvilTier);
 
 			ar = handleMatchingRecipe(ar);
 			if (ar != null)
