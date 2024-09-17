@@ -31,13 +31,6 @@ public class AnvilRecipe {
 		this(in, in2, p.toLowerCase(), req.Tier, result);
 	}
 
-	public AnvilRecipe setCraftingBound(int max)
-	{
-		craftingValue = 70 + new Random(seed).nextInt(max);
-		this.minStep=getMinimalSteps(AnvilManager.getInstance().getPlan(planName), craftingValue);
-		return this;
-	}
-
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, int req, ItemStack result)
 	{
 		input1 = in;
@@ -50,6 +43,32 @@ public class AnvilRecipe {
 		inheritsDamage = false;
 		skillsList.add(Global.SKILL_GENERAL_SMITHING);
 		getMinimalSteps(AnvilManager.getInstance().getPlan(planName), craftingValue);
+	}
+	@Deprecated
+	public AnvilRecipe(ItemStack in, ItemStack in2, String planName,boolean isWeld, AnvilReq req, ItemStack result)
+	{
+		this(in, in2, planName.toLowerCase(), req.Tier, result);
+		if(isWeld)FMLLog.log(Level.FATAL,"Deprecated AnvilRecipe init! Use AnvilWeldRecipe instead. /in:"+in.getDisplayName()+"/ in2:"+in2.getDisplayName()+"/ result:"+result.getDisplayName());
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof AnvilRecipe)) return false;
+		AnvilRecipe that = (AnvilRecipe) o;
+		return isStackEqual(result, that.result) && Objects.equals(planName, that.planName) && isStackEqual(input1, that.input1) && isStackEqual(input2, that.input2);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(result, planName, input1, input2);
+	}
+
+	public AnvilRecipe setCraftingBound(int max)
+	{
+		craftingValue = 70 + new Random(seed).nextInt(max);
+		this.minStep=getMinimalSteps(AnvilManager.getInstance().getPlan(planName), craftingValue);
+		return this;
 	}
 
 	public AnvilRecipe clearRecipeSkills()
@@ -81,8 +100,8 @@ public class AnvilRecipe {
 	 */    
 	public boolean matches(ItemStack in1, ItemStack in2, String thePlan, int req)
 	{
-        return areItemStacksEqual(input1, in1) &&
-                areItemStacksEqual(input2, in2) &&
+        return isStackEqual(input1, in1) &&
+                isStackEqual(input2, in2) &&
                 planName.equals(thePlan) &&
                 AnvilReq.matches(anvilreq, req);
     }
@@ -90,22 +109,21 @@ public class AnvilRecipe {
 	public boolean isComplete(AnvilManager am, ItemStack in1, ItemStack in2, String thePlan, int req, int craftingValue, int[] rules)
 	{
 		PlanRecipe pr = am.getPlan(thePlan);
-        return areItemStacksEqual(input1, in1) &&
-                areItemStacksEqual(input2, in2) &&
+        return isStackEqual(input1, in1) &&
+                isStackEqual(input2, in2) &&
                 planName.equals(thePlan) &&
                 pr.rules[0].matches(rules, 0) && pr.rules[1].matches(rules, 1) && pr.rules[2].matches(rules, 2) &&
                 this.craftingValue == craftingValue &&
                 AnvilReq.matches(anvilreq, req);
     }
 
-	private boolean areItemStacksEqual(ItemStack is1, ItemStack is2)
+	public static boolean isStackEqual(ItemStack is1, ItemStack is2)
 	{
 		// XOR, if both are null return true
 		if (is1 != null && is2 != null)
 		{
 			if (is1.getItem() != is2.getItem())
 				return false;
-
 			return is1.getItemDamage() == 32767 || is1.getItemDamage() == is2.getItemDamage();
 		}
 		else return is1 == null && is2 == null;
@@ -192,7 +210,7 @@ public class AnvilRecipe {
 		try {
 			long timeStarted=System.nanoTime();
 			generatePossibleLastReqOpt(plan.rules);
-			Arrays.fill(bestOptNum, Integer.MAX_VALUE);
+			Arrays.fill(bestOptNum, 65536);
 			bestOptNum[0] = 0;
 			for (String[] currPosReqOpt : AllPosLastReqOpt) {
 				int offset = 0;
@@ -204,15 +222,15 @@ public class AnvilRecipe {
 				OffsetToOptNum.put(offset,
 						TraceFromStart(0, craftingValue - offset) + EffLenth);
 			}
-			//取OffsetToOptNum中最小的值
-			if(outputAllResult||Collections.min(OffsetToOptNum.values())>20||Collections.min(OffsetToOptNum.values())<0){
-			FMLLog.log(Level.FATAL,"DEBUG: Successfully getMinimalSteps "+Collections.min(OffsetToOptNum.values())+"for: "+planName+", CraftValue: "+craftingValue);
-			FMLLog.log(Level.FATAL,"DEBUG: Took: "+(System.nanoTime()-timeStarted)+"ns");}
+			 //取OffsetToOptNum中最小的值
+			 if(outputAllResult||Collections.min(OffsetToOptNum.values())>20||Collections.min(OffsetToOptNum.values())<0){
+			 FMLLog.log(Level.FATAL,"DEBUG: Successfully getMinimalSteps "+Collections.min(OffsetToOptNum.values())+"for: "+planName+", CraftValue: "+craftingValue);
+			 FMLLog.log(Level.FATAL,"DEBUG: Took: "+(System.nanoTime()-timeStarted)+"ns");}
 			return Collections.min(OffsetToOptNum.values());
 		}catch (Throwable t){
 
-			FMLLog.log(Level.FATAL,t,"Exception when getMinimalSteps: "+planName+" / "+craftingValue);
-			FMLLog.getLogger().throwing(t);
+			FMLLog.log(Level.FATAL,t,"Exception when getMinimalSteps: "+planName+", CraftValue: "+craftingValue);
+			t.printStackTrace();
 			return 1;
 		}
 	}
@@ -224,7 +242,7 @@ public class AnvilRecipe {
 	private static final int lowerBound = 0;
 	private static final int upperBound = 150;
 
-	private final int[] bestOptNum = new int[upperBound - lowerBound + 1];
+	private final int[] bestOptNum = new int[upperBound - lowerBound + 50];
 
 	private ArrayList<String[]> AllPosLastReqOpt = new ArrayList<>();
 

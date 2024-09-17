@@ -26,14 +26,14 @@ public class AnvilManager
 		plans = new HashMap<>();
 	}
 
-		public void addRecipe(AnvilRecipe recipeToAdd)
+	public void addRecipe(AnvilRecipe recipeToAdd)
 	{
-		recipes.add(recipeToAdd);
+		if(recipes.stream().noneMatch(a->a.equals(recipeToAdd)))recipes.add(recipeToAdd);
 	}
 
 	public void addWeldRecipe(AnvilWeldRecipe recipeToAdd)
 	{
-		recipesWeld.add(recipeToAdd);
+		if(recipesWeld.stream().noneMatch(a->a.equals(recipeToAdd)))recipesWeld.add(recipeToAdd);
 	}
 	public void clearRecipes()
 	{
