@@ -1,13 +1,23 @@
-package com.bioxx.tfc;
+package com.bioxx.tfc.ModSupport.NEI;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
+import codechicken.lib.gui.GuiDraw;
+import com.bioxx.tfc.ModSupport.NEI.recipeHandlers.*;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import codechicken.nei.api.API;
@@ -18,12 +28,48 @@ import com.bioxx.tfc.GUI.GuiLargeVessel;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
+import org.lwjgl.opengl.GL11;
 
-/**
- * @author Dries007
- */
 public class NEIIntegration
 {
+	public static final AnvilRecipeHandler anvilRecipeHandler = new AnvilRecipeHandler();
+	public static final QuernRecipeHandler quernRecipeHandler = new QuernRecipeHandler();
+	public static final KilnRecipeHandler kilnRecipeHandler = new KilnRecipeHandler();
+	public static final KnappingRecipeHandler knappingRecipeHandler = new KnappingRecipeHandler();
+	public static final BarrelRecipeHandler barrelRecipeHandler = new BarrelRecipeHandler();
+	public static final AlloyRecipeHandler alloyRecipeHandler = new AlloyRecipeHandler();
+	public static final HeatRecipeHandler heatRecipeHandler = new HeatRecipeHandler();
+
+
+	public static void run(){
+		API.registerRecipeHandler(anvilRecipeHandler);
+		API.registerRecipeHandler(quernRecipeHandler);
+		API.registerRecipeHandler(kilnRecipeHandler);
+		API.registerRecipeHandler(knappingRecipeHandler);
+		API.registerRecipeHandler(barrelRecipeHandler);
+		API.registerRecipeHandler(alloyRecipeHandler);
+		API.registerRecipeHandler(heatRecipeHandler);
+		API.registerUsageHandler(anvilRecipeHandler);
+		API.registerUsageHandler(quernRecipeHandler);
+		API.registerUsageHandler(kilnRecipeHandler);
+		API.registerUsageHandler(knappingRecipeHandler);
+		API.registerUsageHandler(barrelRecipeHandler);
+		API.registerUsageHandler(alloyRecipeHandler);
+		API.registerUsageHandler(heatRecipeHandler);
+	}
+	//utils
+
+	public static void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k) {
+		fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);
+	}
+
+	public static boolean areItemStacksEqual(ItemStack input, ItemStack target) {
+		return input == target || OreDictionary.itemMatches(target, input, false);
+	}
+
+	/**
+	 * @author Dries007
+	 */
 	public static void hideNEIItems()
 	{
 		GuiContainerManager.addTooltipHandler(new IContainerTooltipHandler()
