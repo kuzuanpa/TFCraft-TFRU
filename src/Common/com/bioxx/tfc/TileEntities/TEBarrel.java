@@ -3,17 +3,9 @@ package com.bioxx.tfc.TileEntities;
 import java.util.Random;
 import java.util.Stack;
 
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.relauncher.FMLLaunchHandler;
-import eu.usrv.yamcore.auxiliary.FluidHelper;
-import gregapi.data.FL;
-import gregapi.data.MT;
-import gregapi.data.OP;
-import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -38,7 +30,6 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.*;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
-import org.apache.logging.log4j.Level;
 
 public class TEBarrel extends NetworkTileEntity implements IInventory
 {
@@ -55,7 +46,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public static final int MODE_IN = 0;
 	public static final int MODE_OUT = 1;
 	public static final int INPUT_SLOT = 0;
-	public BarrelRecipe recipe;
+	public IBarrelRecipe recipe;
 	//temporary field. No need to save
 	public boolean shouldDropItem = true;
 
@@ -794,25 +785,26 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						time = (int)TFC_Time.getTotalHours() - unsealtime;
 
 					//Make sure that the recipe meets the time requirements
-					if(recipe.isSealedRecipe() && time < recipe.sealTime) return;
+					if(recipe.isSealedRecipe() && time < recipe.getSealTime()) return;
 
 					ItemStack origIS = getInputStack() != null ? getInputStack().copy() : null;
 					FluidStack origFS = getFluidStack() != null ? getFluidStack().copy() : null;
 					FluidStack targetFS=recipe.getResultFluid(origIS,origFS,time);
-					if (fluid.isFluidEqual(targetFS)&&recipe.removesLiquid) {
-						fluid.amount -= targetFS.amount;
+					if (fluid.isFluidEqual(targetFS)&&recipe.isRemovesLiquid()) {
+						fluid.amount -= targetFS.amount*(origIS==null?1:origIS.stackSize);
 					} else if(targetFS!=null) {
 						this.fluid = targetFS.copy();
 						this.fluid.amount = fluid.copy().amount ;
 						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					}else{
-						this.fluid.amount-=recipe.recipeFluid.amount;
+						this.fluid.amount-=(recipe.getInFluid().amount*(origIS==null?1:origIS.stackSize));
 					}
 
 					if (origFS != null && origFS.getFluid() != TFCFluids.MILKCURDLED && this.fluid.getFluid() == TFCFluids.MILKCURDLED)
 						this.sealtime = (int) TFC_Time.getTotalHours();
 
 
+					if(this.fluid.amount<=0)this.actionEmpty();
 
 					Stack<ItemStack> resultStacks = recipe.getResult(origIS, origFS, time);
 					if (!resultStacks.isEmpty())
@@ -858,7 +850,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				(inIS == null || inIS.getItem() instanceof IFood && ((IFood)inIS.getItem()).getFoodGroup() != EnumFoodGroup.Dairy && 
 				((IFood)inIS.getItem()).isEdible(inIS) && Food.getWeight(inIS) <= 20.0f))
 		{
-			recipe = new BarrelRecipe(null,new FluidStack(TFCFluids.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.cheese, 1), 160), null).setMinTechLevel(0);
+			recipe = new BarrelCommonRecipe(null,new FluidStack(TFCFluids.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.cheese, 1), 160), null).setMinTechLevel(0);
 			if(!worldObj.isRemote)
 			{
 				int time = 0;
@@ -868,7 +860,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					time = (int)TFC_Time.getTotalHours() - unsealtime;
 
 				//Make sure that the recipe meets the time requirements
-				if(time < recipe.sealTime)
+				if(time < recipe.getSealTime())
 					return true;
 				float w = this.fluid.amount/62.5f;
 
@@ -912,54 +904,53 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public static void registerRecipes()
 	{
-		//TODO: seems the NEI plugin won't report the output fluid correctly although Barrel produce them very correctly, but nooooooo, the NEI plugin CLOSED source....
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.potato), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.VODKA, 60)));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.redApple), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.CIDER, 60)));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.greenApple), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.CIDER, 60)));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatDough), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.WHISKEY, 60)));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.ryeDough), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.RYEWHISKEY, 60)));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.barleyDough), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.BEER, 60)));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.riceDough), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.SAKE, 60)));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.sugar), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.RUM, 60)));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.cornmealDough), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.CORNWHISKEY, 60)));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(null, new FluidStack(TFCFluids.MILKVINEGAR, 10000), null, new FluidStack(TFCFluids.MILKCURDLED, 100)).setMinTechLevel(0).setRemovesLiquid(false));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.potato       ), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.VODKA,       60)));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.redApple     ), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.CIDER,       60)));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.greenApple   ), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.CIDER,       60)));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatDough   ), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.WHISKEY,     60)));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.ryeDough     ), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.RYEWHISKEY,  60)));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.barleyDough  ), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.BEER,        60)));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.riceDough    ), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.SAKE,        60)));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.sugar        ), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.RUM,         60)));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.cornmealDough), 1), new FluidStack(TFCFluids.FRESHWATER, 60), null, new FluidStack(TFCFluids.CORNWHISKEY, 60)));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(null, new FluidStack(TFCFluids.MILKVINEGAR, 10000), null, new FluidStack(TFCFluids.MILKCURDLED, 100)).setMinTechLevel(0).setRemovesLiquid(false));
 		//BarrelManager.getInstance().addRecipe(new BarrelRecipeNoItem(new FluidStack(TFCFluid.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese), 160), null).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.logs, 1, 0), new FluidStack(TFCFluids.FRESHWATER, 1000), null, new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.logs, 1, 2), new FluidStack(TFCFluids.FRESHWATER, 1000), null, new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.logs, 1, 3), new FluidStack(TFCFluids.FRESHWATER, 1000), null, new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.logs, 1, 4), new FluidStack(TFCFluids.FRESHWATER, 1000), null, new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.logs, 1, 5), new FluidStack(TFCFluids.FRESHWATER, 1000), null, new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.logs, 1, 6), new FluidStack(TFCFluids.FRESHWATER, 1000), null, new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.logs, 1, 9), new FluidStack(TFCFluids.FRESHWATER, 1000), null, new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.powder, 1, 0), new FluidStack(TFCFluids.FRESHWATER, 500), null, new FluidStack(TFCFluids.LIMEWATER, 500), 0).setMinTechLevel(0).setSealedRecipe(false).setRemovesLiquid(false).setAllowAnyStack(false));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.scrapedHide, 1, 0), new FluidStack(TFCFluids.FRESHWATER, 300), new ItemStack(TFCItems.prepHide, 1, 0), new FluidStack(TFCFluids.FRESHWATER, 300)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.scrapedHide, 1, 1), new FluidStack(TFCFluids.FRESHWATER, 400), new ItemStack(TFCItems.prepHide, 1, 1), new FluidStack(TFCFluids.FRESHWATER, 400)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.scrapedHide, 1, 2), new FluidStack(TFCFluids.FRESHWATER, 500), new ItemStack(TFCItems.prepHide, 1, 2), new FluidStack(TFCFluids.FRESHWATER, 500)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.hide, 1, 0), new FluidStack(TFCFluids.LIMEWATER, 300), new ItemStack(TFCItems.soakedHide, 1, 0), new FluidStack(TFCFluids.LIMEWATER, 300)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.hide, 1, 1), new FluidStack(TFCFluids.LIMEWATER, 400), new ItemStack(TFCItems.soakedHide, 1, 1), new FluidStack(TFCFluids.LIMEWATER, 400)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.hide, 1, 2), new FluidStack(TFCFluids.LIMEWATER, 500), new ItemStack(TFCItems.soakedHide, 1, 2), new FluidStack(TFCFluids.LIMEWATER, 500)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.prepHide, 1, 0), new FluidStack(TFCFluids.TANNIN, 300), new ItemStack(TFCItems.leather, 1), new FluidStack(TFCFluids.TANNIN, 300)).setKeepStackSize(false).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.prepHide, 1, 1), new FluidStack(TFCFluids.TANNIN, 400), new ItemStack(TFCItems.leather, 2), new FluidStack(TFCFluids.TANNIN, 400)).setKeepStackSize(false).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.prepHide, 1, 2), new FluidStack(TFCFluids.TANNIN, 500), new ItemStack(TFCItems.leather, 3), new FluidStack(TFCFluids.TANNIN, 500)).setKeepStackSize(false).setMinTechLevel(0));		
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCBlocks.sand, 1, 32767), new FluidStack(TFCFluids.LIMEWATER, 100), new ItemStack(TFCItems.mortar, 16), new FluidStack(TFCFluids.LIMEWATER, 100)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCBlocks.sand2, 1, 32767), new FluidStack(TFCFluids.LIMEWATER, 100), new ItemStack(TFCItems.mortar, 16), new FluidStack(TFCFluids.LIMEWATER, 100)).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.logs       , 1, 0),     new FluidStack(TFCFluids.FRESHWATER, 1000), null,                                                                    new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.logs       , 1, 2),     new FluidStack(TFCFluids.FRESHWATER, 1000), null,                                                                    new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.logs       , 1, 3),     new FluidStack(TFCFluids.FRESHWATER, 1000), null,                                                                    new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.logs       , 1, 4),     new FluidStack(TFCFluids.FRESHWATER, 1000), null,                                                                    new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.logs       , 1, 5),     new FluidStack(TFCFluids.FRESHWATER, 1000), null,                                                                    new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.logs       , 1, 6),     new FluidStack(TFCFluids.FRESHWATER, 1000), null,                                                                    new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.logs       , 1, 9),     new FluidStack(TFCFluids.FRESHWATER, 1000), null,                                                                    new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.powder     , 1, 0),     new FluidStack(TFCFluids.FRESHWATER, 500 ), null,                                                                    new FluidStack(TFCFluids.LIMEWATER, 500), 0).setMinTechLevel(0).setSealedRecipe(false).setRemovesLiquid(false));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.scrapedHide, 1, 0),     new FluidStack(TFCFluids.FRESHWATER, 300 ), new ItemStack(TFCItems.prepHide  , 1, 0), null).setMinTechLevel(0).setRemovesLiquid(true));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.scrapedHide, 1, 1),     new FluidStack(TFCFluids.FRESHWATER, 400 ), new ItemStack(TFCItems.prepHide  , 1, 1), null).setMinTechLevel(0).setRemovesLiquid(true));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.scrapedHide, 1, 2),     new FluidStack(TFCFluids.FRESHWATER, 500 ), new ItemStack(TFCItems.prepHide  , 1, 2), null).setMinTechLevel(0).setRemovesLiquid(true));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.hide       , 1, 0),     new FluidStack(TFCFluids.LIMEWATER,  300 ), new ItemStack(TFCItems.soakedHide, 1, 0), null).setMinTechLevel(0).setRemovesLiquid(true));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.hide       , 1, 1),     new FluidStack(TFCFluids.LIMEWATER,  400 ), new ItemStack(TFCItems.soakedHide, 1, 1), null).setMinTechLevel(0).setRemovesLiquid(true));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.hide       , 1, 2),     new FluidStack(TFCFluids.LIMEWATER,  500 ), new ItemStack(TFCItems.soakedHide, 1, 2), null).setMinTechLevel(0).setRemovesLiquid(true));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.prepHide   , 1, 0),     new FluidStack(TFCFluids.TANNIN,     300 ), new ItemStack(TFCItems.leather   , 1 ),             null).setMinTechLevel(0).setRemovesLiquid(true));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.prepHide   , 1, 1),     new FluidStack(TFCFluids.TANNIN,     400 ), new ItemStack(TFCItems.leather   , 2 ),             null).setMinTechLevel(0).setRemovesLiquid(true));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.prepHide   , 1, 2),     new FluidStack(TFCFluids.TANNIN,     500 ), new ItemStack(TFCItems.leather   , 3 ),             null).setMinTechLevel(0).setRemovesLiquid(true));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCBlocks.sand      , 1, 32767), new FluidStack(TFCFluids.LIMEWATER,  100 ), new ItemStack(TFCItems.mortar    , 16),             null).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCBlocks.sand2     , 1, 32767), new FluidStack(TFCFluids.LIMEWATER,  100 ), new ItemStack(TFCItems.mortar    , 16),             null).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.VODKA, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.CIDER, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.WHISKEY, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.RYEWHISKEY, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
-		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.BEER, 100), new FluidStack(TFCFluids.VINEGAR, 100)));	
+		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.BEER, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.SAKE, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.RUM, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.CORNWHISKEY, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluids.SALTWATER, 9000), new FluidStack(TFCFluids.VINEGAR, 1000), new FluidStack(TFCFluids.BRINE, 10000)).setSealedRecipe(false).setMinTechLevel(0).setRemovesLiquid(false));
 		BarrelManager.getInstance().addRecipe(new BarrelBriningRecipe(new FluidStack(TFCFluids.BRINE, 60), new FluidStack(TFCFluids.BRINE, 60)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.sugarcane), 1), new FluidStack(TFCFluids.FRESHWATER, 60), ItemFoodTFC.createTag(new ItemStack(TFCItems.sugar), 0.1f), new FluidStack(TFCFluids.FRESHWATER, 60)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.jute, 1, 0), new FluidStack(TFCFluids.FRESHWATER, 200), new ItemStack(TFCItems.juteFiber, 1, 0), new FluidStack(TFCFluids.FRESHWATER, 200)).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.sugarcane), 1), new FluidStack(TFCFluids.FRESHWATER, 60), ItemFoodTFC.createTag(new ItemStack(TFCItems.sugar), 0.1f), null).setMinTechLevel(0).setRemovesLiquid(true));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.jute, 1, 0), new FluidStack(TFCFluids.FRESHWATER, 200), new ItemStack(TFCItems.juteFiber, 1, 0), null).setMinTechLevel(0).setRemovesLiquid(true));
 		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluids.MILK, 9000), new FluidStack(TFCFluids.VINEGAR, 1000), new FluidStack(TFCFluids.MILKVINEGAR, 10000)).setSealedRecipe(false).setMinTechLevel(0).setRemovesLiquid(false));
 		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluids.MILKVINEGAR, 9000), new FluidStack(TFCFluids.MILK, 1000), new FluidStack(TFCFluids.MILKVINEGAR, 10000)).setSealedRecipe(false).setMinTechLevel(0).setRemovesLiquid(false));
 
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.powder, 1, 4), new FluidStack(TFCFluids.FRESHWATER, 1000), new ItemStack(Item.getItemFromBlock(TFCBlocks.ice)), null).setMinTechLevel(0));
-        if(Loader.isModLoaded("gregtech"))		BarrelManager.getInstance().addRecipe(new BarrelRecipe(OP.dust.mat(MT.Ash,1), new FluidStack(TFCFluids.FRESHWATER, 5000), null, FL.make("basepotashliquor",5000)).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.powder, 1, 4), new FluidStack(TFCFluids.FRESHWATER, 1000), new ItemStack(Item.getItemFromBlock(TFCBlocks.ice)), null).setMinTechLevel(0));
+        if(Loader.isModLoaded("gregtech"))		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(gregapi.data.OP.dust.mat(gregapi.data.MT.Ash,1), new FluidStack(TFCFluids.FRESHWATER, 5000), null, gregapi.data.FL.make("basepotashliquor",5000)).setMinTechLevel(0));
 
 		// 5000mb / 160oz = 31.25
 		// 10000mb / 160oz = 62.5
