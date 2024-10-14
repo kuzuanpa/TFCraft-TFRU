@@ -212,7 +212,7 @@ public class AnvilRecipe {
 		return skillsList;
 	}
 
-	private static final boolean outputAllResult=true;
+	private static final boolean outputAllResult=false;
 	public int getMinimalSteps(PlanRecipe plan,int craftingValue){
 		try {
 			long timeStarted=System.nanoTime();
@@ -226,8 +226,7 @@ public class AnvilRecipe {
 					offset += optSet.get(opt);
 					if (!Objects.equals(opt, "9") && !Objects.equals(opt, "-1")) EffLenth++;
 				}
-				OffsetToOptNum.put(offset,
-						TraceFromStart(0, craftingValue - offset) + EffLenth);
+				OffsetToOptNum.put(offset, TraceFromStart(0, craftingValue - offset) + EffLenth);
 			}
 			 //取OffsetToOptNum中最小的值
 			 if(outputAllResult||Collections.min(OffsetToOptNum.values())>20||Collections.min(OffsetToOptNum.values())<0){
@@ -346,7 +345,7 @@ public class AnvilRecipe {
 		while (!q.isEmpty()){
 			int CurrDest = q.poll();
 			for (String opt : optSet.keySet()){
-				int NextDest = CurrDest - optSet.get(opt);
+				int NextDest = CurrDest + optSet.get(opt);
 				if (NextDest < lowerBound) continue;
 				if (NextDest > upperBound) continue;
 				if (bestOptNum[NextDest] > bestOptNum[CurrDest] + 1){
