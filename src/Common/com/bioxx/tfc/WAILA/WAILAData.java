@@ -641,11 +641,11 @@ public class WAILAData implements IWailaDataProvider
 		Boolean sealed = te.getSealed();
 		int sealTime = accessor.getNBTInteger(tag, "SealTime");
 		FluidStack fluid = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("fluidNBT"));
-		BarrelRecipe recipe = BarrelManager.getInstance().findMatchingRecipe(inStack, fluid, sealed, te.getTechLevel());
+		IBarrelRecipe recipe = BarrelManager.getInstance().findMatchingRecipe(inStack, fluid, sealed, te.getTechLevel());
 
 		if (sealed && fluid != null && fluid.getFluid() == TFCFluids.MILKCURDLED && (inStack == null ||
 				inStack.getItem() instanceof IFood && ((IFood) inStack.getItem()).getFoodGroup() != EnumFoodGroup.Dairy && ((IFood) inStack.getItem()).isEdible(inStack) && Food.getWeight(inStack) <= 20.0f))
-			recipe = new BarrelRecipe(null, new FluidStack(TFCFluids.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.cheese, 1), 160), null).setMinTechLevel(0);
+			recipe = new BarrelCommonRecipe(null, new FluidStack(TFCFluids.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.cheese, 1), 160), null).setMinTechLevel(0);
 
 		// Fluid Amount
 		if (fluid != null)

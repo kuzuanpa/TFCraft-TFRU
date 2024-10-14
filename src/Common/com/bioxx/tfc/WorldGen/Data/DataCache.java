@@ -3,12 +3,14 @@ package com.bioxx.tfc.WorldGen.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.LongHashMap;
 
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.WorldCacheManager;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
+import org.apache.logging.log4j.Level;
 
 public class DataCache
 {
@@ -38,7 +40,12 @@ public class DataCache
 		x >>= 4;
 		y >>= 4;
 		long var3 = x & 4294967295L | (y & 4294967295L) << 32;
-		DataCacheBlockTFC var5 = (DataCacheBlockTFC)this.cacheMap.getValueByKey(var3);
+		DataCacheBlockTFC var5 = null;
+		try {
+			var5 = (DataCacheBlockTFC) this.cacheMap.getValueByKey(var3);
+		}catch (IndexOutOfBoundsException e){
+			FMLLog.log(Level.ERROR,"IndexOutOfBounds while getting DataCache");
+		}
 		if (var5 == null)
 		{
 			var5 = new DataCacheBlockTFC(this, indexLayers, x, y, index);

@@ -300,15 +300,15 @@ public class GuiBarrel extends GuiContainerTFC
 				//drawTexturedModalRect(w + 8, h + 65 - scale, 185, 31, 15, 6);
 				IIcon liquidIcon = barrelTE.fluid.getFluid().getIcon(barrelTE.fluid);
 				TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
+				GL11.glEnable(GL11.GL_BLEND);
 				int color = barrelTE.fluid.getFluid().getColor(barrelTE.fluid);
 				GL11.glColor4ub((byte) ((color >> 16) & 255), (byte) ((color >> 8) & 255), (byte) (color & 255), (byte) ((0xaa) & 255));
-				int div = (int) Math.floor(scale / 8);
-				int rem = scale - (div * 8);
-				this.drawTexturedModelRectFromIcon(guiLeft + 12, guiTop + 65 - scale, liquidIcon, 8, div > 0 ? 8 : rem);
+				int div = (int) Math.floor(scale / 8F);
 				for (int c = 0; div > 0 && c < div; c++)
 				{
 					this.drawTexturedModelRectFromIcon(guiLeft + 12, guiTop + 65 - (8 + (c * 8)), liquidIcon, 8, 8);
 				}
+				this.drawTexturedModelRectFromIcon(guiLeft + 12, guiTop + 65 - (div * 8)-scale%8, liquidIcon, 8, scale%8);
 				GL11.glColor3f(0, 0, 0);
 			}
 			ItemStack inStack = barrelTE.getStackInSlot(0);

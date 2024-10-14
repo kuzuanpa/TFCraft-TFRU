@@ -2,10 +2,12 @@ package com.bioxx.tfc.api;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import org.apache.logging.log4j.Level;
 
 public class HeatIndex
 {
@@ -22,6 +24,7 @@ public class HeatIndex
 
 	public HeatIndex(ItemStack in, double sh, double melt, ItemStack out)
 	{
+		if(in==null) FMLLog.log(Level.FATAL,"Heat Index Input == null, this is a bug!");
 		input = in;
 		specificHeat = (float)sh;
 		meltTemp = (float)melt;

@@ -1,9 +1,7 @@
 package com.bioxx.tfc;
 
+import com.bioxx.tfc.ModSupport.NEI.NEIIntegration;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelOcelot;
-import net.minecraft.client.renderer.entity.RenderOcelot;
-import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.GameSettings;
@@ -504,6 +502,9 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void hideNEIItems()
 	{
-		if (Loader.isModLoaded("NotEnoughItems")) NEIIntegration.hideNEIItems();
+		if (Loader.isModLoaded("NotEnoughItems")) {
+			NEIIntegration.hideNEIItems();
+			NEIIntegration.run();
+		}
 	}
 }

@@ -12,33 +12,37 @@ import com.bioxx.tfc.TileEntities.TEBarrel;
 public class BarrelManager
 {
 	private static final BarrelManager INSTANCE = new BarrelManager();
-	public static final BarrelManager getInstance()
+	public static BarrelManager getInstance()
 	{
 		return INSTANCE;
 	}
 
-	private List<BarrelRecipe> recipes;
+	private List<IBarrelRecipe> recipes;
 	private List<BarrelPreservativeRecipe> preservativeRecipes;
 
 	private BarrelManager()
 	{
-		recipes = new ArrayList<BarrelRecipe>();
+		recipes = new ArrayList<>();
 		preservativeRecipes = new ArrayList<BarrelPreservativeRecipe>();
 	}
 
+	public void addRecipe(IBarrelRecipe recipe)
+	{
+		if(recipe!=null)recipes.add(recipe);
+	}
+	@Deprecated
 	public void addRecipe(BarrelRecipe recipe)
 	{
-		recipes.add(recipe);
+		if(recipe!=null)recipes.add(recipe);
 	}
-	
 	public void addPreservative(BarrelPreservativeRecipe recipe) {
 		preservativeRecipes.add(recipe);
 	}
 
-	public BarrelRecipe findMatchingRecipe(ItemStack item, FluidStack fluid, boolean sealed, int techLevel) {
-		for (BarrelRecipe br : recipes) {
-			if (/*item != null && */fluid != null &&/*(br.inItemStack != null && item != null) && (br.inFluid != null && fluid != null) &&*/ br.matches(item, fluid))
-				if (br.sealedRecipe == sealed && br.minTechLevel <= techLevel)
+	public IBarrelRecipe findMatchingRecipe(ItemStack item, FluidStack fluid, boolean sealed, int techLevel) {
+		for (IBarrelRecipe br : recipes) {
+			if (/*item != null && */fluid != null &&/*(br.inItemStack != null && item != null) && (br.inFluid != null && fluid != null) &&*/br!=null&& br.matches(item, fluid))
+				if (br.isSealedRecipe() == sealed && br.getMinTechLevel() <= techLevel)
 					return br;
 		}
 		return null;
@@ -52,7 +56,7 @@ public class BarrelManager
 		return null;
 	}
 
-	public List<BarrelRecipe> getRecipes()
+	public List<IBarrelRecipe> getRecipes()
 	{
 		return recipes;
 	}

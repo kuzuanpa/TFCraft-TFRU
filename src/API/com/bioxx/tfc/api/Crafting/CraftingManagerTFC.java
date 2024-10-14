@@ -32,6 +32,7 @@ public class CraftingManagerTFC
 
 	public ShapedRecipesTFC addRecipe(ItemStack itemstack, Object aobj[])
 	{
+		if(itemstack==null||itemstack.getItem()==null)return null;
 		String s = "";
 		int i = 0;
 		int j = 0;

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,6 +39,7 @@ import com.bioxx.tfc.api.Crafting.AnvilRecipe;
 import com.bioxx.tfc.api.Crafting.AnvilReq;
 import com.bioxx.tfc.api.Enums.RuleEnum;
 import com.bioxx.tfc.api.Events.AnvilCraftEvent;
+import org.apache.logging.log4j.Level;
 
 public class TEAnvil extends NetworkTileEntity implements IInventory
 {
@@ -145,11 +147,15 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 						//If the lastWorker is not null, then we attempt to apply some crafting buffs to items based on the players skills
 						if (output != null && lastWorker != null && recipe != null)
 						{
-							int stepsMoreThanMinimal = getItemWorkedSteps()-recipe.minStep;
+							int stepsMoreThanMinimal = getItemWorkedSteps() - recipe.minStep;
 
-							float buff = (Math.max(recipe.getSkillMult(lastWorker),0.001F) * Math.max(MINIMAL_BUFF,(BUFF_INIT_VALUE-(stepsMoreThanMinimal*BUFF_DECREASE_STEP)))) + (stepsMoreThanMinimal==0 ? BUFF_PERFECT_BONUS:0F);
+							if(stepsMoreThanMinimal<0){
+								stepsMoreThanMinimal=0;
+								FMLLog.log(Level.ERROR,"Actual Step less than calculated minStep! This is a bug!\nInfo: Craft Value="+recipe.craftingValue+" Actual Step="+getItemWorkedSteps()+" Calculated MinStep="+recipe.minStep);
+							}
 
-							System.out.print(buff);
+							float buff = AnvilManager.enableMinStepBonus? (Math.max(recipe.getSkillMult(lastWorker),0.001F) * Math.max(MINIMAL_BUFF,(BUFF_INIT_VALUE-(stepsMoreThanMinimal*BUFF_DECREASE_STEP)))) + (stepsMoreThanMinimal==0 ? BUFF_PERFECT_BONUS:0F): recipe.getSkillMult(lastWorker);
+
 							if (output.getItem() instanceof ItemMiscToolHead)
 							{
 								AnvilManager.setDurabilityBuff(output, buff);
@@ -181,7 +187,15 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 								else if (bucket == TFCItems.redSteelBucketEmpty)
 									lastWorker.triggerAchievement(TFC_Achievements.achRedBucket);
 							}
+							if(stepsMoreThanMinimal==0) worldObj.playSoundAtEntity(lastWorker,"random.orb",0.2F,1);
 
+							if(recipe.minStepItemBonus != null && recipe.minStepItemBonus.stackSize - stepsMoreThanMinimal > 0){
+								EntityItem e = new EntityItem(worldObj,xCoord,yCoord+1,zCoord);
+								ItemStack stack = recipe.minStepItemBonus.copy();
+								stack.stackSize -= stepsMoreThanMinimal;
+								e.setEntityItemStack(stack);
+								worldObj.spawnEntityInWorld(e);
+							}
 							increaseSkills(recipe,stepsMoreThanMinimal);
 							removeRules(INPUT1_SLOT);
 						}
@@ -209,7 +223,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		{
 			for(String s : recipe.skillsList)
 			{
-				TFC_Core.getSkillStats(lastWorker).increaseSkill(s, (int) (recipe.craftingXP * Math.max(MINIMAL_EXP,stepsMoreThanMinimal==0?EXP_PERFECT_BONUS: (EXP_INIT_VALUE-stepsMoreThanMinimal*EXP_DECREASE_STEP))));
+				TFC_Core.getSkillStats(lastWorker).increaseSkill(s, AnvilManager.enableMinStepBonus? (int) (recipe.craftingXP * Math.max(MINIMAL_EXP,stepsMoreThanMinimal==0?EXP_PERFECT_BONUS: (EXP_INIT_VALUE-stepsMoreThanMinimal*EXP_DECREASE_STEP))): recipe.craftingXP);
 			}
 		}
 	}
@@ -710,7 +724,6 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 				tag.setShort(ITEM_CRAFTING_STEPS_TAG, (short) 1);
 				input.setTagCompound(tag);
 			}
-			System.out.print(getItemWorkedSteps());
 
 
 			return true;
