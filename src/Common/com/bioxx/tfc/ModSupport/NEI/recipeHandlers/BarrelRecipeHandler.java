@@ -142,6 +142,7 @@ public class BarrelRecipeHandler extends TemplateRecipeHandler {
     public static void drawFluidInRect(Fluid fluid, Rectangle rect) {
         GL11.glEnable(GL11.GL_BLEND);
         IIcon fluidIcon = fluid.getIcon();
+        if(fluidIcon==null)return;
         Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
         int color = fluid.getColor();
         GL11.glColor4ub((byte)(color >> 16 & 255), (byte)(color >> 8 & 255), (byte)(color & 255), (byte)-86);
