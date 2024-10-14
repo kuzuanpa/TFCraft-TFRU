@@ -18,6 +18,7 @@ public class AnvilManager
 	private List<AnvilRecipe> recipes;
 	private List<AnvilWeldRecipe> recipesWeld;
 	private Map<String, PlanRecipe> plans;
+	public static boolean enableMinStepBonus = true;
 
 	private AnvilManager()
 	{

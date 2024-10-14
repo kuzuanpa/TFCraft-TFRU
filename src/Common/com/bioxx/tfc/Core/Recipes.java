@@ -1258,6 +1258,9 @@ public class Recipes
 	public static void registerAnvilRecipes(Random r, World world)
 	{
 		AnvilManager manager = AnvilManager.getInstance();
+
+		AnvilManager.enableMinStepBonus=!Loader.isModLoaded("tfcaf");
+
 		//We need to set the world ref so that all anvil recipes can generate correctly
 		AnvilManager.world = world;
 

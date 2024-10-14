@@ -145,11 +145,10 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 						//If the lastWorker is not null, then we attempt to apply some crafting buffs to items based on the players skills
 						if (output != null && lastWorker != null && recipe != null)
 						{
-							int stepsMoreThanMinimal = getItemWorkedSteps()-recipe.minStep;
+							int stepsMoreThanMinimal = getItemWorkedSteps() - recipe.minStep;
 
-							float buff = (Math.max(recipe.getSkillMult(lastWorker),0.001F) * Math.max(MINIMAL_BUFF,(BUFF_INIT_VALUE-(stepsMoreThanMinimal*BUFF_DECREASE_STEP)))) + (stepsMoreThanMinimal==0 ? BUFF_PERFECT_BONUS:0F);
+							float buff = AnvilManager.enableMinStepBonus? (Math.max(recipe.getSkillMult(lastWorker),0.001F) * Math.max(MINIMAL_BUFF,(BUFF_INIT_VALUE-(stepsMoreThanMinimal*BUFF_DECREASE_STEP)))) + (stepsMoreThanMinimal==0 ? BUFF_PERFECT_BONUS:0F): recipe.getSkillMult(lastWorker);
 
-							System.out.print(buff);
 							if (output.getItem() instanceof ItemMiscToolHead)
 							{
 								AnvilManager.setDurabilityBuff(output, buff);
@@ -181,7 +180,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 								else if (bucket == TFCItems.redSteelBucketEmpty)
 									lastWorker.triggerAchievement(TFC_Achievements.achRedBucket);
 							}
-
+							if(stepsMoreThanMinimal==0)worldObj.playSoundAtEntity(lastWorker,"random.orb",0.2F,1);
 							increaseSkills(recipe,stepsMoreThanMinimal);
 							removeRules(INPUT1_SLOT);
 						}
@@ -209,7 +208,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		{
 			for(String s : recipe.skillsList)
 			{
-				TFC_Core.getSkillStats(lastWorker).increaseSkill(s, (int) (recipe.craftingXP * Math.max(MINIMAL_EXP,stepsMoreThanMinimal==0?EXP_PERFECT_BONUS: (EXP_INIT_VALUE-stepsMoreThanMinimal*EXP_DECREASE_STEP))));
+				TFC_Core.getSkillStats(lastWorker).increaseSkill(s, AnvilManager.enableMinStepBonus? (int) (recipe.craftingXP * Math.max(MINIMAL_EXP,stepsMoreThanMinimal==0?EXP_PERFECT_BONUS: (EXP_INIT_VALUE-stepsMoreThanMinimal*EXP_DECREASE_STEP))): recipe.craftingXP);
 			}
 		}
 	}
@@ -710,7 +709,6 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 				tag.setShort(ITEM_CRAFTING_STEPS_TAG, (short) 1);
 				input.setTagCompound(tag);
 			}
-			System.out.print(getItemWorkedSteps());
 
 
 			return true;

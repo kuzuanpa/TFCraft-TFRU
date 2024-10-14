@@ -24,7 +24,7 @@ public class AnvilRecipe {
 	public List<String> skillsList = new ArrayList<>();
 	public static int craftingBoundDefault = 50;
 	private final long seed;
-	public int minStep;
+	public int minStep = -1;
 
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, AnvilReq req, ItemStack result)
 	{
@@ -42,7 +42,7 @@ public class AnvilRecipe {
 		this.planName = p;
 		inheritsDamage = false;
 		skillsList.add(Global.SKILL_GENERAL_SMITHING);
-		getMinimalSteps(AnvilManager.getInstance().getPlan(planName), craftingValue);
+		if(AnvilManager.enableMinStepBonus) minStep = getMinimalSteps(AnvilManager.getInstance().getPlan(planName), craftingValue);
 	}
 	@Deprecated
 	public AnvilRecipe(ItemStack in, ItemStack in2, String planName,boolean isWeld, AnvilReq req, ItemStack result)
@@ -67,7 +67,7 @@ public class AnvilRecipe {
 	public AnvilRecipe setCraftingBound(int max)
 	{
 		craftingValue = 70 + new Random(seed).nextInt(max);
-		this.minStep=getMinimalSteps(AnvilManager.getInstance().getPlan(planName), craftingValue);
+		if(AnvilManager.enableMinStepBonus) this.minStep = getMinimalSteps(AnvilManager.getInstance().getPlan(planName), craftingValue);
 		return this;
 	}
 
@@ -205,7 +205,7 @@ public class AnvilRecipe {
 		return skillsList;
 	}
 
-	private static final boolean outputAllResult=false;
+	private static final boolean outputAllResult=true;
 	public int getMinimalSteps(PlanRecipe plan,int craftingValue){
 		try {
 			long timeStarted=System.nanoTime();
