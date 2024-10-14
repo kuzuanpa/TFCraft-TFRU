@@ -25,6 +25,7 @@ public class AnvilRecipe {
 	public static int craftingBoundDefault = 50;
 	private final long seed;
 	public int minStep = -1;
+	public ItemStack minStepItemBonus =null;
 
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, AnvilReq req, ItemStack result)
 	{
@@ -48,7 +49,7 @@ public class AnvilRecipe {
 	public AnvilRecipe(ItemStack in, ItemStack in2, String planName,boolean isWeld, AnvilReq req, ItemStack result)
 	{
 		this(in, in2, planName.toLowerCase(), req.Tier, result);
-		if(isWeld)FMLLog.log(Level.FATAL,"Deprecated AnvilRecipe init! Use AnvilWeldRecipe instead. /in:"+in.getDisplayName()+"/ in2:"+in2.getDisplayName()+"/ result:"+result.getDisplayName());
+		if(isWeld)FMLLog.log(Level.ERROR,"Deprecated AnvilRecipe init! Use AnvilWeldRecipe instead. /in:"+in.getDisplayName()+"/ in2:"+in2.getDisplayName()+"/ result:"+result.getDisplayName());
 	}
 
 	@Override
@@ -80,6 +81,12 @@ public class AnvilRecipe {
 	public AnvilRecipe setCraftingXP(int xp)
 	{
 		this.craftingXP = xp;
+		return this;
+	}
+
+	public AnvilRecipe setMinStepBonusItem(ItemStack bonus)
+	{
+		this.minStepItemBonus = bonus;
 		return this;
 	}
 
