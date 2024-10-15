@@ -285,6 +285,7 @@ public class AnvilRecipe {
 		optSet.put("6", 16);
 		optSet.put("-1",0); //Any
 		optSet.put("9",0);  //Unknown
+		initBestOptNum();
 	}
 
 	public boolean isHaveMatchedOpt(RuleEnum currOpt){
