@@ -131,6 +131,7 @@ public class AnvilRecipe {
 		{
 			if (is1.getItem() != is2.getItem())
 				return false;
+
 			return is1.getItemDamage() == 32767 || is1.getItemDamage() == is2.getItemDamage();
 		}
 		else return is1 == null && is2 == null;
@@ -217,8 +218,6 @@ public class AnvilRecipe {
 		try {
 			long timeStarted=System.nanoTime();
 			generatePossibleLastReqOpt(plan.rules);
-			Arrays.fill(bestOptNum, 65536);
-			bestOptNum[0] = 0;
 			for (String[] currPosReqOpt : AllPosLastReqOpt) {
 				int offset = 0;
 				int EffLenth = 0;
@@ -226,7 +225,9 @@ public class AnvilRecipe {
 					offset += optSet.get(opt);
 					if (!Objects.equals(opt, "9") && !Objects.equals(opt, "-1")) EffLenth++;
 				}
-				OffsetToOptNum.put(offset, TraceFromStart(0, craftingValue - offset) + EffLenth);
+//				OffsetToOptNum.put(offset,
+//						TraceFromStart(0, craftingValue - offset) + EffLenth);
+				OffsetToOptNum.put(offset, bestOptNum[craftingValue - offset] + EffLenth );
 			}
 			 //取OffsetToOptNum中最小的值
 			 if(outputAllResult||Collections.min(OffsetToOptNum.values())>20||Collections.min(OffsetToOptNum.values())<0){
@@ -248,9 +249,30 @@ public class AnvilRecipe {
 	private static final int lowerBound = 0;
 	private static final int upperBound = 150;
 
-	private final int[] bestOptNum = new int[upperBound - lowerBound + 50];
+	private static final int[] bestOptNum = new int[upperBound - lowerBound + 50];
 
 	private ArrayList<String[]> AllPosLastReqOpt = new ArrayList<>();
+
+	private static void initBestOptNum(){
+		Arrays.fill(bestOptNum, 65536);
+		bestOptNum[0] = 0;
+		Queue<Integer> q = new ArrayDeque<>();
+		q.add(0);
+
+		while (!q.isEmpty()) {
+			int CurrDest = q.poll();
+			for (String opt : optSet.keySet()) {
+//                int NextDest = CurrDest - optSet.get(opt);
+				int NextDest = CurrDest + optSet.get(opt);
+				if (NextDest < lowerBound) continue;
+				if (NextDest > upperBound) continue;
+				if (bestOptNum[NextDest] > bestOptNum[CurrDest] + 1) {
+					bestOptNum[NextDest] = bestOptNum[CurrDest] + 1;
+					q.add(NextDest);
+				}
+			}
+		}
+	}
 
 	static {
 		optSet.put("0_1", -3);
@@ -318,14 +340,13 @@ public class AnvilRecipe {
 	}
 
 	public void createNewOptSeq(int opt, int pos){
-		int act = opt;
-		//如果act为0，则加入0_1,0_2,0_3
-		if (act == 0) {
+        //如果act为0，则加入0_1,0_2,0_3
+		if (opt == 0) {
 			createNewOptSeq("0_1", pos);
 			createNewOptSeq("0_2", pos);
 			createNewOptSeq("0_3", pos);
 		}
-		else createNewOptSeq(String.valueOf(act), pos);
+		else createNewOptSeq(String.valueOf(opt), pos);
 	}
 
 	public void generatePossibleLastReqOpt(RuleEnum[] LastReqOpt){
@@ -336,29 +357,6 @@ public class AnvilRecipe {
 					createNewOptSeq(opt.Action, lpos);
 	}
 
-	public int TraceFromStart (int Start, int Dest){
-		//从Start开始，依BFS更新bestOptNum，直到到达Dest
-		//初始化队列
-		Queue<Integer> q = new ArrayDeque<>();
-		q.add(Start);
-
-		while (!q.isEmpty()){
-			int CurrDest = q.poll();
-			for (String opt : optSet.keySet()){
-				int NextDest = CurrDest + optSet.get(opt);
-				if (NextDest < lowerBound) continue;
-				if (NextDest > upperBound) continue;
-				if (bestOptNum[NextDest] > bestOptNum[CurrDest] + 1){
-					bestOptNum[NextDest] = bestOptNum[CurrDest] + 1;
-					q.add(NextDest);
-				}
-			}
-
-			if (CurrDest == Dest) return bestOptNum[Dest];
-		}
-
-		return bestOptNum[Dest];
-	}
 }
 
 
