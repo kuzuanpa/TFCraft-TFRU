@@ -189,7 +189,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 							}
 							if(stepsMoreThanMinimal==0) worldObj.playSoundAtEntity(lastWorker,"random.orb",0.2F,1);
 
-							if(recipe.minStepItemBonus != null && recipe.minStepItemBonus.stackSize - stepsMoreThanMinimal > 0){
+							if(AnvilManager.enableMinStepBonus && recipe.minStepItemBonus != null && recipe.minStepItemBonus.stackSize - stepsMoreThanMinimal > 0){
 								EntityItem e = new EntityItem(worldObj,xCoord,yCoord+1,zCoord);
 								ItemStack stack = recipe.minStepItemBonus.copy();
 								stack.stackSize -= stepsMoreThanMinimal;

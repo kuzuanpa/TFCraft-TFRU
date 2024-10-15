@@ -1325,29 +1325,29 @@ public class Recipes
 
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.weakRedSteelIngot), new ItemStack(TFCItems.smallMetalChunk,1,3), "ingot", AnvilReq.MANASTEEL, new ItemStack(TFCItems.redSteelIngot)).clearRecipeSkills());
 
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.       bismuthIngot2x), null, "sheet", AnvilReq.STONE        , new ItemStack(TFCItems.       bismuthSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,0 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems. bismuthBronzeIngot2x), null, "sheet", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems. bismuthBronzeSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,1 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.   blackBronzeIngot2x), null, "sheet", AnvilReq.BLACKBRONZE  , new ItemStack(TFCItems.   blackBronzeSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,2 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.    blackSteelIngot2x), null, "sheet", AnvilReq.BLACKSTEEL   , new ItemStack(TFCItems.    blackSteelSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,3 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.     blueSteelIngot2x), null, "sheet", AnvilReq.BLUESTEEL    , new ItemStack(TFCItems.     blueSteelSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,4 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.         brassIngot2x), null, "sheet", AnvilReq.COPPER       , new ItemStack(TFCItems.         brassSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,5 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.        bronzeIngot2x), null, "sheet", AnvilReq.BRONZE       , new ItemStack(TFCItems.        bronzeSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,6 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.        copperIngot2x), null, "sheet", AnvilReq.COPPER       , new ItemStack(TFCItems.        copperSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,7 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.          goldIngot2x), null, "sheet", AnvilReq.COPPER       , new ItemStack(TFCItems.          goldSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,8 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.   wroughtIronIngot2x), null, "sheet", AnvilReq.WROUGHTIRON  , new ItemStack(TFCItems.   wroughtIronSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,9 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.          leadIngot2x), null, "sheet", AnvilReq.COPPER       , new ItemStack(TFCItems.          leadSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,10)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.        nickelIngot2x), null, "sheet", AnvilReq.WROUGHTIRON  , new ItemStack(TFCItems.        nickelSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,11)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.       pigIronIngot2x), null, "sheet", AnvilReq.BRONZE       , new ItemStack(TFCItems.       pigIronSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,12)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.      platinumIngot2x), null, "sheet", AnvilReq.BRONZE       , new ItemStack(TFCItems.      platinumSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,13)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.      redSteelIngot2x), null, "sheet", AnvilReq.REDSTEEL     , new ItemStack(TFCItems.      redSteelSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,14)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.      roseGoldIngot2x), null, "sheet", AnvilReq.BRONZE       , new ItemStack(TFCItems.      roseGoldSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,15)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.        silverIngot2x), null, "sheet", AnvilReq.COPPER       , new ItemStack(TFCItems.        silverSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,16)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.         steelIngot2x), null, "sheet", AnvilReq.STEEL        , new ItemStack(TFCItems.         steelSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,17)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.sterlingSilverIngot2x), null, "sheet", AnvilReq.BRONZE       , new ItemStack(TFCItems.sterlingSilverSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,18)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.           tinIngot2x), null, "sheet", AnvilReq.STONE        , new ItemStack(TFCItems.           tinSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,19)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.          zincIngot2x), null, "sheet", AnvilReq.STONE        , new ItemStack(TFCItems.          zincSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,20)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.      electrumIngot2x), null, "sheet", AnvilReq.COPPER       , new ItemStack(TFCItems.      electrumSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,21)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.   cupronickelIngot2x), null, "sheet", AnvilReq.COPPER       , new ItemStack(TFCItems.   cupronickelSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,22)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.       bismuthIngot2x), null, "sheet", AnvilReq.STONE        , new ItemStack(TFCItems.       bismuthSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,0 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems. bismuthBronzeIngot2x), null, "sheet", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems. bismuthBronzeSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,1 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.   blackBronzeIngot2x), null, "sheet", AnvilReq.BLACKBRONZE  , new ItemStack(TFCItems.   blackBronzeSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,2 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.    blackSteelIngot2x), null, "sheet", AnvilReq.BLACKSTEEL   , new ItemStack(TFCItems.    blackSteelSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,3 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.     blueSteelIngot2x), null, "sheet", AnvilReq.BLUESTEEL    , new ItemStack(TFCItems.     blueSteelSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,4 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.         brassIngot2x), null, "sheet", AnvilReq.COPPER       , new ItemStack(TFCItems.         brassSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,5 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.        bronzeIngot2x), null, "sheet", AnvilReq.BRONZE       , new ItemStack(TFCItems.        bronzeSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,6 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.        copperIngot2x), null, "sheet", AnvilReq.COPPER       , new ItemStack(TFCItems.        copperSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,7 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.          goldIngot2x), null, "sheet", AnvilReq.COPPER       , new ItemStack(TFCItems.          goldSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,8 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.   wroughtIronIngot2x), null, "sheet", AnvilReq.WROUGHTIRON  , new ItemStack(TFCItems.   wroughtIronSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,9 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.          leadIngot2x), null, "sheet", AnvilReq.COPPER       , new ItemStack(TFCItems.          leadSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,10)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.        nickelIngot2x), null, "sheet", AnvilReq.WROUGHTIRON  , new ItemStack(TFCItems.        nickelSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,11)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.       pigIronIngot2x), null, "sheet", AnvilReq.BRONZE       , new ItemStack(TFCItems.       pigIronSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,12)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.      platinumIngot2x), null, "sheet", AnvilReq.BRONZE       , new ItemStack(TFCItems.      platinumSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,13)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.      redSteelIngot2x), null, "sheet", AnvilReq.REDSTEEL     , new ItemStack(TFCItems.      redSteelSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,14)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.      roseGoldIngot2x), null, "sheet", AnvilReq.BRONZE       , new ItemStack(TFCItems.      roseGoldSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,15)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.        silverIngot2x), null, "sheet", AnvilReq.COPPER       , new ItemStack(TFCItems.        silverSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,16)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.         steelIngot2x), null, "sheet", AnvilReq.STEEL        , new ItemStack(TFCItems.         steelSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,17)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.sterlingSilverIngot2x), null, "sheet", AnvilReq.BRONZE       , new ItemStack(TFCItems.sterlingSilverSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,18)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.           tinIngot2x), null, "sheet", AnvilReq.STONE        , new ItemStack(TFCItems.           tinSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,19)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.          zincIngot2x), null, "sheet", AnvilReq.STONE        , new ItemStack(TFCItems.          zincSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,20)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.      electrumIngot2x), null, "sheet", AnvilReq.COPPER       , new ItemStack(TFCItems.      electrumSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,21)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.   cupronickelIngot2x), null, "sheet", AnvilReq.COPPER       , new ItemStack(TFCItems.   cupronickelSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,22)));
 
 		//Picks
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeIngot), null, "pickaxe", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.bismuthBronzePickaxeHead, 1)).addRecipeSkill(Global.SKILL_TOOLSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,1 )));
@@ -1626,19 +1626,20 @@ public class Recipes
 		//GT Items
 		for (OreDictMaterial mat : new OreDictMaterial[]{MT.Pb, MT.Steel, MT.Cu, MT.WroughtIron, MT.Bronze, MT.Bi, MT.BlackBronze, MT.BismuthBronze, MT.Cupronickel, MT.Ni, MT.Sn, MT.Au, MT.Brass, MT.Electrum, MT.Ag, MT.RoseGold, MT.SterlingSilver, MT.Invar, MT.Ge, MT.Co, MT.AluminiumBrass, MT.Al, MT.TinAlloy, MT.Fe}) {
 			AnvilReq req = getAnvilReqFromMaterial(mat);
-			manager.addRecipe(new AnvilRecipe(OP.ingotDouble.mat(mat, 1), null, "sheet", req, OP.plate.mat(mat, 1)).setMinStepBonusItem(OP.nugget.mat(mat,3)));
-			manager.addRecipe(new AnvilRecipe(OP.plateQuadruple.mat(mat, 1), OP.plateQuadruple.mat(mat, 1), "casing", req, OP.casingMachine.mat(mat, 1)));
-			manager.addRecipe(new AnvilRecipe(OP.casingMachine.mat(mat, 1), OP.casingMachine.mat(mat, 1), "robustcasing", req, OP.casingMachineDouble.mat(mat, 1)).setMinStepBonusItem(OP.nugget.mat(mat,9)));
+			manager.addRecipe(new AnvilRecipe(OP.plateQuadruple     .mat(mat, 1), OP.plateQuadruple     .mat(mat, 1), "casing"          , req, OP.casingMachine         .mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.casingMachine      .mat(mat, 1), OP.casingMachine      .mat(mat, 1), "robustcasing"    , req, OP.casingMachineDouble   .mat(mat, 1)).setMinStepBonusItem(OP.nugget.mat(mat,9)));
 			manager.addRecipe(new AnvilRecipe(OP.casingMachineDouble.mat(mat, 1), OP.casingMachineDouble.mat(mat, 1), "reinforcedcasing", req, OP.casingMachineQuadruple.mat(mat, 1)).setMinStepBonusItem(OP.nugget.mat(mat,9)));
-			manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat, 1), null, "ring", req, OP.ring.mat(mat, 1)));
-			manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat, 1), null, "casingsmall", req, OP.casingSmall.mat(mat, 1)));
-			manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat, 1), OP.stick.mat(mat, 1), "gear", req, OP.gearGtSmall.mat(mat, 1)));
-			manager.addRecipe(new AnvilRecipe(OP.plateQuadruple.mat(mat, 1), OP.stickLong.mat(mat, 1), "gear", req, OP.gearGt.mat(mat, 1)).setMinStepBonusItem(OP.nugget.mat(mat,6)));
-			manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat, 1), null, "foil", req, OP.foil.mat(mat, 2)).setMinStepBonusItem(OP.nugget.mat(mat,3)));
-			manager.addRecipe(new AnvilRecipe(OP.stickLong.mat(mat, 1), null, "spring", req, OP.spring.mat(mat, 1)));
-			manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat, 1), null, "springsmall", req, OP.springSmall.mat(mat, 2)));
-			manager.addRecipe(new AnvilRecipe(OP.plate.mat(mat, 1), null, "platecurved", req, OP.plateCurved.mat(mat, 1)));
-			manager.addRecipe(new AnvilRecipe(OP.stick.mat(mat, 1), OP.stick.mat(mat, 1), "chain", req, OP.chain.mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.plate              .mat(mat, 1), OP.stick              .mat(mat, 1), "gear"            , req, OP.gearGtSmall           .mat(mat, 1)).setMinStepBonusItem(OP.nugget.mat(mat,2)));
+			manager.addRecipe(new AnvilRecipe(OP.plateQuadruple     .mat(mat, 1), OP.stickLong          .mat(mat, 1), "gear"            , req, OP.gearGt                .mat(mat, 1)).setMinStepBonusItem(OP.nugget.mat(mat,6)));
+			manager.addRecipe(new AnvilRecipe(OP.stick              .mat(mat, 1), OP.stick              .mat(mat, 1), "chain"           , req, OP.chain                 .mat(mat, 1)));
+
+			manager.addRecipe(new AnvilRecipe(OP.ingotDouble        .mat(mat, 1), null, "sheet"      , req, OP.plate      .mat(mat, 1)).setMinStepBonusItem(OP.nugget.mat(mat,3)));
+			manager.addRecipe(new AnvilRecipe(OP.stick              .mat(mat, 1), null, "ring"       , req, OP.ring       .mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.plate              .mat(mat, 1), null, "casingsmall", req, OP.casingSmall.mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.plate              .mat(mat, 1), null, "foil"       , req, OP.foil       .mat(mat, 2)).setMinStepBonusItem(OP.nugget.mat(mat,3)));
+			manager.addRecipe(new AnvilRecipe(OP.stickLong          .mat(mat, 1), null, "spring"     , req, OP.spring     .mat(mat, 1)));
+			manager.addRecipe(new AnvilRecipe(OP.stick              .mat(mat, 1), null, "springsmall", req, OP.springSmall.mat(mat, 2)));
+			manager.addRecipe(new AnvilRecipe(OP.plate              .mat(mat, 1), null, "platecurved", req, OP.plateCurved.mat(mat, 1)));
 
 			manager.addWeldRecipe(new AnvilWeldRecipe(OP.plate.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateDouble.mat(mat, 1)));
 			manager.addWeldRecipe(new AnvilWeldRecipe(OP.plateDouble.mat(mat, 1), OP.plate.mat(mat, 1), req, OP.plateTriple.mat(mat, 1)));
