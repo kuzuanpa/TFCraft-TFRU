@@ -3,6 +3,7 @@ package com.bioxx.tfc.Blocks.Flora;
 import java.util.List;
 import java.util.Random;
 
+import com.bioxx.tfc.api.Interfaces.IFlower;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -22,7 +23,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 
-public class BlockFlower extends BlockTerra
+public class BlockFlower extends BlockTerra implements IFlower
 {
 	public String[] flowerNames;
 	@SideOnly(Side.CLIENT)

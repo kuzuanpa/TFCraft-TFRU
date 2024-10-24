@@ -1,5 +1,7 @@
 package com.bioxx.tfc.Blocks.Vanilla;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -22,6 +24,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class BlockCustomFlowerPot extends BlockFlowerPot
 {
+	protected List<Block> additionalValidBlocks = new ArrayList<>();
 
 	public BlockCustomFlowerPot()
 	{
@@ -82,7 +85,9 @@ public class BlockCustomFlowerPot extends BlockFlowerPot
 			return false; // Empty hand
 		}
 	}
-
+	public void addValidBlock(Block block) {
+		if(block!=null)additionalValidBlocks.add(block);
+	}
 	private boolean validItem(Item item, int meta)
 	{
 		if (item instanceof ItemBlock)
@@ -98,6 +103,7 @@ public class BlockCustomFlowerPot extends BlockFlowerPot
 			if (block == Blocks.yellow_flower || block == Blocks.red_flower || block == Blocks.cactus || block == Blocks.brown_mushroom || 
 					block == Blocks.red_mushroom || block == Blocks.sapling || block == Blocks.deadbush  || block == Blocks.tallgrass && meta == 2 /*Fern*/)
 				return true;
+            return additionalValidBlocks.contains(block);
 		}
 		// Currently not possible to render non-ItemBlocks in the flower pot. -Kitty
 		/*else if (item == TFCItems.FruitTreeSapling)

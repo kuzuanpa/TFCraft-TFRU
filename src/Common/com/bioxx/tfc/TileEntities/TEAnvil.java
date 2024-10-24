@@ -202,8 +202,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 						// We need to call this after the NBT is set, since this call sets lastWorker to null if the output has no further recipes.
 						this.setInventorySlotContents(INPUT1_SLOT, output);
 
-						if(anvilItemStacks[INPUT2_SLOT] != null)
-							anvilItemStacks[INPUT2_SLOT].stackSize--;
+						if(anvilItemStacks[INPUT2_SLOT] != null) anvilItemStacks[INPUT2_SLOT].stackSize--;
 					}
 
 					workRecipe = null;
