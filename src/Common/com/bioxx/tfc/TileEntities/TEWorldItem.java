@@ -1,5 +1,9 @@
 package com.bioxx.tfc.TileEntities;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSnow;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -11,10 +15,13 @@ import net.minecraft.util.AxisAlignedBB;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import java.util.Random;
+
 public class TEWorldItem extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[1];
-
+	public boolean hasSnow = false;
+	private static final Random rng = new Random();
 	public EntityItem renderItem;
 
 	public TEWorldItem()
@@ -22,11 +29,18 @@ public class TEWorldItem extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public boolean canUpdate()
-	{
-		return false;
+	public void updateEntity() {
+		if(worldObj != null && worldObj.isRemote){//is Client Side
+			if(!hasSnow && rng.nextInt(100) == 1 &&(
+					isBlockMaterialSnow(getWorldObj().getBlock(xCoord+1,yCoord,zCoord  ))||
+			        isBlockMaterialSnow(getWorldObj().getBlock(xCoord-1,yCoord,zCoord  ))||
+			        isBlockMaterialSnow(getWorldObj().getBlock(xCoord,  yCoord,zCoord+1))||
+			        isBlockMaterialSnow(getWorldObj().getBlock(xCoord,  yCoord,zCoord-1))))hasSnow=true;
+		}
 	}
-
+	public static boolean isBlockMaterialSnow(Block block){
+		return block != null && block.getMaterial() != null &&block.getMaterial().equals(Material.snow);
+	}
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) 
 	{
