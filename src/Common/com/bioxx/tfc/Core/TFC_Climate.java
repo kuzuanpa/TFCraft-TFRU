@@ -1,8 +1,11 @@
 package com.bioxx.tfc.Core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.bioxx.tfc.api.TileEntities.ITempConditioner;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import cpw.mods.fml.relauncher.Side;
@@ -17,7 +20,8 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class TFC_Climate
 {
-	public static Map<World, WorldCacheManager> worldPair = new HashMap<World, WorldCacheManager>();
+	public final static Map<World, WorldCacheManager> worldPair = new HashMap<>();
+	public final static Map<World, List<ITempConditioner>> worldTempConditioners = new HashMap<>();
 
 	private static final float[] Y_FACTOR_CACHE = new float[441];
 	private static final float[] Z_FACTOR_CACHE = new float[30001];
@@ -217,14 +221,33 @@ public class TFC_Climate
 		return getTemp(world, day, 12, x, z);
 	}
 
+	public static float adjustHeightToTemp(int y, float temp)
+	{
+		//internationally accepted average lapse time is 6.49 K / 1000 m, for the first 11 km of the atmosphere. I suggest graphing our temperature
+		//across the 110 m against 2750 m, so that gives us a change of 1.6225 / 10 blocks, which isn't /terrible/
+		//Now going to attemp exonential growth. calculations but change in temperature at 17.8475 for our system, so that should be the drop at 255.
+		//therefore, change should be temp - f(x), where f(x) is an exp function roughly equal to f(x) = (x^2)/ 677.966.
+		//This seems to work nicely. I like this. Since creative allows players to travel above 255, I'll see if I can't code in the rest of it.
+		//The upper troposhere has no lapse rate, so we'll just use that.
+		//The equation looks rather complicated, but you can see it here:
+		// http://www.wolframalpha.com/input/?i=%28%28%28x%5E2+%2F+677.966%29+*+%280.5%29*%28%28%28110+-+x%29+%2B+%7C110+-+x%7C%29%2F%28110+-
+		// +x%29%29%29+%2B+%28%280.5%29*%28%28%28x+-+110%29+%2B+%7Cx+-+110%7C%29%2F%28x+-+110%29%29+*+x+*+0.16225%29%29+0+to+440
+		if(y > Global.worldHeightAverage)
+		{
+			int i = y - Global.worldHeightAverage;
+			if (i >= Y_FACTOR_CACHE.length) {
+				i = Y_FACTOR_CACHE.length - 1;
+			}
+			temp -= Y_FACTOR_CACHE[i];
+		}
+		return temp;
+	}
+
+	/**get Temp at current Time and Day in Pos(x,y,z)**/
 	public static float getHeightAdjustedTemp(World world, int x, int y, int z)
 	{
 		float temp = getTemp(world, x, z);
-		temp += getTemp(world, x+1, z);
-		temp += getTemp(world, x-1, z);
-		temp += getTemp(world, x, z+1);
-		temp += getTemp(world, x, z-1);
-		temp /= 5;
+
 		temp = adjustHeightToTemp(y,temp);
 		float light = 1;
 
@@ -249,28 +272,21 @@ public class TFC_Climate
 			return temp;
 	}
 
-	public static float adjustHeightToTemp(int y, float temp)
-	{
-		//internationally accepted average lapse time is 6.49 K / 1000 m, for the first 11 km of the atmosphere. I suggest graphing our temperature
-		//across the 110 m against 2750 m, so that gives us a change of 1.6225 / 10 blocks, which isn't /terrible/
-		//Now going to attemp exonential growth. calculations but change in temperature at 17.8475 for our system, so that should be the drop at 255.
-		//therefore, change should be temp - f(x), where f(x) is an exp function roughly equal to f(x) = (x^2)/ 677.966.
-		//This seems to work nicely. I like this. Since creative allows players to travel above 255, I'll see if I can't code in the rest of it.
-		//The upper troposhere has no lapse rate, so we'll just use that.
-		//The equation looks rather complicated, but you can see it here:
-		// http://www.wolframalpha.com/input/?i=%28%28%28x%5E2+%2F+677.966%29+*+%280.5%29*%28%28%28110+-+x%29+%2B+%7C110+-+x%7C%29%2F%28110+-
-		// +x%29%29%29+%2B+%28%280.5%29*%28%28%28x+-+110%29+%2B+%7Cx+-+110%7C%29%2F%28x+-+110%29%29+*+x+*+0.16225%29%29+0+to+440
-		if(y > Global.worldHeightAverage)
-		{
-			int i = y - Global.worldHeightAverage;
-			if (i >= Y_FACTOR_CACHE.length) {
-				i = Y_FACTOR_CACHE.length - 1;
-			}
-			temp -= Y_FACTOR_CACHE[i];
-		}
-		return temp;
+	public static float getCurrentTempAt(World world, int x, int y, int z){
+		return getHeightAdjustedTemp(world, x, y, z) + getConditionerModificationAt(world, x, y, z);
 	}
 
+	public static void addConditioner(World world, ITempConditioner conditioner){
+		worldTempConditioners.get(world).add(conditioner);
+	}
+	public static void removeConditioner(World world, ITempConditioner conditioner){
+		worldTempConditioners.get(world).remove(conditioner);
+	}
+	public static float getConditionerModificationAt(World world, int x, int y, int z){
+		return (float) worldTempConditioners.get(world).stream().mapToDouble(conditioner-> conditioner.getTempModification(x, y, z)).sum();
+	}
+
+	/**get Temp in $day at 12:00 at Pos(x,y,z)**/
 	public static float getHeightAdjustedTempSpecificDay(World world,int day, int x, int y, int z)
 	{
 		float temp = getTempSpecificDay(world, day, x, z);
@@ -278,6 +294,7 @@ public class TFC_Climate
 		return temp;
 	}
 
+	/**get Temp in $day at $hour at Pos(x,y,z)**/
 	public static float getHeightAdjustedTempSpecificDay(World world,int day, int hour, int x, int y, int z)
 	{
 		float temp = getTemp(world, day, hour, x, z);
@@ -285,6 +302,7 @@ public class TFC_Climate
 		return temp;
 	}
 
+	/**get Temp in $day at 0:00 at Pos(x,y,z)**/
 	public static float getHeightAdjustedBioTemp(World world,int day, int x, int y, int z)
 	{
 		float temp = getBioTemp(world, day, x, z);
@@ -297,6 +315,7 @@ public class TFC_Climate
 		return 52;
 	}
 
+	/**get average Temp of whole year at 0:00 at Pos(x,y,z)**/
 	public static float getBioTemperatureHeight(World world,int x, int y, int z)
 	{
 		float temp = 0;
@@ -309,7 +328,8 @@ public class TFC_Climate
 		}
 		return temp / 12;
 	}
-/**This returns average temp of whole year**/
+
+	/**get average Temp of whole year at 0:00 at Pos(x,z)**/
 	public static float getBioTemperatureAverage(World world, int x, int z)
 	{
 		float temp = 0;

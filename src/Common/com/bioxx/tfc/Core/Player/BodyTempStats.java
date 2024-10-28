@@ -80,7 +80,7 @@ public class BodyTempStats
 		int x = (int)(player.posX);
 		int y = (int)(player.posY);
 		int z = (int)(player.posZ);
-		float temperature = TFC_Climate.getHeightAdjustedTemp(player.worldObj, x, y, z);
+		float temperature = TFC_Climate.getCurrentTempAt(player.worldObj, x, y, z);
 		temperature += applyTemperatureFromHeatSources(player);
 
 		//if it's cold

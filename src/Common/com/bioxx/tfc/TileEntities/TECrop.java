@@ -67,7 +67,7 @@ public class TECrop extends NetworkTileEntity
 				if (te instanceof TEFarmland)
 					tef = (TEFarmland) te;
 
-				float ambientTemp = TFC_Climate.getHeightAdjustedTempSpecificDay(worldObj, TFC_Time.getDayOfYearFromTick(growthTimer), xCoord, yCoord, zCoord);
+				float temp = TFC_Climate.getCurrentTempAt(worldObj, xCoord, yCoord, zCoord);
 				float tempAdded = 0;
 				boolean isDormant = false;
 
@@ -91,20 +91,20 @@ public class TECrop extends NetworkTileEntity
 				}*/
 				//End Infestation Code
 
-				if(!crop.dormantInFrost && ambientTemp < crop.minGrowthTemp)
-					tempAdded = -0.03f * (crop.minGrowthTemp - ambientTemp);
-				else if(crop.dormantInFrost && ambientTemp < crop.minGrowthTemp)
+				if(!crop.dormantInFrost && temp < crop.minGrowthTemp)
+					tempAdded = -0.03f * (crop.minGrowthTemp - temp);
+				else if(crop.dormantInFrost && temp < crop.minGrowthTemp)
 				{
 					if(growth > 1)
-						tempAdded = -0.03f * (crop.minGrowthTemp - ambientTemp);
+						tempAdded = -0.03f * (crop.minGrowthTemp - temp);
 					isDormant = true;
 				}
-				else if(ambientTemp < 28)
-					tempAdded = ambientTemp * 0.00035f;
-				else if(ambientTemp < 37)
-					tempAdded = (28 - (ambientTemp-28)) * 0.0003f;
+				else if(temp < 28)
+					tempAdded = temp * 0.00035f;
+				else if(temp < 37)
+					tempAdded = (28 - (temp-28)) * 0.0003f;
 
-				if(!crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
+				if(!crop.dormantInFrost && temp < crop.minAliveTemp)
 				{
 					int baseKillChance = 6;
 					if(this.worldObj.rand.nextInt(baseKillChance-this.killLevel) == 0)
@@ -115,7 +115,7 @@ public class TECrop extends NetworkTileEntity
 							this.killLevel++;
 					}
 				}
-				else if(crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
+				else if(crop.dormantInFrost && temp < crop.minAliveTemp)
 				{
 					if(growth > 1)
 					{
@@ -184,7 +184,7 @@ public class TECrop extends NetworkTileEntity
 				killCrop(crop);
 			}
 
-			if(WeatherManager.isRainingOnCoord(worldObj, xCoord, yCoord, zCoord) && TFC_Climate.getHeightAdjustedTemp(worldObj, xCoord, yCoord, zCoord) < 0)
+			if(WeatherManager.isRainingOnCoord(worldObj, xCoord, yCoord, zCoord) && TFC_Climate.getCurrentTempAt(worldObj, xCoord, yCoord, zCoord) < 0)
 			{
 				if(crop != null && !crop.dormantInFrost || growth > 1)
 				{

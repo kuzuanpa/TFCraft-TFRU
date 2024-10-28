@@ -213,7 +213,7 @@ public class BlockGrass extends BlockSandLike
 				spreadGrass(world, i, j, k, rand);
 
 				float rain = TFC_Climate.getRainfall(world, i, j + 1, k);
-				float temp = TFC_Climate.getHeightAdjustedTemp(world, i, j+1, k);
+				float temp = TFC_Climate.getCurrentTempAt(world, i, j+1, k);
 				if (TFC_Core.isGrass(this)  && world.getBlock(i, j + 1, k).getMaterial() != Material.water)
 				{
 					int chunkX = (int)Math.floor(i) >> 4;

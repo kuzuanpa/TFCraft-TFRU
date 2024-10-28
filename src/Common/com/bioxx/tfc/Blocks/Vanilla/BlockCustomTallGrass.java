@@ -241,7 +241,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	public void updateTick(World w, int x, int y, int z, Random rand)
 	{
 		// Play cricket sound at night
-		float temp = TFC_Climate.getHeightAdjustedTemp(w, x, y, z);
+		float temp = TFC_Climate.getCurrentTempAt(w, x, y, z);
 		/*Crickets typically don't mate below 55F and are nocturnal. We're being oddly accurate about this lol -B*/
 		if(!w.isRemote && w.getBlockLightValue(x, y, z) < 7 && temp > 12.77)
 		{

@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Handlers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -141,6 +142,7 @@ public class ChunkEventHandler
 	public void onUnloadWorld(WorldEvent.Unload event)
 	{
 		TFC_Climate.removeCacheManager(event.world);
+		TFC_Climate.worldTempConditioners.remove(event.world);
 		TFC_Core.removeCDM(event.world);
 		//AnvilManager.getInstance().clearRecipes();
 	}
@@ -155,6 +157,7 @@ public class ChunkEventHandler
 			TFC_Core.setupWorld(event.world);
 		}
 		TFC_Climate.worldPair.put(event.world, new WorldCacheManager(event.world));
+		TFC_Climate.worldTempConditioners.put(event.world, new ArrayList<>());
 		TFC_Core.addCDM(event.world);
 	}
 

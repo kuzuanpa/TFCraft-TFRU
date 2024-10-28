@@ -1272,7 +1272,7 @@ public class TFC_Core
 		{
 			return cacheTemp;
 		}
-		float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,TFC_Time.getDayFromTotalHours(th), TFC_Time.getHourOfDayFromTotalHours(th), x, y, z);
+		float temp = TFC_Climate.getCurrentTempAt(world, x, y, z);
 		addCachedTemp(world, x, z, th, temp);
 		return temp;
 	}

@@ -130,7 +130,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 			FloraIndex fi = manager.findMatchingIndex(getType(this, m));
 			FloraIndex fi2 = manager.findMatchingIndex(getType(this, meta));
 
-			float temp = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
+			float temp = TFC_Climate.getCurrentTempAt(world, x, y, z);
 			TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(x, y, z);
 			if(te != null)
 			{

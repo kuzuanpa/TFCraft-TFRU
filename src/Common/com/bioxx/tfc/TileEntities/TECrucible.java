@@ -128,7 +128,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			if(tempTick > 22)
 			{
 				tempTick = 0;
-				if(temperature > TFC_Climate.getHeightAdjustedTemp(worldObj, xCoord, yCoord, zCoord))
+				if(temperature > TFC_Climate.getCurrentTempAt(worldObj, xCoord, yCoord, zCoord))
 					temperature--;
 			}
 

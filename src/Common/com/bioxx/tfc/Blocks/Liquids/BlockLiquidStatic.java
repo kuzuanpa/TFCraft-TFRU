@@ -127,7 +127,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 			// Play frog sound at night only in fresh water and above freezing temperature.
 			if(world.getBlock(x, y, z) == TFCBlocks.freshWaterStationary
 					&& world.isAirBlock(x, y + 1, z)
-					&& TFC_Climate.getHeightAdjustedTemp(world, x, y + 1, z) > 2)
+					&& TFC_Climate.getCurrentTempAt(world, x, y + 1, z) > 2)
 			{
 				if(rand.nextInt(100) < 25 && world.getBlockLightValue(x, y, z) < 7)
 				{

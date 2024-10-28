@@ -94,7 +94,7 @@ public class FoodStatsTFC
 		if(!player.worldObj.isRemote&&player.isEntityAlive()&&!player.capabilities.isCreativeMode)
 		{
 			BodyTempStats bodyTemp = TFC_Core.getBodyTempStats(player);
-			float temp = TFC_Climate.getHeightAdjustedTemp(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+			float temp = TFC_Climate.getCurrentTempAt(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 
 			float tempWaterMod=0;
 			if(temp >= 25)

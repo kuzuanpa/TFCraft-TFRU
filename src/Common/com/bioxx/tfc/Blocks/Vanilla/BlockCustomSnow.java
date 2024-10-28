@@ -151,7 +151,7 @@ public class BlockCustomSnow extends BlockTerra
 			}
 		}
 		
-		float temp = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
+		float temp = TFC_Climate.getCurrentTempAt(world, x, y, z);
 		
 		if (temp <= 0 && WeatherManager.isRainingOnCoord(world,x, y, z))  //Raining and Below Freezing
 		{

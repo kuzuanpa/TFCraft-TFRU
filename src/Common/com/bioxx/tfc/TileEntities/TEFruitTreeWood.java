@@ -89,7 +89,7 @@ public class TEFruitTreeWood extends TileEntity implements IInventory
 			FloraIndex fi = manager.findMatchingIndex(BlockFruitWood.getType(worldObj.getBlockMetadata(xCoord, yCoord, zCoord)));
 
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-			float temp = TFC_Climate.getHeightAdjustedTemp(worldObj, xCoord, yCoord, zCoord);
+			float temp = TFC_Climate.getCurrentTempAt(worldObj, xCoord, yCoord, zCoord);
 
 			int month = TFC_Time.getSeasonAdjustedMonth(zCoord); // 0 is Early Spring, 3 is Early Summer, 6 is Early Autumn
 			if (month < 9 && fi != null && temp >= fi.minTemp && temp < fi.maxTemp) // Will not grow during winter months or out of temp range
