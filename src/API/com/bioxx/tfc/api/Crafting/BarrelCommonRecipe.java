@@ -162,7 +162,7 @@ public class BarrelCommonRecipe implements IBarrelRecipe
 
 	@Override
 	public int getRecipeRepeatTimes(ItemStack inIS, FluidStack inFS) {
-		return (int) Math.floor(inFS.amount*1F/recipeInFluid.amount);
+		return (int) Math.min(inIS==null || recipeIS==null ? Integer.MAX_VALUE : inIS.stackSize*1F/recipeIS.stackSize, inFS == null || recipeInFluid ==null ?Integer.MAX_VALUE : Math.floor(inFS.amount*1F/recipeInFluid.amount));
 	}
 
 	public FluidStack getResultFluid(ItemStack inIS, FluidStack inFS, int sealedTime)

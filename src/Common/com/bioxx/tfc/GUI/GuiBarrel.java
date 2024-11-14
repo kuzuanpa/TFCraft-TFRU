@@ -1,7 +1,6 @@
 package com.bioxx.tfc.GUI;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -16,6 +15,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
@@ -34,6 +34,7 @@ import com.bioxx.tfc.api.Crafting.BarrelManager;
 import com.bioxx.tfc.api.Crafting.BarrelPreservativeRecipe;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
+import scala.Int;
 
 public class GuiBarrel extends GuiContainerTFC
 {
@@ -325,10 +326,22 @@ public class GuiBarrel extends GuiContainerTFC
 
 			// Draw Output
 			if (barrelTE.recipe != null)
-			{
+			{//Common recipe
 				if (!(barrelTE.recipe instanceof BarrelBriningRecipe))
 				{
-					drawCenteredString(this.fontRendererObj, TFC_Core.translate("gui.Output") + ": " + barrelTE.recipe.getRecipeName(), guiLeft + 88, guiTop + 72, 0x555555);
+					StringBuilder str = new StringBuilder();
+					//Item Outputs
+					Map<String, Integer> outputs = new HashMap<>();
+					barrelTE.recipe.getResult(barrelTE.getInputStack(), barrelTE.getFluidStack(),Integer.MAX_VALUE).stream().filter(Objects::nonNull).forEach(is-> outputs.merge(is.getDisplayName(), is.stackSize, Integer::sum));
+					if(!outputs.isEmpty()) {
+						outputs.forEach((isName, count) -> str.append(isName).append(" x ").append(count).append(", "));
+						str.delete(str.length() - 2,str.length());
+					}
+					//Fluid Outputs
+					FluidStack fs = barrelTE.recipe.getResultFluid(barrelTE.getInputStack(), barrelTE.getFluidStack(),Integer.MAX_VALUE);
+					if(fs != null) str.append(fs.getLocalizedName()).append(" x ").append(fs.amount).append("L");
+					//Draw String
+					if(!str.toString().isEmpty()) drawCenteredString(this.fontRendererObj, TFC_Core.translate("gui.Output") + ": " + str.toString(), guiLeft + 88, guiTop + 72, 0x555555);
 				}
 				else if (barrelTE.getSealed() && barrelTE.getFluidStack() != null && barrelTE.getFluidStack().getFluid() == TFCFluids.BRINE)
 				{
