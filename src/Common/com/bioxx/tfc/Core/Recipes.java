@@ -3,6 +3,7 @@ package com.bioxx.tfc.Core;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import eu.usrv.yamcore.auxiliary.ItemDescriptor;
 import net.minecraft.init.Blocks;
@@ -30,6 +31,7 @@ import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.*;
 import com.bioxx.tfc.api.Enums.RuleEnum;
+import org.apache.logging.log4j.Level;
 import vazkii.botania.common.lib.LibOreDict;
 
 import static com.bioxx.tfc.TFRUEnvHelper.isInTFRU;
@@ -1970,6 +1972,9 @@ public class Recipes
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 31), new ItemStack(TFCItems.fertilizer, 4,2)));//fertilizer
 		if(!isInTFRU)return;
 		manager.addRecipe(new QuernRecipe(new ItemStack(Items.ender_pearl, 1), gregapi.data.OP.dust.mat(gregapi.data.MT.EnderPearl, 1)));//for waystone crafting
+		FMLLog.log(Level.FATAL,"DEBUG Pos 1");
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 32), gregapi.data.OP.dustSmall.mat(gregapi.data.MT.OREMATS.Borax, 2)));
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 18), gregapi.data.OP.dustSmall.mat(gregapi.data.MT.OREMATS.Trona, 2)));
 	}
 
 	public static int valueOfString(String s)

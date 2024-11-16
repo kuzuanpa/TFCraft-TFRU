@@ -517,6 +517,7 @@ public class TFC_ConfigFiles
 		oreList.put("Olivine"        , getOreData("Olivine"      ,"veins",  "small",  MOD_ID + ":Ore3", 1,  100, new String[]{"igneous intrusive", "igneous extrusive"},                   5, 110, 20, 60));
 		oreList.put("Microcline"     , getOreData("Microcline"   ,"veins",  "large",  MOD_ID + ":Ore2", 9,   60, new String[]{"sedimentary"},                                              5, 110, 40, 40));
 		oreList.put("Bismuthinite"   , getOreData("Bismuthinite" ,"veins",  "small",  MOD_ID + ":Ore1", 7,  100, new String[]{"igneous extrusive", "sedimentary"},                         5, 110, 30, 30));
+		oreList.put("Satinspar"      , getOreData("Satinspar"    ,"veins",  "large",  MOD_ID + ":Ore2", 2,   50, new String[]{"sedimentary"},                                              5, 110, 15, 50));
 
 
 		//Surface Ore
