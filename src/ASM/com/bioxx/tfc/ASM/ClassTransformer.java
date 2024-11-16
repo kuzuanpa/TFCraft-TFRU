@@ -21,13 +21,9 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 	protected String mcpClassName;
 	protected String obfClassName;
 
-	public boolean optifineChecked =false;
-
 	@Override
 	public byte[] transform(String name, String transformedName, byte[] bytes)
 	{
-		if(!optifineChecked)try{Class.forName("optifine.OptiFineTweaker");throw new IllegalArgumentException("Optifine Not Supported!");}catch (ClassNotFoundException e){optifineChecked=true;};
-
 		//LOG.info("transforming: {}", name);
 		if (name.equals(obfClassName))
 		{
