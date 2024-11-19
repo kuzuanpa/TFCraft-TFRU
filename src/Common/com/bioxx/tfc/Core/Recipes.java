@@ -1972,7 +1972,6 @@ public class Recipes
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 31), new ItemStack(TFCItems.fertilizer, 4,2)));//fertilizer
 		if(!isInTFRU)return;
 		manager.addRecipe(new QuernRecipe(new ItemStack(Items.ender_pearl, 1), gregapi.data.OP.dust.mat(gregapi.data.MT.EnderPearl, 1)));//for waystone crafting
-		FMLLog.log(Level.FATAL,"DEBUG Pos 1");
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 32), gregapi.data.OP.dustSmall.mat(gregapi.data.MT.OREMATS.Borax, 2)));
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 18), gregapi.data.OP.dustSmall.mat(gregapi.data.MT.OREMATS.Trona, 2)));
 	}
