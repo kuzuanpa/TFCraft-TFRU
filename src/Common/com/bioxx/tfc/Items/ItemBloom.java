@@ -67,7 +67,7 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	@Override
 	public boolean isSmeltable(ItemStack is)
 	{
-		return this == TFCItems.bloom;
+		return false;
 	}
 
 	@Override

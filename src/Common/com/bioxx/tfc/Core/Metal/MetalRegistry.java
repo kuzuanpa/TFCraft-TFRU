@@ -33,21 +33,16 @@ public class MetalRegistry
 	
 	public Metal getMetalFromItem(Item i)
 	{
-		Iterator<Metal> iter = hash.values().iterator();
-		while(iter.hasNext())
-		{
-			Metal m = iter.next();
-			if(m.ingot == i || m.meltedItem == i)
-				return m;
-		}
+        for (Metal m : hash.values()) {
+            if (m.ingot == i || m.meltedItem == i)
+                return m;
+        }
 		
 		return null;
 	}
 	
 	public Metal getMetalFromString(String s)
 	{
-		if(hash.containsKey(s))
-			return hash.get(s);
-		else return null;
+        return hash.getOrDefault(s, null);
 	}
 }
