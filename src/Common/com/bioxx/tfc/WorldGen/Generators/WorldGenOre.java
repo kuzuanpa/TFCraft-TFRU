@@ -1,6 +1,5 @@
 package com.bioxx.tfc.WorldGen.Generators;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -43,75 +42,69 @@ public class WorldGenOre implements IWorldGenerator
 		worldObj = world;
 		random = rand;
 
-		Iterator iter = oreList.values().iterator();
-		while(iter.hasNext())
-		{
-			OreSpawnData osd = (OreSpawnData) iter.next();
-			if(osd.type == 0)
-			{
-				if(osd.size == 0)
-					oreSmall(osd.block, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity);
-				else if(osd.size == 1)
-					oreMedium(osd.block, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity);
-				else if(osd.size == 2)
-					oreLarge(osd.block, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity);
-			}
-			else if(osd.type == 1)
-			{
-				if(osd.size == 0)
-					oreSmallVein(osd.block, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity);
-				else if(osd.size == 1)
-					oreMediumVein(osd.block, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity);
-				else if(osd.size == 2)
-					oreLargeVein(osd.block, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity);
-			}
-		}
+        for (OreSpawnData osd : oreList.values()) {
+            if (osd.type == 0) {
+                if (osd.size == 0)
+                    oreSmall(osd.block, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity, osd.flower, osd.flowerMeta);
+                else if (osd.size == 1)
+                    oreMedium(osd.block, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity, osd.flower, osd.flowerMeta);
+                else if (osd.size == 2)
+                    oreLarge(osd.block, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity, osd.flower, osd.flowerMeta);
+            } else if (osd.type == 1) {
+                if (osd.size == 0)
+                    oreSmallVein(osd.block, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity, osd.flower, osd.flowerMeta);
+                else if (osd.size == 1)
+                    oreMediumVein(osd.block, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity, osd.flower, osd.flowerMeta);
+                else if (osd.size == 2)
+                    oreLargeVein(osd.block, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity, osd.flower, osd.flowerMeta);
+            }
+        }
 	}
 
-	private void oreSmallVein(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private WorldGenMinable oreSmallVein(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity, Block flower, int flowerMeta)
 	{
-		createOreVein(block, meta ,baseRocks,
+		return createOreVeinAndGen(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/30,/*height*/5,/*diameter*/40,/*vDensity*/vDensity,/*hDensity*/hDensity,
- worldObj, random, chunkX, chunkZ, min, max);
+ worldObj, random, chunkX, chunkZ, min, max, flower, flowerMeta);
 	}
 
-	private void oreMediumVein(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private WorldGenMinable oreMediumVein(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity, Block flower, int flowerMeta)
 	{
-		createOreVein(block, meta ,baseRocks,
+		return createOreVeinAndGen(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/40,/*height*/10,/*diameter*/60,/*vDensity*/vDensity,/*hDensity*/hDensity,
- worldObj, random, chunkX, chunkZ, min, max);
+ worldObj, random, chunkX, chunkZ, min, max, flower, flowerMeta);
 	}
 
-	private void oreLargeVein(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private WorldGenMinable oreLargeVein(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity, Block flower, int flowerMeta)
 	{
-		createOreVein(block, meta ,baseRocks,
+		return createOreVeinAndGen(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/45,/*veinAmt*/45,/*height*/20,/*diameter*/80,/*vDensity*/vDensity,/*hDensity*/hDensity,
- worldObj, random, chunkX, chunkZ, min, max);
+ worldObj, random, chunkX, chunkZ, min, max, flower, flowerMeta);
 	}
 
-	private void oreSmall(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private WorldGenMinable oreSmall(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity, Block flower, int flowerMeta)
 	{
-		createOre(block, meta, baseRocks,
+		return createOreAndGen(block, meta, baseRocks,
 				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/30,/*height*/5,/*diameter*/80,/*vDensity*/vDensity,/*hDensity*/hDensity,
- worldObj, random, chunkX, chunkZ, min, max);
+ worldObj, random, chunkX, chunkZ, min, max, flower, flowerMeta);
 	}
 
-	private void oreMedium(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private WorldGenMinable oreMedium(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity, Block flower, int flowerMeta)
 	{
-		createOre(block, meta ,baseRocks,
+		return createOreAndGen(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/25,/*veinAmt*/40,/*height*/10,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,
- worldObj, random, chunkX, chunkZ, min, max);
+ worldObj, random, chunkX, chunkZ, min, max, flower, flowerMeta);
 	}
 
-	private void oreLarge(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private WorldGenMinable oreLarge(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity, Block flower, int flowerMeta)
 	{
-		createOre(block, meta ,baseRocks,
+		return createOreAndGen(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/45,/*veinAmt*/40,/*height*/5,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,
- worldObj, random, chunkX, chunkZ, min, max);
+ worldObj, random, chunkX, chunkZ, min, max, flower, flowerMeta);
 	}
 
-	private static void createOre(Block block, int j, Map<Block, List<Integer>> layers, int rarity, int veinSize,
-			int veinAmount, int height, int diameter, int vDensity, int hDensity, World world, Random rand, int chunkX, int chunkZ, int min, int max)
+	private static WorldGenMinable createOreAndGen(Block block, int j, Map<Block, List<Integer>> layers, int rarity, int veinSize,
+												   int veinAmount, int height, int diameter, int vDensity, int hDensity, World world, Random rand, int chunkX, int chunkZ, int min, int max, Block flower, int meta)
 	{
 		if(world.getWorldChunkManager() instanceof TFCWorldChunkManager)
 		{
@@ -134,17 +127,18 @@ public class WorldGenOre implements IWorldGenerator
 						else
 							grade = 0;
 
-						new WorldGenMinable(block, j, b, metadata, rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, false, grade)
+						return new WorldGenMinable(block, j, b, metadata, rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, false, grade, flower,meta)
 								.generate(world, rand, chunkX, chunkZ, min, max);
 					}
 				}
 			}
 		}
+		return null;
 	}
 
 	// new int[]{TFCBlocks.StoneIgEx,-1,Blocks.sandstone,-1}
-	private static void createOreVein(Block block, int j, Map<Block, List<Integer>> layers, int rarity, int veinSize,
-			int veinAmount, int height, int diameter, int vDensity, int hDensity, World world, Random rand, int chunkX, int chunkZ, int min, int max)
+	private static WorldGenMinable createOreVeinAndGen(Block block, int j, Map<Block, List<Integer>> layers, int rarity, int veinSize,
+													   int veinAmount, int height, int diameter, int vDensity, int hDensity, World world, Random rand, int chunkX, int chunkZ, int min, int max, Block flower, int meta)
 	{
 		if(world.getWorldChunkManager() instanceof TFCWorldChunkManager)
 		{
@@ -167,11 +161,12 @@ public class WorldGenOre implements IWorldGenerator
 						else
 							grade = 0;
 
-						new WorldGenMinable(block, j, b, metadata, rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, true, grade)
+						return new WorldGenMinable(block, j, b, metadata, rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, true, grade, flower, meta)
 								.generate(world, rand, chunkX, chunkZ, min, max);
 					}
 				}
 			}
 		}
+		return null;
 	}
 }

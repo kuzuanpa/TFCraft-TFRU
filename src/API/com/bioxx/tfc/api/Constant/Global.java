@@ -64,19 +64,15 @@ public class Global
 	};
 
 	/* Ore Types */
-	public static final String[] ORE_METAL = {
+	public static final String[] ORES = {
 		"Native Copper", "Native Gold", "Native Platinum", "Hematite",
 		"Native Silver", "Cassiterite", "Galena", "Bismuthinite",
 		"Garnierite", "Malachite", "Magnetite", "Limonite",
-		"Sphalerite", "Tetrahedrite", "Bituminous Coal", "Lignite"
-	};
-	public static final String[] ORE_MINERAL = {
+		"Sphalerite", "Tetrahedrite", "Bituminous Coal", "Lignite",
 		"Kaolinite", "Gypsum", "Satinspar", "Selenite",
 		"Graphite", "Kimberlite", "Petrified Wood", "Sulfur",
 		"Jet", "Microcline", "Pitchblende", "Cinnabar",
-		"Cryolite", "Saltpeter", "Serpentine", "Sylvite"
-	};
-	public static final String[] ORE_MINERAL2 = {"Borax", "Olivine", "Lapis Lazuli"};
+		"Cryolite", "Saltpeter", "Serpentine", "Sylvite", "Borax", "Olivine", "Lapis Lazuli"};
 
 	public static final String[] METAL_ALL = {
 			"Bismuth", "Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel",

@@ -5,7 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import com.bioxx.tfc.api.TFCBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -22,13 +25,15 @@ public class WorldGenMinable extends WorldGenerator
 	//==========================================mp mod
 	//private static int[] aOreCheck = new int[256];// setup array to store oreIDs for this chunk // has to be static to survive instance calls                
 	//private static int[] metaOreCheck = new int[16];// this is used to check the metaIDs of a given ore ID
-	private static List oreList = new ArrayList();
+	private static List oreList = new ArrayList<>();
 	public static int mPChunkX;
 	public static int mPChunkZ;
 	private int xChunk;
 	private int zChunk;
 	public Block mPBlock;
 	private final int minableBlockMeta;
+	public Block flower;
+	public int flowerMeta;
 	public static int mPPrevX;
 	public static int mPPrevZ;
 	public static Block mPPrevBlock;
@@ -86,6 +91,19 @@ public class WorldGenMinable extends WorldGenerator
 		grade = oreGrade;
 	}
 
+	public WorldGenMinable(Block block, int j, Block layerBlock, int layerMeta, int rarity, int veinSize,
+						   int veinAmount, int height, int diameter, int vDensity, int hDensity, boolean vein, int oreGrade, Block flower, int meta){
+		this(block, j, layerBlock, layerMeta, rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, vein, oreGrade);
+		this.flower=flower;
+		flowerMeta=meta;
+	}
+
+	public WorldGenMinable setFlower(Block flower, int flowerMeta) {
+		this.flower = flower;
+		this.flowerMeta=flowerMeta;
+		return this;
+	}
+
 	public boolean generateBeforeCheck() // takes a set of current global variables and checks to see if this ore has spawned before in this chunk
 	{
 		genBeforeCheck = false;
@@ -118,7 +136,7 @@ public class WorldGenMinable extends WorldGenerator
 			createMine(worldObj, rand, x, z);
 	}*/
 
-	public boolean generate(World world, Random random, int x, int z, int min, int max)//obsorb default system
+	public WorldGenMinable generate(World world, Random random, int x, int z, int min, int max)//obsorb default system
 	{
 		mPChunkX = x;// set output chunk x // snap to grid
 		mPChunkZ = z;// set output chunk z    
@@ -143,7 +161,7 @@ public class WorldGenMinable extends WorldGenerator
 					createMine(worldObj, rand, xChunk, zChunk);
 			}
 		}
-		return true;
+		return this;
 	}
 
 	public int mPCalculateDensity(int oreDistance, float oreDensity) // returns the density value
@@ -275,16 +293,7 @@ public class WorldGenMinable extends WorldGenerator
 
 						if (isCorrectRockType && isCorrectMeta)
 						{
-							if (mPBlock != null && world.setBlock(posX, posY, posZ, mPBlock, minableBlockMeta, 2))
-							{
-								TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
-								if(te!= null)
-								{
-									te.baseBlockID = Block.getIdFromBlock(b);
-									te.baseBlockMeta = m;
-									te.extraData = (byte)(grade+8);
-								}
-							}
+							if (mPBlock != null) setOreBlock(world,posX,posY,posZ,b,m);
 						}
 						blocksMade++;
 						blocksMade1++;
@@ -305,16 +314,7 @@ public class WorldGenMinable extends WorldGenerator
 
 				if (isCorrectRockType && isCorrectMeta)
 				{
-					if (mPBlock != null && world.setBlock(posX, posY, posZ, mPBlock, minableBlockMeta, 2))
-					{
-						TEOre te = (TEOre) world.getTileEntity(posX, posY, posZ);
-						if (te != null)
-						{
-							te.baseBlockID = Block.getIdFromBlock(b);
-							te.baseBlockMeta = m;
-							te.extraData = (byte) grade;
-						}
-					}
+					if (mPBlock != null) setOreBlock(world,posX,posY,posZ,b,m);
 				}
 				blocksMade++;
 				blocksMade1++;
@@ -387,16 +387,7 @@ public class WorldGenMinable extends WorldGenerator
 								{
 									if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D)
 									{
-										if (mPBlock != null && world.setBlock(posX, posY, posZ, mPBlock, minableBlockMeta, 2))
-										{
-											TEOre te = (TEOre) world.getTileEntity(posX, posY, posZ);
-											if (te != null)
-											{
-												te.baseBlockID = Block.getIdFromBlock(b);
-												te.baseBlockMeta = m;
-												te.extraData = (byte) grade;
-											}
-										}
+										if (mPBlock != null) setOreBlock(world,posX,posY,posZ,b,m);
 									}
 								}
 							}
@@ -409,6 +400,29 @@ public class WorldGenMinable extends WorldGenerator
 		return true;
 	}
 
+	public void setOreBlock(World world, int posX, int posY, int posZ, Block b, int m){
+		if(world.setBlock(posX, posY, posZ, mPBlock, 0, 2)) {
+			TEOre te = (TEOre) world.getTileEntity(posX, posY, posZ);
+			if (te != null) {
+				te.baseBlockID = Block.getIdFromBlock(b);
+				te.baseBlockMeta = m;
+				te.extraData = (byte) grade;
+				te.droppedOreID = minableBlockMeta;
+			}
+
+			//Only gen Flowers for Coal or DEEEEP ore
+			if(flower!=null && world.rand.nextInt(hDens*2)==0 && (posY < 80 || minableBlockMeta==15))setFlower(world,posX,0,posZ);
+		}
+	}
+
+	public boolean setFlower(World world, int posX, int posY, int posZ){
+		posX+=world.rand.nextInt(10)-5;
+		posZ+=world.rand.nextInt(10)-5;
+		posY=world.getTopSolidOrLiquidBlock(posX,posZ)-1;
+		if (!((world.isAirBlock(posX, posY + 1, posZ) || world.getBlock(posX, posY + 1, posZ) == Blocks.snow || world.getBlock(posX, posY + 1, posZ) == TFCBlocks.tallGrass) &&
+				(world.getBlock(posX, posY, posZ).getMaterial() == Material.grass || world.getBlock(posX, posY, posZ).getMaterial() == Material.rock) && world.getBlock(posX, posY, posZ).isOpaqueCube()))return false;
+		return world.setBlock(posX, posY + 1, posZ, flower, flowerMeta, 2);
+	}
 	@Override
 	public boolean generate(World world, Random random, int i, int j, int k)
 	{

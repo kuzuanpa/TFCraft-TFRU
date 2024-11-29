@@ -14,8 +14,8 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class OreSpawnData
 {
-	public int type, size, meta, rarity, min = 5, max = 128, vDensity, hDensity;
-	public Block block;
+	public int type, size, meta, rarity, min = 5, max = 128, vDensity, hDensity, flowerMeta = 0;
+	public Block block, flower=null;
 	public Map<Block, List<Integer>> base;
 
 	public OreSpawnData(String t, String s, String blockName, int m, int r, String[] baseRocks)
@@ -58,6 +58,15 @@ public class OreSpawnData
 		hDensity = h;
 	}
 
+	public OreSpawnData setFlower(String flowerName, int flowerMeta){
+		flower = Block.getBlockFromName(flowerName);
+		if (flower == null)
+		{
+			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + TFC_Core.translate("error.OreCFG") + " " + flowerName);
+		}
+		this.flowerMeta=flowerMeta;
+		return this;
+	}
 	private void getOre(String name)
 	{		
 		for (int i = 0; i < Global.STONE_IGIN.length; i++){

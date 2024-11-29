@@ -319,9 +319,7 @@ public class TFC_Core
 
 	public static boolean isOreStone(Block block)
 	{
-		return block == TFCBlocks.ore
-				|| block == TFCBlocks.ore2
-				|| block == TFCBlocks.ore3;
+		return block == TFCBlocks.ore;
 	}
 
 	public static boolean isNaturalStone(Block block)

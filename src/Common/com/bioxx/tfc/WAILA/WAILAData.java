@@ -468,7 +468,7 @@ public class WAILAData implements IWailaDataProvider
 
 	public ItemStack oreStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
-		int meta = accessor.getMetadata();
+		int meta = ((TEOre) accessor.getTileEntity()).droppedOreID;
 		TEOre te = (TEOre) accessor.getTileEntity();
 		ItemStack itemstack = null;
 
@@ -484,22 +484,6 @@ public class WAILAData implements IWailaDataProvider
 
 			return itemstack;
 		}
-		else if (accessor.getBlock() == TFCBlocks.ore2) // Minerals
-		{
-			itemstack = new ItemStack(TFCItems.oreChunk, 1, meta + Global.ORE_METAL.length);
-			if (meta == 5)
-				itemstack = new ItemStack(TFCItems.gemDiamond); // Kaolinite
-			else if (meta == 13)
-				itemstack = new ItemStack(TFCItems.powder, 1, 4); // Saltpeter
-
-			return itemstack;
-		}
-		else if (accessor.getBlock() == TFCBlocks.ore3) // Minerals
-		{
-			itemstack = new ItemStack(TFCItems.oreChunk, 1, meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length);
-			return itemstack;
-		}
-
 		return null;
 	}
 
@@ -564,7 +548,7 @@ public class WAILAData implements IWailaDataProvider
 
 	public List<String> oreHead(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
-		int meta = accessor.getMetadata();
+		int meta = ((TEOre) accessor.getTileEntity()).droppedOreID;
 
 		if (accessor.getBlock() == TFCBlocks.ore)
 		{
@@ -575,17 +559,6 @@ public class WAILAData implements IWailaDataProvider
 			else if (meta == 15)
 			{
 				currenttip.set(0, EnumChatFormatting.WHITE.toString() + TFC_Core.translate("item.Ore.Lignite.name"));
-			}
-		}
-		else if (accessor.getBlock() == TFCBlocks.ore2)
-		{
-			if (meta == 5)
-			{
-				currenttip.set(0, EnumChatFormatting.WHITE.toString() + TFC_Core.translate("item.Ore.Kimberlite.name"));
-			}
-			else if (meta == 13)
-			{
-				currenttip.set(0, EnumChatFormatting.WHITE.toString() + TFC_Core.translate("item.Ore.Saltpeter.name"));
 			}
 		}
 
@@ -1011,54 +984,94 @@ public class WAILAData implements IWailaDataProvider
 
 	public List<String> oreBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
-		int meta = accessor.getMetadata();
+		int meta = ((TEOre) accessor.getTileEntity()).droppedOreID;
 
-		if (accessor.getBlock() == TFCBlocks.ore)
-		{
-			switch (meta)
-			{
-			case 0:
-			case 9:
-			case 13:
-				currenttip.add(TFC_Core.translate("gui.metal.Copper"));
-				break;
-			case 1:
-				currenttip.add(TFC_Core.translate("gui.metal.Gold"));
-				break;
-			case 2:
-				currenttip.add(TFC_Core.translate("gui.ore.Platinum"));
-				break;
-			case 3:
-			case 10:
-			case 11:
-				currenttip.add(TFC_Core.translate("gui.metal.Iron"));
-				break;
-			case 4:
-				currenttip.add(TFC_Core.translate("gui.metal.Silver"));
-				break;
-			case 5:
-				currenttip.add(TFC_Core.translate("gui.metal.Tin"));
-				break;
-			case 6:
-				currenttip.add(TFC_Core.translate("gui.ore.Lead"));
-				break;
-			case 7:
-				currenttip.add(TFC_Core.translate("gui.metal.Bismuth"));
-				break;
-			case 8:
-				currenttip.add(TFC_Core.translate("gui.metal.Nickel"));
-				break;
-			case 12:
-				currenttip.add(TFC_Core.translate("gui.metal.Zinc"));
-				break;
-			case 14:
-			case 15:
-				currenttip.add(TFC_Core.translate("item.coal.coal.name"));
-				return currenttip;
+		if (accessor.getBlock() == TFCBlocks.ore) {
+			switch (meta) {
+				case 0:
+				case 9:
+				case 13:
+					currenttip.add(TFC_Core.translate("gui.metal.Copper"));
+					break;
+				case 1:
+					currenttip.add(TFC_Core.translate("gui.metal.Gold"));
+					break;
+				case 2:
+					currenttip.add(TFC_Core.translate("gui.ore.Platinum"));
+					break;
+				case 3:
+				case 10:
+				case 11:
+					currenttip.add(TFC_Core.translate("gui.metal.Iron"));
+					break;
+				case 4:
+					currenttip.add(TFC_Core.translate("gui.metal.Silver"));
+					break;
+				case 5:
+					currenttip.add(TFC_Core.translate("gui.metal.Tin"));
+					break;
+				case 6:
+					currenttip.add(TFC_Core.translate("gui.ore.Lead"));
+					break;
+				case 7:
+					currenttip.add(TFC_Core.translate("gui.metal.Bismuth"));
+					break;
+				case 8:
+					currenttip.add(TFC_Core.translate("gui.metal.Nickel"));
+					break;
+				case 12:
+					currenttip.add(TFC_Core.translate("gui.metal.Zinc"));
+					break;
+				case 14:
+				case 15:
+					currenttip.add(TFC_Core.translate("item.coal.coal.name"));
+					return currenttip;
+				case 17:
+					currenttip.add(TFC_Core.translate("gui.ore.gypsum"));
+					break;
+				case 18:
+					currenttip.add(TFC_Core.translate("gui.ore.satinspar"));
+					break;
+				case 19:
+					currenttip.add(TFC_Core.translate("gui.ore.selenite"));
+					break;
+				case 22:
+					currenttip.add(TFC_Core.translate("gui.ore.petrifiedwood"));
+					break;
+				case 23:
+					currenttip.add(TFC_Core.translate("gui.ore.sulphur"));
+					break;
+				case 24:
+					currenttip.add(TFC_Core.translate("gui.ore.jet"));
+					break;
+				case 25:
+					currenttip.add(TFC_Core.translate("gui.ore.microcline"));
+					break;
+				case 26:
+					currenttip.add(TFC_Core.translate("gui.ore.pitchblende"));
+					break;
+				case 27:
+					currenttip.add(TFC_Core.translate("gui.ore.serpentine"));
+					break;
+				case 21:
+					currenttip.add(TFC_Core.translate("item.Diamond.Normal.name"));
+					break;
+				case 37:
+				case 38:
+					currenttip.add(TFC_Core.translate("item.redstone.name"));
+					break;
+				case 39:
+					currenttip.add(TFC_Core.translate("item.Fertilizer.name"));
+					break;
+
+				case 32:
+					currenttip.add(TFC_Core.translate("item.Powder.Flux.name"));
+					break;
+				case 33:
+					currenttip.add(TFC_Core.translate("gui.ore.olivine"));
+					break;
 			}
-
-			if (config.getConfig("tfc.oreQuality"))
-			{
+			if (config.getConfig("tfc.oreQuality")) {
 				TEOre te = (TEOre) accessor.getTileEntity();
 
 				int ore = getOreGrade(te, meta);
@@ -1067,63 +1080,10 @@ public class WAILAData implements IWailaDataProvider
 				if (units > 0)
 					currenttip.add(TFC_Core.translate("gui.units") + " : " + units);
 			}
+		}
 
-		}
-		else if (accessor.getBlock() == TFCBlocks.ore2)
-		{
-			switch (meta)
-			{
-			case 1:
-				currenttip.add(TFC_Core.translate("gui.ore.gypsum"));
-				break;
-			case 2:
-				currenttip.add(TFC_Core.translate("gui.ore.satinspar"));
-				break;
-			case 3:
-				currenttip.add(TFC_Core.translate("gui.ore.selenite"));
-				break;
-			case 6:
-				currenttip.add(TFC_Core.translate("gui.ore.petrifiedwood"));
-				break;
-			case 7:
-				currenttip.add(TFC_Core.translate("gui.ore.sulphur"));
-				break;
-			case 8:
-				currenttip.add(TFC_Core.translate("gui.ore.jet"));
-				break;
-			case 9:
-				currenttip.add(TFC_Core.translate("gui.ore.microcline"));
-				break;
-			case 10:
-				currenttip.add(TFC_Core.translate("gui.ore.pitchblende"));
-				break;
-			case 14:
-				currenttip.add(TFC_Core.translate("gui.ore.serpentine"));
-				break;
-			case 5:
-				currenttip.add(TFC_Core.translate("item.Diamond.Normal.name"));
-				break;
-			case 11:
-			case 12:
-				currenttip.add(TFC_Core.translate("item.redstone.name"));
-				break;
-			case 15:
-				currenttip.add(TFC_Core.translate("item.Fertilizer.name"));
-				break;
-			}
-		}
-		else if (accessor.getBlock() == TFCBlocks.ore3)
-		{
-			switch (meta)
-			{
-			case 0:
-				currenttip.add(TFC_Core.translate("item.Powder.Flux.name"));
-				break;
-			case 1:
-				currenttip.add(TFC_Core.translate("gui.ore.olivine"));
-				break;
-			}
-		}
+
+
 
 		return currenttip;
 	}

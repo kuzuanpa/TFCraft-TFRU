@@ -144,6 +144,7 @@ public class BlockCobble extends BlockTerra
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, Block l)
 	{
+		super.onNeighborBlockChange(world, i, j, k, l);
 		world.scheduleBlockUpdate(i, j, k, this, tickRate(world));
 	}
 

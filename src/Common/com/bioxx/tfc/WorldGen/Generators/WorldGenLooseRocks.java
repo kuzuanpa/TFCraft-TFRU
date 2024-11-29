@@ -3,8 +3,6 @@ package com.bioxx.tfc.WorldGen.Generators;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.bioxx.tfc.Blocks.Terrain.BlockOre2;
-import com.bioxx.tfc.Blocks.Terrain.BlockOre3;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -48,7 +46,8 @@ public class WorldGenLooseRocks implements IWorldGenerator
 				DataLayer dl = TFC_Climate.getRockLayer(world, i, j, k, 0);
 				//BlockMeta rockLayer = new BlockMeta(dl.block, dl.data2);
 				te.storage[0] = new ItemStack(TFCItems.looseRock, 1, dl.data1);
-			}		}
+			}
+		}
 
 		return true;
 	}
@@ -62,7 +61,6 @@ public class WorldGenLooseRocks implements IWorldGenerator
 			{
 				for(int y = yCoord-4; y > yCoord-35; y-=2)
 				{
-					// Metal
 					if (world.blockExists(xCoord + x, y, zCoord + z) && world.getBlock(xCoord + x, y, zCoord + z) == TFCBlocks.ore)
 					{
 						int m = world.getBlockMetadata(xCoord + x, y, zCoord + z);
@@ -73,28 +71,6 @@ public class WorldGenLooseRocks implements IWorldGenerator
 								coreSample.add(BlockOre.getDroppedItem(m));
 								coreSampleStacks.add(new ItemStack(BlockOre.getDroppedItem(m), 1, m));
 							}
-						}
-					}
-
-					// Mineral
-					if (world.blockExists(xCoord + x, y, zCoord + z) && world.getBlock(xCoord + x, y, zCoord + z) == TFCBlocks.ore2)
-					{
-						int m = world.getBlockMetadata(xCoord + x, y, zCoord + z);
-						if(!coreSample.contains(BlockOre2.getDroppedItem(m+16)))
-						{
-								coreSample.add(BlockOre2.getDroppedItem(m+16));
-								coreSampleStacks.add(new ItemStack(BlockOre2.getDroppedItem(m), 1, m+16));
-						}
-					}
-
-					// Mineral 2
-					if (world.blockExists(xCoord + x, y, zCoord + z) && world.getBlock(xCoord + x, y, zCoord + z) == TFCBlocks.ore3)
-					{
-						int m = world.getBlockMetadata(xCoord + x, y, zCoord + z);
-						if(!coreSample.contains(BlockOre3.getDroppedItem(m+32)))
-						{
-							coreSample.add(BlockOre3.getDroppedItem(m+32));
-							coreSampleStacks.add(new ItemStack(BlockOre3.getDroppedItem(m+32), 1, m+32));
 						}
 					}
 				}

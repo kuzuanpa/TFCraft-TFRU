@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Render.Blocks;
 
+import com.bioxx.tfc.Blocks.Terrain.BlockOre;
 import com.bioxx.tfc.TileEntities.TESmokeRack;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -23,21 +24,19 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
+		if(!(world.getTileEntity(x,y,z) instanceof TEOre))return false;
 		boolean breaking = renderer.overrideBlockTexture != null;
 
-		if ( breaking )
+		if(breaking){
 			renderer.renderStandardBlock(block, x, y, z);
-		else
-		{
-			// render the background rock
-			renderer.overrideBlockTexture = getRockTexture(Minecraft.getMinecraft().theWorld, x, y, z);
-			renderer.renderStandardBlock(block, x, y, z);
-			renderer.clearOverrideBlockTexture();
-
-			// render the ore overlay
-			renderer.renderStandardBlock(block, x, y, z);
+			return true;
 		}
-
+		IIcon oldIcon = renderer.overrideBlockTexture;
+		renderer.overrideBlockTexture = getRockTexture(Minecraft.getMinecraft().theWorld, x, y, z);
+		renderer.renderStandardBlock(block, x, y, z);
+		renderer.overrideBlockTexture = BlockOre.icons[((TEOre)world.getTileEntity(x,y,z)).droppedOreID];
+		renderer.renderStandardBlock(block, x, y, z);
+		renderer.overrideBlockTexture = oldIcon;
 		return true;
 	}
 

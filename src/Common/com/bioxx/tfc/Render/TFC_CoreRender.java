@@ -59,22 +59,8 @@ public class TFC_CoreRender
 
 		renderblocks.setRenderBounds(0.0F+ (div * extraX), 0.0F+ (div * extraY), 0.0F+ (div * extraZ), 1.0F-(div * extraX2), 1-(div * extraY2), 1.0F-(div * extraZ2));
 
-		//This is the old ore code that I experimented with
-		boolean breaking = renderblocks.overrideBlockTexture != null;
-		IIcon over = renderblocks.overrideBlockTexture;
-		if(!breaking && (b == TFCBlocks.ore || b == TFCBlocks.ore2 || b == TFCBlocks.ore3))
-		{
-			//TFCBiome biome = (TFCBiome) renderblocks.blockAccess.getBiomeGenForCoords(par2, par4);
-			renderblocks.overrideBlockTexture = getRockTexture(Minecraft.getMinecraft().theWorld, x, y, z);
-			renderblocks.renderStandardBlock(block, x, y, z);
-			renderblocks.overrideBlockTexture = over;
-		}
-
-		if(!breaking)
-			renderblocks.overrideBlockTexture = tex;
-
 		renderblocks.renderStandardBlock(block, x, y, z);
-		renderblocks.overrideBlockTexture = over;
+
 
 		return true;
 	}

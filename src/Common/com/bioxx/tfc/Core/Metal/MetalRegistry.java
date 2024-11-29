@@ -16,7 +16,7 @@ public class MetalRegistry
 	
 	public MetalRegistry()
 	{
-		hash = new HashMap<String, Metal>();
+		hash = new HashMap<>();
 	}
 	
 	//Returns true if the metal was added or false if a metal with a similar name already exists;

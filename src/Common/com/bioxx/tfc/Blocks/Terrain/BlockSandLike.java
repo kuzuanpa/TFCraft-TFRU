@@ -27,6 +27,7 @@ public abstract class BlockSandLike extends BlockTerra {
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
     {
+        super.onNeighborBlockChange(world, x, y, z, b);
         if(world.isRemote)return;
         BlockCollapsible.tryToFall(world, x, y, z, this);
         world.scheduleBlockUpdate(x, y, z, this, tickRate(world));

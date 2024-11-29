@@ -81,9 +81,6 @@ public class ItemProPick extends ItemTerra
 		if (block == TFCBlocks.toolRack)
 			return true;
 
-		// Getting the metadata only when we actually need it.
-		int meta = world.getBlockMetadata(x, y, z);
-
 		SkillRank rank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_PROSPECTING);
 
 		if(rank.equals(SkillRank.Novice)&&isDeepSearch){
@@ -91,14 +88,12 @@ public class ItemProPick extends ItemTerra
 			return true;
 		}
 			// If an ore block is targeted directly, it'll tell you what it is.
-		if ((block == TFCBlocks.ore ||	block == TFCBlocks.ore2 || block == TFCBlocks.ore3) &&
+		if ((block == TFCBlocks.ore) &&
 				world.getTileEntity(x, y, z) instanceof TEOre)
 		{
 			TEOre te = (TEOre) world.getTileEntity(x, y, z);
-			if (block == TFCBlocks.ore && rank == SkillRank.Master)
-				meta = ((BlockOre) block).getOreGrade(te, meta);
-			if (block == TFCBlocks.ore2) meta = meta + Global.ORE_METAL.length;
-			if (block == TFCBlocks.ore3) meta = meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length;
+			int meta = te.droppedOreID;
+			if (block == TFCBlocks.ore && rank == SkillRank.Master) meta = ((BlockOre) block).getOreGrade(te, meta);
 			tellResult(player, new ItemStack(TFCItems.oreChunk, 1, meta));
 			return true;
 		}
@@ -138,20 +133,16 @@ public class ItemProPick extends ItemTerra
 					int blockZ = z + k;
 
 					block = world.getBlock(blockX, blockY, blockZ);
-					meta = world.getBlockMetadata(blockX, blockY, blockZ);
 					ItemStack ore = null;
 					if (block == TFCBlocks.ore && world.getTileEntity(blockX, blockY, blockZ) instanceof TEOre)
 					{
 						TEOre te = (TEOre) world.getTileEntity(blockX, blockY, blockZ);
+						int meta = te.droppedOreID;
 						if (rank == SkillRank.Master)
 							ore = new ItemStack(TFCItems.oreChunk, 1, ((BlockOre) block).getOreGrade(te, meta));
 						else
 							ore = new ItemStack(TFCItems.oreChunk, 1, meta);
 					}
-					else if (block == TFCBlocks.ore2)
-						ore = new ItemStack(TFCItems.oreChunk, 1, meta + Global.ORE_METAL.length);
-					else if (block == TFCBlocks.ore3)
-						ore = new ItemStack(TFCItems.oreChunk, 1, meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length);
 					else if (!TFC_Core.isGround(block)) // Exclude ground blocks to help with performance
 					{
 						for (OreSpawnData osd : WorldGenOre.oreList.values()) if (osd != null && block == osd.block) {

@@ -50,7 +50,7 @@ public class StripChunkCommand extends CommandBase
 					for (int y = 0; y < 256; y++)
 					{
 						Block id = chunk.getBlock(x, y, z);
-						if (id != Blocks.air && id != TFCBlocks.ore && id != TFCBlocks.ore2 && id != TFCBlocks.ore3 && id != Blocks.bedrock)
+						if (id != Blocks.air && id != TFCBlocks.ore && id != Blocks.bedrock)
 						{
 							if (TFC_Core.isGround(id)) // Automatically replace ground blocks to help with performance
 							{
@@ -98,7 +98,7 @@ public class StripChunkCommand extends CommandBase
 							for (int y = 0; y < 256; y++)
 							{
 								Block id = chunk.getBlock(x, y, z);
-								if (id != Blocks.air && id != TFCBlocks.ore && id != TFCBlocks.ore2 && id != TFCBlocks.ore3 && id != Blocks.bedrock)
+								if (id != Blocks.air && id != TFCBlocks.ore && id != Blocks.bedrock)
 								{
 									if (TFC_Core.isGround(id)) // Automatically replace ground blocks to help with performance
 									{

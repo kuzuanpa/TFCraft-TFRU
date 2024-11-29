@@ -148,6 +148,7 @@ public class BlockStone extends BlockCollapsible
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, Block l)
 	{
+		super.onNeighborBlockChange(world, i, j, k, l);
 		dropCarvedStone(world, i, j, k);
 	}
 

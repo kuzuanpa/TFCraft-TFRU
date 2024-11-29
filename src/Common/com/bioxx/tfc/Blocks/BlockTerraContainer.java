@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Blocks;
 
+import com.bioxx.tfc.Blocks.Terrain.BlockOre;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -83,5 +84,25 @@ public abstract class BlockTerraContainer extends BlockContainer
 			}
 		}
 		super.breakBlock(world, x, y, z, block, metadata);
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world,int x,int y,int z, Block p_149695_5_) {
+		super.onNeighborBlockChange(world,x,y,z, p_149695_5_);
+		spreadOreUpdate(world,x,y,z,0);
+	}
+
+	final byte[] dX = {1, -1, 0, 0, 0, 0};
+	final byte[] dY = { 0, 0, 1, -1, 0, 0};
+	final byte[] dZ = {0,  0, 0, 0, 1, -1};
+	final byte maxDepth = 2;
+	public void spreadOreUpdate(World world,int x,int y,int z,int depth){
+		if(depth >= maxDepth)return;
+		for (int i = 0; i < 6; i++) {
+			Block block = world.getBlock(x+dX[i],y+dY[i],z+dZ[i]);
+			if(block instanceof BlockTerra)((BlockTerra) block).spreadOreUpdate(world, x+dX[i],y+dY[i],z+dZ[i], depth+1);
+			if(block instanceof BlockTerraContainer)((BlockTerraContainer) block).spreadOreUpdate(world, x+dX[i],y+dY[i],z+dZ[i], depth+1);
+			if(block instanceof BlockOre)block.onNeighborBlockChange(world, x+dX[i],y+dY[i],z+dZ[i], this);
+		}
 	}
 }
