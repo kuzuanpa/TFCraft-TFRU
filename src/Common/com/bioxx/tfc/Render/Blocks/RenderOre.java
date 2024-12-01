@@ -35,7 +35,7 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 		renderer.renderStandardBlock(block, x, y, z);
 
 		int meta = ((TEOre)world.getTileEntity(x,y,z)).droppedOreID;
-		meta = meta>49? meta-49 : meta>35? meta - 35:meta;
+		meta = meta>=49? meta-49 : meta>=35? meta - 35:meta;
 		renderer.overrideBlockTexture = BlockOre.icons[meta];
 		renderer.renderStandardBlock(block, x, y, z);
 		renderer.clearOverrideBlockTexture();
