@@ -93,7 +93,6 @@ public class ItemProPick extends ItemTerra
 		{
 			TEOre te = (TEOre) world.getTileEntity(x, y, z);
 			int meta = te.droppedOreID;
-			if (block == TFCBlocks.ore && rank == SkillRank.Master) meta = ((BlockOre) block).getOreGrade(te, meta);
 			tellResult(player, new ItemStack(TFCItems.oreChunk, 1, meta));
 			return true;
 		}
@@ -138,10 +137,7 @@ public class ItemProPick extends ItemTerra
 					{
 						TEOre te = (TEOre) world.getTileEntity(blockX, blockY, blockZ);
 						int meta = te.droppedOreID;
-						if (rank == SkillRank.Master)
-							ore = new ItemStack(TFCItems.oreChunk, 1, ((BlockOre) block).getOreGrade(te, meta));
-						else
-							ore = new ItemStack(TFCItems.oreChunk, 1, meta);
+						ore = new ItemStack(TFCItems.oreChunk, 1, meta);
 					}
 					else if (!TFC_Core.isGround(block)) // Exclude ground blocks to help with performance
 					{

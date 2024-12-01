@@ -9,7 +9,6 @@ public class TEOre extends NetworkTileEntity
 {
 	public int baseBlockID = -1000;
 	public int baseBlockMeta = -1000;
-	public byte extraData;
 	public int droppedOreID = 0;
 	public int timer = 0;
 	public boolean isScanned = false;
@@ -49,7 +48,6 @@ public class TEOre extends NetworkTileEntity
 		super.readFromNBT(nbt);
 		baseBlockID = nbt.getInteger("baseBlockID");
 		baseBlockMeta = nbt.getInteger("baseBlockMeta");
-		extraData = nbt.getByte("extraData");
 		droppedOreID = nbt.getInteger("oreID");
 	}
 
@@ -59,20 +57,15 @@ public class TEOre extends NetworkTileEntity
 		super.writeToNBT(nbt);
 		nbt.setInteger("baseBlockID", baseBlockID);
 		nbt.setInteger("baseBlockMeta", baseBlockMeta);
-		nbt.setByte("extraData", extraData);
 		nbt.setInteger("oreID", droppedOreID);
 	}
 
 	@Override
 	public Packet getDescriptionPacket()
 	{
-		if((extraData & 8) != 0 || this.yCoord > 100)
-		{
-			NBTTagCompound nbt = new NBTTagCompound();
-			createInitNBT(nbt);
-			return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
-		}
-		return null;
+		NBTTagCompound nbt = new NBTTagCompound();
+		createInitNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
 	}
 
 	@Override
@@ -80,7 +73,6 @@ public class TEOre extends NetworkTileEntity
 	{
 		baseBlockID = nbt.getInteger("id");
 		baseBlockMeta = nbt.getInteger("meta");
-		extraData = nbt.getByte("extraData");
 		if(nbt.hasKey("oreID")) {
 			droppedOreID = nbt.getInteger("oreID");
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -106,7 +98,6 @@ public class TEOre extends NetworkTileEntity
 	{
 		nbt.setInteger("id", baseBlockID);
 		nbt.setInteger("meta", baseBlockMeta);
-		nbt.setByte("extraData", extraData);
 		if(isExposedToAir(worldObj, xCoord, yCoord, zCoord))nbt.setInteger("oreID", droppedOreID);
 
 	}

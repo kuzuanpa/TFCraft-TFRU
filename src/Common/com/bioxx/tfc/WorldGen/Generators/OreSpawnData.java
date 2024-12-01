@@ -141,4 +141,8 @@ public class OreSpawnData
 			return;
 		}
 	}
+
+	public static boolean isOreGradable(int meta){
+		return meta<14;
+	}
 }

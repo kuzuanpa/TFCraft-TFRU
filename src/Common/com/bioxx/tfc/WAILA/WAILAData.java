@@ -474,10 +474,7 @@ public class WAILAData implements IWailaDataProvider
 
 		if (accessor.getBlock() == TFCBlocks.ore) // Metals & Coal
 		{
-			if (config.getConfig("tfc.oreQuality"))
-				itemstack = new ItemStack(TFCItems.oreChunk, 1, getOreGrade(te, meta)); // Shows specific quality ore.
-			else
-				itemstack = new ItemStack(TFCItems.oreChunk, 1, meta); // All normal quality ores.
+			itemstack = new ItemStack(TFCItems.oreChunk, 1, meta); // All normal quality ores.
 
 			if (meta == 14 || meta == 15) // Bituminous Coal & Lignite
 				itemstack = new ItemStack(TFCItems.coal);
@@ -1072,11 +1069,7 @@ public class WAILAData implements IWailaDataProvider
 					break;
 			}
 			if (config.getConfig("tfc.oreQuality")) {
-				TEOre te = (TEOre) accessor.getTileEntity();
-
-				int ore = getOreGrade(te, meta);
-
-				int units = ore < 14 ? TFCOptions.normalOreUnits : ore < 49 ? TFCOptions.richOreUnits : ore < 63 ? TFCOptions.poorOreUnits : 0;
+				int units = meta < 14 ? TFCOptions.normalOreUnits : meta < 49 ? TFCOptions.richOreUnits : meta < 63 ? TFCOptions.poorOreUnits : 0;
 				if (units > 0)
 					currenttip.add(TFC_Core.translate("gui.units") + " : " + units);
 			}
@@ -1308,18 +1301,5 @@ public class WAILAData implements IWailaDataProvider
 		}
 
 		return null;
-	}
-
-	private int getOreGrade(TEOre te, int ore)
-	{
-		if (te != null)
-		{
-			int grade = te.extraData & 7;
-			if (grade == 1)
-				ore += 35;
-			else if (grade == 2)
-				ore += 49;
-		}
-		return ore;
 	}
 }

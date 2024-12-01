@@ -64,7 +64,6 @@ public class WorldGenMinable extends WorldGenerator
 	private final Block genInBlock;
 	private final int genInBlockMeta;
 	private final boolean useMarcoVeins;
-	private final int grade;
 
 	//==========================================mp mod
 	private final Block minableBlock;
@@ -88,7 +87,6 @@ public class WorldGenMinable extends WorldGenerator
 		this.vDens = vDensity;
 		this.hDens = hDensity;
 		this.useMarcoVeins = vein;
-		grade = oreGrade;
 	}
 
 	public WorldGenMinable(Block block, int j, Block layerBlock, int layerMeta, int rarity, int veinSize,
@@ -406,7 +404,6 @@ public class WorldGenMinable extends WorldGenerator
 			if (te != null) {
 				te.baseBlockID = Block.getIdFromBlock(b);
 				te.baseBlockMeta = m;
-				te.extraData = (byte) grade;
 				te.droppedOreID = minableBlockMeta;
 			}
 

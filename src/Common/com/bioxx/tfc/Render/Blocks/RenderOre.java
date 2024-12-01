@@ -31,12 +31,14 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 			renderer.renderStandardBlock(block, x, y, z);
 			return true;
 		}
-		IIcon oldIcon = renderer.overrideBlockTexture;
 		renderer.overrideBlockTexture = getRockTexture(Minecraft.getMinecraft().theWorld, x, y, z);
 		renderer.renderStandardBlock(block, x, y, z);
-		renderer.overrideBlockTexture = BlockOre.icons[((TEOre)world.getTileEntity(x,y,z)).droppedOreID];
+
+		int meta = ((TEOre)world.getTileEntity(x,y,z)).droppedOreID;
+		meta = meta>49? meta-49 : meta>35? meta - 35:meta;
+		renderer.overrideBlockTexture = BlockOre.icons[meta];
 		renderer.renderStandardBlock(block, x, y, z);
-		renderer.overrideBlockTexture = oldIcon;
+		renderer.clearOverrideBlockTexture();
 		return true;
 	}
 

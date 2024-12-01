@@ -120,14 +120,11 @@ public class WorldGenOre implements IWorldGenerator
 						rockLayer3.block == b && (rockLayer3.data2 == metadata || metadata == -1))
 					{
 						int grade = rand.nextInt(100);
-						if(grade<20)
-							grade = 1;
-						else if(grade <50)
-							grade = 2;
-						else
-							grade = 0;
-
-						return new WorldGenMinable(block, j, b, metadata, rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, false, grade, flower,meta)
+						if(OreSpawnData.isOreGradable(j)){
+							if(grade<20)j+=35;
+							else if(grade<50)j+=49;
+						}
+						return new WorldGenMinable(block, j, b, metadata, rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, false, 0, flower,meta)
 								.generate(world, rand, chunkX, chunkZ, min, max);
 					}
 				}
@@ -154,14 +151,12 @@ public class WorldGenOre implements IWorldGenerator
 						rockLayer3.block == b && (rockLayer3.data2 == metadata || metadata == -1))
 					{
 						int grade = rand.nextInt(100);
-						if (grade < 20)
-							grade = 1;
-						else if (grade < 50)
-							grade = 2;
-						else
-							grade = 0;
+						if(OreSpawnData.isOreGradable(j)){
+							if(grade<20)j+=35;
+							else if(grade<50)j+=49;
+						}
 
-						return new WorldGenMinable(block, j, b, metadata, rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, true, grade, flower, meta)
+						return new WorldGenMinable(block, j, b, metadata, rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, true, 0, flower, meta)
 								.generate(world, rand, chunkX, chunkZ, min, max);
 					}
 				}

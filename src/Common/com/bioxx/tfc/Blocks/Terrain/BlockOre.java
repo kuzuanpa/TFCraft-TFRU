@@ -147,15 +147,15 @@ public class BlockOre extends BlockCollapsible
 
 	public ItemStack getDrop(World world, int x, int y, int z, int fortune){
 		TEOre te = (TEOre) world.getTileEntity(x, y, z);
-		int ore = getOreGrade(te, te.droppedOreID);
+		int ore = te.droppedOreID;
 
 		ItemStack itemstack;
-		if (te.droppedOreID == 14 || te.droppedOreID == 15)
+		if (ore == 14 || ore == 15)
 			itemstack = new ItemStack(TFCItems.coal);
 		else
 			itemstack = new ItemStack(TFCItems.oreChunk, 1, damageDropped(ore));
 
-		itemstack.stackSize = quantityDropped(te.droppedOreID, fortune, world.rand);
+		itemstack.stackSize = quantityDropped(ore, fortune, world.rand);
 		return itemstack;
 	}
 
@@ -184,37 +184,13 @@ public class BlockOre extends BlockCollapsible
 	{
 		if(!world.isRemote)
 		{
-			TEOre te = (TEOre)world.getTileEntity(x, y, z);
-			Random random = new Random();
-			ItemStack itemstack;
-			int meta = world.getBlockMetadata(x, y, z);
-			int ore = getOreGrade(te, meta);
-
-			if(meta == 14 || meta == 15)
-				itemstack = new ItemStack(TFCItems.coal, 1 + random.nextInt(2));
-			else
-				itemstack = new ItemStack(TFCItems.oreChunk, 1, ore);
-
-			dropBlockAsItem(world, x, y, z, itemstack);
+			dropBlockAsItem(world, x, y, z, getDrop(world,x,y,z, 0));
 			onBlockDestroyedByExplosion(world, x, y, z, exp);
 		}
 	}
 
-	public int getOreGrade(TEOre te, int ore)
-	{
-		if(te != null)
-		{
-			int grade = te.extraData & 7;
-			if(grade == 1)
-				ore += 35;
-			else if(grade == 2)
-				ore += 49;
-		}
-		return ore;
-	}
-
 	@Override
-	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player)
 	{
 		return null;
 	}
