@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Containers.Slots;
 
+import com.bioxx.tfc.TileEntities.TEForge;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -17,7 +18,7 @@ public class SlotForgeFuel extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		return itemstack.getItem() == TFCItems.coal;
+		return TEForge.isItemStackFuel(itemstack);
 	}
 
 	@Override

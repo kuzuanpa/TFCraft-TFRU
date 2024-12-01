@@ -10,6 +10,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Core.TFC_Core;
@@ -351,39 +352,35 @@ public class TEForge extends TEFireEntity implements IInventory
 	public void handleFuelStack()
 	{
 		Random random = new Random();
-		if(fireItemStacks[7] == null)
-		{
-			if(random.nextBoolean() && fireItemStacks[6] != null)
-			{
-				fireItemStacks[7] = fireItemStacks[6];
-				fireItemStacks[6] = null;
-			}
-			else
-			{
-				fireItemStacks[7] = fireItemStacks[8];
-				fireItemStacks[8] = null;
-			}
-		}
+		if(random.nextBoolean()) tryMoveStack(6,7);
+		else tryMoveStack(8,7);
+		tryMoveStack(5,6);
+		tryMoveStack(9,8);
 
-		if(fireItemStacks[6] == null)
-		{
-			if(fireItemStacks[5] != null)
-			{
-				fireItemStacks[6] = fireItemStacks[5];
-				fireItemStacks[5] = null;
+		//Extract Available fuels from EntityItem
+		for (Object o : getWorldObj().getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1.1, zCoord + 1))) {
+			if(!(o instanceof EntityItem)) continue;
+			ItemStack stack = ((EntityItem) o).getEntityItem();
+			if(!isItemStackFuel(stack))continue;
+			if(fireItemStacks[9] == null){
+				fireItemStacks[9] = new ItemStack(stack.getItem(),1, stack.getItemDamage());
+				stack.stackSize--;
+				if(stack.stackSize <= 0)((EntityItem) o).setDead();
+				return;
 			}
-		}
-
-		if(fireItemStacks[8] == null)
-		{
-			if(fireItemStacks[9] != null)
-			{
-				fireItemStacks[8] = fireItemStacks[9];
-				fireItemStacks[9] = null;
+			if(fireItemStacks[5] == null){
+				fireItemStacks[5] = new ItemStack(stack.getItem(),1,stack.getItemDamage());
+				stack.stackSize--;
+				if(stack.stackSize <= 0)((EntityItem) o).setDead();
+				return;
 			}
 		}
 	}
-
+	public void tryMoveStack(int from, int to){
+		if(fireItemStacks[from] == null || fireItemStacks[to] != null)return;
+		fireItemStacks[to] = fireItemStacks[from];
+		fireItemStacks[from] = null;
+	}
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer)
 	{
@@ -580,6 +577,10 @@ public class TEForge extends TEFireEntity implements IInventory
 	public boolean isItemValidForSlot(int i, ItemStack itemstack)
 	{
 		return false;
+	}
+
+	public static boolean isItemStackFuel(ItemStack stack){
+		return stack.getItem() == TFCItems.coal;
 	}
 
 	@Override
