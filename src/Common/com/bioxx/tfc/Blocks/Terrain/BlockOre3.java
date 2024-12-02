@@ -26,10 +26,11 @@ public class BlockOre3 extends BlockOre
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
 		//TODO: For old oreGen Compact, will remove at later version
-		if (!world.isRemote && world.getBlockMetadata(x,y,z) > 0){
-			((TEOre) world.getTileEntity(x, y, z)).droppedOreID = 32+world.getBlockMetadata(x,y,z);
+		if (!world.isRemote){
+			int meta = world.getBlockMetadata(x,y,z);
 			world.setBlock(x,y,z, TFCBlocks.ore);
 			world.setBlockMetadataWithNotify(x,y,z,0, 0);
+			((TEOre) world.getTileEntity(x, y, z)).droppedOreID = 32+meta;
 		}
 	}
 }

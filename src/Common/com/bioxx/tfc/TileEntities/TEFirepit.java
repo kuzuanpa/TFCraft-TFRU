@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import com.bioxx.tfc.api.TileEntities.IHeatAccepter;
+import com.bioxx.tfc.api.TileEntities.IHeater;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -11,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.relauncher.Side;
@@ -26,7 +29,7 @@ import com.bioxx.tfc.api.Events.ItemCookEvent;
 import com.bioxx.tfc.api.Interfaces.ICookableFood;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
-public class TEFirepit extends TEFireEntity implements IInventory
+public class TEFirepit extends TEFireEntity implements IInventory, IHeater
 {
 	public ItemStack fireItemStacks[];
 	public boolean hasCookingPot;
@@ -466,6 +469,8 @@ public class TEFirepit extends TEFireEntity implements IInventory
 					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 2, 3);
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
+				TileEntity te = worldObj.getTileEntity(xCoord, yCoord+1, zCoord);
+				if(te instanceof IHeatAccepter)heat((IHeatAccepter) te);
 			}
 			else if(fuelTimeLeft <= 0 && fireTemp >= 1 && fireItemStacks[5] != null &&
 						 !WeatherManager.isRainingOnCoord(worldObj, xCoord, yCoord, zCoord))
@@ -636,5 +641,15 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			worldObj.spawnParticle("smoke", f+f4 - 0.1F, f1, f2 + f5 + 0.1F, 0.0D, 0.0D, 0.0D);
 			if(worldObj.rand.nextInt(10) == 0) worldObj.spawnParticle("largesmoke", f+f4 - 0.2F, f1, f2 + f5 + 0.2F, 0.0D, 0.0D, 0.0D);
 		}*/
+	}
+
+	@Override
+	public float getCurrentTemperature() {
+		return fireTemp+273;
+	}
+
+	@Override
+	public void heat(IHeatAccepter accepter) {
+		accepter.consumeHeat(this);
 	}
 }

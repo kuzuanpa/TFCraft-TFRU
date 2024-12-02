@@ -2,6 +2,7 @@ package com.bioxx.tfc.Food;
 
 import java.util.List;
 
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -41,6 +42,10 @@ public class ItemSalad extends ItemMeal
 		return is;
 	}
 
+	protected float getWaterAmount(FoodStatsTFC fs, float amount){
+		return amount*100;
+	}
+
 	@Override
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
@@ -50,17 +55,12 @@ public class ItemSalad extends ItemMeal
 		// If the last of the salad has been eaten
 		if (is.stackSize == 0)
 		{
-			// Blows always break OR 50% chance the bowl is broken, and the sound is played
-			if (TFCCrafting.enableBowlsAlwaysBreak || world.rand.nextInt(2) == 0)
-			{
-				world.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
-			}
-			// If the bowl didn't break, try to add it to an existing stack of bowls in the inventory
-			else if (!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.potteryBowl, 1, 1)))
-			{
-				// If the bowl can't be fit in the inventory, put it in the newly emptied held slot
-				return new ItemStack(TFCItems.potteryBowl, 1, 1);
-			}
+			// Blows always break OR 10% chance the bowl is broken, and the sound is played
+			if (TFCCrafting.enableBowlsAlwaysBreak || world.rand.nextInt(10) == 0) world.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
+			
+			// If the bowl didn't break, put it in the hand
+			else return new ItemStack(TFCItems.potteryBowl, 1, 1);
+
 		}
 
 		return is;

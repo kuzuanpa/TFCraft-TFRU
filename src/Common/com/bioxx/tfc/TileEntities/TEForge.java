@@ -2,6 +2,8 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
+import com.bioxx.tfc.api.TileEntities.IHeatAccepter;
+import com.bioxx.tfc.api.TileEntities.IHeater;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.BlockStainedGlass;
 import net.minecraft.entity.item.EntityItem;
@@ -10,6 +12,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -22,7 +25,7 @@ import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
-public class TEForge extends TEFireEntity implements IInventory
+public class TEForge extends TEFireEntity implements IInventory, IHeater
 {
 	public boolean isSmokeStackValid;
 	public ItemStack fireItemStacks[];
@@ -479,6 +482,8 @@ public class TEForge extends TEFireEntity implements IInventory
 					fireTemp = 2000;
 					fuelTimeLeft = 9999;
 				}
+				TileEntity te = worldObj.getTileEntity(xCoord, yCoord+1, zCoord);
+				if(te instanceof IHeatAccepter)heat((IHeatAccepter) te);
 
 				TFC_Core.handleItemTicking(fuelStack, worldObj, xCoord, yCoord, zCoord);
 			}
@@ -601,5 +606,15 @@ public class TEForge extends TEFireEntity implements IInventory
 			}
 		}
 		nbt.setTag("Items", nbttaglist);
+	}
+
+	@Override
+	public float getCurrentTemperature() {
+		return fireTemp+273;
+	}
+
+	@Override
+	public void heat(IHeatAccepter accepter) {
+		fireTemp-= accepter.consumeHeat(this)/32F;
 	}
 }

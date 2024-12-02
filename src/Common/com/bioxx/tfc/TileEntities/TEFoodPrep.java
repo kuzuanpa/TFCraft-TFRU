@@ -277,18 +277,17 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		int tasteBitter = 0;
 		int tasteUmami = 0;
 
-		for (int i = 0; i < isArray.length; i++)
-		{
-			float weightMult = 1f;//weights[i] / totalW * 2;
-			if(isArray[i] != null)
-			{
-				tasteSweet += ((IFood)isArray[i].getItem()).getTasteSweet(isArray[i]) * weightMult;
-				tasteSour += ((IFood)isArray[i].getItem()).getTasteSour(isArray[i]) * weightMult;
-				tasteSalty += ((IFood)isArray[i].getItem()).getTasteSalty(isArray[i]) * weightMult;
-				tasteBitter += ((IFood)isArray[i].getItem()).getTasteBitter(isArray[i]) * weightMult;
-				tasteUmami += ((IFood)isArray[i].getItem()).getTasteSavory(isArray[i]) * weightMult;
-			}
-		}
+        for (ItemStack stack : isArray) {
+            float weightMult = 1f;//weights[i] / totalW * 2;
+            if (stack == null) continue;
+
+            tasteSweet += ((IFood) stack.getItem()).getTasteSweet(stack) * weightMult;
+            tasteSour += ((IFood) stack.getItem()).getTasteSour(stack) * weightMult;
+            tasteSalty += ((IFood) stack.getItem()).getTasteSalty(stack) * weightMult;
+            tasteBitter += ((IFood) stack.getItem()).getTasteBitter(stack) * weightMult;
+            tasteUmami += ((IFood) stack.getItem()).getTasteSavory(stack) * weightMult;
+
+        }
 		nbt.setInteger("tasteSweet", tasteSweet);
 		nbt.setInteger("tasteSour", tasteSour);
 		nbt.setInteger("tasteSalty", tasteSalty);

@@ -173,9 +173,9 @@ public class ItemMeal extends ItemTerra implements IFood
 	}
 
 	/**
-	 * @param fs
-	 * @param amount This should be the amount that is actually consumed aka (weight - decay)
-	 * @return The exact amount that should enter the stomach
+	 * @param fs the player food stats
+	 * @param amount the amount be consumed at start
+	 * @return The exact amount to be consumed
 	 */
 	protected float getEatAmount(FoodStatsTFC fs, float amount)
 	{
@@ -189,6 +189,15 @@ public class ItemMeal extends ItemTerra implements IFood
 	protected float getFillingBoost()
 	{
 		return 1.0f;
+	}
+
+	/**
+	 * @param fs the player food stats
+	 * @param amount consumed amount
+	 * @return The bonus water amount to be added to player, for example, PotteryJug will give 24000.
+	 */
+	protected float getWaterAmount(FoodStatsTFC fs, float amount){
+		return 0;
 	}
 
 	@Override
@@ -218,6 +227,9 @@ public class ItemMeal extends ItemTerra implements IFood
 				//fill the stomach
 				foodstats.addFoodLevel(eatAmount * getFillingBoost());
 				foodstats.setSatisfaction(foodstats.getSatisfaction() + (eatAmount * tasteFactor), fg);
+
+				int bonusWater = (int)getWaterAmount(foodstats, eatAmount);
+				if(bonusWater > 10)foodstats.restoreWater(player, bonusWater);
 
 				//Now remove the eaten amount from the itemstack.
 				if (FoodStatsTFC.reduceFood(is, eatAmount))

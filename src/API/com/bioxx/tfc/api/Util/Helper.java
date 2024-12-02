@@ -77,7 +77,7 @@ public class Helper {
 	 */
 	public static float clampFloat(float par0, float par1, float par2)
 	{
-		return par0 < par1 ? par1 : par0 > par2 ? par2 : par0;
+		return par0 < par1 ? par1 : Math.min(par0, par2);
 	}
 
 	public static float roundNumber(float input, float rounding)
@@ -110,16 +110,10 @@ public class Helper {
 				f = obj.getClass().getDeclaredField(obfName);
 			f.setAccessible(true);
 			return (Integer) f.get(obj);
-		} catch (NoSuchFieldException e) {
-			TerraFirmaCraft.LOG.catching(e);
-		} catch (SecurityException e) {
-			TerraFirmaCraft.LOG.catching(e);
-		} catch (IllegalArgumentException e) {
-			TerraFirmaCraft.LOG.catching(e);
-		} catch (IllegalAccessException e) {
+		} catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
 			TerraFirmaCraft.LOG.catching(e);
 		}
-		return 0; 		
+        return 0;
 	}
 
 	public static boolean getBoolean(Object obj, String srgName, String obfName, String deobfName, boolean useDeobf)
@@ -135,16 +129,10 @@ public class Helper {
 				f = obj.getClass().getDeclaredField(obfName);
 			f.setAccessible(true);
 			return (Boolean) f.get(obj);
-		} catch (NoSuchFieldException e) {
-			TerraFirmaCraft.LOG.catching(e);
-		} catch (SecurityException e) {
-			TerraFirmaCraft.LOG.catching(e);
-		} catch (IllegalArgumentException e) {
-			TerraFirmaCraft.LOG.catching(e);
-		} catch (IllegalAccessException e) {
+		} catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
 			TerraFirmaCraft.LOG.catching(e);
 		}
-		return false; 		
+        return false;
 	}
 
 	public static Object getObject(Object obj, String srgName, String obfName, String deobfName, boolean useDeobf)
@@ -160,15 +148,9 @@ public class Helper {
 				f = obj.getClass().getDeclaredField(obfName);
 			f.setAccessible(true);
 			return f.get(obj);
-		} catch (NoSuchFieldException e) {
-			TerraFirmaCraft.LOG.catching(e);
-		} catch (SecurityException e) {
-			TerraFirmaCraft.LOG.catching(e);
-		} catch (IllegalArgumentException e) {
-			TerraFirmaCraft.LOG.catching(e);
-		} catch (IllegalAccessException e) {
+		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
 			TerraFirmaCraft.LOG.catching(e);
 		}
-		return null; 		
+        return null;
 	}
 }

@@ -1,4 +1,4 @@
-package com.bioxx.tfc;
+package com.bioxx.tfc.api;
 
 public class TFRUEnvHelper {
     public static boolean isModTFRU = true;

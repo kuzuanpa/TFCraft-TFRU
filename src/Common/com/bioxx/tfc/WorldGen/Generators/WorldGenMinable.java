@@ -417,7 +417,7 @@ public class WorldGenMinable extends WorldGenerator
 		posZ+=world.rand.nextInt(10)-5;
 		posY=world.getTopSolidOrLiquidBlock(posX,posZ)-1;
 		if (!((world.isAirBlock(posX, posY + 1, posZ) || world.getBlock(posX, posY + 1, posZ) == Blocks.snow || world.getBlock(posX, posY + 1, posZ) == TFCBlocks.tallGrass) &&
-				(world.getBlock(posX, posY, posZ).getMaterial() == Material.grass || world.getBlock(posX, posY, posZ).getMaterial() == Material.rock) && world.getBlock(posX, posY, posZ).isOpaqueCube()))return false;
+				(world.getBlock(posX, posY, posZ).getMaterial() == Material.grass) && world.getBlock(posX, posY, posZ).isOpaqueCube()))return false;
 		return world.setBlock(posX, posY + 1, posZ, flower, flowerMeta, 2);
 	}
 	@Override

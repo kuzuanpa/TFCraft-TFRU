@@ -3,7 +3,6 @@ package com.bioxx.tfc.Core;
 import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import eu.usrv.yamcore.auxiliary.ItemDescriptor;
 import net.minecraft.init.Blocks;
@@ -31,10 +30,9 @@ import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.*;
 import com.bioxx.tfc.api.Enums.RuleEnum;
-import org.apache.logging.log4j.Level;
 import vazkii.botania.common.lib.LibOreDict;
 
-import static com.bioxx.tfc.TFRUEnvHelper.isInTFRU;
+import static com.bioxx.tfc.api.TFRUEnvHelper.isInTFRU;
 
 public class Recipes 
 {
