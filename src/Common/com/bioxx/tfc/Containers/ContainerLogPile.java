@@ -88,7 +88,7 @@ public class ContainerLogPile extends ContainerTFC
 	@Override
 	public boolean canInteractWith(EntityPlayer var1)
 	{
-		return true;
+		return logpile!=null && !logpile.isInvalid();
 	}
 
 	protected void layoutContainer(IInventory playerInventory, IInventory chestInventory, int xSize, int ySize)

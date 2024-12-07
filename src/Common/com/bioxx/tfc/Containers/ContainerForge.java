@@ -52,7 +52,7 @@ public class ContainerForge extends ContainerTFC
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
-		return true;
+		return forge!=null && !forge.isInvalid();
 	}
 
 	@Override

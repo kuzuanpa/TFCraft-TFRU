@@ -37,7 +37,7 @@ public class ContainerSluice extends ContainerTFC
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
-		return true;
+		return sluice!=null && !sluice.isInvalid();
 	}
 
 	@Override

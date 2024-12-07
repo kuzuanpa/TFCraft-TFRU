@@ -61,7 +61,11 @@ public class ContainerAnvil extends ContainerTFC
 		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 24, 122, false, true);
 
 	}
-
+	@Override
+	public boolean canInteractWith(EntityPlayer var1)
+	{
+		return anvil != null && !anvil.isInvalid();
+	}
 	@Override
 	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{

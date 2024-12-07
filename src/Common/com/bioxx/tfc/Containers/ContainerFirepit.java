@@ -50,7 +50,7 @@ public class ContainerFirepit extends ContainerTFC
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
-		return true;
+		return firepit!=null && !firepit.isInvalid();
 	}
 
 	@Override

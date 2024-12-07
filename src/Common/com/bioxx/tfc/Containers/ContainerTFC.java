@@ -1,6 +1,6 @@
 package com.bioxx.tfc.Containers;
 
-import cpw.mods.fml.common.FMLLog;
+import com.bioxx.tfc.api.TFC_ItemHeat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -8,9 +8,6 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
-import com.bioxx.tfc.api.TFC_ItemHeat;
-import org.apache.logging.log4j.Level;
 
 public class ContainerTFC extends Container
 {
@@ -22,7 +19,7 @@ public class ContainerTFC extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer var1)
 	{
-		return true;
+		return false;
 	}
 
 	/**

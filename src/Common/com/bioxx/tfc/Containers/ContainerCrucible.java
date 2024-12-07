@@ -15,12 +15,12 @@ import com.bioxx.tfc.api.TFCItems;
 
 public class ContainerCrucible extends ContainerTFC
 {
-	private TECrucible te;
+	private TECrucible tileentity;
 	private float firetemp;
 
 	public ContainerCrucible(InventoryPlayer inventoryplayer, TECrucible tileentityforge, World world, int x, int y, int z)
 	{
-		te = tileentityforge;
+		tileentity = tileentityforge;
 		firetemp = 0;
 		//Input slot
 		addSlotToContainer(new Slot(tileentityforge, 0, 152, 7)
@@ -36,13 +36,13 @@ public class ContainerCrucible extends ContainerTFC
 
 		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 118, false, true);
 
-		te.updateGui((byte) 0);
+		tileentity.updateGui((byte) 0);
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
-		return true;
+		return tileentity!=null && !tileentity.isInvalid();
 	}
 
 	@Override
@@ -97,8 +97,8 @@ public class ContainerCrucible extends ContainerTFC
 		for (int var1 = 0; var1 < this.crafters.size(); ++var1)
 		{
 			ICrafting var2 = (ICrafting)this.crafters.get(var1);
-			if (this.firetemp != this.te.temperature)
-				var2.sendProgressBarUpdate(this, 0, this.te.temperature);
+			if (this.firetemp != this.tileentity.temperature)
+				var2.sendProgressBarUpdate(this, 0, this.tileentity.temperature);
 		}
 	}
 
@@ -106,6 +106,6 @@ public class ContainerCrucible extends ContainerTFC
 	public void updateProgressBar(int id, int value)
 	{
 		if (id == 0)
-			this.te.temperature = value;
+			this.tileentity.temperature = value;
 	}
 }
