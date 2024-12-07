@@ -1,8 +1,18 @@
 package com.bioxx.tfc.Handlers;
 
-import java.util.List;
-import java.util.Random;
-
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Food.CropIndex;
+import com.bioxx.tfc.Food.CropManager;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenPlants;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenWaterPlants;
+import com.bioxx.tfc.WorldGen.WorldCacheManager;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
+import com.bioxx.tfc.api.TFCBlocks;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.ChunkPosition;
@@ -10,25 +20,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.WorldInfo;
-
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-
-import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Food.CropIndex;
-import com.bioxx.tfc.Food.CropManager;
-import com.bioxx.tfc.WorldGen.WorldCacheManager;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenPlants;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenWaterPlants;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.Crafting.AnvilManager;
+import java.util.List;
+import java.util.Random;
 
 public class ChunkEventHandler
 {
@@ -132,7 +129,7 @@ public class ChunkEventHandler
 	{
 		TFC_Climate.removeCacheManager(event.world);
 		TFC_Core.removeCDM(event.world);
-		if(event.world.provider.dimensionId == 0) AnvilManager.getInstance().clearRecipes();
+		//if(event.world.provider.dimensionId == 0) AnvilManager.getInstance().clearRecipes();
 	}
 
 	@SubscribeEvent
