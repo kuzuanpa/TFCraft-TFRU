@@ -51,7 +51,7 @@ public class ContainerQuern extends ContainerTFC
 	@Override
 	public boolean canInteractWith(EntityPlayer var1)
 	{
-		return true;
+		return te!=null && !te.isInvalid();
 	}
 
 	protected void layoutContainer(IInventory playerInventory, IInventory chestInventory, int xSize, int ySize)

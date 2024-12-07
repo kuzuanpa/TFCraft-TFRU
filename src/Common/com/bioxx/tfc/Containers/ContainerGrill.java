@@ -43,7 +43,7 @@ public class ContainerGrill extends ContainerTFC
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
-		return true;
+		return fire!=null && !fire.isInvalid();
 	}
 
 	@Override

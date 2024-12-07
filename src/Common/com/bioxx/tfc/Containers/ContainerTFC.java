@@ -20,7 +20,7 @@ public class ContainerTFC extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer var1)
 	{
-		return true;
+		return false;
 	}
 
 	/**
@@ -265,7 +265,8 @@ public class ContainerTFC extends Container
 	{
 		Slot slot = (Slot)this.inventorySlots.get( slotNum );
 		ItemStack is = transferStackInSlotTFC(entityplayer, slotNum);
-		
+
+
 		// send a packet to make sure that the item is removed; that it stays removed.
 		if ( ! slot.getHasStack() && entityplayer instanceof EntityPlayerMP && ! entityplayer.worldObj.isRemote )
 		{

@@ -36,7 +36,7 @@ public class ContainerBlastFurnace extends ContainerTFC
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
-		return true;
+		return tileentity!=null && !tileentity.isInvalid();
 	}
 
 	@Override

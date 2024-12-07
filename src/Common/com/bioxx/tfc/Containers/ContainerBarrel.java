@@ -77,7 +77,7 @@ public class ContainerBarrel extends ContainerTFC
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
-		return true;
+		return barrel != null && !barrel.isInvalid();
 	}
 
 	@Override
