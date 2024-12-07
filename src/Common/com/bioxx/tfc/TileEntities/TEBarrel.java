@@ -1,9 +1,18 @@
 package com.bioxx.tfc.TileEntities;
 
-import java.util.Random;
-import java.util.Stack;
-
-import net.minecraft.block.Block;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Core.WeatherManager;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Crafting.*;
+import com.bioxx.tfc.api.Enums.EnumFoodGroup;
+import com.bioxx.tfc.api.*;
+import com.bioxx.tfc.api.Interfaces.IFood;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -15,20 +24,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.WeatherManager;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
-import com.bioxx.tfc.api.*;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Crafting.*;
-import com.bioxx.tfc.api.Enums.EnumFoodGroup;
-import com.bioxx.tfc.api.Interfaces.IFood;
+import java.util.Random;
+import java.util.Stack;
 public class TEBarrel extends NetworkTileEntity implements IInventory
 {
 	public FluidStack fluid;
@@ -284,9 +282,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public ItemStack addLiquid(ItemStack is)
 	{
-		if(is == null || is.stackSize > 1)
-			return is;
-
+		if(is == null || is.stackSize > 1) return is;
 		
 		if(FluidContainerRegistry.isFilledContainer(is))
 		{
@@ -314,8 +310,8 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	 */
 	public ItemStack removeLiquid(ItemStack is)
 	{
-		if(is == null || is.stackSize > 1)
-			return is;
+		if(is == null || is.stackSize > 1) return is;
+
 		if(FluidContainerRegistry.isEmptyContainer(is))
 		{
 			ItemStack out = FluidContainerRegistry.fillFluidContainer(fluid, is);
@@ -719,6 +715,9 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				ItemStack container = getInputStack();
 				FluidStack inLiquid = FluidContainerRegistry.getFluidForFilledItem(container);
 
+				//avoid liquid voided
+				if(container != null && container.stackSize >1)return;
+
 				if(container != null && container.getItem() instanceof IFluidContainerItem && !container.hasTagCompound())
 				{
 					FluidStack isfs = ((IFluidContainerItem)container.getItem()).getFluid(container);
@@ -727,7 +726,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						((IFluidContainerItem) container.getItem()).drain(container, ((IFluidContainerItem)container.getItem()).getCapacity(container), true);
 					}
 				}
-				else if (inLiquid != null && container != null && container.stackSize == 1)
+				else if (inLiquid != null && container.stackSize == 1)
 				{
 					if(addLiquid(inLiquid))
 					{
@@ -739,6 +738,9 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			else if(mode == MODE_OUT)
 			{
 				ItemStack container = getInputStack();
+
+				//avoid liquid duplicate
+				if(container != null && container.stackSize >1)return;
 
 				if(container != null && fluid != null && container.getItem() instanceof IFluidContainerItem)
 				{
