@@ -1,8 +1,14 @@
 package com.bioxx.tfc.Items.Tools;
 
-import java.util.Iterator;
-import java.util.List;
-
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.TileEntities.TEPottery;
+import com.bioxx.tfc.api.Enums.EnumItemReach;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
@@ -15,15 +21,8 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.TileEntities.TEPottery;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Enums.EnumItemReach;
-import com.bioxx.tfc.api.Enums.EnumSize;
+import java.util.Iterator;
+import java.util.List;
 
 public class ItemFirestarter extends ItemTerra
 {
@@ -132,8 +131,7 @@ public class ItemFirestarter extends ItemTerra
 					}
 
 					stack.damageItem(1, player);
-					if(stack.getItemDamage() >= stack.getMaxDamage())
-						stack.stackSize = 0;
+
 				}
 				else if(isCoal)
 				{
@@ -150,6 +148,8 @@ public class ItemFirestarter extends ItemTerra
 					}
 					stack.damageItem(1, player);
 				}
+				if(stack.getItemDamage() >= stack.getMaxDamage())
+					stack.stackSize = 0;
 			}
 		}
 	}

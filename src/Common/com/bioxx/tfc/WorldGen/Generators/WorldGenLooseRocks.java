@@ -71,7 +71,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 							if(m!= 14 && m != 15)
 							{
 								coreSample.add(BlockOre.getDroppedItem(m));
-								coreSampleStacks.add(new ItemStack(BlockOre.getDroppedItem(m), 1, m));
+								coreSampleStacks.add(new ItemStack(BlockOre.getDroppedItem(m), 1, m>34? m-34: m));
 							}
 						}
 					}

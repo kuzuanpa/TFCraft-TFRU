@@ -559,7 +559,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.wroughtIronUnfinishedBoots,1,0), ironRaw,new ItemStack(TFCItems.wroughtIronUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.wroughtIronUnfinishedBoots,1,1), ironRaw,new ItemStack(TFCItems.wroughtIronUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.wroughtIronKnifeHead, 1), ironRaw, new ItemStack(TFCItems.wroughtIronUnshaped, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.bloom, 1, WILDCARD_VALUE), ironRaw, new ItemStack(TFCItems.wroughtIronUnshaped, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.bloom, 1, WILDCARD_VALUE), ironRaw, new ItemStack(TFCItems.unknownUnshaped, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.rawBloom, 1, WILDCARD_VALUE), ironRaw, new ItemStack(TFCItems.unknownUnshaped, 1)));
 		//Pt
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.oilLamp, 1, 1), platinumRaw, null));

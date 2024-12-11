@@ -1,7 +1,20 @@
 package com.bioxx.tfc.Items;
 
-import java.util.List;
-
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TileEntities.TEAnvil;
+import com.bioxx.tfc.api.Enums.EnumItemReach;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.HeatIndex;
+import com.bioxx.tfc.api.HeatRegistry;
+import com.bioxx.tfc.api.Interfaces.IEquipable;
+import com.bioxx.tfc.api.Interfaces.ISize;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,21 +25,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TEAnvil;
-import com.bioxx.tfc.api.HeatIndex;
-import com.bioxx.tfc.api.HeatRegistry;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFC_ItemHeat;
-import com.bioxx.tfc.api.Enums.EnumItemReach;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-import com.bioxx.tfc.api.Interfaces.IEquipable;
-import com.bioxx.tfc.api.Interfaces.ISize;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
+import java.util.List;
 
 public class ItemTerra extends Item implements ISize
 {
@@ -124,7 +123,7 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public IIcon getIconFromDamage(int i)
 	{
-		if(metaNames != null && i < metaNames.length)
+		if(metaNames != null && i < metaIcons.length)
 			return metaIcons[i];
 		else
 			return this.itemIcon;

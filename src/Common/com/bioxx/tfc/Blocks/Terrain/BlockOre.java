@@ -1,8 +1,15 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.TileEntities.TEOre;
+import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -19,18 +26,8 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.minecraftforge.oredict.OreDictionary;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TEOre;
-import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Constant.Global;
+import java.util.ArrayList;
+import java.util.Random;
 
 import static com.bioxx.tfc.Render.TFC_CoreRender.getRockTexture;
 
@@ -161,10 +158,9 @@ public class BlockOre extends BlockCollapsible
 
 	public static Item getDroppedItem(int meta)
 	{
-		if(meta == 14 || meta == 15)
-			return TFCItems.coal;
-		else
-			return TFCItems.smallOreChunk;
+		if(meta == 14 || meta == 15) return TFCItems.coal;
+		else if(meta > 15 && meta < 35)return TFCItems.oreChunk;
+		return TFCItems.smallOreChunk;
 	}
 
 	@Override
