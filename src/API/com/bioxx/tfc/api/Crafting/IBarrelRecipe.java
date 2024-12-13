@@ -35,6 +35,10 @@ public interface IBarrelRecipe {
 
     boolean isRemovesLiquid();
 
+    default boolean willConsumeItem(){return true;}
+
+    default IBarrelRecipe setWillConsumeItem(boolean b){return this;}
+
     default IBarrelRecipe setRemovesLiquid(boolean b){return this;}
 
     default IBarrelRecipe setMinTechLevel(int t){return this;}

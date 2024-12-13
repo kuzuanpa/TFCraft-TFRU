@@ -1,15 +1,14 @@
 package com.bioxx.tfc.api.Crafting;
 
-import java.util.Stack;
-
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.Stack;
 
 public class BarrelCommonRecipe implements IBarrelRecipe
 {
@@ -19,6 +18,7 @@ public class BarrelCommonRecipe implements IBarrelRecipe
 	public FluidStack recipeOutFluid;
 	public int sealTime = 8;
 	public boolean removesLiquid = true;
+	public boolean consumeItem = true;
 	/**Outputting mode,
 	 * &#064;value=true: output fluid, requires item more than fluid, outputFS!=null
 	 * &#064;value=false: output item, requires fluid more than item, will remove fluid when outputFS==null
@@ -40,6 +40,16 @@ public class BarrelCommonRecipe implements IBarrelRecipe
 	{
 		this(inputItem, inputFluid, outIS, outputFluid);
 		this.sealTime = seal;
+	}
+
+	public boolean willConsumeItem() {
+		return consumeItem;
+	}
+
+	@Override
+	public IBarrelRecipe setWillConsumeItem(boolean b) {
+		consumeItem = b;
+		return this;
 	}
 
 	public IBarrelRecipe setSealedRecipe(boolean b){
@@ -121,12 +131,17 @@ public class BarrelCommonRecipe implements IBarrelRecipe
 		if (recipeOutIS != null)
 		{
             outStack = recipeOutIS.copy();
-			int repeatTime = this.getRecipeRepeatTimes(inIS, inFS);
-			int outputCount = outStack.stackSize * repeatTime;
-			if(inIS.stackSize - recipeIS.stackSize * repeatTime > 0) {
-				ItemStack inISOut = inIS.copy();
-				inISOut.stackSize-=recipeIS.stackSize * repeatTime;
-				stackList.push(inISOut);
+			int outputCount = 0;
+			if(inIS != null){
+				int repeatAmount = this.getRecipeRepeatTimes(inIS, inFS);
+				outputCount = outStack.stackSize * repeatAmount;
+
+				if(recipeIS == null)stackList.push(inIS);
+				else if(inIS.stackSize - recipeIS.stackSize * repeatAmount > 0) {
+					ItemStack inISOut = inIS.copy();
+					inISOut.stackSize-=recipeIS.stackSize * repeatAmount;
+					stackList.push(inISOut);
+				}
 			}
 			int maxStackSize = outStack.getMaxStackSize();
 			Item item = outStack.getItem();
@@ -147,16 +162,17 @@ public class BarrelCommonRecipe implements IBarrelRecipe
 			return stackList;
 
 		}
-		if (!removesLiquid && inIS != null && inFS != null)
+		if (recipeIS == null)
+		{
+			stackList.push(inIS);
+		}
+		else if (!removesLiquid && inIS != null && inFS != null)
 		{
             outStack = inIS.copy();
 			outStack.stackSize -= inFS.amount / this.recipeOutFluid.amount;
 			stackList.push(outStack);
 		}
-		if (outStack == null)
-		{
-            stackList.push(outStack);
-		}
+
 		return stackList;
 	}
 

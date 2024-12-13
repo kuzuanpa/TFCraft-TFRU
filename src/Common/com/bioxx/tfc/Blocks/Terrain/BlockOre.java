@@ -76,7 +76,9 @@ public class BlockOre extends BlockCollapsible
 		}
 		return data;
 	}
-
+	public boolean isOreGradable(int meta){
+		return meta<14;
+	}
 	@Override
 	public int damageDropped(int dmg)
 	{
@@ -94,6 +96,12 @@ public class BlockOre extends BlockCollapsible
 	@Override
 	public IIcon getIcon(IBlockAccess p_149673_1_, int x, int y, int z, int p_149673_5_) {
 		return getRockTexture(Minecraft.getMinecraft().theWorld, x, y, z);
+	}
+
+	@Override
+	public IIcon getIcon(int side, int meta)
+	{
+		return TFCBlocks.stoneIgIn.getIcon(side,meta);
 	}
 
 	public static IIcon[] icons = new IIcon[blockNames.length];

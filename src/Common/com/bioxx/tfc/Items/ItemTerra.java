@@ -123,8 +123,8 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public IIcon getIconFromDamage(int i)
 	{
-		if(metaNames != null && i < metaIcons.length)
-			return metaIcons[i];
+		if(metaNames != null)
+			return i<metaIcons.length? metaIcons[i] : metaIcons[0];
 		else
 			return this.itemIcon;
 	}

@@ -1,11 +1,11 @@
 //world gen minable
 package com.bioxx.tfc.WorldGen.Generators;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.api.TFCBlocks;
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -13,9 +13,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TEOre;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 // Referenced classes of package net.minecraft.src:
 //                      WorldGenerator, MathHelper, World, Block
@@ -394,7 +395,6 @@ public class WorldGenMinable extends WorldGenerator
 				}
 			}
 		}
-		//TerraFirmaCraft.log.info("a vein was placed " + minableBlockId + "." + minableBlockMeta+ " at " + par3 +" "+par4+" "+par5); /// for debugging
 		return true;
 	}
 

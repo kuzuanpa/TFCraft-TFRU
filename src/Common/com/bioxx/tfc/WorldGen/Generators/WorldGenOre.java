@@ -1,20 +1,19 @@
 package com.bioxx.tfc.WorldGen.Generators;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
+import com.bioxx.tfc.Blocks.Terrain.BlockOre;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.Util.CaseInsensitiveHashMap;
+import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCProvider;
+import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
+import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
-import cpw.mods.fml.common.IWorldGenerator;
-
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.Util.CaseInsensitiveHashMap;
-import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class WorldGenOre implements IWorldGenerator
 {
@@ -120,7 +119,7 @@ public class WorldGenOre implements IWorldGenerator
 						rockLayer3.block == b && (rockLayer3.data2 == metadata || metadata == -1))
 					{
 						int grade = rand.nextInt(100);
-						if(OreSpawnData.isOreGradable(j)){
+						if(block instanceof BlockOre && ((BlockOre) block).isOreGradable(j)){
 							if(grade<20)j+=35;
 							else if(grade<50)j+=49;
 						}

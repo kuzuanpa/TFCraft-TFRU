@@ -1,9 +1,9 @@
 buildscript {
     repositories {
         mavenCentral()
-		 maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        maven {
+            name = "gt"
+            url = "https://gregtech.mechaenetia.com/"
         }
         maven {
             name = "forge"
