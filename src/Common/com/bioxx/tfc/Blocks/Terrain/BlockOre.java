@@ -104,6 +104,11 @@ public class BlockOre extends BlockCollapsible
 		return TFCBlocks.stoneIgIn.getIcon(side,meta);
 	}
 
+	public IIcon getOreIcon(int side, int meta)
+	{
+		return icons[meta];
+	}
+
 	public static IIcon[] icons = new IIcon[blockNames.length];
 
 	@Override

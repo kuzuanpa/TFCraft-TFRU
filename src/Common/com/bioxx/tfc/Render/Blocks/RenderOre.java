@@ -1,7 +1,8 @@
 package com.bioxx.tfc.Render.Blocks;
 
 import com.bioxx.tfc.Blocks.Terrain.BlockOre;
-import com.bioxx.tfc.TileEntities.TESmokeRack;
+import com.bioxx.tfc.TileEntities.TEOre;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -9,10 +10,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-
-import com.bioxx.tfc.TileEntities.TEOre;
 
 public class RenderOre implements ISimpleBlockRenderingHandler
 {
@@ -25,6 +22,7 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
 		if(!(world.getTileEntity(x,y,z) instanceof TEOre))return false;
+		if(!(block instanceof BlockOre))return false;
 		boolean breaking = renderer.overrideBlockTexture != null;
 
 		if(breaking){
@@ -36,7 +34,7 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 
 		int meta = ((TEOre)world.getTileEntity(x,y,z)).droppedOreID;
 		meta = meta>=49? meta-49 : meta>=35? meta - 35:meta;
-		renderer.overrideBlockTexture = BlockOre.icons[meta];
+		renderer.overrideBlockTexture = ((BlockOre) block).getOreIcon(0,meta);
 		renderer.renderStandardBlock(block, x, y, z);
 		renderer.clearOverrideBlockTexture();
 		return true;

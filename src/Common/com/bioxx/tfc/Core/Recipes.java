@@ -1,9 +1,16 @@
 package com.bioxx.tfc.Core;
 
-import java.util.List;
-import java.util.Random;
-
+import com.bioxx.tfc.Core.Config.TFC_ConfigFiles;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.TileEntities.TELoom;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Crafting.*;
+import com.bioxx.tfc.api.Enums.RuleEnum;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
 import eu.usrv.yamcore.auxiliary.ItemDescriptor;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -14,23 +21,13 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-
-import com.bioxx.tfc.Core.Config.TFC_ConfigFiles;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.TileEntities.TEBarrel;
-import com.bioxx.tfc.TileEntities.TELoom;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Crafting.*;
-import com.bioxx.tfc.api.Enums.RuleEnum;
 import vazkii.botania.common.lib.LibOreDict;
+
+import java.util.List;
+import java.util.Random;
 
 import static com.bioxx.tfc.api.TFRUEnvHelper.isInTFRU;
 
@@ -1321,7 +1318,9 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.  highCarbonRedSteelIngot), null, "ingot", AnvilReq.BLACKSTEEL   , new ItemStack(TFCItems.       redSteelIngot)).clearRecipeSkills().setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,14)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.     highCarbonSteelIngot), null, "ingot", AnvilReq.WROUGHTIRON  , new ItemStack(TFCItems.          steelIngot)).clearRecipeSkills().setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,1,17)));
 
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.weakRedSteelIngot), new ItemStack(TFCItems.smallMetalChunk,1,3), "ingot", AnvilReq.MANASTEEL, new ItemStack(TFCItems.redSteelIngot)).clearRecipeSkills());
+		//boosted red&blue steel recipe on Mana steel anvil
+		manager.addRecipe(new AnvilRecipe( new ItemStack(TFCItems.weakRedSteelIngot), new ItemStack(TFCItems.smallMetalChunk,1,3), "ingot", AnvilReq.MANASTEEL,  new ItemStack(TFCItems.redSteelIngot)).clearRecipeSkills());
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.weakBlueSteelIngot), new ItemStack(TFCItems.smallMetalChunk,1,3), "ingot", AnvilReq.MANASTEEL, new ItemStack(TFCItems.blueSteelIngot)).clearRecipeSkills());
 
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.       bismuthIngot2x), null, "sheet", AnvilReq.STONE        , new ItemStack(TFCItems.       bismuthSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,0 )));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems. bismuthBronzeIngot2x), null, "sheet", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems. bismuthBronzeSheet)).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,1 )));
