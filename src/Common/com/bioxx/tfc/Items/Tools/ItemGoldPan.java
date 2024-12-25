@@ -1,7 +1,17 @@
 package com.bioxx.tfc.Items.Tools;
 
-import java.util.Random;
-
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Enums.EnumItemReach;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,18 +24,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
-import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Enums.EnumItemReach;
-import com.bioxx.tfc.api.Enums.EnumSize;
+import java.util.Random;
 
 public class ItemGoldPan extends ItemTerra
 {
@@ -128,7 +127,7 @@ public class ItemGoldPan extends ItemTerra
 						if (TFC_Core.isGravel(blockHit))
 						{
 							is.setItemDamage((5 << 4) + 2);
-							if(world.rand.nextInt(10) == 0)
+							if(world.rand.nextInt(5) == 0)
 								world.setBlockToAir(x, y, z);
 							TFC_Core.addPlayerExhaustion(player, 0.0005f);
 							cd.sluicedAmount++;
