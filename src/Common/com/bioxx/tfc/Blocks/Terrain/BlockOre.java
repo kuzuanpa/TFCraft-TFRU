@@ -10,6 +10,8 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -93,6 +95,7 @@ public class BlockOre extends BlockCollapsible
 		return (fortune > 0 && new Random().nextInt(5) < fortune)?2:1;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(IBlockAccess p_149673_1_, int x, int y, int z, int p_149673_5_) {
 		return getRockTexture(Minecraft.getMinecraft().theWorld, x, y, z);
@@ -111,6 +114,7 @@ public class BlockOre extends BlockCollapsible
 
 	public static IIcon[] icons = new IIcon[blockNames.length];
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
