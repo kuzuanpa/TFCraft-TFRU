@@ -1,8 +1,13 @@
 package com.bioxx.tfc.TileEntities;
 
-import java.util.Iterator;
-import java.util.List;
-
+import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Items.ItemOre;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
@@ -11,14 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 
-import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Items.ItemOre;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Interfaces.ISmeltable;
+import java.util.List;
 
 public class TEBloomery extends NetworkTileEntity
 {
@@ -256,73 +254,55 @@ public class TEBloomery extends NetworkTileEntity
 				if (list != null && !list.isEmpty() && !bloomeryLit && (playerList == null || playerList.isEmpty()))
 				{
 					/*Iterate through the list and check for charcoal, coke, and ore*/
-					for (Iterator iterator = list.iterator(); iterator.hasNext();)
-					{
-						EntityItem entity = (EntityItem) iterator.next();
-						if (entity.getEntityItem().getItem() == TFCItems.coal &&
-							entity.getEntityItem().getItemDamage() == 1 /*|| entity.getEntityItem().getItem() == TFCItems.Coke*/)
-						{
-							for (int c = 0; c < entity.getEntityItem().stackSize; c++)
-							{
-								if (charcoalCount + oreCount < (2 * maxCount) && charcoalCount < maxCount)
-								{
-									charcoalCount++;
-									entity.getEntityItem().stackSize--;
-								}
-							}
-							if (entity.getEntityItem().stackSize == 0)
-								entity.setDead();
-						}
-						/*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
-						else if (entity.getEntityItem().getItem() instanceof ItemOre && ((ItemOre) entity.getEntityItem().getItem()).isSmeltable(entity.getEntityItem()))
-						{
-							int c = entity.getEntityItem().stackSize;
-							while (c > 0)
-							{
-								if (charcoalCount + oreCount < (2 * maxCount) && oreCount < maxCount && outCount < 1000)
-								{
-									if (addOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage())))
-									{
-										oreCount += 1;
-										c--;
-									}
-									else
-										break;
-								}
-								else
-									break;
-							}
-							if (c == 0)
-								entity.setDead();
-							else
-								entity.getEntityItem().stackSize = c;
-						}
-						else if (entity.getEntityItem().getItem() instanceof ISmeltable &&
-									((ISmeltable) entity.getEntityItem().getItem()).isSmeltable(entity.getEntityItem()))
-						{
-							int c = entity.getEntityItem().stackSize;
-							while (c > 0)
-							{
-								if (((ISmeltable) entity.getEntityItem().getItem()).getMetalReturnAmount(entity.getEntityItem()) < 100 && oreCount < maxCount && outCount < 1000)
-								{
-									if (addOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage())))
-									{
-										oreCount += 1;
-										c--;
-									}
-									else
-										break;
-								}
-								else
-									break;
-							}
+                    for (Object o : list) {
+                        EntityItem entity = (EntityItem) o;
+                        if (entity.getEntityItem().getItem() == TFCItems.coal &&
+                                entity.getEntityItem().getItemDamage() == 1 /*|| entity.getEntityItem().getItem() == TFCItems.Coke*/) {
+                            for (int c = 0; c < entity.getEntityItem().stackSize; c++) {
+                                if (charcoalCount + oreCount < (2 * maxCount) && charcoalCount < maxCount) {
+                                    charcoalCount++;
+                                    entity.getEntityItem().stackSize--;
+                                }
+                            }
+                            if (entity.getEntityItem().stackSize == 0)
+                                entity.setDead();
+                        }
+                        /*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
+                        else if (entity.getEntityItem().getItem() instanceof ItemOre && ((ItemOre) entity.getEntityItem().getItem()).isSmeltable(entity.getEntityItem())) {
+                            int c = entity.getEntityItem().stackSize;
+                            while (c > 0) {
+                                if (charcoalCount + oreCount < (2 * maxCount) && oreCount < maxCount && outCount < 1000) {
+                                    if (addOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage()))) {
+                                        oreCount += 1;
+                                        c--;
+                                    } else
+                                        break;
+                                } else
+                                    break;
+                            }
+                            if (c == 0)
+                                entity.setDead();
+                            else
+                                entity.getEntityItem().stackSize = c;
+                        } else if (entity.getEntityItem().getItem() instanceof ISmeltable && ((ISmeltable) entity.getEntityItem().getItem()).isSmeltable(entity.getEntityItem())) {
+                            int c = entity.getEntityItem().stackSize;
+                            while (c > 0) {
+                                if (((ISmeltable) entity.getEntityItem().getItem()).getMetalReturnAmount(entity.getEntityItem()) < 100 && oreCount < maxCount && outCount < 1000) {
+                                    if (addOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage()))) {
+                                        oreCount += 1;
+                                        c--;
+                                    } else
+                                        break;
+                                } else
+                                    break;
+                            }
 
-							if (c == 0)
-								entity.setDead();
-							else
-								entity.getEntityItem().stackSize = c;
-						}
-					}
+                            if (c == 0)
+                                entity.setDead();
+                            else
+                                entity.getEntityItem().stackSize = c;
+                        }
+                    }
 				}
 				//Here we make sure that the forge is valid
 				if (this.validationCheck <= 0)

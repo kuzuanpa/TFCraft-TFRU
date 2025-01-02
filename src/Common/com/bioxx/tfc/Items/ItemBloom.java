@@ -1,20 +1,19 @@
 package com.bioxx.tfc.Items;
 
-import java.util.List;
-
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
+import com.bioxx.tfc.api.Metal;
+import com.bioxx.tfc.api.TFCItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.Metal;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-import com.bioxx.tfc.api.Interfaces.ISmeltable;
+import java.util.List;
 
 public class ItemBloom extends ItemTerra implements ISmeltable
 {
@@ -43,10 +42,10 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	@Override
 	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
+		list.add(new ItemStack(this, 1, 50));
 		list.add(new ItemStack(this, 1, 100));
+		list.add(new ItemStack(this, 1, 150));
 		list.add(new ItemStack(this, 1, 200));
-		list.add(new ItemStack(this, 1, 300));
-		list.add(new ItemStack(this, 1, 400));
 	}
 
 	@Override
@@ -67,7 +66,7 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	@Override
 	public boolean isSmeltable(ItemStack is)
 	{
-		return false;
+		return this == TFCItems.bloom;
 	}
 
 	@Override

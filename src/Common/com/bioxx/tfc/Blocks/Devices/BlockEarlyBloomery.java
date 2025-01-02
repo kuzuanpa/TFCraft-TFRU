@@ -1,7 +1,16 @@
 package com.bioxx.tfc.Blocks.Devices;
 
-import java.util.List;
-
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.CollisionRayTraceStandard;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TileEntities.TEBloomery;
+import com.bioxx.tfc.api.Interfaces.ICustomCollision;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,18 +23,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.CollisionRayTraceStandard;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TEBloomery;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Interfaces.ICustomCollision;
+import java.util.List;
 
 public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCollision
 {
@@ -64,7 +62,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 			world.setBlockToAir(x, y, z);
 			world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(this, 1)));
 		}
-		else if ((TEBloomery) world.getTileEntity(x, y, z) != null)
+		else if (world.getTileEntity(x, y, z) != null)
 		{
 			TEBloomery te = (TEBloomery) world.getTileEntity(x, y, z);
 			ItemStack is = entityplayer.getCurrentEquippedItem();
@@ -364,7 +362,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	}
 
 	@Override
-	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
+	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest)
 	{
 		clearStack(world, x, y, z);
 		return true;
