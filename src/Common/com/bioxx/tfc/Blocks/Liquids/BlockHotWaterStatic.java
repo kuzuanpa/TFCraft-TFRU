@@ -1,7 +1,9 @@
 package com.bioxx.tfc.Blocks.Liquids;
 
-import java.util.Random;
-
+import com.bioxx.tfc.Effects.GasFX;
+import com.bioxx.tfc.Reference;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -11,14 +13,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
 import net.minecraftforge.fluids.Fluid;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Effects.GasFX;
+import java.util.Random;
 
 public class BlockHotWaterStatic extends BlockLiquidStatic
 {
@@ -37,6 +34,8 @@ public class BlockHotWaterStatic extends BlockLiquidStatic
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
+		if(true)return;//todo: disable now because angelica bugged particle sort, cause weird rendering
+
 		if(world.isAirBlock(i-1, j, k) || world.isAirBlock(i+1, j, k) || 
 				world.isAirBlock(i, j, k-1) || world.isAirBlock(i, j, k+1) || 
 				world.isAirBlock(i, j+1, k))
