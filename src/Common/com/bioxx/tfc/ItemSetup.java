@@ -1,23 +1,10 @@
 package com.bioxx.tfc;
 
-import java.util.ArrayList;
-
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-
-import net.minecraftforge.common.util.EnumHelper;
-
-import com.bioxx.tfc.Core.Recipes;
-import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.Metal.Alloy;
 import com.bioxx.tfc.Core.Metal.AlloyManager;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
+import com.bioxx.tfc.Core.Recipes;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Food.*;
 import com.bioxx.tfc.Handlers.TFCFuelHandler;
 import com.bioxx.tfc.Items.*;
@@ -33,6 +20,17 @@ import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraftforge.common.util.EnumHelper;
+
+import java.util.ArrayList;
 
 public class ItemSetup extends TFCItems {
 
@@ -529,7 +527,7 @@ public class ItemSetup extends TFCItems {
 		blueSteelBucketEmpty = new ItemSteelBucketBlue(Blocks.air).setUnlocalizedName("Blue Steel Bucket Empty");
 		blueSteelBucketLava = new ItemSteelBucketBlue(TFCBlocks.lava).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(blueSteelBucketEmpty);
 
-		quern = ((ItemTerra) new ItemTerra().setUnlocalizedName("Quern").setMaxDamage(250)).setSize(EnumSize.MEDIUM).setWeight(EnumWeight.HEAVY);
+		quern = ((ItemTerra) new ItemTerra().setCanStack(false).setUnlocalizedName("Quern").setMaxDamage(250)).setSize(EnumSize.MEDIUM).setWeight(EnumWeight.HEAVY);
 		flintSteel = new ItemFlintSteel().setUnlocalizedName("flintAndSteel").setMaxDamage(200).setTextureName("flint_and_steel");
 
 		doorOak = new ItemWoodDoor(0).setUnlocalizedName("Oak Door");

@@ -1,7 +1,13 @@
 package com.bioxx.tfc.TileEntities;
 
-import java.util.*;
-
+import com.bioxx.tfc.Core.Metal.*;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.ItemMeltedMetal;
+import com.bioxx.tfc.Items.Pottery.ItemPotteryMold;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
+import com.bioxx.tfc.api.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -9,17 +15,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Metal.*;
-import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.api.*;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Interfaces.ISmeltable;
+import java.util.*;
 
 public class TECrucible extends NetworkTileEntity implements IInventory
 {
-	public Map<String, MetalPair> metals = new HashMap<String, MetalPair>();
+	public Map<String, MetalPair> metals = new HashMap<>();
 	public Alloy currentAlloy;
 	public int temperature;
 	public ItemStack[] storage;
@@ -43,18 +43,14 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		nbt.setInteger("temp", temperature);
 
 		NBTTagList nbttaglist = new NBTTagList();
-		Iterator<MetalPair> iter = metals.values().iterator();
-		while(iter.hasNext())
-		{
-			MetalPair m = iter.next();
-			if(m != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setInteger("ID", Item.getIdFromItem(m.type.ingot));
-				nbttagcompound1.setFloat("AmountF", m.amount);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}
+        for (MetalPair m : metals.values()) {
+            if (m != null) {
+                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+                nbttagcompound1.setInteger("ID", Item.getIdFromItem(m.type.ingot));
+                nbttagcompound1.setFloat("AmountF", m.amount);
+                nbttaglist.appendTag(nbttagcompound1);
+            }
+        }
 		nbt.setTag("Metals", nbttaglist);
 
 		nbttaglist = new NBTTagList();
@@ -239,12 +235,12 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 	public boolean drainOutput(float amount)
 	{
-		if(metals != null && metals.values().size() > 0)
+		if(metals != null && !metals.values().isEmpty())
 		{
-			for(Object am : metals.values())
+			for(MetalPair am : metals.values())
 			{
-				float percent = currentAlloy.getPercentForMetal(((MetalPair)am).type) / 100;
-				((MetalPair)am).amount -= amount*percent;
+				float percent = currentAlloy.getPercentForMetal(am.type) / 100;
+				am.amount -= amount*percent;
 			}
 			updateCurrentAlloy();
 		}
@@ -382,7 +378,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack)
 	{
-		return true;
+		return (itemstack.getItem() instanceof ItemPotteryMold)? i == 1 : i == 0;
 	}
 
 	public int getOutCountScaled(int length)
@@ -408,7 +404,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				if (action == 0) {
 					currentAlloy.toNBT(nbt);
 				}
-				else if (action == 1 && currentAlloy != null) {
+				else if (action == 1) {
 					nbt.setFloat("outputAmount", currentAlloy.outputAmount);
 				}
 			}

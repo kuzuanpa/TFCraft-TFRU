@@ -52,7 +52,7 @@ public class BlockQuern extends BlockTerraContainer
 				world.playSoundEffect(x, y, z, TFC_Sounds.STONEDRAG, 1, 1);
 				entityplayer.triggerAchievement(TFC_Achievements.achQuern);
 			}
-			else if (!te.shouldRotate && !hit || te.storage[2] == null)
+			else if (!hit || te.storage[2] == null)
 			{
 				entityplayer.openGui(TerraFirmaCraft.instance, 33, world, x, y, z);
 			}

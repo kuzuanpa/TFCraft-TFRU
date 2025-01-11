@@ -85,10 +85,8 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public int getItemStackLimit(ItemStack is)
 	{
-		if(canStack())
-			return this.getSize(null).stackSize * getWeight(null).multiplier <= 64 ? this.getSize(null).stackSize * getWeight(null).multiplier : 64;
-			else
-				return 1;
+		if(canStack()) return Math.min(this.getSize(null).stackSize * getWeight(null).multiplier, 64);
+		else return 1;
 	}
 
 	public ItemTerra setFolder(String s)
@@ -259,6 +257,11 @@ public class ItemTerra extends Item implements ISize
 	public boolean canStack()
 	{
 		return stackable;
+	}
+	public ItemTerra setCanStack(boolean canStack)
+	{
+		stackable = canStack;
+		return this;
 	}
 
 	@Override

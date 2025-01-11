@@ -1,10 +1,25 @@
 package com.bioxx.tfc.TileEntities;
 
-import java.util.Random;
-
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Crafting.QuernManager;
+import com.bioxx.tfc.api.Crafting.QuernRecipe;
+import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.TFCItems;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import gregapi.code.TagData;
+import gregapi.data.TD;
+import gregapi.tileentity.energy.ITileEntityEnergy;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -13,39 +28,39 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Collection;
+import java.util.Random;
 
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Crafting.QuernManager;
-import com.bioxx.tfc.api.Crafting.QuernRecipe;
-import com.bioxx.tfc.api.Interfaces.IFood;
+import static gregapi.data.CS.SIDE_BOTTOM;
+import static gregapi.data.CS.SIDE_TOP;
 
-public class TEQuern extends NetworkTileEntity implements IInventory
+public class TEQuern extends NetworkTileEntity implements IInventory, ISidedInventory, ITileEntityEnergy
 {
 	public ItemStack[] storage = new ItemStack[3];
 	public int rotation;
-	public boolean shouldRotate;
-	public int rotatetimer;
+	public boolean shouldRotate, rotateReverse = false;
+	public int rotatetimer, mEnergy = 0, mCost = 16;
 	public boolean hasQuern;
 
 	@Override
 	public void updateEntity()
 	{
-		if(!worldObj.isRemote)
-			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
+		if(!worldObj.isRemote) TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 
 		hasQuern = storage[2] != null;
 
+		rotateReverse = mEnergy > 0;
+		if(!shouldRotate && storage[2] != null && Math.abs(mEnergy) >= mCost) {
+			shouldRotate = true;
+			getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
+			getWorldObj().playSoundEffect(xCoord, yCoord, zCoord, TFC_Sounds.STONEDRAG, 1, 1);
+		}
+		if(!worldObj.isRemote && Math.abs(mEnergy) >= mCost )mEnergy -= mEnergy > 0? mCost: -mCost;
 		if(shouldRotate)
 		{
-			rotatetimer++;
-			if(rotatetimer == 90) //This needs to be 73 if speed is * 1 in TESRQuern, use 90 for speed * 4
+			if(rotateReverse)rotatetimer--;
+			else rotatetimer++;
+			if(rotatetimer >= 90 || rotatetimer <= -90) //This needs to be 73 if speed is * 1 in TESRQuern, use 90 for speed * 4
 			{
 				rotatetimer = 0;
 				shouldRotate = false;
@@ -295,7 +310,8 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack is)
 	{
-		return false;
+		if(slot == 2)return is.getItem() == TFCItems.quern;
+		return QuernManager.getInstance().isValidItem(is);
 	}
 
 	@Override
@@ -313,6 +329,7 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 		}
 		hasQuern = nbttagcompound.getBoolean("hasQuern");
 		shouldRotate = nbttagcompound.getBoolean("shouldRotate");
+		rotateReverse = nbttagcompound.getBoolean("rotateReverse");
 	}
 
 	@Override
@@ -333,6 +350,7 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 		nbttagcompound.setTag("Items", nbttaglist);
 		nbttagcompound.setBoolean("hasQuern", hasQuern);
 		nbttagcompound.setBoolean("shouldRotate", shouldRotate);
+		nbttagcompound.setBoolean("rotateReverse", rotateReverse);
 	}
 
 	@Override
@@ -372,5 +390,102 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 	public void createInitNBT(NBTTagCompound nbt)
 	{
 		nbt.setBoolean("hasQuern", hasQuern);
+	}
+
+	@Override
+	public Collection<TagData> getEnergyTypes(byte b) {
+		return TD.Energy.RU.AS_LIST;
+	}
+
+	@Override
+	public boolean isEnergyType(TagData tagData, byte b, boolean b1) {
+		return tagData.equals(TD.Energy.RU);
+	}
+
+	@Override
+	public boolean isEnergyAcceptingFrom(TagData tagData, byte b, boolean b1) {
+		return true;
+	}
+
+	@Override
+	public boolean isEnergyEmittingTo(TagData tagData, byte b, boolean b1) {
+		return false;
+	}
+
+	@Override
+	public long getEnergyDemanded(TagData tagData, byte b, long l) {
+		return 4;
+	}
+
+	@Override
+	public long doEnergyInjection(TagData tagData, byte b, long l, long l1, boolean b1) {
+		if(b != SIDE_TOP ||!tagData.equals(TD.Energy.RU)|| Math.abs(l) < 2 || mEnergy > mCost)return 0;
+		if(Math.abs(l) > 16)return l1;
+		int amountUsed = (int) Math.ceil((mCost - mEnergy)*1F/Math.abs(l));
+		mEnergy += (int) (amountUsed * l);
+		return amountUsed;
+	}
+
+	@Override
+	public long doEnergyExtraction(TagData tagData, byte b, long l, long l1, boolean b1) {
+		return 0;
+	}
+
+	@Override
+	public long getEnergyOffered(TagData tagData, byte b, long l) {
+		return 0;
+	}
+
+	@Override
+	public long getEnergySizeInputMin(TagData tagData, byte b) {
+		return 4;
+	}
+
+	@Override
+	public long getEnergySizeOutputMin(TagData tagData, byte b) {
+		return 0;
+	}
+
+	@Override
+	public long getEnergySizeInputRecommended(TagData tagData, byte b) {
+		return 8;
+	}
+
+	@Override
+	public long getEnergySizeOutputRecommended(TagData tagData, byte b) {
+		return 0;
+	}
+
+	@Override
+	public long getEnergySizeInputMax(TagData tagData, byte b) {
+		return 16;
+	}
+
+	@Override
+	public long getEnergySizeOutputMax(TagData tagData, byte b) {
+		return 0;
+	}
+
+	@Override
+	public boolean isDead() {
+		return false;
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int i) {
+        if (i == SIDE_BOTTOM) {
+            return new int[]{1};
+        }
+        return new int[]{0, 2};
+    }
+
+	@Override
+	public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
+		return isItemValidForSlot(slot, itemStack);
+	}
+
+	@Override
+	public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
+		return side == SIDE_BOTTOM;
 	}
 }

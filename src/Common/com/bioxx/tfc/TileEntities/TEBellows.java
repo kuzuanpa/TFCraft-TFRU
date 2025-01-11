@@ -1,20 +1,21 @@
 package com.bioxx.tfc.TileEntities;
 
-import java.util.List;
-import java.util.Random;
-
+import com.bioxx.tfc.api.TileEntities.TEFireEntity;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import gregapi.code.TagData;
+import gregapi.data.TD;
+import gregapi.tileentity.energy.ITileEntityEnergy;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 
-import com.bioxx.tfc.api.TileEntities.TEFireEntity;
-
-public class TEBellows extends NetworkTileEntity
+public class TEBellows extends NetworkTileEntity implements ITileEntityEnergy
 {
 	private static final int BLOCK_MAP[][] = { { 0, 1 }, { -1, 0 }, { 0, -1 }, { 1, 0 } };
 	//private static final int blockMap2[][] = { { 0, 2 }, { -2, 0 }, { 0, -2 }, { 2, 0 } };
@@ -141,4 +142,82 @@ public class TEBellows extends NetworkTileEntity
 		nbt.setBoolean("shouldBlow", shouldBlow);		
 	}
 
+
+	@Override
+	public Collection<TagData> getEnergyTypes(byte b) {
+		return TD.Energy.KU.AS_LIST;
+	}
+
+	@Override
+	public boolean isEnergyType(TagData tagData, byte b, boolean b1) {
+		return tagData.equals(TD.Energy.KU);
+	}
+
+	@Override
+	public boolean isEnergyAcceptingFrom(TagData tagData, byte b, boolean b1) {
+		return true;
+	}
+
+	@Override
+	public boolean isEnergyEmittingTo(TagData tagData, byte b, boolean b1) {
+		return false;
+	}
+
+	@Override
+	public long getEnergyDemanded(TagData tagData, byte b, long l) {
+		return 4;
+	}
+
+	@Override
+	public long doEnergyInjection(TagData tagData, byte b, long l, long l1, boolean b1) {
+		if(!tagData.equals(TD.Energy.KU)|| l < 8)return 0;
+		if(l > 16)return l1;
+		if(worldObj.getTotalWorldTime()%4 == 0) worldObj.getBlock(xCoord,yCoord,zCoord).onBlockActivated(worldObj, xCoord, yCoord, zCoord, null, 0, 0, 0, 0);
+		return 1;
+	}
+
+	@Override
+	public long doEnergyExtraction(TagData tagData, byte b, long l, long l1, boolean b1) {
+		return 0;
+	}
+
+	@Override
+	public long getEnergyOffered(TagData tagData, byte b, long l) {
+		return 0;
+	}
+
+	@Override
+	public long getEnergySizeInputMin(TagData tagData, byte b) {
+		return 4;
+	}
+
+	@Override
+	public long getEnergySizeOutputMin(TagData tagData, byte b) {
+		return 0;
+	}
+
+	@Override
+	public long getEnergySizeInputRecommended(TagData tagData, byte b) {
+		return 8;
+	}
+
+	@Override
+	public long getEnergySizeOutputRecommended(TagData tagData, byte b) {
+		return 0;
+	}
+
+	@Override
+	public long getEnergySizeInputMax(TagData tagData, byte b) {
+		return 16;
+	}
+
+	@Override
+	public long getEnergySizeOutputMax(TagData tagData, byte b) {
+		return 0;
+	}
+
+	@Override
+	public boolean isDead() {
+		return false;
+	}
 }
