@@ -1964,8 +1964,8 @@ public class Recipes
 		manager.addRecipe(new QuernRecipe(new ItemStack(Items.bone, 1), new ItemStack(TFCItems.dye, 2, 15)));//Bone Meal
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.looseRock, 1, 5), new ItemStack(TFCItems.powder, 4, 9)));//Rock Salt to Salt
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 29), new ItemStack(TFCItems.powder, 4,4)));//Cinnabar to Redstone
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 16), new ItemStack(TFCItems.powder, 8,1)));//Kaolin Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 20), new ItemStack(TFCItems.powder, 8,2)));//Graphite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 16), new ItemStack(TFCItems.powder, 4,1)));//Kaolin Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 20), new ItemStack(TFCItems.powder, 4,2)));//Graphite Powder
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 31), new ItemStack(TFCItems.fertilizer, 4,2)));//fertilizer
 		if(!isInTFRU)return;
 		manager.addRecipe(new QuernRecipe(new ItemStack(Items.ender_pearl, 1), gregapi.data.OP.dust.mat(gregapi.data.MT.EnderPearl, 1)));//for waystone crafting
