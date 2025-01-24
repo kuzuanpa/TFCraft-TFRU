@@ -27,7 +27,7 @@ public class GTRecipes {
         manager.addRecipe(new AnvilRecipe(OP.plateQuadruple.mat(MT.WroughtIron, 1), OP.plateTriple.mat(MT.WroughtIron, 1), "bucket", AnvilReq.BRONZE, new ItemStack(Items.cauldron, 1)));
 
         //GT Items
-        for (OreDictMaterial mat : new OreDictMaterial[]{MT.Pb, MT.Steel, MT.Cu, MT.WroughtIron, MT.Bronze, MT.Bi, MT.BlackBronze, MT.BismuthBronze, MT.Cupronickel, MT.Ni, MT.Sn, MT.Au, MT.Brass, MT.Electrum, MT.Ag, MT.RoseGold, MT.SterlingSilver, MT.Invar, MT.Ge, MT.Co, MT.AluminiumBrass, MT.Al, MT.TinAlloy, MT.Fe, MT.BlackSteel, MT.RedSteel, MT.BlueSteel}) {
+        for (OreDictMaterial mat : new OreDictMaterial[]{MT.Pb, MT.Steel, MT.Cu, MT.WroughtIron, MT.Bronze, MT.Bi, MT.BlackBronze, MT.BismuthBronze, MT.Cupronickel, MT.Ni, MT.Sn, MT.Au, MT.Brass, MT.Electrum, MT.Ag, MT.RoseGold, MT.SterlingSilver, MT.Invar, MT.Ge, MT.Co, MT.AluminiumBrass, MT.Al, MT.TinAlloy, MT.Fe, MT.BlackSteel, MT.RedSteel, MT.BlueSteel, MT.Efrine, MT.StainlessSteel, MT.ArsenicBronze, MT.ArsenicCopper}) {
             AnvilReq req = getAnvilReqFromMaterial(mat);
             manager.addRecipe(new AnvilRecipe(OP.plateQuadruple     .mat(mat, 1), OP.plateQuadruple     .mat(mat, 1), "casing"          , req, OP.casingMachine         .mat(mat, 1)));
             manager.addRecipe(new AnvilRecipe(OP.casingMachine      .mat(mat, 1), OP.casingMachine      .mat(mat, 1), "robustcasing"    , req, OP.casingMachineDouble   .mat(mat, 1)).setMinStepBonusItem(OP.nugget.mat(mat,9)));
@@ -65,7 +65,7 @@ public class GTRecipes {
     public static AnvilReq getAnvilReqFromMaterial(OreDictMaterial mat){
         if (mat==MT.Cu)return AnvilReq.COPPER;
         if (mat==MT.Pb||mat==MT.Bronze||mat==MT.Bi||mat==MT.Ni||mat==MT.Sn||mat==MT.Au||mat==MT.Ge||mat==MT.Al)return AnvilReq.COPPER;
-        if (mat==MT.BlackBronze||mat==MT.WroughtIron||mat==MT.Fe||mat==MT.BismuthBronze||mat==MT.Cupronickel||mat==MT.Brass||mat==MT.Electrum||mat==MT.Ag||mat==MT.RoseGold||mat==MT.SterlingSilver) return AnvilReq.BRONZE;
+        if (mat==MT.BlackBronze||mat==MT.WroughtIron||mat==MT.Fe||mat==MT.BismuthBronze||mat==MT.Cupronickel||mat==MT.Brass||mat==MT.Electrum||mat==MT.Ag||mat==MT.RoseGold||mat==MT.SterlingSilver||mat==MT.ArsenicBronze||mat== MT.ArsenicCopper) return AnvilReq.BRONZE;
         if (mat==MT.Steel||mat==MT.BlackSteel||mat==MT.Invar||mat==MT.Co||mat==MT.AluminiumBrass||mat==MT.TinAlloy)return AnvilReq.WROUGHTIRON;
         if (mat==MT.RedSteel||mat==MT.BlueSteel)return AnvilReq.REDSTEEL;
         return AnvilReq.STEEL;
