@@ -24,7 +24,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import vazkii.botania.common.lib.LibOreDict;
 
 import java.util.List;
 import java.util.Random;
@@ -153,7 +152,6 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 0), "###"," D ","###", '#', "ingotRoseGold", 'D',"ingotDoubleRoseGold"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 1), "###"," D ","###", '#', "ingotBismuthBronze", 'D',"ingotDoubleBismuthBronze"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 2), "###"," D ","###", '#', "ingotBlackBronze", 'D',"ingotDoubleBlackBronze"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil3, 1, 0), "###"," # ","###", '#', LibOreDict.MANA_STEEL));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.bloomery, 1), "PPP", "P P", "PPP", 'P', "plateDoubleAnyBronze"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.blastFurnace, 1), "PPP", "PCP", "PPP", 'P', "plateDoubleWroughtIron", 'C', new ItemStack(TFCBlocks.crucible, 1)));

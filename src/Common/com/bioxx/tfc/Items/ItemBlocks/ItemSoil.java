@@ -1,21 +1,18 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
-import java.util.List;
-
+import com.bioxx.tfc.Blocks.Terrain.BlockPeat;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.TFCBlocks;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import com.bioxx.tfc.Blocks.Terrain.BlockPeat;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.Constant.Global;
+import java.util.List;
 
 public class ItemSoil extends ItemTerraBlock
 {
@@ -51,21 +48,6 @@ public class ItemSoil extends ItemTerraBlock
 			arraylist.add(EnumChatFormatting.DARK_GRAY + Global.STONE_ALL[dam]);
 		else
 			arraylist.add(EnumChatFormatting.DARK_RED + "Unknown");
-	}
-
-	@Override
-	public void registerIcons(IIconRegister registerer)
-	{
-		if (this.field_150939_a/*Block*/ instanceof BlockPeat)
-		{
-			String s = this.field_150939_a.getItemIconName();
-
-			if (s != null)
-			{
-				icon = registerer.registerIcon(s);
-			}
-
-		}
 	}
 
 	/**
