@@ -28,6 +28,8 @@ public class GTRecipes {
         manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronSheet), new ItemStack(TFCItems.wroughtIronSheet), "trapdoor", AnvilReq.BRONZE, new ItemStack(Items.iron_door, 1)));
         manager.addRecipe(new AnvilRecipe(OP.plateQuadruple.mat(MT.Fe, 1), OP.plateTriple.mat(MT.Fe, 1), "bucket", AnvilReq.BRONZE, new ItemStack(Items.cauldron, 1)));
         manager.addRecipe(new AnvilRecipe(OP.plateQuadruple.mat(MT.WroughtIron, 1), OP.plateTriple.mat(MT.WroughtIron, 1), "bucket", AnvilReq.BRONZE, new ItemStack(Items.cauldron, 1)));
+        manager.addRecipe(new AnvilRecipe(OP.plateQuadruple.mat(MT.Fe, 1), OP.plateTriple.mat(MT.WroughtIron, 1), "bucket", AnvilReq.BRONZE, new ItemStack(Items.cauldron, 1)));
+        manager.addRecipe(new AnvilRecipe(OP.plateQuadruple.mat(MT.WroughtIron, 1), OP.plateTriple.mat(MT.Fe, 1), "bucket", AnvilReq.BRONZE, new ItemStack(Items.cauldron, 1)));
 
         //GT Items
         for (OreDictMaterial mat : new OreDictMaterial[]{MT.Pb, MT.Steel, MT.Cu, MT.WroughtIron, MT.Bronze, MT.Bi, MT.BlackBronze, MT.BismuthBronze, MT.Cupronickel, MT.Ni, MT.Sn, MT.Au, MT.Brass, MT.Electrum, MT.Ag, MT.RoseGold, MT.SterlingSilver, MT.Invar, MT.Ge, MT.Co, MT.AluminiumBrass, MT.Al, MT.TinAlloy, MT.Fe, MT.BlackSteel, MT.RedSteel, MT.BlueSteel, MT.Efrine, MT.StainlessSteel, MT.ArsenicBronze, MT.ArsenicCopper, MT.Manasteel}) {
