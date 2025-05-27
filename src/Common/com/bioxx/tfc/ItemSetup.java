@@ -58,7 +58,7 @@ public class ItemSetup extends TFCItems {
 		blueSteelToolMaterial = EnumHelper.addToolMaterial("BlueSteel", 		3,	blueSteelUses, 		blueSteelEff, 		240, 	22);
 		redSteelToolMaterial = EnumHelper.addToolMaterial("RedSteel", 			3,	redSteelUses, 		redSteelEff, 		240, 	22);
 
-		TerraFirmaCraft.LOG.info(new StringBuilder().append("Loading Items").toString());
+		TerraFirmaCraft.LOG.info("Loading Items");
 
 		fishingRod = new ItemCustomFishingRod().setUnlocalizedName("fishingRod").setTextureName("tools/fishing_rod");
 		coal = Items.coal;
@@ -591,6 +591,7 @@ public class ItemSetup extends TFCItems {
 		//PotteryPot = new ItemPotteryPot().setUnlocalizedName("Pot");
 		ceramicMold = new ItemPotteryBase().setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
 		potteryBowl = new ItemPotteryBase().setMetaNames(new String[]{"Clay Bowl","Ceramic Bowl"}).setUnlocalizedName("ClayBowl");
+		clayBall = Items.clay_ball;
 		fireClayBall = new ItemFireClay().setSpecialCraftingType(flatClay, new ItemStack(flatClay, 1, 1)).setMetaNames(new String[]{"Fire Clay"}).setUnlocalizedName("Clay");
 		fireBrick = new ItemPotteryBase().setMetaNames(new String[]{"Clay Fire Brick","Fire Brick"}).setUnlocalizedName("Fire Brick");
 

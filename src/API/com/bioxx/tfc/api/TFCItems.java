@@ -742,6 +742,7 @@ public class TFCItems
 
 	public static Item glassBottle;
 	public static Item potion;
+	public static Item clayBall;
 
 	public static Item fireClayBall;
 	public static Item potteryJug;
