@@ -50,7 +50,7 @@ public class PlayerInteractHandler
 
 		
 		if(validAction && event.getResult() != Result.DENY && itemInHand == null) handleDrinkingWater( event.entityPlayer );
-		if(itemInHand == null || event.getResult() == Result.DENY)return;
+		if(!validAction || itemInHand == null || event.getResult() == Result.DENY)return;
 
 		if(itemInHand.getItem().equals(Items.clay_ball))handleClayBall(itemInHand, event.entityPlayer);
 		if(itemInHand.getItem().equals(Items.coal) && event.face != -1)handleCoal(itemInHand, event.world, event.x, event.y, event.z, event.face);
