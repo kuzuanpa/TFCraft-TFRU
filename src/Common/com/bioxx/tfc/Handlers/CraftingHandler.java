@@ -1,7 +1,26 @@
 package com.bioxx.tfc.Handlers;
 
-import java.util.List;
-
+import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Core.TFC_Achievements;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.Handlers.Network.AbstractPacket;
+import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
+import com.bioxx.tfc.Items.ItemBlocks.ItemAnvil1;
+import com.bioxx.tfc.Items.ItemBlocks.ItemAnvil2;
+import com.bioxx.tfc.Items.ItemIngot;
+import com.bioxx.tfc.Items.ItemMeltedMetal;
+import com.bioxx.tfc.Items.Tools.ItemCustomPickaxe;
+import com.bioxx.tfc.Items.Tools.ItemCustomSaw;
+import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFC_ItemHeat;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -9,32 +28,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
 import net.minecraftforge.oredict.OreDictionary;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
-
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.Recipes;
-import com.bioxx.tfc.Core.TFC_Achievements;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
-import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
-import com.bioxx.tfc.Items.ItemIngot;
-import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.Items.ItemBlocks.ItemAnvil1;
-import com.bioxx.tfc.Items.ItemBlocks.ItemAnvil2;
-import com.bioxx.tfc.Items.Tools.ItemCustomPickaxe;
-import com.bioxx.tfc.Items.Tools.ItemCustomSaw;
-import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFC_ItemHeat;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Crafting.AnvilManager;
+import java.util.List;
 
 public class CraftingHandler
 {
@@ -135,7 +131,7 @@ public class CraftingHandler
 		}
 		else if (item == Item.getItemFromBlock(TFCBlocks.blastFurnace))
 			player.triggerAchievement(TFC_Achievements.achBlastFurnace);
-		else if (item == TFCItems.clayBall && itemDamage == 1)
+		else if (item == TFCItems.fireClayBall)
 			player.triggerAchievement(TFC_Achievements.achFireClay);
 		else if (item == TFCItems.unknownIngot)
 			player.triggerAchievement(TFC_Achievements.achUnknown);

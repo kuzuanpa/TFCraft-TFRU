@@ -1,21 +1,5 @@
 package com.bioxx.tfc.WAILA;
 
-import java.util.List;
-
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
-
-import net.minecraftforge.fluids.FluidStack;
-
 import com.bioxx.tfc.Blocks.BlockCharcoal;
 import com.bioxx.tfc.Blocks.BlockMetalTrapDoor;
 import com.bioxx.tfc.Blocks.BlockPartial;
@@ -27,25 +11,39 @@ import com.bioxx.tfc.Blocks.Flora.BlockWaterPlant;
 import com.bioxx.tfc.Blocks.Terrain.*;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomDoor;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTorch;
+import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Food.*;
-import com.bioxx.tfc.Items.ItemCoal;
 import com.bioxx.tfc.Items.ItemGem;
 import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.TileEntities.*;
-import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.*;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
+import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.util.List;
 
 public class WAILAData implements IWailaDataProvider
 {
@@ -68,10 +66,10 @@ public class WAILAData implements IWailaDataProvider
 			return new ItemStack(TFCItems.rawBloom);
 
 		else if (block instanceof BlockCharcoal)
-			return new ItemStack(TFCItems.coal, accessor.getMetadata(), 1);
+			return new ItemStack(Items.coal, accessor.getMetadata(), 1);
 
 		else if (TFC_Core.isClay(block) || TFC_Core.isClayGrass(block))
-			return new ItemStack(TFCItems.clayBall);
+			return new ItemStack(Items.clay_ball);
 
 		else if (block instanceof BlockCobble)
 			return new ItemStack(block, 1, accessor.getMetadata() % 8);
@@ -477,7 +475,7 @@ public class WAILAData implements IWailaDataProvider
 			itemstack = new ItemStack(TFCItems.oreChunk, 1, meta); // All normal quality ores.
 
 			if (meta == 14 || meta == 15) // Bituminous Coal & Lignite
-				itemstack = new ItemStack(TFCItems.coal);
+				itemstack = new ItemStack(Items.coal);
 
 			return itemstack;
 		}
@@ -828,7 +826,7 @@ public class WAILAData implements IWailaDataProvider
 
 			for (int i = 5; i <= 9; i++) // Fuels are stored in slots 5 through 9 per te.HandleFuelStack()
 			{
-				if (storage[i] != null && storage[i].getItem() != null && storage[i].getItem() instanceof ItemCoal)
+				if (storage[i] != null && storage[i].getItem() != null && storage[i].getItem().equals(Items.coal))
 					fuelCount++;
 			}
 

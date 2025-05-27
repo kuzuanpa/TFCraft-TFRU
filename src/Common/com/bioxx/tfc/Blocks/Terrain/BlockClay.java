@@ -1,23 +1,22 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.api.Constant.Global;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Blocks.BlockTerra;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Constant.Global;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class BlockClay extends BlockTerra
 {
@@ -84,7 +83,7 @@ public class BlockClay extends BlockTerra
 	@Override
 	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
-		return TFCItems.clayBall;
+		return Items.clay_ball;
 	}
 
 	/**

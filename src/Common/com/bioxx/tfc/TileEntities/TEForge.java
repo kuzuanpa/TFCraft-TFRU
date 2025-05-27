@@ -1,13 +1,20 @@
 package com.bioxx.tfc.TileEntities;
 
-import java.util.Random;
-
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.WeatherManager;
+import com.bioxx.tfc.Items.ItemBloom;
+import com.bioxx.tfc.Items.ItemMeltedMetal;
+import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
+import com.bioxx.tfc.api.*;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
 import com.bioxx.tfc.api.TileEntities.IHeatAccepter;
 import com.bioxx.tfc.api.TileEntities.IHeater;
+import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.BlockStainedGlass;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,14 +23,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.WeatherManager;
-import com.bioxx.tfc.Items.ItemBloom;
-import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.api.*;
-import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
-import com.bioxx.tfc.api.Interfaces.ISmeltable;
-import com.bioxx.tfc.api.TileEntities.TEFireEntity;
+import java.util.Random;
 
 public class TEForge extends TEFireEntity implements IInventory, IHeater
 {
@@ -585,7 +585,7 @@ public class TEForge extends TEFireEntity implements IInventory, IHeater
 	}
 
 	public static boolean isItemStackFuel(ItemStack stack){
-		return stack.getItem() == TFCItems.coal;
+		return stack.getItem() == Items.coal;
 	}
 
 	@Override

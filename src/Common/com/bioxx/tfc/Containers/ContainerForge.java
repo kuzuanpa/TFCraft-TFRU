@@ -1,17 +1,16 @@
 package com.bioxx.tfc.Containers;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-
 import com.bioxx.tfc.Containers.Slots.SlotForge;
 import com.bioxx.tfc.Containers.Slots.SlotForgeFuel;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEForge;
-import com.bioxx.tfc.api.TFCItems;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class ContainerForge extends ContainerTFC
 {
@@ -78,7 +77,7 @@ public class ContainerForge extends ContainerTFC
 			else
 			{
 				// Fill the fuel slots, and put the remaining stack in storage
-				if(slotStack.getItem() == TFCItems.coal)
+				if(slotStack.getItem() == Items.coal)
 				{
 					int j = 0;
 					while (j < 5)

@@ -2,23 +2,21 @@ package com.bioxx.tfc.ModSupport.NEI.recipeHandlers;
 
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-import com.bioxx.tfc.Items.ItemFlatGeneric;
 import com.bioxx.tfc.Items.ItemLooseRock;
 import com.bioxx.tfc.ModSupport.NEI.NEIIntegration;
-import com.bioxx.tfc.api.Crafting.LoomRecipe;
-import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
 import com.bioxx.tfc.api.Crafting.ShapedRecipesTFC;
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.function.Predicate;
-
+import com.bioxx.tfc.api.TFCItems;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
 
 import static com.bioxx.tfc.Core.TFC_Core.l10n;
 
@@ -96,10 +94,10 @@ public class KnappingRecipeHandler extends TemplateRecipeHandler {
 				if (inStack.getItem() == TFCItems.flatClay) {
 					if (inStack.getItemDamage() == 1) {
 						off = new ItemStack(inStack.getItem(), 1, 0);
-						this.setActualInput(new ItemStack(TFCItems.clayBall, 5, 0));
+						this.setActualInput(new ItemStack(Items.clay_ball, 5, 0));
 					} else if (inStack.getItemDamage() == 3) {
 						off = new ItemStack(inStack.getItem(), 1, 2);
-						this.setActualInput(new ItemStack(TFCItems.clayBall, 5, 1));
+						this.setActualInput(new ItemStack(TFCItems.fireClayBall, 5, 0));
 					}
 				} else if (inStack.getItem() == TFCItems.flatLeather) {
 					this.setActualInput(new ItemStack(TFCItems.leather));

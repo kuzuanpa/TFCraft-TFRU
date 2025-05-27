@@ -6,12 +6,12 @@ import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -256,7 +256,7 @@ public class TEBloomery extends NetworkTileEntity
 					/*Iterate through the list and check for charcoal, coke, and ore*/
                     for (Object o : list) {
                         EntityItem entity = (EntityItem) o;
-                        if (entity.getEntityItem().getItem() == TFCItems.coal &&
+                        if (entity.getEntityItem().getItem() == Items.coal &&
                                 entity.getEntityItem().getItemDamage() == 1 /*|| entity.getEntityItem().getItem() == TFCItems.Coke*/) {
                             for (int c = 0; c < entity.getEntityItem().stackSize; c++) {
                                 if (charcoalCount + oreCount < (2 * maxCount) && charcoalCount < maxCount) {

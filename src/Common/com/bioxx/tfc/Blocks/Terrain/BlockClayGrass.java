@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -36,7 +37,7 @@ public class BlockClayGrass extends BlockGrass
 	@Override
 	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
-		return TFCItems.clayBall;
+		return Items.clay_ball;
 	}
 
 	@Override

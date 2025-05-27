@@ -1,9 +1,17 @@
 package com.bioxx.tfc.Core.Config;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Map;
-
+import com.bioxx.tfc.Core.Util.CaseInsensitiveHashMap;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.WorldGen.Generators.OreSpawnData;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCCrafting;
+import com.bioxx.tfc.api.TFCItems;
+import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ObjectArrays;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -11,23 +19,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapelessRecipes;
-
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.Util.CaseInsensitiveHashMap;
-import com.bioxx.tfc.WorldGen.Generators.OreSpawnData;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCCrafting;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
-import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ObjectArrays;
+import java.io.File;
+import java.util.Arrays;
+import java.util.Map;
 
 import static com.bioxx.tfc.Reference.MOD_ID;
 import static com.bioxx.tfc.WorldGen.Generators.WorldGenOre.oreList;
@@ -159,8 +157,8 @@ public class TFC_ConfigFiles
 					getAsShapeless(new ItemStack(TFCItems.arrow, 1), new ItemStack(Items.arrow, 1)));
 			new ConversionOption("bowConversion", getAsShapeless(new ItemStack(Items.bow, 1), new ItemStack(TFCItems.bow, 1, 0)),
 					getAsShapeless(new ItemStack(TFCItems.bow, 1, 0), new ItemStack(Items.bow, 1)));
-			new ConversionOption("coalConversion", getAsShapeless(new ItemStack(Items.coal, 1), new ItemStack(TFCItems.coal, 1)),
-					getAsShapeless(new ItemStack(TFCItems.coal, 1), new ItemStack(Items.coal, 1)));
+			//new ConversionOption("coalConversion", getAsShapeless(new ItemStack(Items.coal, 1), new ItemStack(TFCItems.coal, 1)),
+			//		getAsShapeless(new ItemStack(TFCItems.coal, 1), new ItemStack(Items.coal, 1)));
 			new ConversionOption("diamondConversion", getAsShapeless(new ItemStack(Items.diamond, 1), new ItemStack(TFCItems.gemDiamond,1,2)),
 					getAsShapeless(new ItemStack(Items.diamond, 2), new ItemStack(TFCItems.gemDiamond,1,3)),
 					getAsShapeless(new ItemStack(Items.diamond, 3), new ItemStack(TFCItems.gemDiamond,1,4)),

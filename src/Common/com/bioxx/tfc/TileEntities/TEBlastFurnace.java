@@ -1,16 +1,20 @@
 package com.bioxx.tfc.TileEntities;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Queue;
-import java.util.Random;
-import java.util.concurrent.ArrayBlockingQueue;
-
+import com.bioxx.tfc.Blocks.Devices.BlockBlastFurnace;
+import com.bioxx.tfc.Core.Metal.MetalRegistry;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.GUI.GuiBlastFurnace;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.*;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
+import com.bioxx.tfc.api.TileEntities.TEFireEntity;
+import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,16 +25,11 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
-import cpw.mods.fml.client.FMLClientHandler;
-
-import com.bioxx.tfc.Blocks.Devices.BlockBlastFurnace;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Metal.MetalRegistry;
-import com.bioxx.tfc.GUI.GuiBlastFurnace;
-import com.bioxx.tfc.api.*;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Interfaces.ISmeltable;
-import com.bioxx.tfc.api.TileEntities.TEFireEntity;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Queue;
+import java.util.Random;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class TEBlastFurnace extends TEFireEntity implements IInventory
 {
@@ -234,7 +233,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 		//charcoal
 		if(this.charcoalCount > 0)
 		{
-			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, new ItemStack(TFCItems.coal, charcoalCount, 1));
+			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, new ItemStack(Items.coal, charcoalCount, 1));
 			entityitem.motionX = (float) rand.nextGaussian() * f3;
 			entityitem.motionY = (float) rand.nextGaussian() * f3 + 0.2F;
 			entityitem.motionZ = (float) rand.nextGaussian() * f3;
@@ -463,7 +462,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 					HeatRegistry manager = HeatRegistry.getInstance();
 					HeatIndex index = manager.findMatchingIndex(itemstack);
 
-					if (item == TFCItems.coal &&
+					if (item == Items.coal &&
 							itemstack.getItemDamage() == 1 /*||
 							item == TFCItems.Coke*/)
 					{

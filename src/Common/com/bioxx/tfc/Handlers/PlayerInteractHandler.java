@@ -1,17 +1,19 @@
 package com.bioxx.tfc.Handlers;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
-
-import com.bioxx.tfc.Items.*;
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Core.Player.PlayerInfo;
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
+import com.bioxx.tfc.Items.*;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.api.*;
-import cpw.mods.fml.common.FMLLog;
+import com.bioxx.tfc.api.Util.Helper;
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.event.ClickEvent;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -20,20 +22,17 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
-
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
-import com.bioxx.tfc.api.Util.Helper;
-import org.apache.logging.log4j.Level;
+import static com.bioxx.tfc.api.TFCItems.flatClay;
 
 public class PlayerInteractHandler
 {
@@ -49,12 +48,74 @@ public class PlayerInteractHandler
 
 		boolean validAction = event.action == Action.RIGHT_CLICK_BLOCK || event.action == Action.RIGHT_CLICK_AIR;
 
-		if(validAction && event.getResult() != Result.DENY && itemInHand == null)
+		
+		if(validAction && event.getResult() != Result.DENY && itemInHand == null) handleDrinkingWater( event.entityPlayer );
+		if(itemInHand == null || event.getResult() == Result.DENY)return;
+
+		if(itemInHand.getItem().equals(Items.clay_ball))handleClayBall(itemInHand, event.entityPlayer);
+		if(itemInHand.getItem().equals(Items.coal) && event.face != -1)handleCoal(itemInHand, event.world, event.x, event.y, event.z, event.face);
+	}
+	private int[][] coalMap =
+			{   {0,-1,0},
+					{0,1,0},
+					{0,0,-1},
+					{0,0,1},
+					{-1,0,0},
+					{1,0,0},
+			};
+	private void handleCoal(ItemStack is, World world, int x, int y, int z, int side){
+		if(is.getItemDamage() == 1 && !world.isRemote)
 		{
-			handleDrinkingWater( event.entityPlayer );
+			if(world.getBlock(x, y, z) == TFCBlocks.charcoal)
+			{
+				int meta = world.getBlockMetadata(x, y, z);
+				if(meta < 8)
+				{
+					world.setBlockMetadataWithNotify(x, y, z, meta + 1, 3);
+					is.stackSize--;
+					return;
+				}
+				else if(side == 1 && world.isAirBlock(x + coalMap[side][0], y + coalMap[side][1], z + coalMap[side][2]))
+				{
+					world.setBlock(x + coalMap[side][0], y + coalMap[side][1], z + coalMap[side][2], TFCBlocks.charcoal, 1, 0x2);
+					is.stackSize--;
+					return;
+				}
+			}
+
+			if(world.getBlock(x + coalMap[side][0], y + coalMap[side][1], z + coalMap[side][2]) == TFCBlocks.charcoal)
+			{
+				int meta = world.getBlockMetadata(x + coalMap[side][0], y + coalMap[side][1], z + coalMap[side][2]);
+				if(meta < 8)
+				{
+					world.setBlockMetadataWithNotify(x + coalMap[side][0], y + coalMap[side][1], z + coalMap[side][2], meta + 1, 3);
+					is.stackSize--;
+					return;
+				}
+			}
+
+			if(world.isAirBlock(x + coalMap[side][0], y + coalMap[side][1], z + coalMap[side][2]))
+			{
+				world.setBlock(x + coalMap[side][0], y + coalMap[side][1], z + coalMap[side][2], TFCBlocks.charcoal, 1, 0x2);
+				is.stackSize--;
+				TFCBlocks.charcoal.onNeighborBlockChange(world, x + coalMap[side][0], y + coalMap[side][1], z + coalMap[side][2], world.getBlock(x + coalMap[side][0], y + coalMap[side][1], z + coalMap[side][2]));
+			}
+			return;
 		}
+		return;
 	}
 
+	private void handleClayBall(ItemStack stack, EntityPlayer player){
+		//TerraFirmaCraft.log.info(itemstack.stackSize+", "+itemstack.getItem().getClass() +": "+Items.clay_ball.getClass());
+		if(stack.stackSize >= 5)
+		{
+			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
+			pi.specialCraftingType = new ItemStack(flatClay, 1, 0);
+			pi.specialCraftingTypeAlternate = new ItemStack(flatClay, 1, 1);
+
+			player.openGui(TerraFirmaCraft.instance, 28, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+		}
+	}
 	private void handleDrinkingWater(EntityPlayer entityPlayer)
 	{
 		Long lastCheck = lastDrink.get(entityPlayer.getUniqueID());

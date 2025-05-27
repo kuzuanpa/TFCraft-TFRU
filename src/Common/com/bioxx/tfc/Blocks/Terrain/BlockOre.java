@@ -18,6 +18,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -165,7 +166,7 @@ public class BlockOre extends BlockCollapsible
 
 		ItemStack itemstack;
 		if (ore == 14 || ore == 15)
-			itemstack = new ItemStack(TFCItems.coal);
+			itemstack = new ItemStack(Items.coal);
 		else
 			itemstack = new ItemStack(TFCItems.oreChunk, 1, damageDropped(ore));
 
@@ -175,7 +176,7 @@ public class BlockOre extends BlockCollapsible
 
 	public static Item getDroppedItem(int meta)
 	{
-		if(meta == 14 || meta == 15) return TFCItems.coal;
+		if(meta == 14 || meta == 15) return Items.coal;
 		else if(meta > 15 && meta < 35)return TFCItems.oreChunk;
 		return TFCItems.smallOreChunk;
 	}

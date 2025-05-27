@@ -421,9 +421,9 @@ public class TFC_OreDictionary
 
 		//Fuel
 		OreDictionary.registerOre("gemCoal", new ItemStack(Items.coal, 1, 0));
-		OreDictionary.registerOre("gemCoal", new ItemStack(TFCItems.coal, 1, 0));
+		//OreDictionary.registerOre("gemCoal", new ItemStack(TFCItems.coal, 1, 0));
 		OreDictionary.registerOre("gemCharcoal", new ItemStack(Items.coal, 1, 1));
-		OreDictionary.registerOre("gemCharcoal", new ItemStack(TFCItems.coal, 1, 1));
+		//OreDictionary.registerOre("gemCharcoal", new ItemStack(TFCItems.coal, 1, 1));
 
 		//Stone
 		OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.stoneIgEx, 1, WILD));
@@ -720,7 +720,6 @@ public class TFC_OreDictionary
 
 		//Miscellaneous Items
 		OreDictionary.registerOre("lumpClay", new ItemStack(Items.clay_ball));
-		OreDictionary.registerOre("lumpClay", new ItemStack(TFCItems.clayBall, 1, 0));
 
 		OreDictionary.registerOre("itemArrow", new ItemStack(Items.arrow));
 		OreDictionary.registerOre("itemArrow", new ItemStack(TFCItems.arrow));

@@ -162,10 +162,10 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.quern, 1), "  W", "PPP", 'P', "stone", 'W', "stickWood"));
 
 		//Fire Clay
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.clayBall, 1, 1), "PXP", "XCX", "PXP", 'P', new ItemStack(TFCItems.powder, 1, 1), 'X', new ItemStack(TFCItems.powder, 1, 2), 'C', "lumpClay"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.clayBall, 1, 1), "PXP", "XCX", "PXP", 'P', new ItemStack(TFCItems.powder, 1, 2), 'X', new ItemStack(TFCItems.powder, 1, 1), 'C', "lumpClay"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.fireClayBall, 1, 0), "PXP", "XCX", "PXP", 'P', new ItemStack(TFCItems.powder, 1, 1), 'X', new ItemStack(TFCItems.powder, 1, 2), 'C', "lumpClay"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.fireClayBall, 1, 0), "PXP", "XCX", "PXP", 'P', new ItemStack(TFCItems.powder, 1, 2), 'X', new ItemStack(TFCItems.powder, 1, 1), 'C', "lumpClay"));
 
-		GameRegistry.addRecipe(new ItemStack(TFCItems.fireBrick, 2, 0), "PP", "PP", 'P', new ItemStack(TFCItems.clayBall, 1, 1));
+		GameRegistry.addRecipe(new ItemStack(TFCItems.fireBrick, 2, 0), "PP", "PP", 'P', new ItemStack(TFCItems.fireClayBall, 1, 0));
 
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.fireBrick, 2, 0), "PXP", "XPX", "PXP", 'P', new ItemStack(TFCItems.fireBrick, 1, 1), 'X', new ItemStack(TFCItems.mortar, 1));
 
@@ -174,7 +174,7 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.straw, 4), new ItemStack(TFCBlocks.thatch, 1));
 
 		//Coal
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.coal, 9), new ItemStack(Blocks.coal_block));
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.coal, 9), new ItemStack(Blocks.coal_block));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.coal_block, 1), "###", "###", "###", '#', "gemCoal"));
 
 		//Misc Items
@@ -1482,13 +1482,13 @@ public class Recipes
 		//javelin heads
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeIngot), null,"javelin", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.bismuthBronzeJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,1 )));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.  blackBronzeIngot), null,"javelin", AnvilReq.BLACKBRONZE  , new ItemStack(TFCItems.  blackBronzeJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,2 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.       bronzeIngot), null,"javelin", AnvilReq.BRONZE       , new ItemStack(TFCItems.       bronzeJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,3 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.   blackSteelIngot), null,"javelin", AnvilReq.BLACKSTEEL   , new ItemStack(TFCItems.   blackSteelJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,4 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.    blueSteelIngot), null,"javelin", AnvilReq.BLUESTEEL    , new ItemStack(TFCItems.    blueSteelJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,6 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.     redSteelIngot), null,"javelin", AnvilReq.REDSTEEL     , new ItemStack(TFCItems.     redSteelJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,7 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.        steelIngot), null,"javelin", AnvilReq.STEEL        , new ItemStack(TFCItems.        steelJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,9 )));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.  wroughtIronIngot), null,"javelin", AnvilReq.WROUGHTIRON  , new ItemStack(TFCItems.  wroughtIronJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,14)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.       copperIngot), null,"javelin", AnvilReq.COPPER       , new ItemStack(TFCItems.       copperJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,17)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.   blackSteelIngot), null,"javelin", AnvilReq.BLACKSTEEL   , new ItemStack(TFCItems.   blackSteelJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,3 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.    blueSteelIngot), null,"javelin", AnvilReq.BLUESTEEL    , new ItemStack(TFCItems.    blueSteelJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,4 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.       bronzeIngot), null,"javelin", AnvilReq.BRONZE       , new ItemStack(TFCItems.       bronzeJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,6 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.       copperIngot), null,"javelin", AnvilReq.COPPER       , new ItemStack(TFCItems.       copperJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,7 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.  wroughtIronIngot), null,"javelin", AnvilReq.WROUGHTIRON  , new ItemStack(TFCItems.  wroughtIronJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,9 )));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.     redSteelIngot), null,"javelin", AnvilReq.REDSTEEL     , new ItemStack(TFCItems.     redSteelJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,14)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.        steelIngot), null,"javelin", AnvilReq.STEEL        , new ItemStack(TFCItems.        steelJavelinHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setMinStepBonusItem(new ItemStack(TFCItems.smallMetalChunk,3,17)));
 
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeSheet), null,"helmPlate", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.bismuthBronzeUnfinishedHelmet, 1, 0)).addRecipeSkill(Global.SKILL_ARMORSMITH));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.  blackBronzeSheet), null,"helmPlate", AnvilReq.BLACKBRONZE  , new ItemStack(TFCItems.  blackBronzeUnfinishedHelmet, 1, 0)).addRecipeSkill(Global.SKILL_ARMORSMITH));

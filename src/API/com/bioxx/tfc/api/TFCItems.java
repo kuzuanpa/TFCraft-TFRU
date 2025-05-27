@@ -1,13 +1,11 @@
 package com.bioxx.tfc.api;
 
-import java.util.List;
-
+import com.bioxx.tfc.TerraFirmaCraft;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
-import com.bioxx.tfc.TerraFirmaCraft;
+import java.util.List;
 
 public class TFCItems
 {
@@ -745,7 +743,7 @@ public class TFCItems
 	public static Item glassBottle;
 	public static Item potion;
 
-	public static Item clayBall;
+	public static Item fireClayBall;
 	public static Item potteryJug;
 	//public static Item PotteryPot;
 	public static Item potterySmallVessel;
@@ -1427,13 +1425,13 @@ public class TFCItems
 		GameRegistry.registerItem(reeds , reeds.getUnlocalizedName());
 
 		GameRegistry.registerItem(fishingRod, fishingRod.getUnlocalizedName());
-		GameRegistry.registerItem(coal, coal.getUnlocalizedName());
-		GameRegistry.registerItem(stick, stick.getUnlocalizedName());
+		//GameRegistry.registerItem(coal, coal.getUnlocalizedName());
+		//GameRegistry.registerItem(stick, stick.getUnlocalizedName());
 		GameRegistry.registerItem(bow, bow.getUnlocalizedName());
 		GameRegistry.registerItem(arrow, arrow.getUnlocalizedName());
 		GameRegistry.registerItem(dye, dye.getUnlocalizedName());
 		GameRegistry.registerItem(rope, rope.getUnlocalizedName());
-		GameRegistry.registerItem(clayBall, clayBall.getUnlocalizedName());
+		GameRegistry.registerItem(fireClayBall, fireClayBall.getUnlocalizedName());
 		GameRegistry.registerItem(powder, powder.getUnlocalizedName());
 		GameRegistry.registerItem(fertilizer, fertilizer.getUnlocalizedName());
 

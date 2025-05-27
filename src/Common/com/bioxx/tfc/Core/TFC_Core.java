@@ -1,18 +1,29 @@
 package com.bioxx.tfc.Core;
 
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
 import com.bioxx.tfc.Blocks.Terrain.BlockBuilding;
-import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
-import com.bioxx.tfc.Blocks.Terrain.BlockDirt;
-import com.bioxx.tfc.Blocks.Terrain.BlockStone;
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Chunkdata.ChunkDataManager;
+import com.bioxx.tfc.Core.Player.BodyTempStats;
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
+import com.bioxx.tfc.Core.Player.SkillStats;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
+import com.bioxx.tfc.Items.ItemOre;
+import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.TileEntities.*;
-import cpw.mods.fml.common.FMLLog;
+import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
+import com.bioxx.tfc.api.*;
+import com.bioxx.tfc.api.Interfaces.IFood;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.ReflectionHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.BlockStainedGlass;
@@ -26,6 +37,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -36,38 +48,16 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.storage.WorldInfo;
-
 import net.minecraftforge.common.util.ForgeDirection;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.ReflectionHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import org.apache.logging.log4j.Level;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
-import com.bioxx.tfc.Core.Player.BodyTempStats;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
-import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
-import com.bioxx.tfc.Core.Player.SkillStats;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Items.ItemOre;
-import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
-import com.bioxx.tfc.TileEntities.TEMetalSheet;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.api.*;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
-import com.bioxx.tfc.api.Interfaces.IFood;
-
 import javax.annotation.Nullable;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class TFC_Core
 {
@@ -826,10 +816,8 @@ public class TFC_Core
 		if(is.getItem() == Item.getItemFromBlock(TFCBlocks.peat))
 			return EnumFuelMaterial.PEAT;
 
-		if(is.getItem() == TFCItems.coal && is.getItemDamage() == 0)
+		if(is.getItem() == Items.coal && is.getItemDamage() == 0)
 			return EnumFuelMaterial.COAL;
-		else if(is.getItem() == TFCItems.coal && is.getItemDamage() == 1)
-			return EnumFuelMaterial.CHARCOAL;
 
 		if(is.getItemDamage() == 0)
 			return EnumFuelMaterial.ASH;

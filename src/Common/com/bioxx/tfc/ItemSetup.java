@@ -61,8 +61,8 @@ public class ItemSetup extends TFCItems {
 		TerraFirmaCraft.LOG.info(new StringBuilder().append("Loading Items").toString());
 
 		fishingRod = new ItemCustomFishingRod().setUnlocalizedName("fishingRod").setTextureName("tools/fishing_rod");
-		coal = new ItemCoal().setUnlocalizedName("coal");
-		stick = new ItemStick().setFull3D().setUnlocalizedName("stick");
+		coal = Items.coal;
+		stick = Items.stick;
 		bow = new ItemCustomBow().setUnlocalizedName("bow").setTextureName("tools/bow");
 		Items.bow = (ItemBow) bow;
 		arrow = new ItemArrow().setUnlocalizedName("arrow").setCreativeTab(TFCTabs.TFC_WEAPONS);
@@ -591,7 +591,7 @@ public class ItemSetup extends TFCItems {
 		//PotteryPot = new ItemPotteryPot().setUnlocalizedName("Pot");
 		ceramicMold = new ItemPotteryBase().setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
 		potteryBowl = new ItemPotteryBase().setMetaNames(new String[]{"Clay Bowl","Ceramic Bowl"}).setUnlocalizedName("ClayBowl");
-		clayBall = new ItemClay().setSpecialCraftingType(flatClay, new ItemStack(flatClay, 1, 1)).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("Clay");
+		fireClayBall = new ItemFireClay().setSpecialCraftingType(flatClay, new ItemStack(flatClay, 1, 1)).setMetaNames(new String[]{"Fire Clay"}).setUnlocalizedName("Clay");
 		fireBrick = new ItemPotteryBase().setMetaNames(new String[]{"Clay Fire Brick","Fire Brick"}).setUnlocalizedName("Fire Brick");
 
 		clayMoldAxe = new ItemPotteryMold().setMetaNames(new String[]{"Clay Mold Axe","Ceramic Mold Axe",
@@ -1219,7 +1219,7 @@ public class ItemSetup extends TFCItems {
 		TFCFuelHandler.registerFuel(bow, 100);
 		TFCFuelHandler.registerFuel(fishingRod, 100);
 		TFCFuelHandler.registerFuel(stick, 100);
-		TFCFuelHandler.registerFuel(coal, 1600);
+		TFCFuelHandler.registerFuel(Items.coal, 1600);
 		TFCFuelHandler.registerFuel(woolCloth, 20);
 		TFCFuelHandler.registerFuel(silkCloth, 20);
 		TFCFuelHandler.registerFuel(burlapCloth, 20);

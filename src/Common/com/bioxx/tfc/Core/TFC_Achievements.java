@@ -1,16 +1,14 @@
 package com.bioxx.tfc.Core;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
-
 import net.minecraftforge.common.AchievementPage;
 
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TFC_Achievements
 {
@@ -70,7 +68,7 @@ public class TFC_Achievements
 		achIronAge = createAchievement("achievement.achIronAge", "achIronAge", 5, 3, new ItemStack(TFCItems.rawBloom), achBronzeAge);
 		achPokeCreeper = createAchievement("achievement.achPokeCreeper", "achPokeCreeper", -3, -3, new ItemStack(Items.skull, 1, 4), null);
 		achBlastFurnace = createAchievement("achievement.achBlastFurnace", "achBlastFurnace", 6, 1, new ItemStack(TFCBlocks.blastFurnace), achIronAge);
-		achFireClay = createAchievement("achievement.achFireClay", "achFireClay", 5, -5, new ItemStack(TFCItems.clayBall, 1, 1), achQuern);
+		achFireClay = createAchievement("achievement.achFireClay", "achFireClay", 5, -5, new ItemStack(TFCItems.fireClayBall, 1, 0), achQuern);
 		achCrucible = createAchievement("achievement.achCrucible", "achCrucible", 7, -5, new ItemStack(TFCBlocks.crucible), achFireClay);
 		achUnknown = createAchievement("achievement.achUnknown", "achUnknown", 7, -3, new ItemStack(TFCItems.unknownIngot), achCrucible);
 		achBlackSteel = createAchievement("achievement.achBlackSteel", "achBlackSteel", 7, 0, new ItemStack(TFCItems.blackSteelIngot), achBlastFurnace);
