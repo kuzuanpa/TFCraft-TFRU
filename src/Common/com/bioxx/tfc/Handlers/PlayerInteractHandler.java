@@ -55,7 +55,7 @@ public class PlayerInteractHandler
 		if(itemInHand.getItem().equals(Items.clay_ball))handleClayBall(itemInHand, event.entityPlayer);
 		if(itemInHand.getItem().equals(Items.coal) && event.face != -1)handleCoal(itemInHand, event.world, event.x, event.y, event.z, event.face);
 	}
-	private int[][] coalMap =
+	private static final int[][] coalMap =
 			{   {0,-1,0},
 					{0,1,0},
 					{0,0,-1},
