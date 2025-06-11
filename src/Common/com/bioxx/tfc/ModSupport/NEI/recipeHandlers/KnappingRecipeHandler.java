@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import static com.bioxx.tfc.Core.TFC_Core.l10n;
+import static com.bioxx.tfc.api.TFCItems.flatClay;
 
 public class KnappingRecipeHandler extends TemplateRecipeHandler {
 	private static List<ShapedRecipesTFC> recipeList;
@@ -68,12 +69,22 @@ public class KnappingRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	public void loadUsageRecipes(ItemStack ingredient) {
+		if(ingredient.getItem().equals(Items.clay_ball)){
+			addRecipe(recipe -> Arrays.stream(recipe.getRecipeItems()).filter(itemStack -> itemStack != null && itemStack.getItem() == flatClay).anyMatch(is -> {
+				int inMeta = ingredient.getItemDamage();
+				int outMeta=is.getItemDamage();
+				return (inMeta == 0 && outMeta == 1) ||
+						(outMeta == 32767 || inMeta == outMeta);
+			}));
+			return;
+		}
 		if (!(ingredient.getItem() instanceof ItemLooseRock))return;
 		Item type = ((ItemLooseRock) ingredient.getItem()).getSpecialCraftingType();
 		addRecipe(recipe -> Arrays.stream(recipe.getRecipeItems()).filter(itemStack -> itemStack != null && itemStack.getItem() == type).anyMatch(is -> {
 			int inMeta = ingredient.getItemDamage();
 			int outMeta=is.getItemDamage();
-			return (type == TFCItems.flatClay && ((inMeta == 0 && outMeta == 1) || (inMeta == 1 && outMeta == 3))) ||
+			return (type == TFCItems.flatClay
+					&& (inMeta == 0 && outMeta == 3)) ||
 					(outMeta == 32767 || inMeta == outMeta);
 		}));
 	}

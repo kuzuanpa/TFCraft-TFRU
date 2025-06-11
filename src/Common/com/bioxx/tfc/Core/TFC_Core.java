@@ -816,7 +816,7 @@ public class TFC_Core
 		if(is.getItem() == Item.getItemFromBlock(TFCBlocks.peat))
 			return EnumFuelMaterial.PEAT;
 
-		if(is.getItem() == Items.coal && is.getItemDamage() == 0)
+		if(is.getItem() == Items.coal)
 			return EnumFuelMaterial.COAL;
 
 		if(is.getItemDamage() == 0)
