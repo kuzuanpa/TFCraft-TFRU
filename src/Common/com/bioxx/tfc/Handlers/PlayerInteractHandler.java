@@ -52,8 +52,9 @@ public class PlayerInteractHandler
 		if(validAction && event.getResult() != Result.DENY && itemInHand == null) handleDrinkingWater( event.entityPlayer );
 		if(!validAction || itemInHand == null || event.getResult() == Result.DENY)return;
 
-		if(itemInHand.getItem().equals(Items.clay_ball))handleClayBall(itemInHand, event.entityPlayer);
-		if(itemInHand.getItem().equals(Items.coal) && event.face != -1)handleCoal(itemInHand, event.world, event.x, event.y, event.z, event.face);
+		if(event.action == Action.RIGHT_CLICK_AIR && itemInHand.getItem().equals(Items.clay_ball))handleClayBall(itemInHand, event.entityPlayer);
+
+		if(event.entityPlayer.isSneaking() && itemInHand.getItem().equals(Items.coal) && event.face != -1)handleCoal(itemInHand, event.world, event.x, event.y, event.z, event.face);
 	}
 	private static final int[][] coalMap =
 			{   {0,-1,0},
