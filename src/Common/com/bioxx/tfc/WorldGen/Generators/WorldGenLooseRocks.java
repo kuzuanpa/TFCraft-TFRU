@@ -11,7 +11,6 @@ import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -29,15 +28,11 @@ public class WorldGenLooseRocks implements IWorldGenerator
 
 	public boolean generateRocks(World world, Random random, int i, int j, int k)
 	{
-		if (!((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j + 1, k) == TFCBlocks.tallGrass) &&
-				(world.getBlock(i, j, k).getMaterial() == Material.grass || world.getBlock(i, j, k).getMaterial() == Material.rock) && world.getBlock(i, j, k).isOpaqueCube()))return false;
-
-
 		if(world.setBlock(i, j+1, k, TFCBlocks.worldItem, 0, 2))
 		{
 			TEWorldItem te =(TEWorldItem)world.getTileEntity(i, j + 1, k);
-			ItemStack sample = getCoreSample(world, i, j, k);
-			if(world.rand.nextInt(3) == 0 && sample != null)
+			ItemStack sample = new ItemStack(TFCItems.looseRock,1,random.nextInt(15));
+			if(world.rand.nextInt(3) == 0)
 			{
 				te.storage[0] = sample;
 			}
@@ -117,21 +112,10 @@ public class WorldGenLooseRocks implements IWorldGenerator
 
 	public boolean generateSticks(World world, Random random, int i, int j, int k)
 	{
-		if ((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j + 1, k) == TFCBlocks.tallGrass) && 
-				(world.getBlock(i, j, k).getMaterial() == Material.grass || world.getBlock(i, j, k).getMaterial() == Material.rock ||
-				world.getBlock(i, j, k) .getMaterial() == Material.sand || world.getBlock(i, j, k).getMaterial() == Material.ground) && world.getBlock(i, j, k).isOpaqueCube())
-		{
-			if (world.getBiomeGenForCoords(i, k) instanceof TFCBiome) // Fixes ClassCastException
-			{
-				TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(i, k);
-				if ((biome == TFCBiome.DEEP_OCEAN || biome == TFCBiome.BEACH || biome == TFCBiome.GRAVEL_BEACH || biome == TFCBiome.OCEAN || biome == TFCBiome.RIVER || isNearTree(world, i, j, k)) &&
-						world.setBlock(i, j + 1, k, TFCBlocks.worldItem, 0, 2))
-				{
-					TEWorldItem te = (TEWorldItem) world.getTileEntity(i, j + 1, k);
-					//BlockMeta rockLayer = TFC_Climate.getRockLayer(i, j, k, 0);
-					te.storage[0] = new ItemStack(TFCItems.stick, 1);
-				}
-			}
+		if (world.setBlock(i, j + 1, k, TFCBlocks.worldItem, 0, 2)) {
+			TEWorldItem te = (TEWorldItem) world.getTileEntity(i, j + 1, k);
+			//BlockMeta rockLayer = TFC_Climate.getRockLayer(i, j, k, 0);
+			te.storage[0] = new ItemStack(TFCItems.stick, 1);
 		}
 		return true;
 	}

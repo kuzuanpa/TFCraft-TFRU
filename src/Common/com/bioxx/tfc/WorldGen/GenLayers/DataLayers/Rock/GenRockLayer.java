@@ -1,15 +1,13 @@
 package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-
-import javax.imageio.ImageIO;
-
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.*;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 public abstract class GenRockLayer extends GenLayerTFC
 {
@@ -37,8 +35,6 @@ public abstract class GenRockLayer extends GenLayerTFC
 		drawImage(512, layer, "Rock 7");
 		layer = new GenLayerZoomTFC(1002L, layer);
 		drawImage(512, layer, "Rock 8");
-		layer = new GenLayerZoomTFC(1003L, layer);
-		drawImage(512, layer, "Rock 9");
 
 		GenLayerSmoothTFC smoothedLayer = new GenLayerSmoothTFC(1000L, layer);
 		GenLayerVoronoiZoomTFC voronoiLayer = new GenLayerVoronoiZoomTFC(10L, smoothedLayer);

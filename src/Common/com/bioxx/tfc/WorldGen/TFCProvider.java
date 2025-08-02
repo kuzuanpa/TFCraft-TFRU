@@ -1,5 +1,12 @@
 package com.bioxx.tfc.WorldGen;
 
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.api.TFCBlocks;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import gregapi.util.WD;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -8,15 +15,6 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.Constant.Global;
 import net.minecraft.world.storage.WorldInfo;
 
 public class TFCProvider extends WorldProvider
@@ -48,9 +46,7 @@ public class TFCProvider extends WorldProvider
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
 		int y = worldObj.getTopSolidOrLiquidBlock(x, z)-1;
-		if(y < Global.worldHeightAverage || y > Global.worldHeightAverage + 25) return false;
-		Block b = worldObj.getBlock(x, y, z);
-		return TFC_Core.isGrass(b);
+		return !WD.air(worldObj,x,y,z);
 	}
 
 	@Override

@@ -1,11 +1,21 @@
 package com.bioxx.tfc.Handlers;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Chunkdata.ChunkDataManager;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Food.CropIndex;
+import com.bioxx.tfc.Food.CropManager;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenPlants;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenWaterPlants;
 import com.bioxx.tfc.WorldGen.TFCProvider;
+import com.bioxx.tfc.WorldGen.WorldCacheManager;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
+import com.bioxx.tfc.api.TFCBlocks;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.ChunkPosition;
@@ -13,27 +23,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.WorldInfo;
-
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-
-import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Food.CropIndex;
-import com.bioxx.tfc.Food.CropManager;
-import com.bioxx.tfc.WorldGen.WorldCacheManager;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenPlants;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenWaterPlants;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.Crafting.AnvilManager;
-
-import static com.bioxx.tfc.TerraFirmaCraft.TFCDimID;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class ChunkEventHandler
 {
@@ -219,35 +215,41 @@ public class ChunkEventHandler
 		Random rand = new Random(seed);
 
 		ChunkPosition chunkCoord = null;
-		int xOffset = 0;
 		int xCoord = 0;
 		//int yCoord = Global.SEALEVEL+1;
-		int zCoord = 10000;
-		int startingZ = 5000 + rand.nextInt(10000);
+		int zCoord = rand.nextInt(8000);
 
-		while(chunkCoord == null)
-		{
-			chunkCoord = world.getWorldChunkManager().findBiomePosition(xOffset, -startingZ, 64, biomeList, rand);
-			if (chunkCoord != null)
-			{
-				xCoord = chunkCoord.chunkPosX;
-				zCoord = chunkCoord.chunkPosZ;
-			}
-			else
-			{
-				xOffset += 64;
-				//TerraFirmaCraft.log.warn("Unable to find spawn biome");
-			}
-		}
+		//while(chunkCoord == null)
+		//{
+		//	chunkCoord = world.getWorldChunkManager().findBiomePosition(xOffset, -startingZ, 64, biomeList, rand);
+		//	if (chunkCoord != null)
+		//	{
+		//		xCoord = chunkCoord.chunkPosX;
+		//		zCoord = chunkCoord.chunkPosZ;
+		//	}
+		//	else
+		//	{
+		//		xOffset += 64;
+		//		//TerraFirmaCraft.log.warn("Unable to find spawn biome");
+		//	}
+		//}
 
-		int var9 = 0;
-		while (!world.provider.canCoordinateBeSpawn(xCoord, zCoord))
-		{
-			xCoord += rand.nextInt(16) - rand.nextInt(16);
-			zCoord += rand.nextInt(16) - rand.nextInt(16);
-			++var9;
-			if (var9 >= 1000)
-				break;
+		//int var9 = 0;
+		//if (!world.provider.canCoordinateBeSpawn(xCoord, zCoord))
+		//{
+		//	xCoord += rand.nextInt(16) - rand.nextInt(16);
+		//	zCoord += rand.nextInt(16) - rand.nextInt(16);
+		//	world.setBlock(xCoord, 108, zCoord, Blocks.end_stone);
+		//	FMLLog.log(Level.INFO, "TFCIsland: create spawn at: "+xCoord+", "+zCoord);
+		//}
+
+		for (int x = -8; x < 8; x++) {
+			for (int z = -8; z < 8; z++) {
+				world.setBlock(xCoord +x, 94, zCoord +z, Blocks.end_stone);
+				world.setBlock(xCoord +x, 95, zCoord +z, TFCBlocks.dirt, rand.nextInt(12),0);
+				if(x==3 && z==3)world.setBlock(xCoord +x, 95, zCoord +z, TFCBlocks.lavaStationary);
+				if(x==3 && z==-3)world.setBlock(xCoord +x, 95, zCoord +z, TFCBlocks.freshWaterStationary);
+			}
 		}
 
 		WorldInfo info = world.getWorldInfo();

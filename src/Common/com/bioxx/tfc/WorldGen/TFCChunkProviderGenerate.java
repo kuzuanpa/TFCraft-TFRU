@@ -1,10 +1,14 @@
 package com.bioxx.tfc.WorldGen;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
+import com.bioxx.tfc.Blocks.Terrain.BlockCollapsible;
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.Mobs.*;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
@@ -16,22 +20,13 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderGenerate;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 
-import com.bioxx.tfc.Blocks.Terrain.BlockCollapsible;
-import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.Mobs.*;
-import com.bioxx.tfc.WorldGen.MapGen.MapGenCavesTFC;
-import com.bioxx.tfc.WorldGen.MapGen.MapGenRavineTFC;
-import com.bioxx.tfc.WorldGen.MapGen.MapGenRiverRavine;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Constant.Global;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 	/** RNG. */
@@ -98,10 +93,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 
 	private int[] seaLevelOffsetMap = new int[256];
 	private int[] chunkHeightMap = new int[256];
-	private MapGenCavesTFC caveGen = new MapGenCavesTFC();
-	private MapGenRavineTFC surfaceRavineGen = new MapGenRavineTFC(125, 30);//surface
-	private MapGenRavineTFC ravineGen = new MapGenRavineTFC(20, 50);//deep
-	private MapGenRiverRavine riverRavineGen = new MapGenRiverRavine();
+	//private MapGenCavesTFC caveGen = new MapGenCavesTFC();
+	//private MapGenRavineTFC surfaceRavineGen = new MapGenRavineTFC(125, 30);//surface
+	//private MapGenRavineTFC ravineGen = new MapGenRavineTFC(20, 50);//deep
+	//private MapGenRiverRavine riverRavineGen = new MapGenRiverRavine();
 
 	public TFCChunkProviderGenerate(World par1World, long par2, boolean par4)
 	{
@@ -135,7 +130,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 		Arrays.fill(idsBig, null);
 		Arrays.fill(metaBig, (byte)0);
 
-		this.generateTerrainHigh(chunkX, chunkZ, idsTop);
+		//this.generateTerrainHigh(chunkX, chunkZ, idsTop);
+
+		//if(rand.nextInt(16)==0)
 
 		biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, chunkX * 16-1, chunkZ * 16-1, 18, 18);
 		if (TFC_Climate.getCacheManager(worldObj) != null)
@@ -151,13 +148,16 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 
 		seaLevelOffsetMap = new int[256];
 
-		replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);
-		replaceBlocksForBiomeLow(chunkX, chunkZ, rand, idsBig, metaBig);
+		if(rand.nextInt(64)==0)genVoidPieceWorld();
 
-		caveGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
-		surfaceRavineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//surface
-		ravineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//deep
-		riverRavineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
+		//islandfy
+		//replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);
+		//replaceBlocksForBiomeLow(chunkX, chunkZ, rand, idsBig, metaBig);
+		//
+		//caveGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
+		//surfaceRavineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//surface
+		//ravineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//deep
+		//riverRavineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 
 		Chunk chunk = new Chunk(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		byte[] abyte1 = chunk.getBiomeArray();
@@ -357,6 +357,21 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 		}
 	}
 
+	public void genVoidPieceWorld(){
+		for (int x = 0; x < 16; x++) {
+			for (int z = 0; z < 16; z++) {
+				int arrayIndex = x + z * 16;
+				int indexOffset = Global.worldHeightAverage-16;
+				int indexBig = (arrayIndex) * 256 - 14 + indexOffset;
+
+				idsBig[indexBig] = Blocks.end_stone;
+
+				indexBig = (arrayIndex) * 256 - 13 + indexOffset;
+				idsBig[indexBig] = TFCBlocks.dirt;
+				metaBig[indexBig] = (byte) rand.nextInt(12);
+			}
+		}
+	}
 	public void generateTerrainHigh(int chunkX, int chunkZ, Block[] idsTop)
 	{
 		byte subDivXZ = 4;

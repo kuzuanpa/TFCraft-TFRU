@@ -3,12 +3,18 @@
 //=======================================================
 package com.bioxx.tfc;
 
+import com.bioxx.tfc.Commands.*;
+import com.bioxx.tfc.Core.Config.TFC_ConfigFiles;
+import com.bioxx.tfc.Core.*;
+import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Enchant.TFCEnchant;
-
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.ForgeModContainer;
-import net.minecraftforge.common.MinecraftForge;
-
+import com.bioxx.tfc.Food.TFCPotion;
+import com.bioxx.tfc.Handlers.*;
+import com.bioxx.tfc.Handlers.Network.PacketPipeline;
+import com.bioxx.tfc.WorldGen.Generators.*;
+import com.bioxx.tfc.WorldGen.TFCProvider;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.SkillsManager;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
@@ -22,20 +28,9 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-
-import com.bioxx.tfc.Commands.*;
-import com.bioxx.tfc.Core.*;
-import com.bioxx.tfc.Core.Config.TFC_ConfigFiles;
-import com.bioxx.tfc.Core.Player.PlayerTracker;
-import com.bioxx.tfc.Food.TFCPotion;
-import com.bioxx.tfc.Handlers.*;
-import com.bioxx.tfc.Handlers.Network.PacketPipeline;
-import com.bioxx.tfc.WorldGen.TFCProvider;
-import com.bioxx.tfc.WorldGen.Generators.*;
-import com.bioxx.tfc.api.SkillsManager;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Constant.Global;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.ForgeModContainer;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -104,17 +99,17 @@ public class TerraFirmaCraft
 
 		//Register Generators
 		//Underground Lava
-		GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.lava, 2, true, TFCOptions.lavaFissureRarity).setUnderground(true, 20).setSeed(1), 0);
-		GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.freshWaterStationary, 2, false, TFCOptions.waterFissureRarity), 0);
+		//GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.lava, 2, true, TFCOptions.lavaFissureRarity).setUnderground(true, 20).setSeed(1), 0);
+		//GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.freshWaterStationary, 2, false, TFCOptions.waterFissureRarity), 0);
 		//Surface Hotsprings
-		GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
-		GameRegistry.registerWorldGenerator(new WorldGenOre(), 2);
-		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor(), 3);
+		//GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
+		//GameRegistry.registerWorldGenerator(new WorldGenOre(), 2);
+		//GameRegistry.registerWorldGenerator(new WorldGenCaveDecor(), 3);
 		GameRegistry.registerWorldGenerator(new WorldGenForests(), 4);
 		GameRegistry.registerWorldGenerator(new WorldGenLooseRocks(), 5);
-		GameRegistry.registerWorldGenerator(new WorldGenSoilPits(), 6);
-		GameRegistry.registerWorldGenerator(new WorldGenLargeRock(), 7);
-		GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);
+		//GameRegistry.registerWorldGenerator(new WorldGenSoilPits(), 6);
+		//GameRegistry.registerWorldGenerator(new WorldGenLargeRock(), 7);
+		GameRegistry.registerWorldGenerator(new WorldGenPlants(), 6);
 
 
 		//DimensionManager.unregisterDimension(-1);
