@@ -1,10 +1,17 @@
 package com.bioxx.tfc.WorldGen;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
+import com.bioxx.tfc.Blocks.Terrain.BlockCollapsible;
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.Mobs.*;
+import com.bioxx.tfc.WorldGen.MapGen.MapGenCavesTFC;
+import com.bioxx.tfc.WorldGen.MapGen.MapGenRavineTFC;
+import com.bioxx.tfc.WorldGen.MapGen.MapGenRiverRavine;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
@@ -16,22 +23,13 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderGenerate;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 
-import com.bioxx.tfc.Blocks.Terrain.BlockCollapsible;
-import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.Mobs.*;
-import com.bioxx.tfc.WorldGen.MapGen.MapGenCavesTFC;
-import com.bioxx.tfc.WorldGen.MapGen.MapGenRavineTFC;
-import com.bioxx.tfc.WorldGen.MapGen.MapGenRiverRavine;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Constant.Global;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 	/** RNG. */
@@ -340,21 +338,15 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 	public boolean canSnowAt(World world, int x, int y, int z)
 	{
 		float var5 = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
-		if (var5 >= 0F)
+		if (var5 >= 0F) return false;
+
+		if (y >= 0 && y < 256 && world.getSavedLightValue(EnumSkyBlock.Block, x, y, z) < 10 && TFC_Time.getTotalMonths() > 1)
 		{
-			return false;
+			Block var6 = world.getBlock(x, y - 1, z);
+			Block var7 = world.getBlock(x, y, z);
+            return var7.isAir(world, x, y, z) && TFCBlocks.snow.canPlaceBlockAt(world, x, y, z) && !var6.isAir(world, x, y - 1, z) && var6.getMaterial().blocksMovement();
 		}
-		else
-		{
-			if (y >= 0 && y < 256 && world.getSavedLightValue(EnumSkyBlock.Block, x, y, z) < 10 && TFC_Time.getTotalMonths() > 1)
-			{
-				Block var6 = world.getBlock(x, y - 1, z);
-				Block var7 = world.getBlock(x, y, z);
-				if (var7.isAir(world, x, y, z) && TFCBlocks.snow.canPlaceBlockAt(world, x, y, z) && !var6.isAir(world, x, y - 1, z) && var6.getMaterial().blocksMovement())
-					return true;
-			}
-			return false;
-		}
+		return false;
 	}
 
 	public void generateTerrainHigh(int chunkX, int chunkZ, Block[] idsTop)

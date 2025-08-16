@@ -1,7 +1,10 @@
 package com.bioxx.tfc.Blocks.Vanilla;
 
-import java.util.Random;
-
+import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.WeatherManager;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.api.TFCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,11 +19,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Blocks.BlockTerra;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.WeatherManager;
-import com.bioxx.tfc.api.TFCBlocks;
+import java.util.Random;
 
 public class BlockCustomSnow extends BlockTerra
 {
@@ -155,7 +154,7 @@ public class BlockCustomSnow extends BlockTerra
 		
 		if (temp <= 0 && WeatherManager.isRainingOnCoord(world,x, y, z))  //Raining and Below Freezing
 		{
-			if (r.nextInt(20) == 0)
+			if (r.nextInt(10) == 0)
 			{
 				int max = (world.getBlock(x, y - 1, z).getMaterial() == Material.leaves) ? 3 : 7;
 				if(meta < max && canAddSnow(world, x, y, z, meta))

@@ -1457,21 +1457,22 @@ public class TFC_Core
 	
 	public static boolean isExposedToRain(World world, int x, int y, int z)
 	{
+		if(!world.isRaining())return false;
+
 		int highestY = world.getPrecipitationHeight(x, z) - 1;
-		boolean isExposed = true;
-		if (world.canBlockSeeTheSky(x, y + 1, z)) // Either no blocks, or transparent blocks above.
+
+		if(!world.canBlockSeeTheSky(x, y + 1, z))return false;
+
+		if (highestY > y) // Either no blocks, or transparent blocks above.
 		{
 			// Glass blocks, or blocks with a solid top or bottom block the rain.
-			if (world.getBlock(x, highestY, z) instanceof BlockGlass
-					|| world.getBlock(x, highestY, z) instanceof BlockStainedGlass
-					|| world.isSideSolid(x, highestY, z, ForgeDirection.UP) 
-					|| world.isSideSolid(x, highestY, z, ForgeDirection.DOWN))
-				isExposed = false;
+            return !(world.getBlock(x, highestY, z) instanceof BlockGlass)
+                    && !(world.getBlock(x, highestY, z) instanceof BlockStainedGlass)
+                    && !world.isSideSolid(x, highestY, z, ForgeDirection.UP)
+                    && !world.isSideSolid(x, highestY, z, ForgeDirection.DOWN);
 		}
-		else // Can't see the sky
-			isExposed = false;
 
-		return world.isRaining() && isExposed;
+		return true;
 	}
 	public static String l10n(String key){
 		String possibleText = LanguageRegistry.instance().getStringLocalization(key);
