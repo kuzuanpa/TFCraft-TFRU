@@ -1,9 +1,9 @@
 package com.bioxx.tfc.TileEntities;
 
+import com.bioxx.tfc.api.TFCBlocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -11,13 +11,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
 
 import java.util.Random;
 
 public class TEWorldItem extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[1];
-	public boolean hasSnow = false;
+	public byte snowLevel = 0;
 	private static final Random rng = new Random();
 	public EntityItem renderItem;
 
@@ -28,15 +29,16 @@ public class TEWorldItem extends NetworkTileEntity implements IInventory
 	@Override
 	public void updateEntity() {
 		if(worldObj != null && worldObj.isRemote){//is Client Side
-			if(!hasSnow && rng.nextInt(100) == 1 &&(
-					isBlockMaterialSnow(getWorldObj().getBlock(xCoord+1,yCoord,zCoord  ))||
-			        isBlockMaterialSnow(getWorldObj().getBlock(xCoord-1,yCoord,zCoord  ))||
-			        isBlockMaterialSnow(getWorldObj().getBlock(xCoord,  yCoord,zCoord+1))||
-			        isBlockMaterialSnow(getWorldObj().getBlock(xCoord,  yCoord,zCoord-1))))hasSnow=true;
+			if(rng.nextInt(100) == 1)snowLevel = (byte)
+					Math.min(getBlockSnowLevel(getWorldObj(),xCoord+1,yCoord,zCoord ),
+					Math.min(getBlockSnowLevel(getWorldObj(),xCoord-1,yCoord,zCoord ),
+					Math.min(getBlockSnowLevel(getWorldObj(),xCoord,  yCoord,zCoord+1),
+			        getBlockSnowLevel(getWorldObj(),xCoord,  yCoord,zCoord-1))));
 		}
 	}
-	public static boolean isBlockMaterialSnow(Block block){
-		return block != null && block.getMaterial() != null &&block.getMaterial().equals(Material.snow);
+	public static byte getBlockSnowLevel(World world, int x, int y, int z){
+		Block block = world.getBlock(x,y,z);
+		return (byte) (block != null && block.equals(TFCBlocks.snow) ? world.getBlockMetadata(x,y,z)+1 : 0);
 	}
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) 
@@ -51,6 +53,7 @@ public class TEWorldItem extends NetworkTileEntity implements IInventory
 			if(byte0 >= 0 && byte0 < storage.length)
 				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
+		snowLevel = nbt.getByte("snow");
 	}
 
 	@Override
@@ -64,7 +67,7 @@ public class TEWorldItem extends NetworkTileEntity implements IInventory
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{
-		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 0.1, zCoord + 1);
+		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 0.125*Math.max(1, snowLevel), zCoord + 1);
 	}
 
 	@Override
@@ -83,6 +86,7 @@ public class TEWorldItem extends NetworkTileEntity implements IInventory
 			}
 		}
 		nbt.setTag("Items", nbttaglist);
+		nbt.setByte("snow", snowLevel);
 	}
 
 	@Override

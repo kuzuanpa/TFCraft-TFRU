@@ -46,7 +46,7 @@ public class BlockCustomSnow extends BlockTerra
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
 		float f = 0.125F;
-		return AxisAlignedBB.getBoundingBox(x + this.minX, y + this.minY, z + this.minZ, x + this.maxX, y + f, z + this.maxZ);
+		return AxisAlignedBB.getBoundingBox(x + this.minX, y + this.minY, z + this.minZ, x + this.maxX, y + f * (world.getBlockMetadata(x,y,z) & 7), z + this.maxZ);
 	}
 	
 	@Override
@@ -88,7 +88,7 @@ public class BlockCustomSnow extends BlockTerra
 		//    7  0.10   -  eight layers = like leaves
 		
 		int meta = world.getBlockMetadata(x, y, z) & 7;
-		double speed = 0.98 - 0.125 * meta;
+		double speed = 0.98 - 0.02 * meta;
 		entity.motionX *= speed;
 		entity.motionZ *= speed;
 	}
@@ -101,11 +101,9 @@ public class BlockCustomSnow extends BlockTerra
 			world.setBlock(x, y, z, Blocks.air, 0, 2);
 		}
 	}
-
 	@Override
-	public int quantityDropped(Random r)
-	{
-		return 1;
+	public int quantityDropped(int meta, int fortune, Random random) {
+		return meta + 1;
 	}
 
 	@Override

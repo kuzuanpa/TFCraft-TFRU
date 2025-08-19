@@ -1,28 +1,26 @@
 package com.bioxx.tfc.Blocks;
 
-import java.util.Random;
-
+import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.TileEntities.TEWorldItem;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import gregapi.util.UT;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import com.bioxx.tfc.Core.TFC_Textures;
-import com.bioxx.tfc.TileEntities.TEWorldItem;
+import java.util.ArrayList;
 
 public class BlockWorldItem extends BlockTerraContainer
 {
@@ -43,37 +41,22 @@ public class BlockWorldItem extends BlockTerraContainer
 	{
 	}*/
 
-	@Override
-	public void onBlockPreDestroy(World world, int x, int y, int z, int meta) 
-	{
-		if(!world.isRemote)
-		{
-			TileEntity te = world.getTileEntity(x, y, z);
-			if (te instanceof IInventory) {
-				IInventory inv = (IInventory) te;
-				for (int i = 0; i< inv.getSizeInventory(); i++) {
-					if (inv.getStackInSlot(i) != null) {
-						EntityItem ei = new EntityItem(world, x+0.5, y+0.5, z+0.5, inv.getStackInSlot(i));
-						inv.setInventorySlotContents(i, null);  // so it is not created again in super.breakBlock()
-						ei.motionX = 0;
-						ei.motionY = 0;
-						ei.motionZ = 0;
-						world.spawnEntityInWorld(ei);
-					}
-				}
-			}
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+		TileEntity te = world.getTileEntity(x, y, z);
+		if (!(te instanceof IInventory))return new ArrayList<>();
+
+		ArrayList<ItemStack> ret = new ArrayList<>();
+		IInventory inv = (IInventory) te;
+		for (int i = 0; i< inv.getSizeInventory(); i++) {
+			ret.add(inv.getStackInSlot(i));
 		}
-		super.onBlockPreDestroy(world, x, y, z, meta);
+		if(!(te instanceof TEWorldItem) || ((TEWorldItem) te).snowLevel == 0)return ret;
+		ret.add(new ItemStack(Items.snowball, ((TEWorldItem) te).snowLevel, 0));
+		return ret;
 	}
 
 	@Override
-	public Item getItemDropped(int metadata, Random rand, int fortune)
-	{
-		return null;
-	}
-
-	@Override
-	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player)
 	{
 		return null;
 	}
@@ -81,8 +64,11 @@ public class BlockWorldItem extends BlockTerraContainer
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
-		if(!world.isRemote)
-			return world.setBlockToAir(x, y, z);
+		if(!world.isRemote){
+			dropBlockAsItem(world, x,y,z, 0,0);
+			world.setBlockToAir(x, y, z);
+			return true;
+		}
 		return false;
 	}
 
@@ -124,17 +110,33 @@ public class BlockWorldItem extends BlockTerraContainer
 	{
 		return false;
 	}
+	@Override
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+	{
+		// meta  speed
+		//    0  0.98   -  one layer
+		//    7  0.10   -  eight layers = like leaves
+		TileEntity te = world.getTileEntity(x,y,z);
+		if(!(te instanceof TEWorldItem))return;
+		int meta = ((TEWorldItem) te).snowLevel + 1;
+		double speed = 0.98 - 0.02 * meta;
+		entity.motionX *= speed;
+		entity.motionZ *= speed;
+		if(Math.abs(entity.motionX) > 0.01 || Math.abs(entity.motionZ) > 0.01)UT.Sounds.send("step.snow", world,x,y,z);
+	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		return null;
+		TileEntity te = world.getTileEntity(x,y,z);
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, te instanceof TEWorldItem? y + ((TEWorldItem) te).snowLevel* 0.1F : y + 0.1, z + 1);
 	}
 
 	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 0.25, z + 1);
+		TileEntity te = world.getTileEntity(x,y,z);
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, te instanceof TEWorldItem? y + ((TEWorldItem) te).snowLevel* 0.125F : y + 0.2, z + 1);
 	}
 
 	@Override

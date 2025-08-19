@@ -1,8 +1,16 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
-import java.util.List;
-import java.util.Random;
-
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Core.*;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenLooseRocks;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenSaplings;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCOptions;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,18 +23,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Core.*;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenLooseRocks;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenSaplings;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Constant.Global;
+import java.util.List;
+import java.util.Random;
 
 public class BlockGrass extends BlockSandLike
 {

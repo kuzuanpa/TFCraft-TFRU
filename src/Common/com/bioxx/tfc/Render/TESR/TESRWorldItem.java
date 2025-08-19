@@ -1,24 +1,16 @@
 package com.bioxx.tfc.Render.TESR;
 
-import java.util.Random;
-
-import codechicken.lib.render.BlockRenderer;
-import com.bioxx.tfc.Render.TFC_CoreRender;
+import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.api.TFCBlocks;
-import net.minecraft.block.BlockSnow;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
-
 import net.minecraft.util.IIcon;
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TileEntities.TEWorldItem;
+import java.util.Random;
 
 public class TESRWorldItem extends TESRBase
 {
@@ -29,39 +21,45 @@ public class TESRWorldItem extends TESRBase
 	}
 	public static void tryUpdateSnowLayerID(){
 		if(TFCBlocks.snow.getIcon(0,0) == null)return;
-		snowLayerID = GL11.glGenLists(1);
-		GL11.glNewList(snowLayerID, GL11.GL_COMPILE);
+		snowLayerID = GL11.glGenLists(8);
+		for (int i = 1; i <= 8; i++) {
+			GL11.glNewList(snowLayerID+ i -1, GL11.GL_COMPILE);
+			drawSnow(i);
+			GL11.glEndList();
+		}
+	}
+	public static void drawSnow(int num){
 		IIcon icon = TFCBlocks.snow.getIcon(0,0);
+		float minU =icon.getMinU(),maxU=icon.getMaxU(), minV=icon.getMinV(),maxV=icon.getMaxV();
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
-		float sminU =icon.getMinU(),smaxU=icon.getMaxU(), sminV=icon.getMinV(),smaxV=icon.getMaxV(), sidemaxV = sminV+(smaxV-sminV)*0.125f;
+		float sideMaxV = minV + (maxV - minV) * 0.125F * num;
 		tessellator.setNormal( 0,  1,  0);
-		tessellator.addVertexWithUV(0, 0.125, 0, sminU, smaxV);
-		tessellator.addVertexWithUV(0, 0.125, 1, smaxU, smaxV);
-		tessellator.addVertexWithUV(1, 0.125, 1, smaxU, sminV);
-		tessellator.addVertexWithUV(1, 0.125, 0, sminU, sminV);
+		tessellator.addVertexWithUV(0, 0.125 * num, 0, minU, maxV);
+		tessellator.addVertexWithUV(0, 0.125 * num, 1, maxU, maxV);
+		tessellator.addVertexWithUV(1, 0.125 * num, 1, maxU, minV);
+		tessellator.addVertexWithUV(1, 0.125 * num, 0, minU, minV);
 		tessellator.setNormal( 0,  0,  -1);
-		tessellator.addVertexWithUV(1, 0.125, 0, smaxU, sidemaxV);
-		tessellator.addVertexWithUV(1, 0.00 , 0, smaxU, sminV);
-		tessellator.addVertexWithUV(0, 0.00 , 0, sminU, sminV);
-		tessellator.addVertexWithUV(0, 0.125, 0, sminU, sidemaxV);
+		tessellator.addVertexWithUV(1, 0.125 * num, 0, maxU, sideMaxV);
+		tessellator.addVertexWithUV(1, 0.00 , 0, maxU, minV);
+		tessellator.addVertexWithUV(0, 0.00 , 0, minU, minV);
+		tessellator.addVertexWithUV(0, 0.125 * num, 0, minU, sideMaxV);
 		tessellator.setNormal( -1,  0,  0);
-		tessellator.addVertexWithUV(0, 0.125, 0, smaxU, sidemaxV);
-		tessellator.addVertexWithUV(0, 0.00 , 0, smaxU, sminV);
-		tessellator.addVertexWithUV(0, 0.00 , 1, sminU, sminV);
-		tessellator.addVertexWithUV(0, 0.125, 1, sminU, sidemaxV);
+		tessellator.addVertexWithUV(0, 0.125 * num, 0, maxU, sideMaxV);
+		tessellator.addVertexWithUV(0, 0.00 , 0, maxU, minV);
+		tessellator.addVertexWithUV(0, 0.00 , 1, minU, minV);
+		tessellator.addVertexWithUV(0, 0.125 * num, 1, minU, sideMaxV);
 		tessellator.setNormal( 1,  0,  0);
-		tessellator.addVertexWithUV(1, 0.125, 1, smaxU, sidemaxV);
-		tessellator.addVertexWithUV(1, 0.00 , 1, smaxU, sminV);
-		tessellator.addVertexWithUV(1, 0.00 , 0, sminU, sminV);
-		tessellator.addVertexWithUV(1, 0.125, 0, sminU, sidemaxV);
+		tessellator.addVertexWithUV(1, 0.125 * num, 1, maxU, sideMaxV);
+		tessellator.addVertexWithUV(1, 0.00 , 1, maxU, minV);
+		tessellator.addVertexWithUV(1, 0.00 , 0, minU, minV);
+		tessellator.addVertexWithUV(1, 0.125 * num, 0, minU, sideMaxV);
 		tessellator.setNormal( 0,  0,  1);
-		tessellator.addVertexWithUV(0, 0.125, 1, smaxU, sidemaxV);
-		tessellator.addVertexWithUV(0, 0.00 , 1, smaxU, sminV);
-		tessellator.addVertexWithUV(1, 0.00 , 1, sminU, sminV);
-		tessellator.addVertexWithUV(1, 0.125, 1, sminU, sidemaxV);
+		tessellator.addVertexWithUV(0, 0.125 * num, 1, maxU, sideMaxV);
+		tessellator.addVertexWithUV(0, 0.00 , 1, maxU, minV);
+		tessellator.addVertexWithUV(1, 0.00 , 1, minU, minV);
+		tessellator.addVertexWithUV(1, 0.125 * num, 1, minU, sideMaxV);
 		tessellator.draw();
-		GL11.glEndList();
 	}
 	/**
 	 * Renders the TileEntity for the chest at a position.
@@ -90,13 +88,13 @@ public class TESRWorldItem extends TESRBase
 				//float f7 = 0.5F;
 				//float f8 = 0.25F;
 				float snowOffset = 0;
-				if(te.hasSnow) {
-					snowOffset = 0.125f;
+				if(te.snowLevel > 0) {
+					snowOffset = te.snowLevel * 0.125f;
 					if (snowLayerID != -1) {
 						GL11.glPushMatrix();
 						this.bindTexture(TextureMap.locationBlocksTexture);
 						GL11.glTranslated(d, d1, d2);
-						GL11.glCallList(snowLayerID);
+						GL11.glCallList(snowLayerID + te.snowLevel -1);
 						GL11.glPopMatrix();
 					} else tryUpdateSnowLayerID();
 				}
@@ -117,7 +115,7 @@ public class TESRWorldItem extends TESRBase
 					GL11.glRotatef(90, 1.0f, 0.0F, 0.0F);
 					//GL11.glRotatef(rand.nextFloat()*360, 0.0f, 0.0F, 1.0F);
 
-					itemRenderer.doRender(te.renderItem, 0, 0, -snowOffset*1.5F, 0, 0);
+					itemRenderer.doRender(te.renderItem, 0, 0, -snowOffset, 0, 0);
 				}
 				else
 				{
