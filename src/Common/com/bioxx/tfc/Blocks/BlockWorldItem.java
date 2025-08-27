@@ -4,7 +4,6 @@ import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gregapi.util.UT;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -122,7 +121,6 @@ public class BlockWorldItem extends BlockTerraContainer
 		double speed = 0.98 - 0.02 * meta;
 		entity.motionX *= speed;
 		entity.motionZ *= speed;
-		if(Math.abs(entity.motionX) > 0.01 || Math.abs(entity.motionZ) > 0.01)UT.Sounds.send("step.snow", world,x,y,z);
 	}
 
 	@Override
