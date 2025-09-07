@@ -24,7 +24,7 @@ allprojects {
     apply plugin: 'maven-publish'
     group = group_name
     version = mod_version
-    archivesBaseName = "[${minecraft_version}]${mod_id}"
+    archivesBaseName = "${mod_id}-${minecraft_version}"
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
