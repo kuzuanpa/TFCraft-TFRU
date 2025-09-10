@@ -64,7 +64,6 @@ public class BlockWorldItem extends BlockTerraContainer
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		if(!world.isRemote){
-			dropBlockAsItem(world, x,y,z, 0,0);
 			world.setBlockToAir(x, y, z);
 			return true;
 		}
