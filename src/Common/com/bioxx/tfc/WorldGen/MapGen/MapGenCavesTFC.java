@@ -1,17 +1,16 @@
 package com.bioxx.tfc.WorldGen.MapGen;
 
-import java.util.Random;
-
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.api.TFCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.api.TFCBlocks;
+import java.util.Random;
 
 public class MapGenCavesTFC extends MapGenBaseTFC
 {
@@ -193,6 +192,12 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 										}
 										--index;
 									}
+								}
+								else {
+									if(TFC_Core.isStoneIgEx(idArray[index]))idArray[index] = TFCBlocks.stoneIgExHarden;
+									if(TFC_Core.isStoneIgIn(idArray[index]))idArray[index] = TFCBlocks.stoneIgInHarden;
+									if(TFC_Core.isStoneSed(idArray[index]))idArray[index] = TFCBlocks.stoneSedHarden;
+									if(TFC_Core.isStoneMM(idArray[index]))idArray[index] = TFCBlocks.stoneMMHarden;
 								}
 							}
 						}

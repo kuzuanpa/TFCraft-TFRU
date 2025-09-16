@@ -70,6 +70,10 @@ public class TFCBlocks
 	public static Block stoneIgEx;
 	public static Block stoneSed;
 	public static Block stoneMM;
+	public static Block stoneIgInHarden;
+	public static Block stoneIgExHarden;
+	public static Block stoneSedHarden;
+	public static Block stoneMMHarden;
 	public static Block stoneIgInCobble;
 	public static Block stoneIgExCobble;
 	public static Block stoneSedCobble;

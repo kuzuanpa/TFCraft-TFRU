@@ -29,6 +29,10 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(stoneIgEx, ItemStone.class, "StoneIgEx");
 		GameRegistry.registerBlock(stoneSed, ItemStone.class, "StoneSed");
 		GameRegistry.registerBlock(stoneMM, ItemStone.class, "StoneMM");
+		GameRegistry.registerBlock(stoneIgInHarden, ItemStone.class, "StoneIgInHarden");
+		GameRegistry.registerBlock(stoneIgExHarden, ItemStone.class, "StoneIgExHarden");
+		GameRegistry.registerBlock(stoneSedHarden, ItemStone.class, "StoneSedHarden");
+		GameRegistry.registerBlock(stoneMMHarden, ItemStone.class, "StoneMMHarden");
 
 		GameRegistry.registerBlock(stoneIgInCobble, ItemStone.class, "StoneIgInCobble");
 		GameRegistry.registerBlock(stoneIgExCobble, ItemStone.class, "StoneIgExCobble");
@@ -339,16 +343,19 @@ public class BlockSetup extends TFCBlocks
 		Blocks.snow_layer = snow;
 		stoneIgInCobble = new BlockIgInCobble(Material.rock).setHardness(8F).setBlockName("IgInRockCobble");
 		stoneIgIn = new BlockIgIn(Material.rock).setHardness(4F).setBlockName("IgInRock");
+		stoneIgInHarden = new BlockIgInHarden(Material.rock).setHardness(8F).setBlockName("RockHarden");
 		stoneIgInSmooth = new BlockIgInSmooth().setHardness(8F).setBlockName("IgInRockSmooth");
 		stoneIgInBrick = new BlockIgInBrick().setHardness(8F).setBlockName("IgInRockBrick");
 
 		stoneSedCobble = new BlockSedCobble(Material.rock).setHardness(7F).setBlockName("SedRockCobble");
 		stoneSed = new BlockSed(Material.rock).setHardness(3.5F).setBlockName("SedRock");
+		stoneSedHarden = new BlockSedHarden(Material.rock).setHardness(7F).setBlockName("RockHarden");
 		stoneSedSmooth = new BlockSedSmooth().setHardness(7F).setBlockName("SedRockSmooth");
 		stoneSedBrick = new BlockSedBrick().setHardness(7F).setBlockName("SedRockBrick");
 
 		stoneIgExCobble = new BlockIgExCobble(Material.rock).setHardness(8F).setBlockName("IgExRockCobble");
 		stoneIgEx = new BlockIgEx(Material.rock).setHardness(4F).setBlockName("IgExRock");
+		stoneIgExHarden = new BlockIgExHarden(Material.rock).setHardness(8F).setBlockName("RockHarden");
 		stoneIgExSmooth = new BlockIgExSmooth().setHardness(8F).setBlockName("IgExRockSmooth");
 		stoneIgExBrick = new BlockIgExBrick().setHardness(8F).setBlockName("IgExRockBrick");
 
@@ -365,6 +372,7 @@ public class BlockSetup extends TFCBlocks
 
 		stoneMMCobble = new BlockMMCobble(Material.rock).setHardness(7.5F).setBlockName("MMRockCobble");
 		stoneMM = new BlockMM(Material.rock).setHardness(4F).setBlockName("MMRock");
+		stoneMMHarden = new BlockMMHarden(Material.rock).setHardness(7.5F).setBlockName("RockHarden");
 		stoneMMSmooth = new BlockMMSmooth().setHardness(7.5F).setBlockName("MMRockSmooth");
 		stoneMMBrick = new BlockMMBrick().setHardness(7.5F).setBlockName("MMRockBrick");
 

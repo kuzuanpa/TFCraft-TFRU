@@ -329,6 +329,7 @@ public class TFC_Core
 	{
 		return block == TFCBlocks.stoneIgEx
 				|| block == TFCBlocks.stoneIgExCobble
+				|| block == TFCBlocks.stoneIgExHarden
 				|| block == TFCBlocks.stoneIgExSmooth
 				|| block == TFCBlocks.stoneIgExBrick
 				|| block == TFCBlocks.wallRawIgEx
@@ -341,6 +342,7 @@ public class TFC_Core
 	{
 		return block == TFCBlocks.stoneIgIn
 				|| block == TFCBlocks.stoneIgInCobble
+				|| block == TFCBlocks.stoneIgInHarden
 				|| block == TFCBlocks.stoneIgInSmooth
 				|| block == TFCBlocks.stoneIgInBrick
 				|| block == TFCBlocks.wallRawIgIn
@@ -354,6 +356,7 @@ public class TFC_Core
 		return block == TFCBlocks.stoneSed
 				|| block == TFCBlocks.stoneSedCobble
 				|| block == TFCBlocks.stoneSedSmooth
+				|| block == TFCBlocks.stoneSedHarden
 				|| block == TFCBlocks.stoneSedBrick
 				|| block == TFCBlocks.wallRawSed
 				|| block == TFCBlocks.wallCobbleSed
@@ -366,6 +369,7 @@ public class TFC_Core
 		return block == TFCBlocks.stoneMM
 				|| block == TFCBlocks.stoneMMCobble
 				|| block == TFCBlocks.stoneMMSmooth
+				|| block == TFCBlocks.stoneMMHarden
 				|| block == TFCBlocks.stoneMMBrick
 				|| block == TFCBlocks.wallRawMM
 				|| block == TFCBlocks.wallCobbleMM
