@@ -1,22 +1,20 @@
 package com.bioxx.tfc.Render;
 
-import java.io.IOException;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.shader.ShaderGroup;
 import net.minecraft.util.ResourceLocation;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import org.apache.logging.log4j.LogManager;
+
+import java.io.IOException;
 
 @SideOnly(Side.CLIENT)
 public class EntityRendererTFC extends EntityRenderer {
 
-	private boolean allowShaderSwitching = true;
+	private boolean allowShaderSwitching = false;
 	private ResourceLocation currentShader;
 
 	public EntityRendererTFC(Minecraft minecraft, IResourceManager irm) {
@@ -47,7 +45,7 @@ public class EntityRendererTFC extends EntityRenderer {
 	}
 
 	public void deactivateManualShader(){
-		allowShaderSwitching = true;
+		allowShaderSwitching = false;
 		super.deactivateShader();
 	}
 	

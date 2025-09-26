@@ -12,16 +12,15 @@ buildscript {
 
     }
     dependencies {
-        classpath ('com.anatawa12.forge:ForgeGradle:1.2-1.1.+') {
-            changing = true
-        }
+        classpath ('com.anatawa12.forge:ForgeGradle:1.2-1.1.+') 
     }
 }
-
+plugins{
+    id 'maven-publish'
+}
 allprojects {
     apply plugin: 'java'
     apply plugin: 'forge'
-    apply plugin: 'maven-publish'
     group = group_name
     version = mod_version
     archivesBaseName = "${mod_id}-${minecraft_version}"
@@ -81,24 +80,6 @@ sourceSets {
      }
    }
  }
- //Creates a compiled de-obfuscated jar
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    appendix = 'deobf'
-	
-	manifest.attributes(
-            'FMLCorePlugin': 'com.bioxx.tfc.TFCASMLoadingPlugin',
-			'FMLCorePluginContainsFMLMod': 'true',
-			'FMLAT': 'tfc_at.cfg'
-    )
-}
- //creates a jar containing only the src
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-    appendix = 'src'
-}
-
-tasks.build.dependsOn('sourceJar', 'deobfJar')
 
 processResources {
 //First we just copy in the mcmod.info file
@@ -113,7 +94,23 @@ from(sourceSets.main.resources.srcDirs) {
         ])
     }
 }
+// This task creates a .jar file containing the source code of this mod.
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = "sources"
+    from sourceSets.main.allSource
+}
 
+// This task creates a .jar file containing a deobfuscated version of this mod, for other developers to use in a development environment.
+task devJar(type: Jar) {
+    classifier = "dev"
+    from sourceSets.main.output
+}
+
+// Creates the listed artifacts on building the mod.
+artifacts {
+    archives sourcesJar
+    archives devJar
+}
 jar {
     manifest.attributes(
             'FMLCorePlugin': 'com.bioxx.tfc.TFCASMLoadingPlugin',
@@ -124,3 +121,27 @@ jar {
 
 
 idea { module { inheritOutputDirs = true } }
+// This block configures any maven publications you want to make.
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'cn.kuzuanpa'
+            // Add any other artifacts here that you would like to publish!
+            artifact(jar) {
+                builtBy build
+            }
+            artifact(sourcesJar) {
+                builtBy sourcesJar
+            }
+            artifact(devJar) {
+                builtBy devJar
+            }
+        }
+    }
+
+    // This block selects the repositories you want to publish to.
+    repositories {
+        mavenLocal()
+        // Add the repositories you want to publish to here.
+    }
+}
