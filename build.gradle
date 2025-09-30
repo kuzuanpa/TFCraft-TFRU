@@ -126,6 +126,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             groupId = 'cn.kuzuanpa'
+            artifactId = 'TerraFirmaCraft-TFRU'
             // Add any other artifacts here that you would like to publish!
             artifact(jar) {
                 builtBy build
