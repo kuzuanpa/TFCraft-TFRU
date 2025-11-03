@@ -316,6 +316,7 @@ public class ItemHeat
 			manager.addIndex(new HeatIndex(IL.Ceramic_Builderwand_Mold_Raw.get(1), 0.3, 1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_00100_11111_01110_01010))).setKeepNBT(false));
 			manager.addIndex(new HeatIndex(IL.Ceramic_Nugget_Mold_Raw.get(1), 0.3, 1400, IL.Ceramic_Mold.getWithNBT(1, UT.NBT.make("gt.mold", 0b0_00000_00000_00100_00000_00000))).setKeepNBT(false));
 
+			manager.addIndex(new HeatIndex(OP.dust.mat(MT.OREMATS.Trona, 1),          0.5, 1000, OP.dust.mat(MT.Na2CO3, 1)).setMinMax(0) .setKeepNBT(true));
 
 			for (OreDictMaterial mat : new OreDictMaterial[]{MT.RedSteel,MT.BlueSteel,MT.BlackSteel,MT.Pt,MT.Pb, MT.Steel, MT.Cu, MT.WroughtIron, MT.Bronze, MT.Bi, MT.BlackBronze, MT.BismuthBronze, MT.Cupronickel, MT.Ni, MT.Sn, MT.Au, MT.Brass, MT.Electrum, MT.Ag, MT.RoseGold, MT.SterlingSilver, MT.Invar, MT.Al, MT.TinAlloy, MT.Fe,MT.RedAlloy, MT.StainlessSteel}) {
 				long temp = getMeltPoint(mat);
