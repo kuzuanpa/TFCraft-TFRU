@@ -181,6 +181,13 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 												else
 												{
 													idArray[index] = Blocks.air;
+
+													//set roof of caves to harden rock to prevent collapse
+													if(TFC_Core.isStoneIgEx(idArray[index+1]))idArray[index+1] = TFCBlocks.stoneIgExHarden;
+													if(TFC_Core.isStoneIgIn(idArray[index+1]))idArray[index+1] = TFCBlocks.stoneIgInHarden;
+													if(TFC_Core.isStoneSed(idArray[index+1]))idArray[index+1] = TFCBlocks.stoneSedHarden;
+													if(TFC_Core.isStoneMM(idArray[index+1]))idArray[index+1] = TFCBlocks.stoneMMHarden;
+
 													//metaArray[index] = 0;
 													if (isGrass && TFC_Core.isDirt(idArray[index - 1]))
 													{
@@ -192,12 +199,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 										}
 										--index;
 									}
-								}
-								else {
-									if(TFC_Core.isStoneIgEx(idArray[index]))idArray[index] = TFCBlocks.stoneIgExHarden;
-									if(TFC_Core.isStoneIgIn(idArray[index]))idArray[index] = TFCBlocks.stoneIgInHarden;
-									if(TFC_Core.isStoneSed(idArray[index]))idArray[index] = TFCBlocks.stoneSedHarden;
-									if(TFC_Core.isStoneMM(idArray[index]))idArray[index] = TFCBlocks.stoneMMHarden;
+
 								}
 							}
 						}
