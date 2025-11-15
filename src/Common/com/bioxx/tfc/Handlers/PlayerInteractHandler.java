@@ -41,15 +41,12 @@ public class PlayerInteractHandler
 	@SubscribeEvent
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
-		if (event.entityPlayer.worldObj.isRemote)
-			return;
 
 		ItemStack itemInHand = event.entityPlayer.getCurrentEquippedItem();
 
 		boolean validAction = event.action == Action.RIGHT_CLICK_BLOCK || event.action == Action.RIGHT_CLICK_AIR;
 
-		
-		if(validAction && event.getResult() != Result.DENY && itemInHand == null) handleDrinkingWater( event.entityPlayer );
+		if(!event.entityPlayer.worldObj.isRemote && validAction && event.getResult() != Result.DENY && itemInHand == null) handleDrinkingWater( event.entityPlayer );
 		if(!validAction || itemInHand == null || event.getResult() == Result.DENY)return;
 
 		if(event.action == Action.RIGHT_CLICK_AIR && itemInHand.getItem().equals(Items.clay_ball))handleClayBall(itemInHand, event.entityPlayer);
