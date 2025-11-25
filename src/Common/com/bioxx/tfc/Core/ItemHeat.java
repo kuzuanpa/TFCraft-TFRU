@@ -186,6 +186,8 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronSheet,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.pigIronSheet2x,1), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,2)));
 
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.wroughtIronKnifeHead,1), ironRaw,new ItemStack(TFCItems.wroughtIronUnshaped,1)).setMinMax(50).setKeepNBT(true));
+
 
 		//Food
 		//Proteins

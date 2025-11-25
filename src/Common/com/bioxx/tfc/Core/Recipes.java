@@ -152,6 +152,7 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 0), "###"," D ","###", '#', "ingotRoseGold", 'D',"ingotDoubleRoseGold"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 1), "###"," D ","###", '#', "ingotBismuthBronze", 'D',"ingotDoubleBismuthBronze"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil2, 1, 2), "###"," D ","###", '#', "ingotBlackBronze", 'D',"ingotDoubleBlackBronze"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil3, 1, 0), "###"," D ","###", '#', "ingotManasteel", 'D', "ingotDoubleManasteel"));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.bloomery, 1), "PPP", "P P", "PPP", 'P', "plateDoubleAnyBronze"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.blastFurnace, 1), "PPP", "PCP", "PPP", 'P', "plateDoubleWroughtIron", 'C', new ItemStack(TFCBlocks.crucible, 1)));
@@ -160,10 +161,6 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.quern, 1), "PPP", 'P', "stoneSmooth"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.quern, 1), "  W", "PPP", 'P', "stone", 'W', "stickWood"));
-
-		//Fire Clay
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.fireClayBall, 1, 0), "PXP", "XCX", "PXP", 'P', new ItemStack(TFCItems.powder, 1, 1), 'X', new ItemStack(TFCItems.powder, 1, 2), 'C', "lumpClay"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.fireClayBall, 1, 0), "PXP", "XCX", "PXP", 'P', new ItemStack(TFCItems.powder, 1, 2), 'X', new ItemStack(TFCItems.powder, 1, 1), 'C', "lumpClay"));
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.fireBrick, 2, 0), "PP", "PP", 'P', new ItemStack(TFCItems.fireClayBall, 1, 0));
 

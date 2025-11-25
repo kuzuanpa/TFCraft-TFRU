@@ -6,7 +6,6 @@ import com.bioxx.tfc.api.Crafting.AnvilReq;
 import com.bioxx.tfc.api.Crafting.AnvilWeldRecipe;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
-import cpw.mods.fml.common.registry.GameRegistry;
 import eu.usrv.yamcore.auxiliary.ItemDescriptor;
 import gregapi.block.multitileentity.MultiTileEntityRegistry;
 import gregapi.data.MT;
@@ -14,15 +13,12 @@ import gregapi.data.OP;
 import gregapi.oredict.OreDictMaterial;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class GTRecipes {
 
     public static void addGTRecipes(AnvilManager manager){
         if (MultiTileEntityRegistry.getRegistry("ktfru.multitileentity") != null) manager.addRecipe(new AnvilRecipe(MultiTileEntityRegistry.getRegistry("ktfru.multitileentity").getItem(32762, 1), OP.plate.mat(MT.Bronze, 1), "casing", AnvilReq.COPPER, OP.casingMachine.mat(MT.Bronze, 1)));
         if(new ItemDescriptor("forestry","sturdyMachine").getItemStack(1)!=null)manager.addRecipe(new AnvilRecipe(OP.plateTriple.mat(MT.Bronze,1),OP.plateTriple.mat(MT.Bronze,1),"sturdyMachine",AnvilReq.COPPER,new ItemDescriptor("forestry","sturdyMachine").getItemStack(1)));
-
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil3, 1, 0), "###"," D ","###", '#', "ingotManaSteel", 'D', "ingotDoubleManaSteel"));
 
         manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronSheet2x), new ItemStack(TFCItems.wroughtIronSheet2x), "hopper", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.hopper, 1, 0)));
         manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronSheet), new ItemStack(TFCItems.wroughtIronSheet), "trapdoor", AnvilReq.BRONZE, new ItemStack(Items.iron_door, 1)));
