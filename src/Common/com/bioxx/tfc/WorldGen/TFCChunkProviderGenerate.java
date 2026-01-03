@@ -826,7 +826,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 						if(idsBig[indexBig+1] != TFCBlocks.lava && rand.nextBoolean())
 						{
 							idsBig[indexBig+1] = TFCBlocks.lava;
-							metaBig[indexBig+1] = 0; 
+							metaBig[indexBig+1] = 2;
 						}
 					}
 				}
