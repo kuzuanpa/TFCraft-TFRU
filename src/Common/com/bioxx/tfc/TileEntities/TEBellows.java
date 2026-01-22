@@ -1,6 +1,7 @@
 package com.bioxx.tfc.TileEntities;
 
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregapi.code.TagData;
@@ -15,6 +16,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+@Optional.Interface(iface = "gregapi.tileentity.energy.ITileEntityEnergy", modid = "gregtech")
 public class TEBellows extends NetworkTileEntity implements ITileEntityEnergy
 {
 	private static final int BLOCK_MAP[][] = { { 0, 1 }, { -1, 0 }, { 0, -1 }, { 1, 0 } };

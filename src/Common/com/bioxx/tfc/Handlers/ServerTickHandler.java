@@ -1,16 +1,14 @@
 package com.bioxx.tfc.Handlers;
 
 import com.bioxx.tfc.Blocks.Terrain.BlockCollapsible;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.WorldTickEvent;
-
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.TFCOptions;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.WorldTickEvent;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.World;
 
 import static com.bioxx.tfc.TerraFirmaCraft.TFCDimID;
 
@@ -29,8 +27,7 @@ public class ServerTickHandler
 				TFC_Core.setupWorld(world);
 				wSeed = world.getWorldInfo().getSeed();
 			}
-			TFC_Time.updateTime(world);
-
+			if(world.provider.dimensionId == TFCDimID)TFC_Time.updateTime(world);
 			/*if(ServerOverrides.isServerEmpty())
 				return;*/
 			if(MinecraftServer.getServer().getCurrentPlayerCount() == 0 && TFCOptions.simSpeedNoPlayers > 0)
