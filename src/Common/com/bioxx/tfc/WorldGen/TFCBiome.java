@@ -133,12 +133,11 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 1, 1, 1));
 
 		this.spawnableWaterCreatureList.clear();
-		switch(par1){
-		case 0: this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 8, 1, 1)); break;
-		case 2: this.spawnableWaterCreatureList.add(new SpawnListEntry(EntityFishTFC.class, 7, 1, 2));
-		this.spawnableWaterCreatureList.add(new SpawnListEntry(EntityFishTFC.class, 12, 0, 0));break;
-		default: break;
+		if(par1 == 40 || par1 == 51){
+		this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 8, 2, 2));
+		 this.spawnableWaterCreatureList.add(new SpawnListEntry(EntityFishTFC.class, 7, 4, 2));
 		}
+		if (par1 == 42) this.spawnableWaterCreatureList.add(new SpawnListEntry(EntityFishTFC.class, 12, 0, 0));
 
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntitySpiderTFC.class, 5, 1, 1));

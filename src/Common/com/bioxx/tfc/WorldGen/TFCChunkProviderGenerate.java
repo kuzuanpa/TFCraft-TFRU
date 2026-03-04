@@ -254,8 +254,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 		if (TFC_Climate.getCacheManager(world) != null && TFC_Climate.getCacheManager(world).getEVTLayerAt(x, z) != null)
 			evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
 		boolean isMountainous = biome == TFCBiome.MOUNTAINS || biome == TFCBiome.HIGH_HILLS;
+		boolean isWater = biome == TFCBiome.LAKE || biome == TFCBiome.OCEAN || biome == TFCBiome.DEEP_OCEAN;
 		//To adjust animal spawning at higher altitudes
 		int mountainousAreaModifier = isMountainous? - 1 : 0;
+		if(isWater){
+			spawnableCreatureList.add(new SpawnListEntry(EntityFishTFC.class, 2, 2, 4));
+			spawnableCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 2, 2, 4));
+		}
 		if(isMountainous)
 		{
 			if(temp<25 && temp > -10)
