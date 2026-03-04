@@ -11,6 +11,7 @@ import com.bioxx.tfc.api.Crafting.QuernRecipe;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.TFCItems;
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregapi.code.TagData;
@@ -34,6 +35,7 @@ import java.util.Random;
 import static gregapi.data.CS.SIDE_BOTTOM;
 import static gregapi.data.CS.SIDE_TOP;
 
+@Optional.Interface(iface = "gregapi.tileentity.energy.ITileEntityEnergy", modid = "gregtech")
 public class TEQuern extends NetworkTileEntity implements IInventory, ISidedInventory, ITileEntityEnergy
 {
 	public ItemStack[] storage = new ItemStack[3];

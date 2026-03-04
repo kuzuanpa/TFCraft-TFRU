@@ -1,10 +1,7 @@
 package com.bioxx.tfc.Core;
 
-import net.minecraft.world.World;
-
 import com.bioxx.tfc.api.TFCOptions;
-
-import net.minecraftforge.common.DimensionManager; 
+import net.minecraft.world.World;
 
 public class TFC_Time
 {
@@ -84,20 +81,20 @@ public class TFC_Time
 	{
 		time = world.getWorldInfo().getWorldTime();
 
-		if(time < startTime)
-		{
-			world.getWorldInfo().setWorldTime(startTime);
-			world.getWorldInfo().incrementTotalWorldTime(startTime);
-		}
-		if(!world.isRemote)
-		{
-			MainWorldTime = DimensionManager.getWorld(0).getWorldInfo().getWorldTime();
-			if(time != MainWorldTime)
-			{
-			world.getWorldInfo().setWorldTime(MainWorldTime);
-			world.getWorldInfo().incrementTotalWorldTime(MainWorldTime);
-			}
-		}
+		//if(time < startTime)
+		//{
+		//	world.getWorldInfo().setWorldTime(startTime);
+		//	world.getWorldInfo().incrementTotalWorldTime(startTime);
+		//}
+		//if(!world.isRemote)
+		//{
+		//	MainWorldTime = DimensionManager.getWorld(0).getWorldInfo().getWorldTime();
+		//	if(time != MainWorldTime)
+		//	{
+		//	world.getWorldInfo().setWorldTime(MainWorldTime);
+		//	world.getWorldInfo().incrementTotalWorldTime(MainWorldTime);
+		//	}
+		//}
 
 		int m = getMonth();
 		int m1 = m - 1;

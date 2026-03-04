@@ -1,11 +1,15 @@
 package com.bioxx.tfc.TileEntities;
 
-import java.util.Random;
-
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Render.Models.ModelLoom;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Crafting.LoomManager;
+import com.bioxx.tfc.api.Crafting.LoomRecipe;
+import com.bioxx.tfc.api.TFCItems;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import eu.usrv.yamcore.auxiliary.ItemDescriptor;
-import eu.usrv.yamcore.command.YAMCommand;
-import eu.usrv.yamcore.items.ModItemManager;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -17,15 +21,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Render.Models.ModelLoom;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Crafting.LoomManager;
-import com.bioxx.tfc.api.Crafting.LoomRecipe;
+import java.util.Random;
 
 public class TELoom extends NetworkTileEntity implements IInventory
 {
