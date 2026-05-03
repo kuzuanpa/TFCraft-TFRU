@@ -12,6 +12,8 @@ import com.bioxx.tfc.api.TFCItems;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import eu.usrv.yamcore.auxiliary.ItemDescriptor;
+import gregapi.data.MT;
+import gregapi.data.OP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -130,17 +132,17 @@ public class Recipes
 		}
 
 
-		//Dyes
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.dye,1,4), new ItemStack(TFCItems.powder,1,6)); // Lapis - Blue
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.dye,1,2), new ItemStack(TFCItems.powder,1,8)); // Malachite - Green
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.dye,1,1), new ItemStack(TFCItems.powder,1,5)); // Hematite - Red
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.dye,1,11), new ItemStack(TFCItems.powder,1,7)); // Limonite - Yellow
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.dye,1,12), new ItemStack(TFCItems.powder,1,8),new ItemStack(TFCItems.powder,1,0), "blockSand")); // Malachite, Flux & Sand - Light Blue
+		////Dyes
+		//GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.dye,1,4), new ItemStack(TFCItems.powder,1,6)); // Lapis - Blue
+		//GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.dye,1,2), new ItemStack(TFCItems.powder,1,8)); // Malachite - Green
+		//GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.dye,1,1), new ItemStack(TFCItems.powder,1,5)); // Hematite - Red
+		//GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.dye,1,11), new ItemStack(TFCItems.powder,1,7)); // Limonite - Yellow
+		//GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.dye,1,12), new ItemStack(TFCItems.powder,1,8),new ItemStack(TFCItems.powder,1,0), "blockSand")); // Malachite, Flux & Sand - Light Blue
 
-		//Flux Powder
-		for (int i = 0; i < Global.STONE_FLUXINDEX.length; i++)
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.powder, 2, 0), new ItemStack(TFCItems.looseRock, 1, Global.STONE_FLUXINDEX[i]), "itemHammer"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.powder, 6, 0), new ItemStack(TFCItems.oreChunk, 1, 32), "itemHammer"));
+		////Flux Powder
+		//for (int i = 0; i < Global.STONE_FLUXINDEX.length; i++)
+		//	GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.powder, 2, 0), new ItemStack(TFCItems.looseRock, 1, Global.STONE_FLUXINDEX[i]), "itemHammer"));
+		//GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.powder, 6, 0), new ItemStack(TFCItems.oreChunk, 1, 32), "itemHammer"));
 
 		//Devices
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 1), "###"," D ","###", '#', "ingotCopper", 'D',"ingotDoubleCopper"));
@@ -1783,7 +1785,7 @@ public class Recipes
 
 	public static void addFoodSaltRecipe(Item food)
 	{
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), new ItemStack(TFCItems.powder, 1, 9));
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), OP.dust.mat(MT.NaCl,1));
 	}
 
 	public static void addFoodRefineRecipe(Item foodInput, Item foodOutput)
@@ -1957,10 +1959,10 @@ public class Recipes
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.maizeEar, 1), new ItemStack(TFCItems.cornmealGround, 1)));//Cornmeal
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 27), new ItemStack(Items.redstone, 8)));//Cinnabar to Redstone
 		manager.addRecipe(new QuernRecipe(new ItemStack(Items.bone, 1), new ItemStack(TFCItems.dye, 2, 15)));//Bone Meal
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.looseRock, 1, 5), new ItemStack(TFCItems.powder, 4, 9)));//Rock Salt to Salt
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 29), new ItemStack(TFCItems.powder, 4,4)));//Cinnabar to Redstone
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 16), new ItemStack(TFCItems.powder, 4,1)));//Kaolin Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 20), new ItemStack(TFCItems.powder, 4,2)));//Graphite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.looseRock, 1, 5), OP.dust.mat(MT.NaCl,3)));//Rock Salt to Salt
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 29), OP.dust.mat(MT.Redstone,3)));//Cinnabar to Redstone
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 16), OP.dust.mat(MT.Kaolinite,3)));//Kaolin Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 20), OP.dust.mat(MT.Graphite,3)));//Graphite Powder
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 31), new ItemStack(TFCItems.fertilizer, 4,2)));//fertilizer
 		if(!isInTFRU)return;
 		manager.addRecipe(new QuernRecipe(new ItemStack(Items.ender_pearl, 1), gregapi.data.OP.dust.mat(gregapi.data.MT.EnderPearl, 1)));//for waystone crafting

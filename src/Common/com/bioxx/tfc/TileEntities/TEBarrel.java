@@ -14,6 +14,8 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregapi.data.MT;
+import gregapi.data.OP;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -925,7 +927,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.logs       , 1, 5),     new FluidStack(TFCFluids.FRESHWATER, 1000), null,                                                                    new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.logs       , 1, 6),     new FluidStack(TFCFluids.FRESHWATER, 1000), null,                                                                    new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.logs       , 1, 9),     new FluidStack(TFCFluids.FRESHWATER, 1000), null,                                                                    new FluidStack(TFCFluids.TANNIN, 1000)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.powder     , 1, 0),     new FluidStack(TFCFluids.FRESHWATER, 500 ), null,                                                                    new FluidStack(TFCFluids.LIMEWATER, 500), 0).setMinTechLevel(0).setSealedRecipe(false).setRemovesLiquid(false));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(OP.dust.mat(MT.CaCO3,1),     new FluidStack(TFCFluids.FRESHWATER, 500 ), null,                                                                    new FluidStack(TFCFluids.LIMEWATER, 500), 0).setMinTechLevel(0).setSealedRecipe(false).setRemovesLiquid(false));
 		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.scrapedHide, 1, 0),     new FluidStack(TFCFluids.FRESHWATER, 300 ), new ItemStack(TFCItems.prepHide  , 1, 0), null).setMinTechLevel(0).setRemovesLiquid(true));
 		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.scrapedHide, 1, 1),     new FluidStack(TFCFluids.FRESHWATER, 400 ), new ItemStack(TFCItems.prepHide  , 1, 1), null).setMinTechLevel(0).setRemovesLiquid(true));
 		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.scrapedHide, 1, 2),     new FluidStack(TFCFluids.FRESHWATER, 500 ), new ItemStack(TFCItems.prepHide  , 1, 2), null).setMinTechLevel(0).setRemovesLiquid(true));
@@ -952,7 +954,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluids.MILK, 9000), new FluidStack(TFCFluids.VINEGAR, 1000), new FluidStack(TFCFluids.MILKVINEGAR, 10000)).setSealedRecipe(false).setMinTechLevel(0).setRemovesLiquid(false));
 		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluids.MILKVINEGAR, 9000), new FluidStack(TFCFluids.MILK, 1000), new FluidStack(TFCFluids.MILKVINEGAR, 10000)).setSealedRecipe(false).setMinTechLevel(0).setRemovesLiquid(false));
 
-		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(new ItemStack(TFCItems.powder, 1, 4), new FluidStack(TFCFluids.FRESHWATER, 1000), new ItemStack(Item.getItemFromBlock(TFCBlocks.ice)), null).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(OP.dust.mat(MT.NaCl,1), new FluidStack(TFCFluids.FRESHWATER, 1000), new ItemStack(Item.getItemFromBlock(TFCBlocks.ice)), null).setMinTechLevel(0));
         if(Loader.isModLoaded("gregtech"))		BarrelManager.getInstance().addRecipe(new BarrelCommonRecipe(gregapi.data.OP.dust.mat(gregapi.data.MT.Ash,1), new FluidStack(TFCFluids.FRESHWATER, 5000), null, gregapi.data.FL.make("basepotashliquor",5000)).setMinTechLevel(0));
 
 		// 5000mb / 160oz = 31.25

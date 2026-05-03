@@ -9,6 +9,8 @@ import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 import cpw.mods.fml.client.FMLClientHandler;
+import gregapi.data.MT;
+import gregapi.data.OP;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.gui.GuiScreen;
@@ -603,7 +605,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 		{
 			EntityItem entity = (EntityItem) iterator.next();
 			ItemStack is = entity.getEntityItem();
-			if (!entity.isDead && is.getItemDamage() == 0 && is.getItem() == TFCItems.powder)
+			if (!entity.isDead && OP.dust.mat(MT.CaCO3,1).isItemEqual(is))
 			{
 				is.stackSize--;
 				if(is.stackSize == 0)

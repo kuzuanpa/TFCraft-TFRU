@@ -1,12 +1,5 @@
 package com.bioxx.tfc.Containers;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-
 import com.bioxx.tfc.Containers.Slots.SlotAnvilFlux;
 import com.bioxx.tfc.Containers.Slots.SlotAnvilHammer;
 import com.bioxx.tfc.Containers.Slots.SlotAnvilIn;
@@ -14,7 +7,14 @@ import com.bioxx.tfc.Containers.Slots.SlotAnvilWeldOut;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.TileEntities.TEAnvil;
-import com.bioxx.tfc.api.TFCItems;
+import gregapi.data.MT;
+import gregapi.data.OP;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class ContainerAnvil extends ContainerTFC
 {
@@ -86,7 +86,7 @@ public class ContainerAnvil extends ContainerTFC
 					return null;
 			}
 			// Flux
-			else if(slotStack.getItem() == TFCItems.powder && slotStack.getItemDamage() == 0)
+			else if(OP.dust.mat(MT.CaCO3,0).isItemEqual(slotStack))
 			{
 				if (!this.mergeItemStack(slotStack, 6, 7, false))
 					return null;

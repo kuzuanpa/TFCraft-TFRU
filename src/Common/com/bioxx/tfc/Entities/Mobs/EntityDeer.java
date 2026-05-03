@@ -1,9 +1,19 @@
 package com.bioxx.tfc.Entities.Mobs;
 
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
+import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
+import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
+import com.bioxx.tfc.Items.ItemCustomNameTag;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Util.Helper;
+import gregapi.data.MT;
+import gregapi.data.OP;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -17,18 +27,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
-import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
-import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
-import com.bioxx.tfc.Items.ItemCustomNameTag;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Util.Helper;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EntityDeer extends EntityAnimal implements IAnimal
 {
@@ -249,7 +250,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if (stack != null && stack.getItem() != null && stack.getItem().equals(TFCItems.powder) && stack.getItemDamage() == 9 &&
+		if (stack != null && stack.getItem() != null && OP.dust.mat(MT.NaCl,1).isItemEqual(stack) &&
 			!familiarizedToday && canFamiliarize())
 		{
 			if (!ep.capabilities.isCreativeMode)

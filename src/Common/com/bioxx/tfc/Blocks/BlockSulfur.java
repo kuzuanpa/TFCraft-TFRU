@@ -1,31 +1,29 @@
 package com.bioxx.tfc.Blocks;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
+import com.bioxx.tfc.Core.CollisionRayTraceStandard;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Interfaces.ICustomCollision;
+import com.bioxx.tfc.api.TFCBlocks;
+import gregapi.data.MT;
+import gregapi.data.OP;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Core.CollisionRayTraceStandard;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Interfaces.ICustomCollision;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class BlockSulfur extends BlockTerra implements ICustomCollision
 {
@@ -72,12 +70,12 @@ public class BlockSulfur extends BlockTerra implements ICustomCollision
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
-		dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.powder, quantityDropped(new Random()), itemMeta));
+		dropBlockAsItem(world, i, j, k, OP.dust.mat(MT.S,quantityDropped(world.rand)));
 	}
 
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3) {
-		return TFCItems.powder;
+		return OP.dust.mat(MT.S,0).getItem();
 	}
 
 	@Override
@@ -117,7 +115,7 @@ public class BlockSulfur extends BlockTerra implements ICustomCollision
 		if(num == 0)
 		{
 			world.setBlockToAir(i, j, k);
-			dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.powder, quantityDropped(new Random()), itemMeta));
+			dropBlockAsItem(world, i, j, k, OP.dust.mat(MT.S,quantityDropped(world.rand)));
 		}
 	}
 

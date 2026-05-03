@@ -1,26 +1,22 @@
 package com.bioxx.tfc.Handlers;
 
-import java.util.List;
-
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Items.Tools.ItemKnife;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Events.ItemCookEvent;
+import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.Util.Helper;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
+import gregapi.data.MT;
+import gregapi.data.OP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-
-import net.minecraftforge.oredict.OreDictionary;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
-
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Items.Tools.ItemKnife;
-import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Events.ItemCookEvent;
-import com.bioxx.tfc.api.Interfaces.IFood;
-import com.bioxx.tfc.api.Util.Helper;
 
 public class FoodCraftingHandler
 {
@@ -377,7 +373,7 @@ public class FoodCraftingHandler
 					continue;
 
 				// If we're salting the food
-				if (inputStack.getItem() == TFCItems.powder && inputStack.getItemDamage() == 9)
+				if (OP.dust.mat(MT.NaCl,1).isItemEqual(inputStack))
 				{
 					salted = true;
 				}

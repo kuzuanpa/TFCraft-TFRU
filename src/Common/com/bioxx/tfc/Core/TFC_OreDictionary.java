@@ -144,14 +144,14 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("oreOlivine", new ItemStack(TFCItems.oreChunk, 1, 33));
 		OreDictionary.registerOre("oreLapis", new ItemStack(TFCItems.oreChunk, 1, 34));
 
-		//Ore Powders
-		OreDictionary.registerOre("dustFlux", new ItemStack(TFCItems.powder, 1, 0)); //Flux
-		OreDictionary.registerOre("dustKaolinite", new ItemStack(TFCItems.powder, 1, 1)); //Kaolinite
-		OreDictionary.registerOre("dustGraphite", new ItemStack(TFCItems.powder, 1, 2)); //Graphite
-		OreDictionary.registerOre("dustSulfur", new ItemStack(TFCItems.powder, 1, 3)); //Sulfur
-		OreDictionary.registerOre("dustSaltpeter", new ItemStack(TFCItems.powder, 1, 4)); //Saltpeter
-		OreDictionary.registerOre("dustLapis", new ItemStack(TFCItems.powder, 1, 6)); //Lapis
-		OreDictionary.registerOre("dustSalt", new ItemStack(TFCItems.powder, 1, 9)); //Salt
+		////Ore Powders
+		//OreDictionary.registerOre("dustFlux", new ItemStack(TFCItems.powder, 1, 0)); //Flux
+		//OreDictionary.registerOre("dustKaolinite", new ItemStack(TFCItems.powder, 1, 1)); //Kaolinite
+		//OreDictionary.registerOre("dustGraphite", new ItemStack(TFCItems.powder, 1, 2)); //Graphite
+		//OreDictionary.registerOre("dustSulfur", new ItemStack(TFCItems.powder, 1, 3)); //Sulfur
+		//OreDictionary.registerOre("dustSaltpeter", new ItemStack(TFCItems.powder, 1, 4)); //Saltpeter
+		//OreDictionary.registerOre("dustLapis", new ItemStack(TFCItems.powder, 1, 6)); //Lapis
+		//OreDictionary.registerOre("dustSalt", new ItemStack(TFCItems.powder, 1, 9)); //Salt
 
 		//Nuggetsq
 		OreDictionary.registerOre("blockBismuth", new ItemStack(TFCBlocks.metalBlock, 1, 0));

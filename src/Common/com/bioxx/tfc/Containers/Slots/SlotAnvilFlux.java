@@ -1,10 +1,10 @@
 package com.bioxx.tfc.Containers.Slots;
 
+import gregapi.data.MT;
+import gregapi.data.OP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import com.bioxx.tfc.api.TFCItems;
 
 public class SlotAnvilFlux extends Slot
 {
@@ -16,6 +16,6 @@ public class SlotAnvilFlux extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		return itemstack.getItem() == TFCItems.powder && itemstack.getItemDamage() == 0;
+		return OP.dust.mat(MT.CaCO3,0).isItemEqual(itemstack);
 	}
 }

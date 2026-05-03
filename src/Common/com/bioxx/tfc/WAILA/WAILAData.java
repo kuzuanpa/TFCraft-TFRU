@@ -25,6 +25,8 @@ import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
+import gregapi.data.MT;
+import gregapi.data.OP;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -593,7 +595,7 @@ public class WAILAData implements IWailaDataProvider
 		ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
 		ItemStack flux = storage[TEAnvil.FLUX_SLOT];
 
-		if (flux != null && flux.getItem() == TFCItems.powder && flux.getItemDamage() == 0 && flux.stackSize > 0)
+		if (flux != null && OP.dust.mat(MT.CaCO3,0).isItemEqual(flux) && flux.stackSize > 0)
 			currenttip.add(TFC_Core.translate("item.Powder.Flux.name") + " : " + flux.stackSize);
 
 		return currenttip;

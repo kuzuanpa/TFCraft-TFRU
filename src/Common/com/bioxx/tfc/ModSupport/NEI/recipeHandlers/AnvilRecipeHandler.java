@@ -7,21 +7,21 @@ import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.GUI.GuiAnvil;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.ModSupport.NEI.NEIIntegration;
-import com.bioxx.tfc.api.Crafting.AnvilWeldRecipe;
-import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Crafting.AnvilRecipe;
 import com.bioxx.tfc.api.Crafting.AnvilReq;
+import com.bioxx.tfc.api.Crafting.AnvilWeldRecipe;
+import gregapi.data.MT;
+import gregapi.data.OP;
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
+import org.lwjgl.opengl.GL11;
 
-import java.awt.Rectangle;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import org.lwjgl.opengl.GL11;
 
 import static com.bioxx.tfc.Core.TFC_Core.l10n;
 
@@ -75,7 +75,7 @@ public class AnvilRecipeHandler extends TemplateRecipeHandler {
         if (ingredient.getItem() instanceof ItemHammer) {
             addCommonRecipe(r -> true);
             addWeldRecipe(r -> true);
-        } else if (ingredient.getItem() == TFCItems.powder && ingredient.getItemDamage() == 0) {
+        } else if (OP.dust.mat(MT.CaCO3,1).isItemEqual(ingredient)) {
             addWeldRecipe(r -> true);
         } else {
             addCommonRecipe(anvilRecipe -> AnvilRecipe.isStackEqual(ingredient, anvilRecipe.input1) || AnvilRecipe.isStackEqual(ingredient, anvilRecipe.input2));
@@ -178,7 +178,7 @@ public class AnvilRecipeHandler extends TemplateRecipeHandler {
             List<PositionedStack> stacks = new ArrayList<>();
             stacks.add(new PositionedStack(AnvilRecipeHandler.hammers, -14, 100, false));
             if (this.isWeld) {
-                stacks.add(new PositionedStack(new ItemStack(TFCItems.powder), 164, 100));
+                stacks.add(new PositionedStack(OP.dust.mat(MT.CaCO3,1), 164, 100));
             }
 
             return stacks;

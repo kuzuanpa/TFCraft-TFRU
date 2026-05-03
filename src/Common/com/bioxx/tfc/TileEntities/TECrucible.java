@@ -281,8 +281,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		float totalAmount = getTotalMetal();
 		if(metals.size()>1) {
 			for (MetalPair m : metals.values()) {
-				if (m != null)
-					a.add(new AlloyMetal(m.type, (m.amount / totalAmount) * 100f));
+				if (m != null) a.add(new AlloyMetal(m.type, (m.amount / totalAmount) * 100f));
 			}
 			Metal match = AlloyManager.INSTANCE.matchesAlloy(a, Alloy.EnumTier.TierV);
 			if (match != null) currentAlloy = new Alloy(match, totalAmount);
