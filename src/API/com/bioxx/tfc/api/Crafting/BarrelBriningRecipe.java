@@ -68,7 +68,7 @@ public class BarrelBriningRecipe implements IBarrelRecipe
 
 	@Override
 	public IBarrelRecipe setMinTechLevel(int t) {
-		return null;
+		return this;
 	}
 
 	@Override
