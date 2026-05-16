@@ -22,7 +22,11 @@ public class BarrelBriningRecipe implements IBarrelRecipe
 
 	@Override
 	public Stack<ItemStack> getResult(ItemStack inIS, FluidStack inFS, int sealedTime) {
-		return null;
+		Stack<ItemStack> result = new Stack<>();
+		if (inIS != null) {
+			result.push(inIS.copy());
+		}
+		return result;
 	}
 
 	@Override
@@ -68,7 +72,7 @@ public class BarrelBriningRecipe implements IBarrelRecipe
 
 	@Override
 	public IBarrelRecipe setMinTechLevel(int t) {
-		return null;
+		return this;
 	}
 
 	@Override
