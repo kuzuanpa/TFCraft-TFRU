@@ -390,7 +390,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 	public int getTemperatureScaled(int s)
 	{
-		return (temperature * s) / 2500;
+		return (Math.min(1800, temperature) * s) / 1800;
 	}
 
 	public void updateGui(byte action)

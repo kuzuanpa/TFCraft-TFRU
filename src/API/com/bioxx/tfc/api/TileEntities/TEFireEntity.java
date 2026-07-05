@@ -65,9 +65,9 @@ public class TEFireEntity extends NetworkTileEntity
 		return fuelBurnTemp + airFromBellows;
 	}
 
-	public int getTemperatureScaled(int s)
+	public int getTemperatureScaled(int height)
 	{
-		return (int)(fireTemp * s / maxFireTempScale);
+		return (int)(Math.min(1800,fireTemp)* height / 1800);
 	}
 
 	protected float handleTemp()

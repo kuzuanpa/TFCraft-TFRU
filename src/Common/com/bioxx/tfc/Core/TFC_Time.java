@@ -66,7 +66,7 @@ public class TFC_Time
 	public static int daysInMonth = daysInYear/12;
 	public static long ticksInYear = daysInYear * DAY_LENGTH;
 	public static long ticksInMonth = daysInMonth * DAY_LENGTH;
-	public static long startTime = ticksInMonth * 3;
+	public static long startTime = -1;
 
 	public static void setYearLength(int length)
 	{
@@ -74,12 +74,12 @@ public class TFC_Time
 		daysInMonth = daysInYear/12;
 		ticksInYear = daysInYear * DAY_LENGTH;
 		ticksInMonth = daysInMonth * DAY_LENGTH;
-		startTime = ticksInMonth * 3;
 	}
 
 	public static void updateTime(World world)
 	{
-		time = world.getWorldInfo().getWorldTime();
+		if(startTime < 0) startTime = Math.abs(world.getSeed()) % ticksInYear;
+		time = world.getWorldInfo().getWorldTime() + Math.abs(world.getSeed()) % ticksInYear;
 
 		//if(time < startTime)
 		//{
