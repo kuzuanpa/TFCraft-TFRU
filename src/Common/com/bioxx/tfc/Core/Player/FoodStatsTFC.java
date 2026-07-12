@@ -1,36 +1,26 @@
 package com.bioxx.tfc.Core.Player;
 
-import java.util.Arrays;
-import java.util.Random;
-
-import baubles.api.IBauble;
-import baubles.common.container.InventoryBaubles;
-import baubles.common.lib.PlayerHandler;
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Loader;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Render.EntityRendererTFC;
+import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.FoodRegistry;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
-import org.apache.logging.log4j.Level;
+import com.bioxx.tfc.api.TFCOptions;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import vazkii.botania.common.item.relic.ItemOdinRing;
+
+import java.util.Random;
 
 public class FoodStatsTFC
 {
@@ -149,11 +139,9 @@ public class FoodStatsTFC
 		float hourlyHunger = (1 + bodyTemp.getExtraFood()) * drainMult;
 		long fullySatisfiedHours = Math.min(elapsedHours, (long) (initialSatisfaction / hourlyHungerWithExhaustion));
 		float remainingSatisfaction = initialSatisfaction - (fullySatisfiedHours * hourlyHungerWithExhaustion);
-		long positiveSatisfactionHours = Math.min(fullySatisfiedHours,
-				(long) Math.floor(Math.max(0f, initialSatisfaction - 0.0001f) / hourlyHungerWithExhaustion));
+		long positiveSatisfactionHours = Math.min(fullySatisfiedHours, (long) Math.floor(Math.max(0f, initialSatisfaction - 0.0001f) / hourlyHungerWithExhaustion));
 
-		if (positiveSatisfactionHours > 0)
-		{
+		if (positiveSatisfactionHours > 0) {
 			float totalPositiveSatisfaction = positiveSatisfactionHours * initialSatisfaction -
 					hourlyHungerWithExhaustion * positiveSatisfactionHours * (positiveSatisfactionHours + 1) / 2f;
 			float averagePositiveSatisfaction = totalPositiveSatisfaction / positiveSatisfactionHours;
@@ -162,8 +150,7 @@ public class FoodStatsTFC
 
 		long unsatisfiedHours = elapsedHours - fullySatisfiedHours;
 		float hungerAppliedToStomach = 0;
-		if (unsatisfiedHours > 0)
-		{
+		if (unsatisfiedHours > 0) {
 			hungerAppliedToStomach += hourlyHungerWithExhaustion - remainingSatisfaction;
 			if (unsatisfiedHours > 1)
 				hungerAppliedToStomach += (unsatisfiedHours - 1) * hourlyHunger;
@@ -171,10 +158,8 @@ public class FoodStatsTFC
 			foodExhaustionLevel = 0;
 			satProtein = false; satFruit = false; satVeg = false; satDairy = false; satGrain = false;
 		}
-		else
-		{
-			this.satisfaction = remainingSatisfaction;
-		}
+		else this.satisfaction = remainingSatisfaction;
+
 
 		this.stomachLevel = Math.max(this.stomachLevel - hungerAppliedToStomach, 0);
 
@@ -182,10 +167,8 @@ public class FoodStatsTFC
 		long starvingHours = estimateStarvingHours(initialStomach, hourlyHungerWithExhaustion, hourlyHunger, remainingSatisfaction, unsatisfiedHours);
 		long unsatisfiedButFedHours = Math.max(0, unsatisfiedHours - starvingHours) + nonPositiveSatisfiedHours;
 
-		if (starvingHours > 0)
-			reduceNutritionDirect(0.0024F * starvingHours);
-		if (unsatisfiedButFedHours > 0)
-			reduceNutritionDirect(0.0008F * unsatisfiedButFedHours);
+		if (starvingHours > 0) reduceNutritionDirect(0.0024F * starvingHours);
+		if (unsatisfiedButFedHours > 0) reduceNutritionDirect(0.0008F * unsatisfiedButFedHours);
 
 		sendUpdate = true;
 	}
