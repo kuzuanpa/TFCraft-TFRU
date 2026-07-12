@@ -115,96 +115,130 @@ public class FoodStatsTFC
 			else if(vanillaHungerDelta<=-1) stomachLevelModifier += vanillaHungerDelta*vanillaNegativeRate;
 			if(stomachLevelModifier!=0)this.stomachLevel = (Math.min(stomachMax,Math.max(stomachLevel + stomachLevelModifier,0)));
 			stomachLevelModifier = 0;
-			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.HOUR_LENGTH && updateStats)
+			long totalTicks = TFC_Time.getTotalTicks();
+			if (totalTicks - this.foodTimer >= TFC_Time.HOUR_LENGTH && updateStats)
 			{
-				this.foodTimer += TFC_Time.HOUR_LENGTH;
-				float drainMult = 1.0f;
-				if(player.isPlayerSleeping())
-				{
-					drainMult = 0.50f;
-				}
-				//Water
-				if(player.isSprinting())
-					waterLevel -= 5+(tempWaterMod);
-				if (!player.capabilities.isCreativeMode && updateStats)
-					waterLevel -= bodyTemp.getExtraWater()*drainMult;
-
-				//Food
-				float hunger = (1 + foodExhaustionLevel + bodyTemp.getExtraFood()) * drainMult;
-				if(this.satisfaction >= hunger)
-				{
-					satisfaction -= hunger;
-					hunger = 0;
-				}
-				else
-				{
-					hunger -= satisfaction;
-					satisfaction = 0;
-					foodExhaustionLevel = 0;
-				}
-				this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
-
-				if(satisfaction == 0)
-				{
-					satProtein = false; satFruit = false; satVeg = false; satDairy = false; satGrain = false;
-				}
-
-				if (this.stomachLevel <= 0)
-				{
-					reduceNutrition(0.0024F);//3x penalty for starving
-				}
-				else if(this.satisfaction <= 0)
-				{
-					reduceNutrition(0.0008F);
-				}
-				else
-				{
-					if(this.satProtein)
-						this.addNutrition(EnumFoodGroup.Protein, this.satisfaction*((1-this.nutrProtein)/100), false);
-					if(this.satGrain)
-						this.addNutrition(EnumFoodGroup.Grain, this.satisfaction*((1-this.nutrGrain)/100), false);
-					if(this.satVeg)
-						this.addNutrition(EnumFoodGroup.Vegetable, this.satisfaction*((1-this.nutrVeg)/100), false);
-					if(this.satFruit)
-						this.addNutrition(EnumFoodGroup.Fruit, this.satisfaction*((1-this.nutrFruit)/100), false);
-					if(this.satDairy)
-						this.addNutrition(EnumFoodGroup.Dairy, this.satisfaction*((1-this.nutrDairy)/100), false);
-				}
-				sendUpdate = true;
+				long elapsedHours = (totalTicks - this.foodTimer) / TFC_Time.HOUR_LENGTH;
+				this.foodTimer += elapsedHours * TFC_Time.HOUR_LENGTH;
+				float drainMult = player.isPlayerSleeping() ? 0.50f : 1.0f;
+				applyHourlyFoodDrain(bodyTemp, drainMult, elapsedHours);
 			}
 
 			//Sync vanilla hunger values
 			player.getFoodStats().addStats((int) (this.stomachLevel - player.getFoodStats().getFoodLevel()), 0.0F);
 			//Heal or hurt the player based on hunger.
-			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.HOUR_LENGTH/4)
+			if (totalTicks - this.foodHealTimer >= TFC_Time.HOUR_LENGTH/4)
 			{
-				this.foodHealTimer += TFC_Time.HOUR_LENGTH/4;
-
-				if (this.stomachLevel >= this.getMaxStomach(player)/4 && player.shouldHeal())
-				{
-					//Player heals 1% per 30 in game minutes
-					player.heal((int) (player.getMaxHealth() * 0.01f));
-				}
-				else if (this.stomachLevel <= 0 && getNutritionHealthModifier() <= 0.05f && player.worldObj.difficultySetting.getDifficultyId() > 0)
-				{
-					//Players loses health when no nutrition and no food in stomach, starve to death when difficulty is hard
-					if(player.worldObj.difficultySetting.getDifficultyId()==3||player.getHealth()>100)player.attackEntityFrom(DamageSource.starve, player.getRNG().nextInt(16)+4);
-				}
+				long elapsedHealSteps = (totalTicks - this.foodHealTimer) / (TFC_Time.HOUR_LENGTH / 4);
+				this.foodHealTimer += elapsedHealSteps * (TFC_Time.HOUR_LENGTH / 4);
+				applyDelayedHealthEffects(player, elapsedHealSteps);
 			}
 
 			if (!player.capabilities.isCreativeMode && updateStats)
 			{
-				for(;waterTimer < TFC_Time.getTotalTicks();  waterTimer++)
-				{
-					/*Reduce the player's water for normal living*/
-					waterLevel -= 1+(tempWaterMod/2);
-					if(waterLevel < 0)
-						waterLevel = 0;
-					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0) {
-						if(temp > 35) player.attackEntityFrom(new DamageSource("heatStroke").setDamageBypassesArmor().setDamageIsAbsolute(), 4);
-						else if(temp > 15 && player.getRNG().nextInt(10)==0)player.attackEntityFrom(new DamageSource("thirst").setDamageBypassesArmor().setDamageIsAbsolute(), 1);
-					}
-				}
+				applyWaterDrain(player, bodyTemp, tempWaterMod, temp);
+			}
+		}
+	}
+
+	private void applyHourlyFoodDrain(BodyTempStats bodyTemp, float drainMult, long elapsedHours)
+	{
+		for (long i = 0; i < elapsedHours; i++)
+		{
+			float hunger = (1 + foodExhaustionLevel + bodyTemp.getExtraFood()) * drainMult;
+			if(this.satisfaction >= hunger)
+			{
+				satisfaction -= hunger;
+				hunger = 0;
+			}
+			else
+			{
+				hunger -= satisfaction;
+				satisfaction = 0;
+				foodExhaustionLevel = 0;
+			}
+			this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
+
+			if(satisfaction == 0)
+			{
+				satProtein = false; satFruit = false; satVeg = false; satDairy = false; satGrain = false;
+			}
+
+			if (this.stomachLevel <= 0)
+			{
+				reduceNutrition(0.0024F);//3x penalty for starving
+			}
+			else if(this.satisfaction <= 0)
+			{
+				reduceNutrition(0.0008F);
+			}
+			else
+			{
+				if(this.satProtein)
+					this.addNutrition(EnumFoodGroup.Protein, this.satisfaction*((1-this.nutrProtein)/100), false);
+				if(this.satGrain)
+					this.addNutrition(EnumFoodGroup.Grain, this.satisfaction*((1-this.nutrGrain)/100), false);
+				if(this.satVeg)
+					this.addNutrition(EnumFoodGroup.Vegetable, this.satisfaction*((1-this.nutrVeg)/100), false);
+				if(this.satFruit)
+					this.addNutrition(EnumFoodGroup.Fruit, this.satisfaction*((1-this.nutrFruit)/100), false);
+				if(this.satDairy)
+					this.addNutrition(EnumFoodGroup.Dairy, this.satisfaction*((1-this.nutrDairy)/100), false);
+			}
+		}
+		sendUpdate = true;
+	}
+
+	private void applyWaterDrain(EntityPlayer player, BodyTempStats bodyTemp, float tempWaterMod, float temp)
+	{
+		long totalTicks = TFC_Time.getTotalTicks();
+		if (waterTimer >= totalTicks)
+			return;
+
+		long elapsedTicks = totalTicks - waterTimer;
+		waterTimer = totalTicks;
+
+		/*Reduce the player's water for normal living*/
+		float perTickDrain = 1 + (tempWaterMod / 2);
+		waterLevel -= elapsedTicks * perTickDrain;
+		if(player.isSprinting())
+			waterLevel -= (5 + tempWaterMod) * ((float) elapsedTicks / TFC_Time.HOUR_LENGTH);
+		waterLevel -= bodyTemp.getExtraWater() * ((float) elapsedTicks / TFC_Time.HOUR_LENGTH);
+		if(waterLevel < 0)
+			waterLevel = 0;
+
+		if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0)
+		{
+			if(temp > 35)
+				player.attackEntityFrom(new DamageSource("heatStroke").setDamageBypassesArmor().setDamageIsAbsolute(), 4f * elapsedTicks);
+			else if(temp > 15)
+				player.attackEntityFrom(new DamageSource("thirst").setDamageBypassesArmor().setDamageIsAbsolute(), estimateThirstDamage(player, elapsedTicks));
+		}
+
+		sendUpdate = true;
+	}
+
+	private float estimateThirstDamage(EntityPlayer player, long elapsedTicks)
+	{
+		long guaranteedHits = elapsedTicks / 10;
+		if(elapsedTicks % 10 > 0 && player.getRNG().nextInt(10) < elapsedTicks % 10)
+			guaranteedHits++;
+		return guaranteedHits;
+	}
+
+	private void applyDelayedHealthEffects(EntityPlayer player, long elapsedHealSteps)
+	{
+		for (long i = 0; i < elapsedHealSteps; i++)
+		{
+			if (this.stomachLevel >= this.getMaxStomach(player)/4 && player.shouldHeal())
+			{
+				//Player heals 1% per 30 in game minutes
+				player.heal((int) (player.getMaxHealth() * 0.01f));
+			}
+			else if (this.stomachLevel <= 0 && getNutritionHealthModifier() <= 0.05f && player.worldObj.difficultySetting.getDifficultyId() > 0)
+			{
+				//Players loses health when no nutrition and no food in stomach, starve to death when difficulty is hard
+				if(player.worldObj.difficultySetting.getDifficultyId()==3||player.getHealth()>100)player.attackEntityFrom(DamageSource.starve, player.getRNG().nextInt(16)+4);
 			}
 		}
 	}
