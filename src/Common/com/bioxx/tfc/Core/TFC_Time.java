@@ -74,12 +74,14 @@ public class TFC_Time
 		daysInMonth = daysInYear/12;
 		ticksInYear = daysInYear * DAY_LENGTH;
 		ticksInMonth = daysInMonth * DAY_LENGTH;
+		timeRatio360 = daysInYear / 360f;
+		timeRatio96 = daysInYear / 96f;
 	}
 
 	public static void updateTime(World world)
 	{
-		if(startTime < 0) startTime = Math.abs(world.getSeed()) % ticksInYear;
-		time = world.getWorldInfo().getWorldTime() + Math.abs(world.getSeed()) % ticksInYear;
+		startTime = Math.abs(world.getSeed()) % ticksInYear;
+		time = world.getWorldInfo().getWorldTime() + startTime;
 
 		//if(time < startTime)
 		//{

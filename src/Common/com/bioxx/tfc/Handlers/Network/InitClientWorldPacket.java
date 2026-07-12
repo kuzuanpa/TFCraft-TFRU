@@ -171,6 +171,26 @@ public class InitClientWorldPacket extends AbstractPacket
 	@Override
 	public void handleClientSide(EntityPlayer player)
 	{
+		// Sync config options before time-dependent world setup runs on the client.
+		TFCOptions.enableDebugMode = this.debugMode;
+		TFC_Time.setYearLength(this.daysInYear);
+		TFCOptions.healthGainRate = this.healthGainRate;
+		TFCOptions.healthGainCap = this.healthGainCap;
+		TFCOptions.maxProtectionMonths = this.maxProtectionMonths;
+		TFCOptions.protectionGain = this.protectionGain;
+		TFCOptions.protectionBuffer = this.protectionBuffer;
+		TFCOptions.smallOreUnits = this.smallOreUnits;
+		TFCOptions.poorOreUnits = this.poorOreUnits;
+		TFCOptions.normalOreUnits = this.normalOreUnits;
+		TFCOptions.richOreUnits = this.richOreUnits;
+		TFCOptions.torchBurnTime = this.torchBurnTime;
+		TFCOptions.oilLampFuelMult = this.oilLampFuelMult;
+		TFCOptions.pitKilnBurnTime = this.pitKilnBurnTime;
+		TFCOptions.bloomeryBurnTime = this.bloomeryBurnTime;
+		TFCOptions.charcoalPitBurnTime = this.charcoalPitBurnTime;
+		TFCOptions.saplingTimerMultiplier = this.saplingTimerMultiplier;
+		TFCOptions.animalTimeMultiplier = this.animalTimeMultiplier;
+
 		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
 		fs.stomachLevel = this.stomachLevel;
 		fs.waterLevel = this.waterLevel;
@@ -200,26 +220,6 @@ public class InitClientWorldPacket extends AbstractPacket
 				player.getUniqueID()));
 
 		PlayerManagerTFC.getInstance().getClientPlayer().setChiselMode(this.chiselMode);
-
-		// Sync Config Options
-		TFCOptions.enableDebugMode = this.debugMode;
-		TFC_Time.setYearLength(this.daysInYear);
-		TFCOptions.healthGainRate = this.healthGainRate;
-		TFCOptions.healthGainCap = this.healthGainCap;
-		TFCOptions.maxProtectionMonths = this.maxProtectionMonths;
-		TFCOptions.protectionGain = this.protectionGain;
-		TFCOptions.protectionBuffer = this.protectionBuffer;
-		TFCOptions.smallOreUnits = this.smallOreUnits;
-		TFCOptions.poorOreUnits = this.poorOreUnits;
-		TFCOptions.normalOreUnits = this.normalOreUnits;
-		TFCOptions.richOreUnits = this.richOreUnits;
-		TFCOptions.torchBurnTime = this.torchBurnTime;
-		TFCOptions.oilLampFuelMult = this.oilLampFuelMult;
-		TFCOptions.pitKilnBurnTime = this.pitKilnBurnTime;
-		TFCOptions.bloomeryBurnTime = this.bloomeryBurnTime;
-		TFCOptions.charcoalPitBurnTime = this.charcoalPitBurnTime;
-		TFCOptions.saplingTimerMultiplier = this.saplingTimerMultiplier;
-		TFCOptions.animalTimeMultiplier = this.animalTimeMultiplier;
 	}
 
 	@Override
