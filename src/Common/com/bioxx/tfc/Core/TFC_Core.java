@@ -247,6 +247,7 @@ public class TFC_Core
 		Random r = new Random(seed);
 		world.provider.registerWorld(world);
 		Recipes.registerAnvilRecipes(r, world);
+		TFC_Time.startTime = Math.abs(seed) % TFC_Time.ticksInYear;
 		TFC_Time.updateTime(world);
 		// TerraFirmaCraft.proxy.registerSkyProvider(world.provider);
 	}

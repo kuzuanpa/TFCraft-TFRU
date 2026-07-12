@@ -9,6 +9,8 @@ import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 import com.bioxx.tfc.Core.TFC_Time;
 
+import static com.bioxx.tfc.TerraFirmaCraft.TFCDimID;
+
 public class ClientTickHandler// implements ITickHandler
 {
 	@SubscribeEvent
@@ -28,7 +30,8 @@ public class ClientTickHandler// implements ITickHandler
 			World world = player.worldObj;
 
 			//Allow the client to increment time
-			TFC_Time.updateTime(world);
+
+			if(world.provider.dimensionId == TFCDimID)TFC_Time.updateTime(world);
 		}
 	}
 

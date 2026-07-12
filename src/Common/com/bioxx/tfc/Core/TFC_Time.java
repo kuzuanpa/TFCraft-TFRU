@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Core;
 
+import com.bioxx.tfc.WorldGen.TFCProvider;
 import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.world.World;
 
@@ -80,7 +81,7 @@ public class TFC_Time
 
 	public static void updateTime(World world)
 	{
-		startTime = Math.abs(world.getSeed()) % ticksInYear;
+		if(!(world.provider instanceof TFCProvider))return;
 		time = world.getWorldInfo().getWorldTime() + startTime;
 
 		//if(time < startTime)

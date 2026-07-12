@@ -143,50 +143,100 @@ public class FoodStatsTFC
 
 	private void applyHourlyFoodDrain(BodyTempStats bodyTemp, float drainMult, long elapsedHours)
 	{
-		for (long i = 0; i < elapsedHours; i++)
+		float initialSatisfaction = this.satisfaction;
+		float initialStomach = this.stomachLevel;
+		float hourlyHungerWithExhaustion = (1 + foodExhaustionLevel + bodyTemp.getExtraFood()) * drainMult;
+		float hourlyHunger = (1 + bodyTemp.getExtraFood()) * drainMult;
+		long fullySatisfiedHours = Math.min(elapsedHours, (long) (initialSatisfaction / hourlyHungerWithExhaustion));
+		float remainingSatisfaction = initialSatisfaction - (fullySatisfiedHours * hourlyHungerWithExhaustion);
+		long positiveSatisfactionHours = Math.min(fullySatisfiedHours,
+				(long) Math.floor(Math.max(0f, initialSatisfaction - 0.0001f) / hourlyHungerWithExhaustion));
+
+		if (positiveSatisfactionHours > 0)
 		{
-			float hunger = (1 + foodExhaustionLevel + bodyTemp.getExtraFood()) * drainMult;
-			if(this.satisfaction >= hunger)
-			{
-				satisfaction -= hunger;
-				hunger = 0;
-			}
-			else
-			{
-				hunger -= satisfaction;
-				satisfaction = 0;
-				foodExhaustionLevel = 0;
-			}
-			this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
-
-			if(satisfaction == 0)
-			{
-				satProtein = false; satFruit = false; satVeg = false; satDairy = false; satGrain = false;
-			}
-
-			if (this.stomachLevel <= 0)
-			{
-				reduceNutrition(0.0024F);//3x penalty for starving
-			}
-			else if(this.satisfaction <= 0)
-			{
-				reduceNutrition(0.0008F);
-			}
-			else
-			{
-				if(this.satProtein)
-					this.addNutrition(EnumFoodGroup.Protein, this.satisfaction*((1-this.nutrProtein)/100), false);
-				if(this.satGrain)
-					this.addNutrition(EnumFoodGroup.Grain, this.satisfaction*((1-this.nutrGrain)/100), false);
-				if(this.satVeg)
-					this.addNutrition(EnumFoodGroup.Vegetable, this.satisfaction*((1-this.nutrVeg)/100), false);
-				if(this.satFruit)
-					this.addNutrition(EnumFoodGroup.Fruit, this.satisfaction*((1-this.nutrFruit)/100), false);
-				if(this.satDairy)
-					this.addNutrition(EnumFoodGroup.Dairy, this.satisfaction*((1-this.nutrDairy)/100), false);
-			}
+			float totalPositiveSatisfaction = positiveSatisfactionHours * initialSatisfaction -
+					hourlyHungerWithExhaustion * positiveSatisfactionHours * (positiveSatisfactionHours + 1) / 2f;
+			float averagePositiveSatisfaction = totalPositiveSatisfaction / positiveSatisfactionHours;
+			applyNutritionGainApprox(averagePositiveSatisfaction, positiveSatisfactionHours);
 		}
+
+		long unsatisfiedHours = elapsedHours - fullySatisfiedHours;
+		float hungerAppliedToStomach = 0;
+		if (unsatisfiedHours > 0)
+		{
+			hungerAppliedToStomach += hourlyHungerWithExhaustion - remainingSatisfaction;
+			if (unsatisfiedHours > 1)
+				hungerAppliedToStomach += (unsatisfiedHours - 1) * hourlyHunger;
+			this.satisfaction = 0;
+			foodExhaustionLevel = 0;
+			satProtein = false; satFruit = false; satVeg = false; satDairy = false; satGrain = false;
+		}
+		else
+		{
+			this.satisfaction = remainingSatisfaction;
+		}
+
+		this.stomachLevel = Math.max(this.stomachLevel - hungerAppliedToStomach, 0);
+
+		long nonPositiveSatisfiedHours = fullySatisfiedHours - positiveSatisfactionHours;
+		long starvingHours = estimateStarvingHours(initialStomach, hourlyHungerWithExhaustion, hourlyHunger, remainingSatisfaction, unsatisfiedHours);
+		long unsatisfiedButFedHours = Math.max(0, unsatisfiedHours - starvingHours) + nonPositiveSatisfiedHours;
+
+		if (starvingHours > 0)
+			reduceNutritionDirect(0.0024F * starvingHours);
+		if (unsatisfiedButFedHours > 0)
+			reduceNutritionDirect(0.0008F * unsatisfiedButFedHours);
+
 		sendUpdate = true;
+	}
+
+	private void applyNutritionGainApprox(float averageSatisfaction, long hours)
+	{
+		if (hours <= 0 || averageSatisfaction <= 0)
+			return;
+
+		if(this.satProtein)
+			this.nutrProtein = applyNutritionGainApprox(this.nutrProtein, averageSatisfaction, hours);
+		if(this.satGrain)
+			this.nutrGrain = applyNutritionGainApprox(this.nutrGrain, averageSatisfaction, hours);
+		if(this.satVeg)
+			this.nutrVeg = applyNutritionGainApprox(this.nutrVeg, averageSatisfaction, hours);
+		if(this.satFruit)
+			this.nutrFruit = applyNutritionGainApprox(this.nutrFruit, averageSatisfaction, hours);
+		if(this.satDairy)
+			this.nutrDairy = applyNutritionGainApprox(this.nutrDairy, averageSatisfaction, hours);
+	}
+
+	private float applyNutritionGainApprox(float currentNutrition, float averageSatisfaction, long hours)
+	{
+		float perHourFactor = Math.max(0f, 1f - (averageSatisfaction / 100f));
+		return Math.min(1.0f, 1f - (1f - currentNutrition) * (float) Math.pow(perHourFactor, hours));
+	}
+
+	private long estimateStarvingHours(float initialStomach, float hourlyHungerWithExhaustion, float hourlyHunger, float remainingSatisfaction, long unsatisfiedHours)
+	{
+		if (unsatisfiedHours <= 0)
+			return 0;
+
+		float firstUnsatisfiedDrain = hourlyHungerWithExhaustion - remainingSatisfaction;
+		if (initialStomach <= firstUnsatisfiedDrain)
+			return unsatisfiedHours;
+		if (unsatisfiedHours == 1 || hourlyHunger <= 0)
+			return 0;
+
+		float stomachAfterFirstUnsatisfiedHour = initialStomach - firstUnsatisfiedDrain;
+		long nonStarvingHoursAfterFirst = (long) Math.ceil(stomachAfterFirstUnsatisfiedHour / hourlyHunger) - 1;
+		long starvingHoursAfterFirst = (unsatisfiedHours - 1) - Math.max(0, nonStarvingHoursAfterFirst);
+		return Math.max(0, starvingHoursAfterFirst);
+	}
+
+	private void reduceNutritionDirect(float amount)
+	{
+		nutrFruit = Math.max(this.nutrFruit - amount, 0);
+		nutrVeg = Math.max(this.nutrVeg - amount, 0);
+		nutrGrain = Math.max(this.nutrGrain - amount, 0);
+		nutrProtein = Math.max(this.nutrProtein - amount, 0);
+		nutrDairy = Math.max(this.nutrDairy - amount, 0);
 	}
 
 	private void applyWaterDrain(EntityPlayer player, BodyTempStats bodyTemp, float tempWaterMod, float temp)
