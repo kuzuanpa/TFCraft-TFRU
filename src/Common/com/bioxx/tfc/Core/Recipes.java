@@ -139,10 +139,10 @@ public class Recipes
 		//GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.dye,1,11), new ItemStack(TFCItems.powder,1,7)); // Limonite - Yellow
 		//GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.dye,1,12), new ItemStack(TFCItems.powder,1,8),new ItemStack(TFCItems.powder,1,0), "blockSand")); // Malachite, Flux & Sand - Light Blue
 
-		////Flux Powder
-		//for (int i = 0; i < Global.STONE_FLUXINDEX.length; i++)
-		//	GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.powder, 2, 0), new ItemStack(TFCItems.looseRock, 1, Global.STONE_FLUXINDEX[i]), "itemHammer"));
-		//GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.powder, 6, 0), new ItemStack(TFCItems.oreChunk, 1, 32), "itemHammer"));
+		//Flux Powder
+		for (int i = 0; i < Global.STONE_FLUXINDEX.length; i++)
+			GameRegistry.addRecipe(new ShapelessOreRecipe(OP.dust.mat(MT.CaCO3,2), new ItemStack(TFCItems.looseRock, 1, Global.STONE_FLUXINDEX[i]), "itemHammer"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(OP.dust.mat(MT.CaCO3,6), new ItemStack(TFCItems.oreChunk, 1, 32), "itemHammer"));
 
 		//Devices
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 1), "###"," D ","###", '#', "ingotCopper", 'D',"ingotDoubleCopper"));
