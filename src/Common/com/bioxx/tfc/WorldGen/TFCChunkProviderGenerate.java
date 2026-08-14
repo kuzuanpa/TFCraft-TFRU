@@ -298,7 +298,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate {
 
 		}
 		//colder climate
-		if(temp > -20 && temp <=0)
+		if(temp > -10 && temp <=0)
 		{
 			//boreal forest
 			if(rain > 250)

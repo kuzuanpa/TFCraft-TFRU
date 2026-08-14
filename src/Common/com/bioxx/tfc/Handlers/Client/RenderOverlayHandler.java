@@ -1,8 +1,25 @@
 package com.bioxx.tfc.Handlers.Client;
 
-import java.awt.Color;
-import java.lang.reflect.Field;
-
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
+import com.bioxx.tfc.Core.Player.PlayerInfo;
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Entities.Mobs.EntityPigTFC;
+import com.bioxx.tfc.GUI.GuiScreenHorseInventoryTFC;
+import com.bioxx.tfc.Items.ItemQuiver;
+import com.bioxx.tfc.Items.Tools.ItemChisel;
+import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
+import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.api.TFCAttributes;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Tools.ChiselManager;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiIngame;
@@ -18,34 +35,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
-
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.ReflectionHelper;
-
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
-import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
-import com.bioxx.tfc.Core.Player.PlayerInfo;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityPigTFC;
-import com.bioxx.tfc.GUI.GuiScreenHorseInventoryTFC;
-import com.bioxx.tfc.Items.ItemQuiver;
-import com.bioxx.tfc.Items.Tools.ItemChisel;
-import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
-import com.bioxx.tfc.Items.Tools.ItemHammer;
-import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.api.TFCAttributes;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Tools.ChiselManager;
+import java.awt.*;
+import java.lang.reflect.Field;
 
 public class RenderOverlayHandler
 {
@@ -366,7 +362,7 @@ public class RenderOverlayHandler
 			int zCoord = (int)player.posZ;
 			DataLayer evt = TFC_Climate.getCacheManager(mc.theWorld).getEVTLayerAt(xCoord, zCoord);
 			event.left.add(String.format(
-					"rain: %.0f, temp: %.2f, conditioner: %.2f, average bio temp: %.2f, evt: %.3f",
+					"rain: %.0f, temp: %.2f, conditioner: %.2f, avg bio temp: %.2f, evt: %.3f",
 					TFC_Climate.getRainfall(mc.theWorld, xCoord, yCoord, zCoord),
 					TFC_Climate.getHeightAdjustedTemp(mc.theWorld, xCoord, yCoord, zCoord),
 					TFC_Climate.getConditionerModificationAt(mc.theWorld, xCoord, yCoord, zCoord),
