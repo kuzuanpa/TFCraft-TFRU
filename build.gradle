@@ -39,6 +39,7 @@ allprojects {
 
 
 repositories {
+    mavenLocal()
     maven {
         name = "gt"
         url = "https://gregtech.mechaenetia.com/"
@@ -62,6 +63,16 @@ repositories {
         implementation "mcp.mobius.waila:Waila:1.5.10_1.7.10:dev"
         implementation "com.azanor.baubles:Baubles:1.7.10-1.0.1.10:deobf"
 
+        // TFRU-series dependencies (pulled from the local maven repository)
+        implementation "cn.kuzuanpa:gregtech6-TFRU:6.17.05.7:dev"
+        implementation "cn.kuzuanpa:TerraFirmaCraft-TFRU:0.83.0:dev"
+        implementation "cn.kuzuanpa:TFCTech-TFRU:0.3.0:dev"
+        implementation "cn.kuzuanpa:ktfruaddon:1.1.0:dev"
+        implementation "cn.kuzuanpa:Botania-TFRU:1.3.2:dev"
+        implementation "cn.kuzuanpa:ForestryMC-TFRU:4.2.1.0:dev"
+        implementation "cn.kuzuanpa:AdvancedRocketry-TFRU:1.4.1:dev"
+        implementation "cn.kuzuanpa:LibVulpes-TFRU:0.2.10:universal"
+        implementation "cn.kuzuanpa:Draconic-Evolution-TFRU:1.0.3:dev"
 
     }
 }
